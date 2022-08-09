@@ -9,7 +9,7 @@
             - 추천:
                 - [Git Graph (깃 상태를 그래픽으로 확인)](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)
                 - [Live Share (원격 코드 협업)](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare)
-    - 협업툴 (🙏자주 이용 바랍니다🙏): [Gather Town (원격 오피스)](https://app.gather.town/invite?token=kcTp-jMm5i9hr3RX_eeZAISPmPHZ9dv6),
+    - 협업툴 (🙏자주 이용 바랍니다🙏): [Gather Town (원격 오피스)](https://app.gather.town/app/lWsuavRupCx4KoUk/bitcamp-homies),
 
 
 2. Branch 관련
