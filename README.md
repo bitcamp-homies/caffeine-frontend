@@ -6,7 +6,6 @@
                 - [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
                 - [PostCSS Language Support](https://marketplace.visualstudio.com/items?itemName=csstools.postcss)
                 - [Prettier (코드 규칙 자동 적용)](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-                - 
             - 추천:
                 - [Git Graph (깃 상태를 그래픽으로 확인)](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)
                 - [Live Share (원격 코드 협업)](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare)
