@@ -14,7 +14,12 @@
         - 무조건 yarn 사용해주시기 바랍니다. npm & npx (X)
 
 
-2. Branch 관련
+2. Issue 생성 규칙
+    - 모든 작업 시작 전 Issue를 생성해주세요.
+    - Issue 생성 시 지정된 템플릿을 사용해서 작성해주세요.
+
+
+3. Branch 관련
     - main 브랜치의 Pull (Merge) 권한은 팀장과 부팀장에게 있다.
     - 각 기능의 개발은 feature 브랜치에서 개발 후, 작동에 이상이 없는 경우 Pull Request를 요청한다.
       - feature 브랜치의 작명은 '{issue#}-{feature이름}-{short-description}'으로 한다. 예) 23-shop-link-fix, 50-hotfix-core
@@ -24,5 +29,5 @@
       - 명령어: git tag -a v{버전번호} -m "RESELT version {버전번호}" --> git push
 
 
-3. Commit 규칙
+4. Commit 규칙
     - Commit 메시지는 "{#issue번호} {feature이름}: 설명" 예) "#23-index-링크 수정"
