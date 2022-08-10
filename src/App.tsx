@@ -1,9 +1,12 @@
+
+import Featured from 'components/featured/Featured';
 import React from 'react';
 
 function App() {
   return (
-    <div className='w-96 h-96 bg-slate-300'>
+    <div>
       <h1 className='text-rose-600'>Bitcamp Homies: Caffeine Project</h1>
+      <Featured/>
     </div>
   );
 }
