@@ -9,6 +9,7 @@
             - 추천:
                 - [Git Graph (깃 상태를 그래픽으로 확인)](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)
                 - [Live Share (원격 코드 협업)](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare)
+                - [Workspace Explorer (워크스페이스 저장)](https://marketplace.visualstudio.com/items?itemName=tomsaunders.vscode-workspace-explorer)
     - 협업툴 (🙏자주 이용 바랍니다🙏): [Gather Town (원격 오피스)](https://app.gather.town/app/lWsuavRupCx4KoUk/bitcamp-homies),
     - 주의사항:
         - 무조건 yarn 사용해주시기 바랍니다. npm & npx (X)
