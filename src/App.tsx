@@ -1,12 +1,13 @@
-
-import Featured from 'components/featured/Featured';
-import OrederNow from 'components/featured/featuredList/OrederNow';
 import React from 'react';
+import Featured from 'components/featured/Featured';
+import AllProducts from 'components/order/AllProducts';
+import NavBar from './components/index/NavBar';
 
 function App() {
   return (
     <div>
-      <h1 className='text-rose-600'>Bitcamp Homies: Caffeine Project</h1>
+      <NavBar />
+      <AllProducts />
       <Featured/>
     </div>
   );
