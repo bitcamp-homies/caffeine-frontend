@@ -1,9 +1,13 @@
+import NavBar from 'components/NavBar';
+import SearchPlace from 'components/SearchPlace';
 import React from 'react';
+
 
 function App() {
   return (
-    <div className='w-96 h-96 bg-slate-300'>
-      <h1 className='text-rose-600'>Bitcamp Homies: Caffeine Project</h1>
+    <div>
+      <NavBar />
+      <SearchPlace />
     </div>
   );
 }
