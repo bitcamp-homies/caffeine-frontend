@@ -1,9 +1,13 @@
+import AllProducts from 'components/order/AllProducts';
 import React from 'react';
 import NavBar from './components/index/NavBar';
 
 function App() {
   return (
-    <NavBar />
+    <div>
+      <NavBar />
+      <AllProducts />
+    </div>
   );
 }
 

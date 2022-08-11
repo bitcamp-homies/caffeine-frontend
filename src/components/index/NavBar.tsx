@@ -2,7 +2,6 @@ import React from 'react';
 import Logo from './Logo';
 import MapMarker from './MapMarker';
 
-
 const navBar = () => {
   return (
     <div className='px-4 py-4 md:px-6 md:py-6 lg:px-10 lg:py-6 flex flex-row'>
@@ -30,4 +29,4 @@ const navBar = () => {
   );
 };
 
-export default navBar;<h1>NavBar</h1>
+export default navBar;
