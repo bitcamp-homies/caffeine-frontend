@@ -7,6 +7,7 @@ import MapMarker from './components/MapMarker';
 import Main from 'components/main/Main';
 import Order from 'components/order/Order';
 import AllProducts from 'components/order/allproduct/AllProducts';
+import Featured from 'components/order/featured/Featured';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <div className='w-full hidden md:flex flex-row'>
           <ul className='mx-10 list-none font-bold self-center'>
             <li className='inline-block mr-7'>
-              <Link to="/order">ORDER</Link>
+              <Link to="/order/menu">ORDER</Link>
             </li>
             <li className='inline-block mr-7'>
               <button>CARDS</button>
@@ -35,8 +36,10 @@ function App() {
       </nav>
       <Routes>
         <Route path='/' element={ <Main /> } />
-        <Route path='/order' element={ <Order /> } />
-        <Route path='/menu' element={ <AllProducts /> } />
+        <Route path='order' element={ <Order /> }>
+          <Route path='menu' element={ <AllProducts /> } />
+          <Route path='featured' element={ <Featured /> } />
+        </Route>
       </Routes>
     </Router>
   );
