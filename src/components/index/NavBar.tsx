@@ -7,8 +7,8 @@ const navBar = () => {
   return (
     <div className='px-4 py-4 md:px-6 md:py-6 lg:px-10 lg:py-6 flex flex-row'>
       <Logo />
-      <div className='hidden md:block self-center'>
-        <ul className='mx-10 list-none font-bold'>
+      <div className='w-full hidden md:flex flex-row'>
+        <ul className='mx-10 list-none font-bold self-center'>
           <li className='inline-block mr-7 text-sm'>
             <button>ORDER</button>
           </li>
