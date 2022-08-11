@@ -9,9 +9,9 @@ const FeaturedMenu = () => {
   const dataShow1 = dataList1.map (item => (
         <div key={item.seq} className="basis-[60%]">
         <img className="" src={item.img} />
-        <div className="p-5 h-[250px] text-center text-white mb-5 bg-pink-300">
+        <div className="p-5 lg:h-[261px] sm:h-[330px] text-center text-white mb-5 bg-pink-300">
           <p className="font-bold text-2xl">{item.header}</p>
-          <p className='mt-5 text-xl'>{item.footer}</p>
+          <p className='mt-5 sm:text-xl text-base min-w-[99px]'>{item.footer}</p>
           <button className='mt-5 rounded-3xl w-[130px] font-semibold border-white border-2 p-2'>Order now</button>
         </div>
       </div>
@@ -21,9 +21,9 @@ const FeaturedMenu = () => {
   const dataShow2 = dataList2.map(item => (  
         <div key={item.seq} className="basis-[60%]">
           <img className="" src={item.img} />
-          <div className="p-5 h-[250px] text-center text-white mb-5 bg-red-400">
+          <div className="p-5 lg:h-[261px] sm:h-[330px] text-center text-white mb-5 bg-red-400">
             <p className="font-bold text-2xl">{item.header}</p>
-            <p className='mt-5 text-xl'>{item.footer}</p>
+            <p className='mt-5 sm:text-xl text-base'>{item.footer}</p>
             <button className='mt-5 rounded-3xl w-[130px] font-semibold border-white border-2 p-2'>Order now</button>
           </div>
         </div>
@@ -32,9 +32,9 @@ const FeaturedMenu = () => {
   const dataShow3 = dataList3.map(item => (
         <div key={item.seq} className="basis-[60%]">
           <img className="" src={item.img} />
-          <div className="p-5 h-[250px] text-center mb-5 bg-sky-200">
+          <div className="p-5 lg:h-[261px] sm:h-[330px] text-center mb-5 bg-sky-200">
             <p className="font-bold text-2xl">{item.header}</p>
-            <p className='mt-5 text-xl'>{item.footer}​</p>
+            <p className='mt-5 sm:text-xl text-base'>{item.footer}​</p>
             <button className='mt-5 rounded-3xl w-[130px] font-semibold border-black border-2 p-2'>Order now</button>
           </div>
         </div>
@@ -43,9 +43,9 @@ const FeaturedMenu = () => {
   const dataShow4 = dataList4.map(item => (
     <div key={item.seq} className="basis-[60%]">
     <img className="" src={item.img} />
-    <div className="p-5 h-[250px] text-center mb-5 text-white bg-green-800">
+    <div className="p-5 lg:h-[261px] sm:h-[330px] text-center mb-5 text-white bg-green-800">
       <p className="font-bold text-2xl">{item.header}</p>
-      <p className='mt-5 text-xl'>{item.footer}​</p>
+      <p className='mt-5 sm:text-xl text-base'>{item.footer}​</p>
       <button className='mt-5 rounded-3xl w-[130px] font-semibol border-white border-2 p-2'>Order now</button>
     </div>
   </div>
