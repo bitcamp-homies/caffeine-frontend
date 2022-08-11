@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
       <nav className='px-4 py-4 md:px-6 md:py-6 lg:px-10 lg:py-6 flex flex-row'>
-        <Logo />
+        <Link to="/"><Logo /></Link>
         <div className='w-full hidden md:flex flex-row'>
           <ul className='mx-10 list-none font-bold self-center'>
             <li className='inline-block mr-7 text-sm'>
