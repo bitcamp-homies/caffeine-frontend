@@ -24,9 +24,7 @@ const FeaturedMenu = () => {
           <div className="p-5 h-[250px] text-center text-white mb-5 bg-red-400">
             <p className="font-bold text-2xl">{item.header}</p>
             <p className='mt-5 text-xl'>{item.footer}</p>
-            <Link to={`/OrderNow/${item.seq}`}>
             <button className='mt-5 rounded-3xl w-[130px] font-semibold border-white border-2 p-2'>Order now</button>
-            </Link>
           </div>
         </div>
   ));
@@ -37,9 +35,7 @@ const FeaturedMenu = () => {
           <div className="p-5 h-[250px] text-center mb-5 bg-sky-200">
             <p className="font-bold text-2xl">{item.header}</p>
             <p className='mt-5 text-xl'>{item.footer}​</p>
-            <Link to={`/OrederNow/${item.seq}`}>
             <button className='mt-5 rounded-3xl w-[130px] font-semibold border-black border-2 p-2'>Order now</button>
-            </Link>
           </div>
         </div>
   ));
@@ -50,7 +46,6 @@ const FeaturedMenu = () => {
     <div className="p-5 h-[250px] text-center mb-5 text-white bg-green-800">
       <p className="font-bold text-2xl">{item.header}</p>
       <p className='mt-5 text-xl'>{item.footer}​</p>
-      <Link to={`/OrederNow/${item.seq}`}></Link>
       <button className='mt-5 rounded-3xl w-[130px] font-semibol border-white border-2 p-2'>Order now</button>
     </div>
   </div>
