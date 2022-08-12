@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter } from 'react-router-dom';
 
 import Logo from './components/Logo';
 import MapMarker from './components/MapMarker';
@@ -8,10 +8,11 @@ import Order from 'components/order/Order';
 import AllProducts from 'components/order/allproduct/AllProducts';
 import Featured from 'components/order/featured/Featured';
 import AllCafes from 'components/order/allcafe/AllCafes';
+import MainRoutes from 'Routes';
 
 function App() {
   return (
-    <Router>
+    <>
       <nav className='sticky z-10 shadow px-4 py-4 md:px-6 md:py-6 lg:px-10 lg:py-7 flex flex-row'>
         <Link to="/"><Logo /></Link>
         <div className='w-full hidden md:flex flex-row'>
@@ -34,15 +35,8 @@ function App() {
           </div>
         </div>
       </nav>
-      <Routes>
-        <Route path='/' element={ <Main /> } />
-        <Route path='order' element={ <Order /> }>
-          <Route path='cafes' element= {<AllCafes /> }/>
-          <Route path='cafes/menu' element={ <AllProducts /> }/>
-          <Route path='featured' element={ <Featured /> } />
-        </Route>
-      </Routes>
-    </Router>
+      <MainRoutes/>
+    </>
   );
 }
 
