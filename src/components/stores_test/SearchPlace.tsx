@@ -2,14 +2,12 @@ import { useState } from 'react';
 import CafeList from './CafeList';
 import MapContainer from "./MapContainer";
 
+type setPlaceType = {
+  setPlace : any
+}
 
-const SearchPlace = () => {
+const SearchPlace = ({setPlace}: setPlaceType) => {
 const [inputText, setInputText] = useState("");
-const [place, setPlace] = useState("");
-
-const onChange = (event:any) => {
-  setInputText(event.target.value);
-};
 
 const handleSubmit = (event:any) => {
   event.preventDefault();
@@ -17,8 +15,11 @@ const handleSubmit = (event:any) => {
   setInputText("");
 };
 
+const onChange = (event:any) => {
+  setInputText(event.target.value);
+};
+
   return (
-    <div className='ml-4 flex flex-row'>
       <div className='flex flex-col w-96 h-128'>
         <form className="px-5 inputForm " onSubmit={handleSubmit}>
           <div className='border-b-2 border-gray-400 inline-block mb-6'>
@@ -34,10 +35,6 @@ const handleSubmit = (event:any) => {
         </form>
         <CafeList />
       </div>
-      <div className='w-full h-full flex items-stretch'>
-        <MapContainer searchPlace={place} />
-      </div>
-    </div>
   );
 };
 

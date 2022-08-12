@@ -1,14 +1,15 @@
-import NavBar from 'components/NavBar';
-import SearchPlace from 'components/SearchPlace';
-import React from 'react';
+import FindStore from 'components/stores_test/FindStore';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
 function App() {
   return (
-    <div>
-      <NavBar />
-      <SearchPlace />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/cafe/list" element={<FindStore/>}></Route>
+        <Route path="/cafe/list/:cafename" element={<FindStore/>}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
