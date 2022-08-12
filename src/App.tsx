@@ -8,6 +8,7 @@ import Main from 'components/main/Main';
 import Order from 'components/order/Order';
 import AllProducts from 'components/order/allproduct/AllProducts';
 import Featured from 'components/order/featured/Featured';
+import AllCafes from 'components/order/allcafe/AllCafes';
 import FindStore from 'components/stores/FindStore';
 
 function App() {
@@ -53,10 +54,11 @@ function App() {
         </div>
       </nav>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="order" element={<Order />}>
-          <Route path="menu" element={<AllProducts />} />
-          <Route path="featured" element={<Featured />} />
+        <Route path='/' element={ <Main /> } />
+        <Route path='order' element={ <Order /> }>
+          <Route path='cafes' element= {<AllCafes /> }/>
+          <Route path='cafes/menu' element={ <AllProducts /> }/>
+          <Route path='featured' element={ <Featured /> } />
         </Route>
         <Route path='store' element={ <FindStore /> } />
         <Route path="store/:cafename" element={<FindStore/>}></Route>
