@@ -1,16 +1,16 @@
 
 import React, { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-
 import Logo from './components/Logo'
 import MapMarker from './components/MapMarker'
 import { Squash as Hamburger } from 'hamburger-react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 
 import Main from 'components/main/Main';
 import Order from 'components/order/Order';
 import AllProducts from 'components/order/allproduct/AllProducts';
 import Featured from 'components/order/featured/Featured';
-import SearchPlace from 'components/stores/SearchPlace';
+import AllCafes from 'components/order/allcafe/AllCafes';
+import FindStore from 'components/stores/FindStore';
 
 function App() {
   const [isOpen, setOpen] = useState(false)
@@ -55,12 +55,14 @@ function App() {
         </div>
       </nav>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="order" element={<Order />}>
-          <Route path="menu" element={<AllProducts />} />
-          <Route path="featured" element={<Featured />} />
+        <Route path='/' element={ <Main /> } />
+        <Route path='order' element={ <Order /> }>
+          <Route path='cafes' element= {<AllCafes /> }/>
+          <Route path='cafes/menu' element={ <AllProducts /> }/>
+          <Route path='featured' element={ <Featured /> } />
         </Route>
-        <Route path='store' element={ <SearchPlace /> } />
+        <Route path='store' element={ <FindStore /> } />
+        <Route path="store/:cafename" element={<FindStore/>}></Route>
       </Routes>
     </Router>
   )
