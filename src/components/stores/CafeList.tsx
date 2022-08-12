@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { ReactComponent as LikeIcon } from './heart-svgrepo-com.svg';
-import { ReactComponent as InfoIcon } from './info-svgrepo-com.svg';
+import { ReactComponent as LikeIcon } from './svg/heart-svgrepo-com.svg';
+import { ReactComponent as InfoIcon } from './svg/info-svgrepo-com.svg';
 import { Link } from "react-router-dom";
 
 const CafeList = () => {

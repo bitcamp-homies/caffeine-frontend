@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { ReactComponent as XIcon } from './x-svgrepo-com.svg';
+import { ReactComponent as XIcon } from './svg/x-svgrepo-com.svg';
 
 const CafeDetail = () => {
   
