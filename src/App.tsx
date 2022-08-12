@@ -5,10 +5,11 @@ import Logo from './components/Logo'
 import MapMarker from './components/MapMarker'
 import { Squash as Hamburger } from 'hamburger-react'
 
-import Main from 'components/main/Main'
-import Order from 'components/order/Order'
-import AllProducts from 'components/order/allproduct/AllProducts'
-import Featured from 'components/order/featured/Featured'
+import Main from 'components/main/Main';
+import Order from 'components/order/Order';
+import AllProducts from 'components/order/allproduct/AllProducts';
+import Featured from 'components/order/featured/Featured';
+import SearchPlace from 'components/stores/SearchPlace';
 
 function App() {
   const [isOpen, setOpen] = useState(false)
@@ -42,15 +43,13 @@ function App() {
               <button>GIFT</button>
             </li>
           </ul>
-          <div className="ml-auto flex flex-shrink-0 flex-row self-center">
-            <MapMarker />
-            <button className="ml-4 mr-10 font-semibold">Find a store</button>
-            <button className="rounded-full border border-black px-4 py-1.5 font-semibold">
-              Sign in
-            </button>
-            <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
-              Join now
-            </button>
+          <div className='ml-auto flex flex-row flex-shrink-0 self-center'>
+            <Link to="/store" className='flex flex-row self-center'>
+              <MapMarker />
+              <span className='ml-4 mr-10 font-semibold'>Find a store</span>
+            </Link>
+            <button className='px-4 py-1.5 border border-black rounded-full font-semibold'>Sign in</button>
+            <button className='ml-4 px-4 py-1.5 border border-black bg-black text-white rounded-full font-semibold'>Join now</button>
           </div>
         </div>
       </nav>
@@ -60,6 +59,7 @@ function App() {
           <Route path="menu" element={<AllProducts />} />
           <Route path="featured" element={<Featured />} />
         </Route>
+        <Route path='store' element={ <SearchPlace /> } />
       </Routes>
     </Router>
   )
