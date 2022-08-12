@@ -21,7 +21,7 @@ const CafeList = () => {
   
   React.useEffect(
     () => {
-      axios.get(`http://localhost:8080/cafe/list`)
+      axios.get(`http://localhost:8080/cafe/listAll`)
       .then(
         (res) => {
           setData(res.data);
