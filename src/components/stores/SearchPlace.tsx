@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import CafeList from './CafeList';
-import MapContainer from "./MapContainer";
 
 type setPlaceType = {
   setPlace : any

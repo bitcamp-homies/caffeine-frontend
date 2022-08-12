@@ -38,7 +38,7 @@ const CafeList = () => {
 <ul className='w-96 h-96 overflow-scroll overflow-x-hidden'>
       {
         data.map((item:cafeData, index:number) => {
-          DetailLink = `/cafe/list/${item.cafe_name}`
+          DetailLink = `/store/${item.cafe_name}`
           return (<li className='p-4 hover:bg-gray-100' key={index}>
             <div className='flex space-x-4 justify-around'>
               <div className='w-60'>

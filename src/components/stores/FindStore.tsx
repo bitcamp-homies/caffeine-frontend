@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CafeDetail from './CafeDetail';
-import MapContainer from "./MapContainer";
-import NavBar from './NavBar';
+import MapContainer from './MapContainer';
 import SearchPlace from './SearchPlace';
 
 
@@ -14,7 +13,6 @@ const FindStore = () => {
 
   return (
     <>
-    <NavBar/>
     <div className='ml-4 flex flex-row'>
       <div className='flex flex-col w-96 h-128'>
       {
