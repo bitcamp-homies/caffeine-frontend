@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Route, Router, Routes } from 'react-router-dom';
 import data from "../featuredData";
 
 const FeaturedMenu = () => {
@@ -53,18 +53,19 @@ const FeaturedMenu = () => {
 
   return (
     <>
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-10 sm:flex-row sm:items-center sm:justify-center">
-        {dataShow1}
-      </div>
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-10 sm:flex-row sm:items-center sm:justify-center">
-        {dataShow2}
-      </div>
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-10 sm:flex-row sm:items-center sm:justify-center">
-        {dataShow3}
-      </div>
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-10 sm:flex-row sm:items-center sm:justify-center">
-        {dataShow4}
-      </div>
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-10 sm:flex-row sm:items-center sm:justify-center">
+          {dataShow1}
+        </div>
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-10 sm:flex-row sm:items-center sm:justify-center">
+          {dataShow2}
+        </div>
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-10 sm:flex-row sm:items-center sm:justify-center">
+          {dataShow3}
+        </div>
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-10 sm:flex-row sm:items-center sm:justify-center">
+          {dataShow4}
+        </div>
+      
     </>
   );
 };
