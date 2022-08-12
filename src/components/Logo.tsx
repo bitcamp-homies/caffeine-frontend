@@ -3,7 +3,7 @@ import React from "react";
 function Logo() {
   return (
     <svg
-      className="w-8 h-full xs:w-9 md:w-12"
+      className="w-8 h-full xs:w-10 md:w-[3.15rem]"
       xmlns="http://www.w3.org/2000/svg"
       width="297.474"
       height="299"
