@@ -6,10 +6,10 @@ const Drinks = () => {
       <a href="#">Hot Coffees</a>
       <a href="#">Hot Teas</a>
       <a href="#">Hot Drinks</a>
-      <a href="#">Frappuccino</a>
-      <a href="#">Cold Coffees</a>
+      <a href="#">Frappuccino Blended Beverage</a>
+      <a href="#">Cold Cofees</a>
       <a href="#">Iced Teas</a>
-      <a href="#">Cold Drinks</a>
+      <a href="#">Cold Drink</a>
     </div>
   );
 };

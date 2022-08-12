@@ -17,7 +17,7 @@ const Order = () => {
           <li className="mr-7 inline-block text-sm">
             <button
               onClick={() => {
-                navigate('/order/menu')
+                navigate('/order/cafes')
               }}
             >
               All product

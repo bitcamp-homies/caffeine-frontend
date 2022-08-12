@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import Logo from './components/Logo';
 import MapMarker from './components/MapMarker';
-
 import Main from 'components/main/Main';
 import Order from 'components/order/Order';
 import AllProducts from 'components/order/allproduct/AllProducts';
 import Featured from 'components/order/featured/Featured';
+import AllCafes from 'components/order/allcafe/AllCafes';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <div className='w-full hidden md:flex flex-row'>
           <ul className='mx-10 list-none font-bold self-center'>
             <li className='inline-block mr-7'>
-              <Link to="/order/menu">ORDER</Link>
+              <Link to="/order/cafes">ORDER</Link>
             </li>
             <li className='inline-block mr-7'>
               <button>CARDS</button>
@@ -37,7 +37,8 @@ function App() {
       <Routes>
         <Route path='/' element={ <Main /> } />
         <Route path='order' element={ <Order /> }>
-          <Route path='menu' element={ <AllProducts /> } />
+          <Route path='cafes' element= {<AllCafes /> } />
+          <Route path='cafes/menu' element={ <AllProducts /> } />
           <Route path='featured' element={ <Featured /> } />
         </Route>
       </Routes>
