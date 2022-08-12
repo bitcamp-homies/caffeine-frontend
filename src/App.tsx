@@ -37,8 +37,8 @@ function App() {
       <Routes>
         <Route path='/' element={ <Main /> } />
         <Route path='order' element={ <Order /> }>
-          <Route path='cafes' element= {<AllCafes /> } />
-          <Route path='cafes/menu' element={ <AllProducts /> } />
+          <Route path='cafes' element= {<AllCafes /> }/>
+          <Route path='cafes/menu' element={ <AllProducts /> }/>
           <Route path='featured' element={ <Featured /> } />
         </Route>
       </Routes>
