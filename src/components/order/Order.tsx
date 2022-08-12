@@ -8,7 +8,7 @@ const Order = () => {
     <>
       <div
         id="orderNavBar"
-        className="sticky
+        className="sticky top-0
           hidden flex-row border-[1px] border-gray-300 bg-gray-100
           md:block md:px-6 md:py-2 lg:px-10 lg:py-3
     "
