@@ -21,7 +21,7 @@ const CafeList = () => {
   
   React.useEffect(
     () => {
-      axios.get(`http://localhost:8080/cafe/list`)
+      axios.get(`http://localhost:8080/cafe/listAll`)
       .then(
         (res) => {
           setData(res.data);
@@ -35,7 +35,7 @@ const CafeList = () => {
     }, [])
   
   return (
-<ul className='w-96 h-96 overflow-scroll overflow-x-hidden'>
+<ul className='w-full h-[440px] overflow-scroll overflow-x-hidden'>
       {
         data.map((item:cafeData, index:number) => {
           DetailLink = `/store/${item.cafe_name}`
@@ -49,14 +49,16 @@ const CafeList = () => {
                   {item.address2},{item.address3}
                 </div>
               </div>
-              <button className='w-4 h-4'>
-                <LikeIcon fill="#dd9c4f"/>
-              </button>
-              <Link to={DetailLink}>
-              <button className='w-4 h-4'>
-                <InfoIcon fill="#dd9c4f"/>
-              </button>
-              </Link>
+              <div>
+                <button className='relative ml-6 w-4 h-4'>
+                  <LikeIcon fill="#dd9c4f"/>
+                </button>
+                <Link to={DetailLink}>
+                  <button className='relative ml-6 w-4 h-4'>
+                    <InfoIcon fill="#dd9c4f"/>
+                  </button>
+                </Link>
+              </div>
             </div>
           </li>);
         })

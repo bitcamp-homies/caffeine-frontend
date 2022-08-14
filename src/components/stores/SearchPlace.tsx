@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import CafeList from './CafeList';
+import MapContainer from './MapContainer';
 
 type setPlaceType = {
   setPlace : any
@@ -19,9 +20,9 @@ const onChange = (event:any) => {
 };
 
   return (
-      <div className='flex flex-col w-96 h-128'>
+      <div className='flex flex-col basis-2/5 h-128'>
         <form className="px-5 inputForm " onSubmit={handleSubmit}>
-          <div className='border-b-2 border-gray-400 inline-block mb-6'>
+          <div className='border-b-2 border-gray-400 inline-block my-6'>
             <input
               placeholder="Find a store"
               onChange={onChange}
@@ -32,6 +33,9 @@ const onChange = (event:any) => {
           </div>
           <button className='ml-4 border-green-800 border-2 rounded-full text-green-800 w-16 text-center h-8' type="submit">Filter</button>
         </form>
+        <div className='hidden'>
+        <MapContainer searchPlace={setPlace} />
+        </div>
         <CafeList />
       </div>
   );

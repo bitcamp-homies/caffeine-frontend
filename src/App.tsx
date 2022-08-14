@@ -7,8 +7,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Main from 'components/main/Main';
 import Order from 'components/order/Order';
 import AllProducts from 'components/order/allproduct/AllProducts';
-import Featured from 'components/order/featured/Featured';
-import FindStore from 'components/stores/FindStore';
+import FindStore from 'components/stores/FindStore'
+import Featured from 'components/order/featured/Featured'
 
 function App() {
   const [isOpen, setOpen] = useState(false)
