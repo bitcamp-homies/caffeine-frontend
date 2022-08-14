@@ -6,6 +6,7 @@ import AllDetails from 'components/order/allproduct/AllDetails';
 import AllProducts from 'components/order/allproduct/AllProducts';
 import Featured from 'components/order/featured/Featured';
 import Order from 'components/order/Order';
+import FindStore from 'components/stores/FindStore';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
@@ -21,6 +22,7 @@ const MainRoutes = () => {
           <Route path='cafes/menu/hot-coffees' element={ <AllDetails />}/>
           <Route path='featured' element={ <Featured /> } />
         </Route>
+        <Route path='/store' element={ <FindStore /> } />
       </Routes>
   );
 };
