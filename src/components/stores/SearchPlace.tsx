@@ -15,10 +15,11 @@ type cafeData = {
 }
 
 type setPlaceType = {
-  setPlace : any
+  place: string,
+  setPlace : React.Dispatch<React.SetStateAction<string>>
 }
 
-const SearchPlace = ({setPlace}: setPlaceType) => {
+const SearchPlace = (props: setPlaceType) => {
 const [inputText, setInputText] = useState<string>("");
 const [data, setData] = React.useState<cafeData[]>([]);
 
@@ -36,11 +37,12 @@ React.useEffect(
         console.log(err);
       }
     )
-  }, [inputText])
+  }, [])
 
 const handleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
-  setPlace(inputText);
+  props.setPlace(inputText);
+  console.log(props.place);
   setInputText("");
 };
 
@@ -56,12 +58,12 @@ const filterdData = data.filter((data:cafeData) => {
       <div className='lg:flex lg:flex-col lg:basis-2/5 basis-full h-128'>
         <form className="px-5 inputForm " onSubmit={handleSubmit}>
           <div className='text-center lg:text-left'>
-            <div className='border-b-2 border-gray-400 inline-block my-6 lg:w-72 w-3/4'>
+            <div className='border-b-2 border-gray-400 inline-block my-6 lg:w-64 w-3/4'>
               <input
                 placeholder="Find a store"
                 onChange={onChange}
                 value={inputText}
-                className="outline-0 lg:w-64 w-4/5"
+                className="outline-0 lg:w-56 w-4/5"
               />
               <button><img className='w-4 h-4 mr-4' src='img/search_icon.png' alt='search_icon'/></button>
             </div>
@@ -69,9 +71,9 @@ const filterdData = data.filter((data:cafeData) => {
           </div>
         </form>
         <div className='flex lg:hidden '>
-        <MapContainer searchPlace={setPlace} />
+          <MapContainer searchPlace={props.place} />
         </div>
-        <CafeList data={filterdData} />
+          <CafeList data={filterdData} />
       </div>
   );
 };
