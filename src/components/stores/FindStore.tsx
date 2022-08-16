@@ -18,7 +18,7 @@ const FindStore = () => {
         cafename === undefined ?
         <>
           <SearchPlace setPlace={setPlace}/>
-          <div className='hidden lg:basis-3/5 items-stretch'>
+          <div className='hidden lg:basis-3/5 lg:flex items-stretch'>
             <MapContainer searchPlace={place} />
           </div>
         </>

@@ -36,7 +36,7 @@ React.useEffect(
         console.log(err);
       }
     )
-  }, [])
+  }, [inputText])
 
 const handleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
@@ -55,20 +55,20 @@ const filterdData = data.filter((data:cafeData) => {
   return (
       <div className='lg:flex lg:flex-col lg:basis-2/5 basis-full h-128'>
         <form className="px-5 inputForm " onSubmit={handleSubmit}>
-          <div>
-            <div className='border-b-2 border-gray-400 inline-block my-6'>
+          <div className='text-center lg:text-left'>
+            <div className='border-b-2 border-gray-400 inline-block my-6 lg:w-72 w-3/4'>
               <input
                 placeholder="Find a store"
                 onChange={onChange}
                 value={inputText}
-                className="outline-0 w-56"
+                className="outline-0 lg:w-64 w-4/5"
               />
               <button><img className='w-4 h-4 mr-4' src='img/search_icon.png' alt='search_icon'/></button>
             </div>
             <button className='ml-4 border-green-800 border-2 rounded-full text-green-800 w-16 text-center h-8' type="submit">Filter</button>
           </div>
         </form>
-        <div className='flex lg:hidden'>
+        <div className='flex lg:hidden '>
         <MapContainer searchPlace={setPlace} />
         </div>
         <CafeList data={filterdData} />

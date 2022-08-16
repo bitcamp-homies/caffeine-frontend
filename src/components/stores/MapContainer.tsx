@@ -120,7 +120,7 @@ const MapContainer = ({searchPlace} : searchPlaceType) => {
   }, [])
   
   return (
-    <div className='w-full h-[32rem]' id='myMap'>
+    <div className='w-full lg:h-[32rem] h-[17rem]' id='myMap'>
       
     </div>
   );
