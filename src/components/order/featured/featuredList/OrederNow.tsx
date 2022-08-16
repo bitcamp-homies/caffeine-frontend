@@ -172,9 +172,9 @@ const OrderNow = () => {
           </div>
         </div>
 
-        <div className="mx-auto mb-10 w-full lg:my-10 lg:mx-0">
-          <h2 className="mx-auto mb-5 w-[500px] text-[1.2rem] font-semibold md:text-[1.6rem] lg:mx-0 lg:w-[600px]">
-            <span className="relative block px-2 pb-3 after:absolute after:bottom-0 after:left-0 after:h-[4px] after:w-full after:rounded-xl after:bg-[#d4e9e2]">
+        <div className="mx-auto basis-[60%] mb-10 w-full lg:my-10 lg:mx-0">
+          <h2 className="mx-auto mb-5 text-[1.2rem] w-[500px] lg:w-min-[300px] font-semibold md:text-[1.6rem] lg:mx-0">
+            <span className="relative block px-2 pb-3  after:absolute after:bottom-0 after:left-0 after:h-[4px] after:w-full after:rounded-xl after:bg-[#d4e9e2]">
               Recommend Menu
             </span>
           </h2>
