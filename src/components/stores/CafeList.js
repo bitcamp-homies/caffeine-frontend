@@ -33,7 +33,7 @@ const CafeList = () => {
       {
         data.map((item, index) => {
           DetailLink = `/store/${item.cafe_name}`
-          return (<li className='p-4 hover:bg-gray-100' key={index} onMouseOver={ () => dispatch(changeMain(item.address2, item.address3)) }>
+          return (<li className='p-4 hover:bg-gray-100' key={index} onMouseOver={ () => dispatch(changeMain(item)) }>
             <div className='flex space-x-4 justify-around'>
               <div className='w-60'>
                 <div className='font-bold text-sm'>

@@ -21,12 +21,8 @@ const onChange = (event) => {
     return state.colorReducer.color;
   })
 
-  const hoverAddr2 = useSelector( (state) => {
-    return state.mainMarkerReducer.address2;
-  })
-
-  const hoverAddr3 = useSelector( (state) => {
-    return state.mainMarkerReducer.address3;
+  const cafe = useSelector ( (state) => {
+    return state.mainMarkerReducer;
   })
 
 
@@ -34,12 +30,6 @@ const onChange = (event) => {
       <div className='flex flex-col w-96 h-128'>
         <form className="px-5 inputForm " onSubmit={handleSubmit}>
           <div className='border-b-2 border-gray-400 inline-block mb-6'>
-            {
-              <h3 style={{color : color}}>color test : </h3>
-            }
-            {
-              <div className='text-xs'> hover addr : {hoverAddr2} {hoverAddr3}</div>
-            }
             <input
               placeholder="Find a store"
               onChange={onChange}

@@ -7,12 +7,24 @@ import cafeDataTemp from './cafe_gangnam';
 // 커스텀 오버레이에 표시할 내용입니다     
 // HTML 문자열 또는 Dom Element 입니다 
 
+let map; 
+let customOverlay =new kakao.maps.CustomOverlay({
+  position: new window.kakao.maps.LatLng(37.54699, 127.09598),
+  content: ''   
+});
 
-const hoverPin = (addr2, addr3, map) => {
-  
+let customOverLaies = [];
+
+const hoverPin = ( cafe , map) => {
+  for(var i = 0; i < customOverLaies.length; i++){
+    customOverLaies[i].setMap(null);
+  }
+
+  console.log('cafe 정보 : ', cafe.cafe_name);
+
   var geocoder = new window.kakao.maps.services.Geocoder();
 
-  geocoder.addressSearch(`${addr2} ${addr3}`, function(result, status) {
+  geocoder.addressSearch(`${cafe.address2} ${cafe.address3}`, function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === window.kakao.maps.services.Status.OK) {
@@ -21,80 +33,83 @@ const hoverPin = (addr2, addr3, map) => {
         console.log(`변경된좌표 : ${result[0].y}, ${result[0].x}`);
 
         // 결과값으로 받은 위치를 마커로 표시합니다
-        var content = `<div class='w-[150px] text-center py-2 px-1 bg-none border-green-500 border-2'></div>`;
+        var content = `<div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-green-500 border-none  mb-9 text-white font-semibold text-sm'>${cafe.cafe_name}</div>`;
 
         // 커스텀 오버레이를 생성합니다
-        var customOverlay = new kakao.maps.CustomOverlay({
+        customOverlay = new kakao.maps.CustomOverlay({
             position: coords,
             content: content   
         });
 
-        // 커스텀 오버레이를 지도에 표시합니다
+        customOverLaies.push(customOverlay);
+        
         customOverlay.setMap(map);
     } 
   });    
 
 }
+
+const cafeLocPin = (aCafeData, map) => {
+  
+  var geocoder = new window.kakao.maps.services.Geocoder();
+  geocoder.addressSearch(`${aCafeData.address2} ${aCafeData.address3}`, function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === window.kakao.maps.services.Status.OK) {
+
+        var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new window.kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+    } 
+});    
+
+}
+
+//오버레이가 아니라 인포윈도우를 새로 열어야하나?
+const emphasizeMarkerDiv = '<div class="w-[150px] text-center py-2 px-1 bg-none border-green-500 border-2"></div>';
+function emphasizeMarke(locPosition, message, map) {
+  
+  var iwContent = message, 
+      iwRemoveable = false;
+
+  var infowindow = new window.kakao.maps.InfoWindow({
+      content : iwContent,
+      removable : iwRemoveable
+  });
+  
+  infowindow.open(map, marker);
+  
+  map.setCenter(locPosition);      
+}
+//
   
 const MapContainer = () => {
     
   // 풍혁0812 : user 현재위치 얻어오기
   // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-  const addr2 = useSelector((state) => {
-    return state.mainMarkerReducer.address2;
+  const cafe = useSelector((state) => {
+    return state.mainMarkerReducer;
   })
   
-  const addr3 = useSelector((state) => {
-    return state.mainMarkerReducer.address3;
-  })
-
-
-  const cafeLocPin = (aCafeData, map) => {
-  
-    var geocoder = new window.kakao.maps.services.Geocoder();
-    geocoder.addressSearch(`${aCafeData.address2} ${aCafeData.address3}`, function(result, status) {
-  
-      // 정상적으로 검색이 완료됐으면 
-       if (status === window.kakao.maps.services.Status.OK) {
-  
-          var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-  
-          // 결과값으로 받은 위치를 마커로 표시합니다
-          var marker = new window.kakao.maps.Marker({
-              map: map,
-              position: coords
-          });
-  
-          // 인포윈도우로 장소에 대한 설명을 표시합니다
-          
-          var infowindow = new window.kakao.maps.InfoWindow({
-              content: `<div class='w-[150px] text-center py-2 px-1 text-[10px] bg-white text-black'>${aCafeData.cafe_name}</div>`,
-              removable : true,
-          });
-          
-          infowindow.open(map, marker);
-  
-      } 
-  });    
-  
-  }
   const mainMarkerId = useSelector( (state) => {
     return state.mainMarkerReducer.mainMarkerId;
   })
-  
-  // React.useEffect(() => {
-    
-  // },[addr2, addr3])
     
   React.useEffect(() => {
+  
+    // 지도에 마커와 인포윈도우를 표시하는 함수입니다
     const container = document.getElementById('myMap');
     const options = {
       center : new window.kakao.maps.LatLng(35.4923615 , 127.0292881),
       level : 7
     };
-    const map = new window.kakao.maps.Map(container, options);
-      
-    // 지도에 마커와 인포윈도우를 표시하는 함수입니다
+    map = new window.kakao.maps.Map(container, options);
+
     
     if (navigator.geolocation) {
       
@@ -150,7 +165,13 @@ const MapContainer = () => {
   }
   
   }, [])
+
+  React.useEffect(() => {
+    hoverPin(cafe, map);
+
+  },[cafe])
   
+
   return (
     <div className='w-full h-[32rem]' id='myMap'>
       
