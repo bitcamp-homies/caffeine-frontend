@@ -39,7 +39,7 @@ function App() {
               <Link to="/order/cafes">ORDER</Link>
             </li>
             <li className="mr-7 inline-block">
-              <button>CARDS</button>
+            <Link to="/cards">CARDS</Link>
             </li>
             <li className="inline-block">
               <button>GIFT</button>

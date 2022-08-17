@@ -1,4 +1,5 @@
 import App from 'App';
+import Card from 'components/cards/Card';
 import Main from 'components/main/Main';
 import AllCafes from 'components/order/allcafe/AllCafes';
 import AllCafesLocation from 'components/order/allcafe/AllCafesLocation';
@@ -17,6 +18,7 @@ const MainRoutes = () => {
       <Routes>
         <Route path='/' element={ <App /> } />
         <Route index element={ <Main /> } />
+        <Route path='cards' element={<Card/> } />
         <Route path='order' element={ <Order /> }>
           <Route path='cafes' element= {<AllCafes /> }/>
           <Route path='cafes/location' element= {<AllCafesLocation /> }/>
