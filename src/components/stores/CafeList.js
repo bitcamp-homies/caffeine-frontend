@@ -3,23 +3,17 @@ import axios from 'axios';
 import { ReactComponent as LikeIcon } from './svg/heart-svgrepo-com.svg';
 import { ReactComponent as InfoIcon } from './svg/info-svgrepo-com.svg';
 import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { changeMain } from 'store/modules/mapMarker';
 
 const CafeList = () => {
-  type cafeData = {
-    insta_account : string,
-    cafe_name : string,
-    address1 : string,
-    address2 : string,
-    address3 : string,
-    address4 : string,
-    about : string,
-    subfolder: string
-  }
+  const dispatch = useDispatch();
 
   const [data, setData] = React.useState([]);
   let DetailLink;
   
   React.useEffect(
+    
     () => {
       axios.get(`http://localhost:8080/cafe/listAll`)
       .then(
@@ -37,9 +31,9 @@ const CafeList = () => {
   return (
 <ul className='w-96 h-96 overflow-scroll overflow-x-hidden'>
       {
-        data.map((item:cafeData, index:number) => {
+        data.map((item, index) => {
           DetailLink = `/store/${item.cafe_name}`
-          return (<li className='p-4 hover:bg-gray-100' key={index}>
+          return (<li className='p-4 hover:bg-gray-100' key={index} onMouseOver={ () => dispatch(changeMain(item.address2, item.address3)) }>
             <div className='flex space-x-4 justify-around'>
               <div className='w-60'>
                 <div className='font-bold text-sm'>

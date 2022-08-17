@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CafeDetail from './CafeDetail';
 import MapContainer from './MapContainer';
+
 import SearchPlace from './SearchPlace';
 
 

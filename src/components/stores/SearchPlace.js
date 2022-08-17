@@ -1,27 +1,45 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import CafeList from './CafeList';
 
-type setPlaceType = {
-  setPlace : any
-}
 
-const SearchPlace = ({setPlace}: setPlaceType) => {
+const SearchPlace = ({setPlace}) => {
 const [inputText, setInputText] = useState("");
 
-const handleSubmit = (event:any) => {
+const handleSubmit = (event) => {
   event.preventDefault();
   setPlace(inputText);
   setInputText("");
 };
 
-const onChange = (event:any) => {
+const onChange = (event) => {
   setInputText(event.target.value);
 };
+
+//redux test
+  const color = useSelector( (state) => {
+    return state.colorReducer.color;
+  })
+
+  const hoverAddr2 = useSelector( (state) => {
+    return state.mainMarkerReducer.address2;
+  })
+
+  const hoverAddr3 = useSelector( (state) => {
+    return state.mainMarkerReducer.address3;
+  })
+
 
   return (
       <div className='flex flex-col w-96 h-128'>
         <form className="px-5 inputForm " onSubmit={handleSubmit}>
           <div className='border-b-2 border-gray-400 inline-block mb-6'>
+            {
+              <h3 style={{color : color}}>color test : </h3>
+            }
+            {
+              <div className='text-xs'> hover addr : {hoverAddr2} {hoverAddr3}</div>
+            }
             <input
               placeholder="Find a store"
               onChange={onChange}
