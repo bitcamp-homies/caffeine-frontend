@@ -1,7 +1,8 @@
 //@ts-nocheck
 
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeLocation } from 'store/modules/userLocation';
 import cafeDataTemp from './cafe_gangnam';
 
 //주소로 좌표받아서 map에 pin박기 >> 반복문 돌려서 넘어온 카페들 전부 핀 박아버리기 >> 추후엔 반경 3km 기준으로 데이터를 받아와서 redux state에서 저장시킬것
@@ -94,6 +95,8 @@ function emphasizeMarke(locPosition, message, map) {
 //
   
 const MapContainer = () => {
+  const  userLocation = useSelector( (state) => {return state.locationReducer} );
+  const dispatch = useDispatch();
     
   // 풍혁0812 : user 현재위치 얻어오기
   // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
@@ -124,6 +127,8 @@ const MapContainer = () => {
           var lat = position.coords.latitude, // 위도
               lon = position.coords.longitude; // 경도
           console.log('사용자 위치 : ', lat, lon);
+          dispatch(changeLocation(lon,lat));
+          console.log('redux 사용자위치 삽입 : ', userLocation);
 
           var locPosition = new window.kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
               message = '<div class="w-[150px] h-9 text-center py-2 px-1 text-[16px] bg-blue-500 text-white font-bold">내 위치</div>'; // 인포윈도우에 표시될 내용입니다
