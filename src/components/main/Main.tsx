@@ -1,4 +1,5 @@
 import React from 'react'
+import CafeSwipe from './CafeSwipe'
 
 const Main = () => {
   return (
@@ -8,7 +9,9 @@ const Main = () => {
           Good morning ☕
         </div>
       </div>
-      <div id="rightDiv" className="basis-3/5"></div>
+      <div id="rightDiv" className="basis-3/5">
+        <CafeSwipe />
+      </div>
     </div>
   )
 }
