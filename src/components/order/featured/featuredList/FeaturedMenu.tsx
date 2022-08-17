@@ -12,9 +12,11 @@ const FeaturedMenu = () => {
       <div className="mb-5 bg-pink-300 p-5 text-center text-white sm:h-[330px] lg:h-[261px]">
         <p className="text-2xl font-bold">{item.header}</p>
         <p className="mt-5 min-w-[99px] text-base sm:text-xl">{item.footer}</p>
+        <Link to="./order-now">
         <button className="mt-5 w-[130px] rounded-3xl border-2 border-white p-2 font-semibold">
           Order now
         </button>
+        </Link>
       </div>
     </div>
   ))
@@ -26,9 +28,11 @@ const FeaturedMenu = () => {
       <div className="mb-5 bg-red-400 p-5 text-center text-white sm:h-[330px] lg:h-[261px]">
         <p className="text-2xl font-bold">{item.header}</p>
         <p className="mt-5 text-base sm:text-xl">{item.footer}</p>
+        <Link to="./order-now">
         <button className="mt-5 w-[130px] rounded-3xl border-2 border-white p-2 font-semibold">
           Order now
         </button>
+        </Link>
       </div>
     </div>
   ))
@@ -39,9 +43,11 @@ const FeaturedMenu = () => {
       <div className="mb-5 bg-sky-200 p-5 text-center sm:h-[330px] lg:h-[261px]">
         <p className="text-2xl font-bold">{item.header}</p>
         <p className="mt-5 text-base sm:text-xl">{item.footer}​</p>
+        <Link to="./order-now">
         <button className="mt-5 w-[130px] rounded-3xl border-2 border-black p-2 font-semibold">
           Order now
         </button>
+        </Link>
       </div>
     </div>
   ))
@@ -52,9 +58,11 @@ const FeaturedMenu = () => {
       <div className="mb-5 bg-green-800 p-5 text-center text-white sm:h-[330px] lg:h-[261px]">
         <p className="text-2xl font-bold">{item.header}</p>
         <p className="mt-5 text-base sm:text-xl">{item.footer}​</p>
-        <button className="font-semibol mt-5 w-[130px] rounded-3xl border-2 border-white p-2">
+        <Link to="./order-now">
+        <button className="mt-5 w-[130px] rounded-3xl border-2 border-white p-2 font-semibold">
           Order now
         </button>
+        </Link>
       </div>
     </div>
   ))
