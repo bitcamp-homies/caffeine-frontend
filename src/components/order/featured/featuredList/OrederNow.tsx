@@ -1,10 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import style from './FeaturedStyle.module.css'
 
 const OrderNow = () => {
   const [size, setSize] = useState<string | null>()
   const [selectsize, setSelectsize] = useState('8px')
   const [count, setCount] = useState(0)
+  const ProductPrice: any = 15000
+  const [count2, setCount2] = useState(0)
+  const [totalPay, setTotalPay] = useState<number | null>(ProductPrice)
+
+  useEffect(() => {
+    setTotalPay((ProductPrice * count) + (ProductPrice * count2))
+  }, [count])
 
   const plus = () => {
     setCount(count + 1)
@@ -15,7 +23,6 @@ const OrderNow = () => {
   }
 
   const clickbtn = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value)
     setSize(e.target.value)
     if (e.target.value === 'Tall') {
       setSelectsize('8px')
@@ -52,7 +59,7 @@ const OrderNow = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-10 lg:mx-[70px] lg:flex-row">
+      <div className="flex flex-col gap-1 lg:ml-[70px] xl:flex-row">
         <div className="my-10 mx-auto lg:mx-[150px]">
           <img
             className="w-[400px] lg:min-h-[500px] lg:min-w-[500px]"
@@ -158,7 +165,7 @@ const OrderNow = () => {
                     서울 특별시 중구 중구 중구 중구
                   </p>
                 </div>
-                <div className="mx-auto flex items-center">
+                <div className="flex items-center">
                   <img
                     className="ml-1 mr-3 w-4 "
                     src="https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../releases/preview/2016/png/iconmonstr-instagram-11.png&r=138&g=138&b=138"
@@ -172,9 +179,9 @@ const OrderNow = () => {
           </div>
         </div>
 
-        <div className="mx-auto mb-10 w-full lg:my-10 lg:mx-0">
-          <h2 className="mx-auto mb-5 w-[500px] text-[1.2rem] font-semibold md:text-[1.6rem] lg:mx-0 lg:w-[600px]">
-            <span className="relative block px-2 pb-3 after:absolute after:bottom-0 after:left-0 after:h-[4px] after:w-full after:rounded-xl after:bg-[#d4e9e2]">
+        <div className="mx-auto sm:mb-24 lg:ml-32 w-full lg:my-10 xl:mx-0">
+          <h2 className="sm:w-[400px] mx-auto mb-5 w-[500px] text-[1.2rem] font-semibold md:text-[1.6rem] lg:mx-0">
+            <span className="relative block px-2 pb-3  after:absolute after:bottom-0 after:left-0 after:h-[4px] after:w-full after:rounded-xl after:bg-[#d4e9e2]">
               Recommend Menu
             </span>
           </h2>
@@ -216,7 +223,10 @@ const OrderNow = () => {
               <div className="mx-auto text-xl font-bold lg:ml-5 lg:text-2xl">
                 <p>i don't Know</p>
               </div>
-              <div className="my-2 text-base text-gray-600 lg:ml-5">
+              <div
+                id="totalPay"
+                className="my-2 text-base text-gray-600 lg:ml-5"
+              >
                 <p>15000$</p>
               </div>
               <button
@@ -228,13 +238,23 @@ const OrderNow = () => {
               <input
                 className={`w-12 border-t border-b border-black text-center ${style}`}
                 type="number"
-                value={count}
+                value={count2}
               />
               <button className="w-7 border border-black" onClick={minus}>
                 -
               </button>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="fixed bottom-0 h-[70px] w-full bg-[#1f3933]">
+        <div className="my-5 ml-5 inline-block">
+          <p className="text-xl text-white">total Pay : {totalPay}</p>
+        </div>
+        <div className="float-right mt-2 mr-10 inline-block rounded-3xl border p-3 text-white">
+          <Link to="./payment">
+          <button className="text-xl text-white">payment</button>
+          </Link>
         </div>
       </div>
     </>

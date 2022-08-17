@@ -12,7 +12,7 @@ const Featured = () => {
         </p>
       </div>
       <div>
-        <OrderNow />
+        <FeaturedMenu />
       </div>
     </div>
   )
