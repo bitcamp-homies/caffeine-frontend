@@ -1,10 +1,9 @@
-import React from 'react';
-import axios from 'axios';
 import { ReactComponent as LikeIcon } from './heart-svgrepo-com.svg';
 import { ReactComponent as InfoIcon } from './info-svgrepo-com.svg';
 import { Link } from "react-router-dom";
+import React from 'react';
 
-const CafeList = () => {
+const CafeList = ({data}:any) => {
   type cafeData = {
     insta_account : string,
     cafe_name : string,
@@ -15,27 +14,10 @@ const CafeList = () => {
     about : string,
     subfolder: string
   }
-
-  const [data, setData] = React.useState([]);
   let DetailLink;
   
-  React.useEffect(
-    () => {
-      axios.get(`http://localhost:8080/cafe/list`)
-      .then(
-        (res) => {
-          setData(res.data);
-        }
-      )
-      .catch(
-        (err) => {
-          console.log(err);
-        }
-      )
-    }, [])
-  
   return (
-<ul className='w-96 h-96 overflow-scroll overflow-x-hidden'>
+<ul className='w-full lg:w-[28rem] h-[440px] overflow-scroll overflow-x-hidden'>
       {
         data.map((item:cafeData, index:number) => {
           DetailLink = `/store/${item.cafe_name}`
@@ -49,14 +31,16 @@ const CafeList = () => {
                   {item.address2},{item.address3}
                 </div>
               </div>
-              <button className='w-4 h-4'>
-                <LikeIcon fill="#dd9c4f"/>
-              </button>
-              <Link to={DetailLink}>
-              <button className='w-4 h-4'>
-                <InfoIcon fill="#dd9c4f"/>
-              </button>
-              </Link>
+              <div>
+                <button className='relative ml-6 w-4 h-4'>
+                  <LikeIcon fill="#dd9c4f"/>
+                </button>
+                <Link to={DetailLink}>
+                  <button className='relative ml-6 w-4 h-4'>
+                    <InfoIcon fill="#dd9c4f"/>
+                  </button>
+                </Link>
+              </div>
             </div>
           </li>);
         })
