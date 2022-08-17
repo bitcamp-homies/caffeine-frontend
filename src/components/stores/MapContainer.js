@@ -19,7 +19,8 @@ const hoverPin = ( cafe , map) => {
   for(var i = 0; i < customOverLaies.length; i++){
     customOverLaies[i].setMap(null);
   }
-
+  customOverLaies = [];
+  
   console.log('cafe 정보 : ', cafe.cafe_name);
 
   var geocoder = new window.kakao.maps.services.Geocoder();
@@ -33,7 +34,7 @@ const hoverPin = ( cafe , map) => {
         console.log(`변경된좌표 : ${result[0].y}, ${result[0].x}`);
 
         // 결과값으로 받은 위치를 마커로 표시합니다
-        var content = `<div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-green-500 border-none  mb-9 text-white font-semibold text-sm'>${cafe.cafe_name}</div>`;
+        var content = `<div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-green-500 border-none  mb-9 text-white font-semibold text-[12px]'>${cafe.cafe_name}</div>`;
 
         // 커스텀 오버레이를 생성합니다
         customOverlay = new kakao.maps.CustomOverlay({
@@ -42,9 +43,11 @@ const hoverPin = ( cafe , map) => {
         });
 
         customOverLaies.push(customOverlay);
-        
-        customOverlay.setMap(map);
-    } 
+        for(var i = 0 ; i < customOverLaies.length; i++){
+          customOverLaies[i].setMap(map);
+        }
+    }
+     
   });    
 
 }
