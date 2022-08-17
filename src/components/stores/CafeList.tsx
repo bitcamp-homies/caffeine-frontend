@@ -17,7 +17,7 @@ const CafeList = ({data}:any) => {
   let DetailLink;
   
   return (
-<ul className='w-full lg:w-96 h-[440px] overflow-scroll overflow-x-hidden'>
+<ul className='w-full lg:w-[28rem] h-[440px] overflow-scroll overflow-x-hidden'>
       {
         data.map((item:cafeData, index:number) => {
           DetailLink = `/store/${item.cafe_name}`
