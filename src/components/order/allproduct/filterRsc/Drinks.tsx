@@ -1,15 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Drinks = () => {
   return (
     <div className="flex flex-col gap-3 pt-3 text-gray-400 font-semibold text-xs">
-      <a href="#">Hot Coffees</a>
-      <a href="#">Hot Teas</a>
-      <a href="#">Hot Drinks</a>
-      <a href="#">Frappuccino</a>
-      <a href="#">Cold Coffees</a>
-      <a href="#">Iced Teas</a>
-      <a href="#">Cold Drinks</a>
+      <div>Hot Coffees</div>
+      <div>Hot Teas</div>
+      <div>Hot Drinks</div>
+      <div>Frappuccino Blended Beverage</div>
+      <div>Cold Coffees</div>
+      <div>Iced Teas</div>
+      <div>Cold Drink</div>
     </div>
   );
 };

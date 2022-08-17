@@ -1,21 +1,21 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import FilterContainer from './FilterContainer';
-import ProductContainer from './ProductContainer';
+import CafesContainer from './CafesContainer';
+import LocaContainer from './LocaContainer';
 
-const AllProducts = () => {
+const AllCafes = () => {
   return (
     <div>
       <div className="flex flex-row gap-4">
         <div className="basis-1/4 hidden lg:block">
-          <FilterContainer />
+          <LocaContainer />
         </div>
         <div className="basis-full font-semibold pb-4">
-          <ProductContainer />
+          <CafesContainer />
         </div>
       </div>
     </div>
   );
 };
 
-export default AllProducts;
+
+export default AllCafes;

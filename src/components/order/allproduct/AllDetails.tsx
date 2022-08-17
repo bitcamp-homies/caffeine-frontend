@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import DetailContainer from './DetailContainer';
 import FilterContainer from './FilterContainer';
-import ProductContainer from './ProductContainer';
 
-const AllProducts = () => {
+const AllDetails = () => {
   return (
     <div>
       <div className="flex flex-row gap-4">
@@ -11,11 +11,11 @@ const AllProducts = () => {
           <FilterContainer />
         </div>
         <div className="basis-full font-semibold pb-4">
-          <ProductContainer />
+          <DetailContainer />
         </div>
       </div>
     </div>
   );
 };
 
-export default AllProducts;
+export default AllDetails;
