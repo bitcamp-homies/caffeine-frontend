@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import CafeList from './CafeList';
@@ -16,15 +18,9 @@ const onChange = (event) => {
   setInputText(event.target.value);
 };
 
-//redux test
-  const color = useSelector( (state) => {
-    return state.colorReducer.color;
-  })
-
-  const cafe = useSelector ( (state) => {
-    return state.mainMarkerReducer;
-  })
-
+const cafe = useSelector ( (state) => {
+  return state.mainMarkerReducer;
+})
 
   return (
       <div className='flex flex-col w-96 h-128'>

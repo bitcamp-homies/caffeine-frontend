@@ -1,3 +1,6 @@
+//@ts-nocheck
+
+
 const initialState = { cafe_id : 0, user_id : 0, cafe_name : '', address1 : '', address2 : '', address3 : '', address4 : '', about : '', subfolder : ''};
 
 export const changeMain = ( cafe ) => ( {type : 'change', cafe : cafe } );

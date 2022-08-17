@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import React from 'react';
 import axios from 'axios';
 import { ReactComponent as LikeIcon } from './svg/heart-svgrepo-com.svg';
