@@ -1,79 +1,49 @@
-import React, { useState } from 'react';
-import CafeList from './CafeList';
-import MapContainer from './MapContainer';
-import axios from 'axios';
+//@ts-nocheck
 
-type cafeData = {
-  insta_account : string,
-  cafe_name : string,
-  address1 : string,
-  address2 : string,
-  address3 : string,
-  address4 : string,
-  about : string,
-  subfolder: string
-}
+import { useState } from 'react'
+import CafeList from './CafeList'
 
-type setPlaceType = {
-  place: string,
-  setPlace : React.Dispatch<React.SetStateAction<string>>
-}
+const SearchPlace = ({ setPlace, cafeList, setHoverCafe}) => {
+  const [inputText, setInputText] = useState('')
 
-const SearchPlace = (props: setPlaceType) => {
-const [inputText, setInputText] = useState<string>("");
-const [data, setData] = React.useState<cafeData[]>([]);
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    setPlace(inputText)
+    setInputText('')
+  }
 
-//데이터 로딩
-React.useEffect(
-  () => {
-    axios.get(`http://localhost:8080/cafe/listAll`)
-    .then(
-      (res) => {
-        setData(res.data);
-      }
-    )
-    .catch(
-      (err) => {
-        console.log(err);
-      }
-    )
-  }, [])
-
-const handleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
-  props.setPlace(inputText);
-  console.log(props.place);
-  setInputText("");
-};
-
-const onChange = (event:React.FormEvent<HTMLInputElement>) => {
-  setInputText(event.currentTarget.value);
-}
-
-const filterdData = data.filter((data:cafeData) => {
-  return data.cafe_name.toLowerCase().includes(inputText.toLowerCase());
-});
+  const onChange = (event) => {
+    setInputText(event.target.value)
+  }
 
   return (
-      <div className='lg:flex lg:flex-col lg:basis-2/5 basis-full h-128'>
-        <form className="pr-5 pl-14 inputForm " onSubmit={handleSubmit}>
-          <div className='text-center lg:text-left'>
-            <div className='border-b-2 border-gray-400 inline-block my-6 lg:w-64 w-3/4'>
-              <input
-                placeholder="Find a store"
-                onChange={onChange}
-                value={inputText}
-                className="outline-0 lg:w-56 w-4/5"
-              />
-              <button><img className='w-4 h-4 mr-4' src='img/search_icon.png' alt='search_icon'/></button>
-            </div>
-            <button className='ml-4 border-green-800 border-2 rounded-full text-green-800 w-16 text-center h-8' type="submit">Filter</button>
-          </div>
-        </form>
+    <div className="h-128 flex w-96 flex-col">
+      <form className="inputForm px-5 " onSubmit={handleSubmit}>
+        <div className="mb-6 inline-block border-b-2 border-gray-400">
+          <input
+            placeholder="Find a store"
+            onChange={onChange}
+            value={inputText}
+            className="w-56 outline-0"
+          />
+          <button>
+            <img
+              className="mr-4 h-4 w-4"
+              src="img/search_icon.png"
+              alt="search_icon"
+            />
+          </button>
+        </div>
+        <button
+          className="ml-4 h-8 w-16 rounded-full border-2 border-green-800 text-center text-green-800"
+          type="submit"
+        >
+          Filter
+        </button>
+      </form>
+      <CafeList cafeList={cafeList} setHoverCafe={setHoverCafe}/>
+    </div>
+  )
+}
 
-          <CafeList data={filterdData} />
-      </div>
-  );
-};
-
-export default SearchPlace;
+export default SearchPlace
