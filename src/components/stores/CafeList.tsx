@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //@ts-nocheck
 
 import React from 'react';
@@ -31,28 +30,8 @@ const CafeList = () => {
       )
     }, [])
   
-=======
-import { ReactComponent as LikeIcon } from './heart-svgrepo-com.svg';
-import { ReactComponent as InfoIcon } from './info-svgrepo-com.svg';
-import { Link } from "react-router-dom";
-import React from 'react';
-
-const CafeList = ({data}:any) => {
-  type cafeData = {
-    insta_account : string,
-    cafe_name : string,
-    address1 : string,
-    address2 : string,
-    address3 : string,
-    address4 : string,
-    about : string,
-    subfolder: string
-  }
-  let DetailLink;
-  
->>>>>>> 5ff3439e61f577f5f41ad96b5dfd63d1a965fa60
   return (
-<ul className='w-full lg:w-[28rem] h-[440px] overflow-scroll overflow-x-hidden'>
+<ul className='w-96 h-96 overflow-scroll overflow-x-hidden'>
       {
         data.map((item, index) => {
           DetailLink = `/store/${item.cafe_name}`
@@ -66,16 +45,14 @@ const CafeList = ({data}:any) => {
                   {item.address2},{item.address3}
                 </div>
               </div>
-              <div>
-                <button className='relative ml-6 w-4 h-4'>
-                  <LikeIcon fill="#dd9c4f"/>
-                </button>
-                <Link to={DetailLink}>
-                  <button className='relative ml-6 w-4 h-4'>
-                    <InfoIcon fill="#dd9c4f"/>
-                  </button>
-                </Link>
-              </div>
+              <button className='w-4 h-4'>
+                <LikeIcon fill="#dd9c4f"/>
+              </button>
+              <Link to={DetailLink}>
+              <button className='w-4 h-4'>
+                <InfoIcon fill="#dd9c4f"/>
+              </button>
+              </Link>
             </div>
           </li>);
         })

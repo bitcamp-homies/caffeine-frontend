@@ -16,16 +16,15 @@ const FindStore = () => {
 
   return (
     <>
-    <div className='ml-4 flex flex-col-reverse lg:flex-row'>
+    <div className='ml-4 flex flex-row'>
+      <div className='flex flex-col w-96 h-128'>
       {
         cafename === undefined ?
-        <>
-          <SearchPlace place={place} setPlace={setPlace}/>
-        </>
-        :
+        <SearchPlace setPlace={setPlace}/> :
         <CafeDetail/>
       }
-      <div className='lg:basis-full lg:flex lg:ml-0 -ml-64 items-stretch'>
+      </div>
+      <div className='w-full h-full flex items-stretch'>
         <MapContainer searchPlace={place} />
       </div>
     </div>

@@ -11,14 +11,13 @@ import Order from 'components/order/Order';
 import AllProducts from 'components/order/allproduct/AllProducts';
 import Featured from 'components/order/featured/Featured';
 import AllCafes from 'components/order/allcafe/AllCafes';
-import MainRoutes from 'Routes';
 import FindStore from 'components/stores/FindStore';
 
 function App() {
   const [isOpen, setOpen] = useState(false)
 
   return (
-    <>
+    <Router>
       <nav
         id="navBar"
         className="sticky top-0 z-10 flex flex-row bg-white px-4 py-4 shadow md:px-6 md:py-6 lg:px-10 lg:py-7"
@@ -37,10 +36,10 @@ function App() {
         <div id="desktopNav" className="hidden w-full flex-row md:flex">
           <ul className="mx-10 list-none self-center font-bold">
             <li className="mr-7 inline-block">
-              <Link to="/order/cafes">ORDER</Link>
+              <Link to="/order/menu">ORDER</Link>
             </li>
             <li className="mr-7 inline-block">
-            <Link to="/cards">CARDS</Link>
+              <button>CARDS</button>
             </li>
             <li className="inline-block">
               <button>GIFT</button>
@@ -56,9 +55,18 @@ function App() {
           </div>
         </div>
       </nav>
-      <MainRoutes/>
-    </>
-  );
+      <Routes>
+        <Route path='/' element={ <Main /> } />
+        <Route path='order' element={ <Order /> }>
+          <Route path='cafes' element= {<AllCafes /> }/>
+          <Route path='cafes/menu' element={ <AllProducts /> }/>
+          <Route path='featured' element={ <Featured /> } />
+        </Route>
+        <Route path='store' element={ <FindStore /> } />
+        <Route path="store/:cafename" element={<FindStore/>}></Route>
+      </Routes>
+    </Router>
+  )
 }
 
 export default App

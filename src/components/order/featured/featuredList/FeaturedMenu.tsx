@@ -1,71 +1,55 @@
-import React from 'react'
-import { Link, Route, Router, Routes } from 'react-router-dom'
-import data from '../featuredData'
+import React from 'react';
+import { Link, Route, Routes } from 'react-router-dom';
+import data from "../featuredData";
 
 const FeaturedMenu = () => {
-  const dataList1 = data.filter((item) => item.seq < 2)
+  const dataList1 = data.filter(item => item.seq < 2)
   console.log(dataList1)
-
-  const dataShow1 = dataList1.map((item) => (
-    <div key={item.seq} className="basis-[60%]">
-      <img className="" src={item.img} />
-      <div className="mb-5 bg-pink-300 p-5 text-center text-white sm:h-[330px] lg:h-[261px]">
-        <p className="text-2xl font-bold">{item.header}</p>
-        <p className="mt-5 min-w-[99px] text-base sm:text-xl">{item.footer}</p>
-        <Link to="./order-now">
-        <button className="mt-5 w-[130px] rounded-3xl border-2 border-white p-2 font-semibold">
-          Order now
-        </button>
-        </Link>
+  
+  const dataShow1 = dataList1.map (item => (
+        <div key={item.seq} className="basis-[60%]">
+        <img className="" src={item.img} />
+        <div className="p-5 lg:h-[261px] sm:h-[330px] text-center text-white mb-5 bg-pink-300">
+          <p className="font-bold text-2xl">{item.header}</p>
+          <p className='mt-5 sm:text-xl text-base min-w-[99px]'>{item.footer}</p>
+          <button className='mt-5 rounded-3xl w-[130px] font-semibold border-white border-2 p-2'>Order now</button>
+        </div>
       </div>
-    </div>
-  ))
-
-  const dataList2 = data.filter((item) => 2 <= item.seq && item.seq < 4)
-  const dataShow2 = dataList2.map((item) => (
+  ));
+  
+  const dataList2 = data.filter(item => 2 <= item.seq  && item.seq < 4 )
+  const dataShow2 = dataList2.map(item => (  
+        <div key={item.seq} className="basis-[60%]">
+          <img className="" src={item.img} />
+          <div className="p-5 lg:h-[261px] sm:h-[330px] text-center text-white mb-5 bg-red-400">
+            <p className="font-bold text-2xl">{item.header}</p>
+            <p className='mt-5 sm:text-xl text-base'>{item.footer}</p>
+            <button className='mt-5 rounded-3xl w-[130px] font-semibold border-white border-2 p-2'>Order now</button>
+          </div>
+        </div>
+  ));
+  const dataList3 = data.filter(item => 4 <= item.seq  && item.seq < 6 )
+  const dataShow3 = dataList3.map(item => (
+        <div key={item.seq} className="basis-[60%]">
+          <img className="" src={item.img} />
+          <div className="p-5 lg:h-[261px] sm:h-[330px] text-center mb-5 bg-sky-200">
+            <p className="font-bold text-2xl">{item.header}</p>
+            <p className='mt-5 sm:text-xl text-base'>{item.footer}​</p>
+            <button className='mt-5 rounded-3xl w-[130px] font-semibold border-black border-2 p-2'>Order now</button>
+          </div>
+        </div>
+  ));
+  const dataList4 = data.filter(item => 6 <= item.seq  && item.seq < 8 )
+  const dataShow4 = dataList4.map(item => (
     <div key={item.seq} className="basis-[60%]">
-      <img className="" src={item.img} />
-      <div className="mb-5 bg-red-400 p-5 text-center text-white sm:h-[330px] lg:h-[261px]">
-        <p className="text-2xl font-bold">{item.header}</p>
-        <p className="mt-5 text-base sm:text-xl">{item.footer}</p>
-        <Link to="./order-now">
-        <button className="mt-5 w-[130px] rounded-3xl border-2 border-white p-2 font-semibold">
-          Order now
-        </button>
-        </Link>
-      </div>
+    <img className="" src={item.img} />
+    <div className="p-5 lg:h-[261px] sm:h-[330px] text-center mb-5 text-white bg-green-800">
+      <p className="font-bold text-2xl">{item.header}</p>
+      <p className='mt-5 sm:text-xl text-base'>{item.footer}​</p>
+      <button className='mt-5 rounded-3xl w-[130px] font-semibol border-white border-2 p-2'>Order now</button>
     </div>
-  ))
-  const dataList3 = data.filter((item) => 4 <= item.seq && item.seq < 6)
-  const dataShow3 = dataList3.map((item) => (
-    <div key={item.seq} className="basis-[60%]">
-      <img className="" src={item.img} />
-      <div className="mb-5 bg-sky-200 p-5 text-center sm:h-[330px] lg:h-[261px]">
-        <p className="text-2xl font-bold">{item.header}</p>
-        <p className="mt-5 text-base sm:text-xl">{item.footer}​</p>
-        <Link to="./order-now">
-        <button className="mt-5 w-[130px] rounded-3xl border-2 border-black p-2 font-semibold">
-          Order now
-        </button>
-        </Link>
-      </div>
-    </div>
-  ))
-  const dataList4 = data.filter((item) => 6 <= item.seq && item.seq < 8)
-  const dataShow4 = dataList4.map((item) => (
-    <div key={item.seq} className="basis-[60%]">
-      <img className="" src={item.img} />
-      <div className="mb-5 bg-green-800 p-5 text-center text-white sm:h-[330px] lg:h-[261px]">
-        <p className="text-2xl font-bold">{item.header}</p>
-        <p className="mt-5 text-base sm:text-xl">{item.footer}​</p>
-        <Link to="./order-now">
-        <button className="mt-5 w-[130px] rounded-3xl border-2 border-white p-2 font-semibold">
-          Order now
-        </button>
-        </Link>
-      </div>
-    </div>
-  ))
+  </div>
+  ));
 
   return (
     <>
@@ -82,7 +66,7 @@ const FeaturedMenu = () => {
         {dataShow4}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default FeaturedMenu
+export default FeaturedMenu;
