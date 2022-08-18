@@ -14,7 +14,8 @@ const Carousel = ({data}) => {
   
   const imgPath = data[0].file_path
   const img = data[0].img_file.split(',')
-  console.log('https://storage.cloud.google.com/bitcamp-caffeine.appspot.com/'+img+imgPath)
+  const path = img+data[0].file_path
+  console.log(path)
   return(
     <div className="carousel">
       <Slider {...settings}>
@@ -26,10 +27,11 @@ const Carousel = ({data}) => {
           <img src="https://storage.cloud.google.com/bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-1.jpg"></img>
         </div>
         {
-          img.map((item) => {
-            return <div className="bg-slate-500">
-              {item}
+          img.map((item,index) => {
+            return(
+              <div key={index}>
               </div>
+            )
           })
         }
       </Slider>
