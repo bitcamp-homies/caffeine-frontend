@@ -14,7 +14,9 @@ const CafeListTemp = () => {
     .get('http://localhost:8080/cafe/listAllMybatis')
     .then((res) => {console.log(res.data)})
 
-  return <div></div>
+  return <div>
+    
+  </div>
 }
 
 export default CafeListTemp

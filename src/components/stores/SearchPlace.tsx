@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import CafeList from './CafeList'
-import CafeListTemp from './CafeListTemp'
 
 const SearchPlace = ({ setPlace }) => {
   const [inputText, setInputText] = useState('')
@@ -48,7 +47,6 @@ const SearchPlace = ({ setPlace }) => {
         </button>
       </form>
       <CafeList />
-      <CafeListTemp />
     </div>
   )
 }

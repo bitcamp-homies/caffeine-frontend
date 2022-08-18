@@ -12,6 +12,7 @@ import AllProducts from 'components/order/allproduct/AllProducts';
 import Featured from 'components/order/featured/Featured';
 import AllCafes from 'components/order/allcafe/AllCafes';
 import FindStore from 'components/stores/FindStore';
+import CafeCoordManage from 'components/stores/CafeCoordManage'
 
 function App() {
   const [isOpen, setOpen] = useState(false)
@@ -64,6 +65,7 @@ function App() {
         </Route>
         <Route path='store' element={ <FindStore /> } />
         <Route path="store/:cafename" element={<FindStore/>}></Route>
+        <Route path="coord" element={<CafeCoordManage/>}></Route>
       </Routes>
     </Router>
   )
