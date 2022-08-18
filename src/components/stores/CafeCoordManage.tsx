@@ -42,8 +42,6 @@ const CafeCoordManage = () => {
     }
   }
 
-  React.useEffect(() => {getUserLocation()},[]);
-  
   const setGeoCoord = (addr2, addr3, cafe_id) => {
     
     geocoder.addressSearch(`${addr2} ${addr3}`, function(result, status) {
@@ -68,11 +66,20 @@ const CafeCoordManage = () => {
     }
   }
 
-  axios
-    .get('http://localhost:8080/cafe/listAlllWithCoord')
+  React.useEffect(() => {
+    getUserLocation()
+
+    axios
+    .get('http://localhost:8080/cafe/listAlllWithCoord',{
+      params:{
+        userLong : userLong, userLat : userLat
+      }
+    })
     .then((res) => {setData(res.data)})
     .catch((err) => {console.log(err)})
 
+  },[])
+  
   return (
     <div>
       <div>현재좌표 경도longitude :  {longitude} 위도 latitude : {latitude}</div>
@@ -93,6 +100,7 @@ const CafeCoordManage = () => {
               <th>ADDRESS4</th>
               <th>경도 </th>
               <th>위도 </th>
+              <th>사용자와 거리:m</th>
               <th>좌표최신화</th>
             </tr>
           </thead>
@@ -100,7 +108,7 @@ const CafeCoordManage = () => {
           {
             data.map((item, index) => {
               return (
-                <tr className='border-t-2 border-green-200' key={index}>
+                <tr className='border-t-2 border-green-200 text-center' key={index}>
                   <td>{item.cafe_id}</td>
                   <td>{item.user_id}</td>
                   <td>{item.cafe_name}</td>
@@ -110,7 +118,8 @@ const CafeCoordManage = () => {
                   <td>{item.address4}</td>
                   <td>{item.longitude}</td>
                   <td>{item.latitude}</td>
-                  <button onClick = {() => setGeoCoord(item.address2, item.address3, item.cafe_id)}>{item.cafe_name}좌표넣기</button>
+                  <td>{Math.round(item.distance * 10) / 10}</td>
+                  <button onClick = {() => setGeoCoord(item.address2, item.address3, item.cafe_id)}>좌표넣기</button>
                 </tr>
               )
             })
