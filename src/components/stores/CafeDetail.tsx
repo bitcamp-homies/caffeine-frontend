@@ -1,11 +1,17 @@
+// @ts-nocheck
 import { Link, useParams } from "react-router-dom";
 import Carousel from "./Carousel";
 import { ReactComponent as XIcon } from './x-svgrepo-com.svg';
-
+import { useQuery } from "react-query";
+import {listAllMybatis} from '../../store/api'
 const CafeDetail = () => {
   
   const { cafename } = useParams();
-
+  const {data,status,isFetching,isLoading,isSuccess} = useQuery(
+    'listAllMybatis',
+    listAllMybatis
+  )
+  const cafedata = data?.data.filter((item) => item.cafe_name === cafename)
   return(
     <div className="lg:flex lg:flex-col lg:basis-2/5 basis-full h-128">
       
@@ -31,7 +37,7 @@ const CafeDetail = () => {
           <div className="pt-2 -ml-5 text-center">
             <h3 className="text-base text-bold px-4 bg-gray-300">PICTURE</h3>
             <div className="px-4 pt-4 pb-5">
-              <Carousel/>
+              <Carousel data = {cafedata}/>
             </div>
           </div>
           
@@ -45,6 +51,11 @@ const CafeDetail = () => {
                     <p className="text-gray-600">
                       <span className="font-serif">"</span>
                         카페 소개글 작성란입니다. 아직 데이터 연동 안되어있습니당.
+                        {
+                        isSuccess &&  cafedata.map((item) => {
+                            return <span key={item.cafe_id}>{item.about}</span>
+                          })
+                        }
                       <span className="font-serif">"</span>
                     </p>
                   </div>
