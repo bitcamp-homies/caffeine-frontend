@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 
 const MemberWrite = () => {
+    
+
     return (
 <div>
     <div className="navOffsetContainer___2wNOX">
@@ -75,7 +77,7 @@ const MemberWrite = () => {
               </fieldset>
               <div>
                 <div className="flex justify-end mt-6"> 
-                  <button className="bg-[#00754a] rounded-[500px] text-white text-lg font-semibold px-[18px] py-[15px] text-center" type="submit">Create account</button>
+                  <button className="bg-[#00754a] rounded-[500px] text-white text-lg font-semibold px-[18px] py-[15px] text-center" type="submit">계정 생성</button>
                 </div>
               </div>
             </div>
