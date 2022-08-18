@@ -75,24 +75,6 @@ const cafeLocPin = (aCafeData, map) => {
 });    
 
 }
-
-//오버레이가 아니라 인포윈도우를 새로 열어야하나?
-const emphasizeMarkerDiv = '<div class="w-[150px] text-center py-2 px-1 bg-none border-green-500 border-2"></div>';
-function emphasizeMarke(locPosition, message, map) {
-  
-  var iwContent = message, 
-      iwRemoveable = false;
-
-  var infowindow = new window.kakao.maps.InfoWindow({
-      content : iwContent,
-      removable : iwRemoveable
-  });
-  
-  infowindow.open(map, marker);
-  
-  map.setCenter(locPosition);      
-}
-//
   
 const MapContainer = () => {
   const  userLocation = useSelector( (state) => {return state.locationReducer} );
