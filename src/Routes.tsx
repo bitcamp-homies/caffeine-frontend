@@ -16,7 +16,11 @@ const MainRoutes = () => {
       <Routes>
         <Route path='/' element={ <App /> } />
         <Route index element={ <Main /> } />
-        <Route path='cards' element={<Card/> } />
+        <Route path='cards' element={<Card/> } >
+          <Route path=''/>
+          <Route path=''/>
+          <Route path=''/>
+        </Route>
         <Route path='order' element={ <Order /> }>
           <Route path='cafes' element= {<AllCafes /> }/>
           <Route path='cafes/location' element= {<AllCafesLocation /> }/>
