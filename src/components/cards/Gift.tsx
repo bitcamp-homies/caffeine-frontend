@@ -1,5 +1,5 @@
 import React from 'react'
-import CardIntro from './GiftLeft'
+import GiftLeft from './GiftLeft'
 import Join from './Join'
 
 const Gift = () => {
@@ -7,7 +7,7 @@ const Gift = () => {
     
     <div className="grid grid-col-1 md:flex flex-row-2 h-screen">
       <div className="w-full h-full font-semibold bg-white">
-        <CardIntro />
+        <GiftLeft />
       </div>
       <div className="w-full h-full font-semibold bg-green-700">
         <Join />
