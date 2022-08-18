@@ -11,10 +11,11 @@ const CafeSwipe = () => {
   
   // 이미지 URL 불러오기
   const gsReference = ref(storage, 'gs://bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-1.jpg')
+  const gsReference2 = ref(storage, 'gs://bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-profile.jpg')
   
   // getDownloadURL() 메서드는 Promise를 호출함에 따라 .then으로 반환된 URL(string)을 가공해야함
   getDownloadURL(gsReference).then((img) => {
-    let imgUrl = document.getElementById("img")
+    const imgUrl = document.getElementById("img1")
     imgUrl?.setAttribute('src', img)
   })
   /*
@@ -23,7 +24,15 @@ const CafeSwipe = () => {
 
   return (
     <div id="CafeSwipe" className=''>
-      <img id="img" className='' />
+      <div className='h-3/5'>
+        <img id='img1' className='object-contain h-full w-full' />
+      </div>
+      <div id='cafe_profile' className='h-2/5'>
+        <div id='head' className='flex flex-row' >
+          <div id='profile_image' className='border rounded-full'>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
