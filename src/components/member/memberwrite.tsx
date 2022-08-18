@@ -1,15 +1,15 @@
-import React from 'react';
+// @ts-nocheck
+import React, { useState } from 'react';
 
-const memberwrite = () => {
+const MemberWrite = () => {
     return (
 <div>
     <div className="navOffsetContainer___2wNOX">
-  <main className="relative z-[-1]">
+  <main className="relative">
     <div className="max-w-[500px] px-7 pt-10 mx-auto">
       <div>
-        <h1 className="font-bold text-2xl leading-snug pb-4 md:pb-10 md:text-center">Create an account</h1>
-        <p className="pb5 md-pb7 text-sm pb-10 text-gray-500 md:text-center">Join Thumbs Rewards to earn Stars for free food and drinks, any way you pay. Get access to mobile ordering, a birthday Reward, and
-          <a className="min-w-[15px] min-h-[15px] text-inherit underline" href="#">more</a>.
+        <h1 className="font-bold text-2xl leading-snug pb-4 md:pb-10 md:text-center">계정 만들기</h1>
+        <p className="pb5 md-pb7 text-sm pb-10 text-gray-500 md:text-center">Thumbs 에 가입하여 주변의 카페 추천과 다른 이용자들의 후기도 확인하고, 편리한 메뉴 주문 방법을 확인해보세요. 
         </p>
       </div>
     </div>
@@ -17,28 +17,28 @@ const memberwrite = () => {
       <div>
         <div className="sm-pt0 md:p-12">
           <form method="post">
-            <p className="md:text-lg"><span className="text-[#00754a]">* </span>indicates required field</p>
+            <p className="md:text-lg"><span className="text-[#00754a]">* </span>표시는 필수 항목입니다.</p>
             <div className="pt-5 md:pt-8">
               <fieldset className="pb-10">
-                <h2 className="font-semibold text-base mb-3">Personal Information</h2>
+                <h2 className="font-semibold text-base mb-3">개인정보</h2>
                 <div>
                   <div className="py-3 relative">
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="text" className="w-full" name="firstName" placeholder="* First Name"/>
+                      <input type="text" className="w-full" id="firstName" name="firstName" placeholder="* 홍" />
                     </div>
                     <div className="">
                     </div>
                   </div>
                   <div className="py-3 relative">
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="text" className="w-full" name="LastName" placeholder="* Last Name"/>
+                      <input type="text" className="w-full" id="LastName" name="LastName" placeholder="* 길동"/>
                     </div>
                     <div className="">
                     </div>
                   </div>
                   <div className="pt-10 py-3 relative">
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="text" className="w-full" name="Nickname" placeholder="* Nickname"/>
+                      <input type="text" className="w-full" id="Nickname" name="Nickname" placeholder="* 길동이"/>
                     </div>
                     <div className="">
                     </div>
@@ -49,11 +49,11 @@ const memberwrite = () => {
                 </div>
               </fieldset>
               <fieldset className="pb-10">
-                <h2 className="font-semibold text-base mb-3">Account Security</h2>
+                <h2 className="font-semibold text-base mb-3">계정정보</h2>
                 <div>
                   <div className="py-3 relative">
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="Email" className="w-full" name="Email" placeholder="* Email address"/>
+                      <input type="Email" className="w-full" id="Email" name="Email" placeholder="* 아이디(이메일)"/>
                     </div>
                     <div className="">
                     </div>
@@ -63,12 +63,12 @@ const memberwrite = () => {
                   </div>
                   <div className="py-3 relative">
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="password" className="w-full" name="password" placeholder="* Password"/>
+                      <input type="password" className="w-full" id="password" name="password" placeholder="* 비밀번호"/>
                     </div>
                     <div className="">
                     </div>
                     <div className="pt-2 text-sm">
-                      <p>8~25자 길이의 패스워드를 입력해야합니다.</p>
+                      <p>8~25자 길이의 비밀번호를 입력해야합니다.</p>
                     </div>
                   </div>
                 </div>
@@ -90,4 +90,4 @@ const memberwrite = () => {
     );
 };
 
-export default memberwrite;
+export default MemberWrite;

@@ -13,6 +13,7 @@ import Payment from 'components/order/featured/Payment';
 
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import MemberWrite from 'components/member/MemberWrite';
 
 const MainRoutes = () => {
   return (
@@ -30,6 +31,7 @@ const MainRoutes = () => {
           <Route path='featured/order-now/payment' element={<Payment/>}/>
         </Route>
         <Route path='/store' element={ <FindStore /> } />
+        <Route path='member' element={<MemberWrite/> } />
       </Routes>
   );
 };

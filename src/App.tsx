@@ -51,7 +51,7 @@ function App() {
               <span className='ml-4 mr-10 font-semibold'>Find a store</span>
             </Link>
             <button className='px-4 py-1.5 border border-black rounded-full font-semibold'>Sign in</button>
-            <button className='ml-4 px-4 py-1.5 border border-black bg-black text-white rounded-full font-semibold'>Join now</button>
+            <button className='ml-4 px-4 py-1.5 border border-black bg-black text-white rounded-full font-semibold'><Link to="/member">Join now</Link></button>
           </div>
         </div>
       </nav>
