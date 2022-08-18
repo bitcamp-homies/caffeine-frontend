@@ -26,21 +26,21 @@ const MemberWrite = () => {
                 <div>
                   <div className="py-3 relative">
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="text" className="w-full" id="firstName" name="firstName" placeholder="* 홍" />
+                      <input type="text" className="w-full" id="firstName" name="firstName" placeholder="* 홍" onChange={onChangefirstName}/>
                     </div>
                     <div className="">
                     </div>
                   </div>
                   <div className="py-3 relative">
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="text" className="w-full" id="LastName" name="LastName" placeholder="* 길동"/>
+                      <input type="text" className="w-full" id="LastName" name="LastName" placeholder="* 길동" onChange={onchangeLastName}/>
                     </div>
                     <div className="">
                     </div>
                   </div>
                   <div className="pt-10 py-3 relative">
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="text" className="w-full" id="Nickname" name="Nickname" placeholder="* 길동이"/>
+                      <input type="text" className="w-full" id="Nickname" name="Nickname" placeholder="* 길동이" onChange={onchangeNickname}/>
                     </div>
                     <div className="">
                     </div>
@@ -55,7 +55,7 @@ const MemberWrite = () => {
                 <div>
                   <div className="py-3 relative">
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="Email" className="w-full" id="Email" name="Email" placeholder="* 아이디(이메일)"/>
+                      <input type="Email" className="w-full" id="Email" name="Email" placeholder="* 아이디(이메일)" onChange={onchangeEmail}/>
                     </div>
                     <div className="">
                     </div>
@@ -65,7 +65,7 @@ const MemberWrite = () => {
                   </div>
                   <div className="py-3 relative">
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="password" className="w-full" id="password" name="password" placeholder="* 비밀번호"/>
+                      <input type="password" className="w-full" id="password" name="password" placeholder="* 비밀번호" onChange={onchangepassword}/>
                     </div>
                     <div className="">
                     </div>
