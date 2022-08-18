@@ -11,7 +11,8 @@ const Carousel = ({data}) => {
     slidesToScroll: 1
   };
   
-  const img = data[0].img_file.split(',')
+  let img = data[0].img_file.split(',')
+  img = img.filter((element, index) => index < img.length - 1);
   let test;
 
   return(
