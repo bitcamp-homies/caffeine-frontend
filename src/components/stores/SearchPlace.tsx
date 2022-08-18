@@ -1,10 +1,9 @@
 //@ts-nocheck
 
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
 import CafeList from './CafeList'
 
-const SearchPlace = ({ setPlace }) => {
+const SearchPlace = ({ setPlace, cafeList, setHoverCafe}) => {
   const [inputText, setInputText] = useState('')
 
   const handleSubmit = (event) => {
@@ -16,10 +15,6 @@ const SearchPlace = ({ setPlace }) => {
   const onChange = (event) => {
     setInputText(event.target.value)
   }
-
-  const cafe = useSelector((state) => {
-    return state.mainMarkerReducer
-  })
 
   return (
     <div className="h-128 flex w-96 flex-col">
@@ -46,7 +41,7 @@ const SearchPlace = ({ setPlace }) => {
           Filter
         </button>
       </form>
-      <CafeList />
+      <CafeList cafeList={cafeList} setHoverCafe={setHoverCafe}/>
     </div>
   )
 }

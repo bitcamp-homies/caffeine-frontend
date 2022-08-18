@@ -6,7 +6,5 @@ import locationReducer from "./modules/userLocation";
 import cafeListBoundaryReducer from "./modules/cafeListBoundary";
 
 export default combineReducers({
-  mainMarkerReducer : reducer,
-  locationReducer,
-  cafeListBoundaryReducer
+  reducer
 })
