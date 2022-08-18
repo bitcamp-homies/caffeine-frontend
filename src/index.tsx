@@ -1,15 +1,23 @@
-// @ts-nocheck
+//@ts-nocheck
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from './reportWebVitals.ts';
+import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore } from 'redux';
+import rootReducer from './store';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from "react-redux";
 import store from "./store/index";
 //index에서 QueryClient생성
 const queryClient = new QueryClient();
+
+const store = createStore(rootReducer, composeWithDevTools());
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

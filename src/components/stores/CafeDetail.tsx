@@ -4,6 +4,8 @@ import Carousel from "./Carousel";
 import { ReactComponent as XIcon } from './x-svgrepo-com.svg';
 import { useQuery } from "react-query";
 import {listAllMybatis} from '../../store/api'
+import { ReactComponent as XIcon } from './svg/x-svgrepo-com.svg';
+s
 const CafeDetail = () => {
   
   const { cafename } = useParams();

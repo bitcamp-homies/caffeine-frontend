@@ -1,10 +1,19 @@
+//@ts-nocheck
 
 import React, { useState } from 'react'
 import Logo from './components/Logo'
 import MapMarker from './components/MapMarker'
 import { Squash as Hamburger } from 'hamburger-react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+
+import Main from 'components/main/Main';
+import Order from 'components/order/Order';
+import AllProducts from 'components/order/allproduct/AllProducts';
+import Featured from 'components/order/featured/Featured';
+import AllCafes from 'components/order/allcafe/AllCafes';
 import MainRoutes from 'Routes';
+import FindStore from 'components/stores/FindStore';
+import CafeCoordManage from 'components/stores/CafeCoordManage'
 
 function App() {
   const [isOpen, setOpen] = useState(false)

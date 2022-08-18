@@ -1,26 +1,13 @@
+//@ts-nocheck
+
 import React, { useState } from 'react';
 import CafeList from './CafeList';
+import MapContainer from './MapContainer';
 import axios from 'axios';
 
-type cafeData = {
-  insta_account : string,
-  cafe_name : string,
-  address1 : string,
-  address2 : string,
-  address3 : string,
-  address4 : string,
-  about : string,
-  subfolder: string
-}
-
-type setPlaceType = {
-  place: string,
-  setPlace : React.Dispatch<React.SetStateAction<string>>
-}
-
-const SearchPlace = (props: setPlaceType) => {
-const [inputText, setInputText] = useState<string>("");
-const [data, setData] = React.useState<cafeData[]>([]);
+const SearchPlace = (props) => {
+const [inputText, setInputText] = useState("");
+const [data, setData] = React.useState([]);
 
 //데이터 로딩
 React.useEffect(
@@ -38,18 +25,18 @@ React.useEffect(
     )
   }, [])
 
-const handleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
+const handleSubmit = (event) => {
   event.preventDefault();
   props.setPlace(inputText);
   console.log(props.place);
   setInputText("");
 };
 
-const onChange = (event:React.FormEvent<HTMLInputElement>) => {
+const onChange = (event) => {
   setInputText(event.currentTarget.value);
 }
 
-const filterdData = data.filter((data:cafeData) => {
+const filterdData = data.filter((data) => {
   return data.cafe_name.toLowerCase().includes(inputText.toLowerCase());
 });
 
