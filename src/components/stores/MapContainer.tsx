@@ -8,6 +8,23 @@ let customOverlay = new kakao.maps.CustomOverlay({
   content: '',
 })
 
+
+const insertUserLocation = (setUserLocation, fnc1) => {
+  if (navigator.geolocation) {
+    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var lat = position.coords.latitude, // 위도
+        lon = position.coords.longitude // 경도
+      console.log('MapContainer...insertUserLocation....사용자 위치 : ', lon, lat)
+      setUserLocation({ lon: lon, lat: lat })
+      fnc1();
+    })
+  } else {
+    // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+    console.log('MapContainer...insertUserLocation....위치불러오기실패...!')
+  }
+}
+
 const setHoverCafeOverlay = (cafeData, map) => {
   // for (var i = 0; i < customOverLaies.length; i++) {
   //   customOverLaies[i].setMap(null)
@@ -41,15 +58,11 @@ const cafeLocPin = (aCafeData, map) => {
   })
 };
 
-const MapContainer = ( props ) => {
-  console.log('MapContainter... props 확인...', props.userLocation);
-  const userLocation = props.userLocation
-  const setUserLocation = props.setUserLocation
-  const cafeList = props.cafeList
-  const setCafeList = props.setCafeList
-  const hoverCafe = props.hoverCafe
-  const setHoverCafe = props.setHoverCafe
-
+const MapContainer = (
+  {userLocation, setUserLocation, cafeList, setCafeList, hoverCafe, setHoverCafe}
+ ) => {
+  
+  console.log('MapContainter... props 확인...', userLocation);
   const setMarkerUserLocationOnMap = (map) => {
     console.log('Map Container... setMarkerUserLocationOnMap... userLocation : ', userLocation.lon, userLocation,lat);
     var locPosition = new window.kakao.maps.LatLng(
@@ -88,6 +101,8 @@ const MapContainer = ( props ) => {
 
 
   React.useEffect(() => {
+    insertUserLocation(setUserLocation, setMarkerUserLocationOnMap(map));
+    
     // map 렌더링
     const container = document.getElementById('myMap')
     const options = {
@@ -99,6 +114,7 @@ const MapContainer = ( props ) => {
 
     // 사용자 위치 map에 marker, infowindow 생성하기
     // setMarkerUserLocationOnMap(map);
+    
     // 사용자 위치 map에 marker, infowindow 생성하기
  
     // for (var i = 0; i < cafeList.length; i++) {

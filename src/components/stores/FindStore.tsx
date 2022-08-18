@@ -28,21 +28,6 @@ import SearchPlace from './SearchPlace'
     }
   );
 
-  const insertUserLocation = () => {
-    if (navigator.geolocation) {
-      // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-      navigator.geolocation.getCurrentPosition(function (position) {
-        var lat = position.coords.latitude, // 위도
-          lon = position.coords.longitude // 경도
-        console.log('FindStore...사용자 위치 : ', lon, lat)
-        setUserLocation({ lon: lon, lat: lat })
-      })
-    } else {
-      // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-      console.log('FindStore...위치불러오기실패...!')
-    }
-}
-
   const getCafeList = (userLocation) => {
     axios
       .get('http://localhost:8080/cafe/listAlllWithCoord', {
@@ -61,7 +46,6 @@ import SearchPlace from './SearchPlace'
 
   //풍혁 0818 : userLocation이랑 cafeList 초기화시켜주기
   useEffect(() => {
-    insertUserLocation();
     getCafeList(userLocation);
   }, [])
 
