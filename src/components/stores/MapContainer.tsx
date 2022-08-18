@@ -8,8 +8,7 @@ let customOverlay = new kakao.maps.CustomOverlay({
   content: '',
 })
 
-
-const insertUserLocation = (setUserLocation, fnc1) => {
+const insertUserLocation = (setUserLocation, fnc1, fnc2) => {
   if (navigator.geolocation) {
     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -18,6 +17,7 @@ const insertUserLocation = (setUserLocation, fnc1) => {
       console.log('MapContainer...insertUserLocation....사용자 위치 : ', lon, lat)
       setUserLocation({ lon: lon, lat: lat })
       fnc1();
+      fnc2();
     })
   } else {
     // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
@@ -64,7 +64,7 @@ const MapContainer = (
   
   console.log('MapContainter... props 확인...', userLocation);
   const setMarkerUserLocationOnMap = (map) => {
-    console.log('Map Container... setMarkerUserLocationOnMap... userLocation : ', userLocation.lon, userLocation,lat);
+    // console.log('Map Container... setMarkerUserLocationOnMap... userLocation : ', userLocation.lon, userLocation,lat);
     var locPosition = new window.kakao.maps.LatLng(
       userLocation.lat,
       userLocation.lon
@@ -101,7 +101,7 @@ const MapContainer = (
 
 
   React.useEffect(() => {
-    insertUserLocation(setUserLocation, setMarkerUserLocationOnMap(map));
+    // insertUserLocation(setUserLocation, setMarkerUserLocationOnMap(map));
     
     // map 렌더링
     const container = document.getElementById('myMap')
