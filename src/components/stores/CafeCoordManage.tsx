@@ -3,11 +3,13 @@
 import axios from 'axios';
 import React from 'react';
 
-
 const CafeCoordManage = () => {
+
   const [data, setData] = React.useState([])
   const [longitude, setLongitude] = React.useState(0);
-  const [latitude, setLatitude] = React.useState(0);
+  const [latitude, setLatitude] = React.useState(0); 
+  const [userLong, setUserLong] = React.useState(0);
+  const [userLat, setUserLat] = React.useState(0);
 
   var geocoder = new window.kakao.maps.services.Geocoder();
 
@@ -22,6 +24,26 @@ const CafeCoordManage = () => {
 
   }
 
+  const getUserLocation = () => {
+    console.log('user loc 집어넣기');
+
+    if (navigator.geolocation) {
+      // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+      navigator.geolocation.getCurrentPosition(function(position) {
+          var lat = position.coords.latitude, // 위도
+              lon = position.coords.longitude; // 경도
+          console.log('사용자 위치 : ',lon,lat);
+          setUserLong(lon);
+          setUserLat(lat);
+      });
+      
+    } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+      console.log('위치불러오기실패...!');
+    }
+  }
+
+  React.useEffect(() => {getUserLocation()},[]);
+  
   const setGeoCoord = (addr2, addr3, cafe_id) => {
     
     geocoder.addressSearch(`${addr2} ${addr3}`, function(result, status) {
@@ -54,27 +76,31 @@ const CafeCoordManage = () => {
   return (
     <div>
       <div>현재좌표 경도longitude :  {longitude} 위도 latitude : {latitude}</div>
+      <div>사용자위치 경도 : {userLong} 위도 : {userLat}</div>
       <div>
         <button onClick={() => setGeoCoordAllCafe(data)} className='bg-green-300 border-none text-center text-white text-semibold'>전체 카페 좌표 최신화</button>
       </div>
       <div>
         <table>
-          <tr>
-            <th>CAFE_ID</th>
-            <th>USER_ID</th>
-            <th>CAFE_NAME</th>
-            <th>ADDRESS1</th>
-            <th>ADDRESS2</th>
-            <th>ADDRESS3</th>
-            <th>ADDRESS4</th>
-            <th>경도 </th>
-            <th>위도 </th>
-            <th>좌표최신화</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>CAFE_ID</th>
+              <th>USER_ID</th>
+              <th>CAFE_NAME</th>
+              <th>ADDRESS1</th>
+              <th>ADDRESS2</th>
+              <th>ADDRESS3</th>
+              <th>ADDRESS4</th>
+              <th>경도 </th>
+              <th>위도 </th>
+              <th>좌표최신화</th>
+            </tr>
+          </thead>
+          <tbody>
           {
             data.map((item, index) => {
               return (
-                <tr className='border-t-2 border-green-100' key={index}>
+                <tr className='border-t-2 border-green-200' key={index}>
                   <td>{item.cafe_id}</td>
                   <td>{item.user_id}</td>
                   <td>{item.cafe_name}</td>
@@ -88,7 +114,8 @@ const CafeCoordManage = () => {
                 </tr>
               )
             })
-          }       
+          }
+          </tbody>       
         </table>
       </div>
     </div>
