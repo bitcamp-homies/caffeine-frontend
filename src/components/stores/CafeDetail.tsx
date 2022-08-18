@@ -37,7 +37,7 @@ const CafeDetail = () => {
           <div className="pt-2 -ml-5 text-center">
             <h3 className="text-base text-bold px-4 bg-gray-300">PICTURE</h3>
             <div className="px-4 pt-4 pb-5">
-              <Carousel data = {cafedata}/>
+            {isSuccess && <Carousel data = {cafedata}/>}
             </div>
           </div>
           

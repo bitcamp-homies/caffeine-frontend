@@ -11,13 +11,24 @@ const Carousel = ({data}) => {
     slidesToScroll: 1
   };
   const img = data[0].img_file.split(',')
-  console.log(img)
+  const filepath = data[0].file_path;
+  console.log(data[0].file_path)
+  let test;
+  //'https://storage.cloud.google.com/bitcamp-caffeine.appspot.com'+data[0].file_path+item
+  console.log(test)
   return(
     <div className="carousel">
       <Slider {...settings}>
         {
           img.map((item) => {
-            return <div className="bg-slate-500">{item}</div>
+            test = 'https://storage.cloud.google.com/bitcamp-caffeine.appspot.com'+data[0].file_path+item;
+            {
+            return <div>
+              <img src={test}>
+              </img>
+            </div>
+            }
+
           })
         }
         {/* <div className="bg-slate-500"><h3>1</h3></div>
