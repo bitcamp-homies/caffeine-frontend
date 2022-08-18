@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import CafeList from './CafeList';
-import MapContainer from './MapContainer';
 import axios from 'axios';
 
 type cafeData = {
@@ -26,7 +25,7 @@ const [data, setData] = React.useState<cafeData[]>([]);
 //데이터 로딩
 React.useEffect(
   () => {
-    axios.get(`http://localhost:8080/cafe/listAll`)
+    axios.get(`http://localhost:8080/cafe/listAllMybatis`)
     .then(
       (res) => {
         setData(res.data);

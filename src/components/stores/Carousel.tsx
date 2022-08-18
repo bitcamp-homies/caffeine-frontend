@@ -14,8 +14,12 @@ const Carousel = () => {
   return(
     <div className="carousel">
       <Slider {...settings}>
-        <div className="bg-slate-500"><h3>1</h3></div>
-        <div className="bg-blue-300"><h3>2</h3></div>
+        <div>
+          <img id="img" className='' />
+        </div>
+        <div className="bg-blue-300">
+          <img src="https://storage.cloud.google.com/bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-1.jpg"></img>
+        </div>
         <div className="bg-red-700"><h3>3</h3></div>
         <div className="bg-orange-500"><h3>4</h3></div>
       </Slider>

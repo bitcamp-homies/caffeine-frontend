@@ -1,7 +1,6 @@
 import { ReactComponent as LikeIcon } from './heart-svgrepo-com.svg';
 import { ReactComponent as InfoIcon } from './info-svgrepo-com.svg';
 import { Link } from "react-router-dom";
-import React from 'react';
 
 const CafeList = ({data}:any) => {
   type cafeData = {
@@ -15,13 +14,17 @@ const CafeList = ({data}:any) => {
     subfolder: string
   }
   let DetailLink;
-  
+
+  const onClick = () => {
+    
+  }
+
   return (
 <ul className='w-full lg:w-[28rem] h-[440px] overflow-scroll overflow-x-hidden'>
       {
         data.map((item:cafeData, index:number) => {
           DetailLink = `/store/${item.cafe_name}`
-          return (<li className='p-4 hover:bg-gray-100' key={index}>
+          return (<li className='p-4 hover:bg-gray-100' onClick={onClick} key={index}>
             <div className='flex space-x-4 justify-around'>
               <div className='w-60'>
                 <div className='font-bold text-sm'>
