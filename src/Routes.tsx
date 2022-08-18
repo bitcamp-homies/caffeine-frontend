@@ -13,8 +13,10 @@ import Payment from 'components/order/featured/Payment';
 
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import CafeCoordManage from 'components/stores/CafeCoordManage';
 import Gift from 'components/cards/Gift';
 import Point from 'components/cards/Point';
+
 
 const MainRoutes = () => {
   return (
@@ -38,6 +40,7 @@ const MainRoutes = () => {
         </Route>
 
         <Route path='/store' element={ <FindStore /> } />
+        <Route path="coord" element={<CafeCoordManage />}></Route>
       </Routes>
   );
 };

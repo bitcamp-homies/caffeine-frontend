@@ -1,7 +1,10 @@
+//@ts-nocheck
+
 import { combineReducers } from "redux";
-import navBar from './modules/navBar';
+import reducer from "./modules/mapMarker";
+import locationReducer from "./modules/userLocation";
+import cafeListBoundaryReducer from "./modules/cafeListBoundary";
 
 export default combineReducers({
-  navBarReducer: navBar,
-
+  reducer
 })

@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import Carousel from "./Carousel";
-import { ReactComponent as XIcon } from './x-svgrepo-com.svg';
+import { ReactComponent as XIcon } from './svg/x-svgrepo-com.svg';
 
 const CafeDetail = () => {
   
