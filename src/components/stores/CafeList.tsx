@@ -3,12 +3,12 @@ import { ReactComponent as LikeIcon } from './svg/heart-svgrepo-com.svg'
 import { ReactComponent as InfoIcon } from './svg/info-svgrepo-com.svg'
 import { Link } from 'react-router-dom'
 
-const CafeList = ({ cafeList, setHoverCafe }) => {
+const CafeList = ({ filterData, setHoverCafe }) => {
   let DetailLink
 
   return (
     <ul className="h-96 w-96 overflow-scroll overflow-x-hidden">
-      {cafeList.map((item, index) => {
+      {filterData.map((item, index) => {
         DetailLink = `/store/${item.cafe_name}`
         return (
           <li

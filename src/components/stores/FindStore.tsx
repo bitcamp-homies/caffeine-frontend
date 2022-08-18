@@ -57,6 +57,7 @@ import SearchPlace from './SearchPlace'
             setPlace={setPlace} 
             setHoverCafe={setHoverCafe} 
             cafeList={cafeList}
+            setCafeList = {setCafeList}
           />
         ) : (
           <CafeDetail />
