@@ -28,6 +28,7 @@ const MainRoutes = () => {
           <Route path='featured/order-now' element={<OrderNow/>}/>
         </Route>
         <Route path='/store' element={ <FindStore /> } />
+        <Route path="/store/:cafename" element={<FindStore/>}></Route>
       </Routes>
   );
 };

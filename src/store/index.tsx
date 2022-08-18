@@ -1,7 +1,15 @@
-import { combineReducers } from "redux";
-import navBar from './modules/navBar';
-
-export default combineReducers({
-  navBarReducer: navBar,
-
-})
+//store/index.js
+// @ts-nocheck
+import {
+    combineReducers,
+    configureStore,
+    getDefaultMiddleware,
+  } from "@reduxjs/toolkit";
+  import { todoReducer } from "./modules/todoReducer";
+  
+  const reducer = combineReducers({ todoReducer: todoReducer.reducer });
+  
+  export default configureStore({
+    reducer,
+    middleware: [...getDefaultMiddleware()],
+  });
