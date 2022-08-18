@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CardIntro = () => {
+const GiftLeft = () => {
   return (
     <div className="text-center font-bold text-green-800">
       <div className="pt-28">THUMBS!</div>
@@ -12,4 +12,4 @@ const CardIntro = () => {
   )
 }
 
-export default CardIntro
+export default GiftLeft
