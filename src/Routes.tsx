@@ -1,3 +1,4 @@
+//@ts-nocheck
 import App from 'App';
 import Cardheader from 'components/cards/Cardheader';
 import Main from 'components/main/Main';
@@ -40,6 +41,7 @@ const MainRoutes = () => {
         </Route>
 
         <Route path='/store' element={ <FindStore /> } />
+        <Route path="/store/:cafename" element={<FindStore/>}></Route>
         <Route path="coord" element={<CafeCoordManage />}></Route>
       </Routes>
   );

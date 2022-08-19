@@ -40,6 +40,7 @@ const MapContainer = ({
       draggable: true,
     })
     kakao.maps.event.addListener(marker, 'dragstart', function () {
+      customOverlay.setMap(null);
       infowindow.close()
       marker.setVisible(false)
     })
@@ -131,7 +132,7 @@ const MapContainer = ({
     setHoverCafeOverlay(hoverCafe, map)
   }, [hoverCafe])
 
-  return <div className="h-[32rem] w-full" id="myMap"></div>
+  return <div className='w-full lg:h-[32rem] h-[17rem]' id='myMap'></div>
 }
 
 export default MapContainer
