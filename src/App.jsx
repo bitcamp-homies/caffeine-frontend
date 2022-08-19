@@ -25,7 +25,9 @@ function App() {
         className="sticky top-0 z-10 flex flex-row bg-white px-4 py-4 shadow md:px-6 md:py-6 lg:px-10 lg:py-7"
       >
         <Link to="/">
-          <Logo />
+          {/* <Logo /> */}
+          <img src={`${process.env.PUBLIC_URL}/img/thumbs_logo.png`}
+               className='w-10 h-full xs:w-12 md:w-[4.25rem]' />
         </Link>
         <div id="mobileNav" className="ml-auto md:hidden">
           <Hamburger
