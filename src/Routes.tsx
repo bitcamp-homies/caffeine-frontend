@@ -1,3 +1,4 @@
+//@ts-nocheck
 import App from 'App';
 import Cardheader from 'components/cards/Cardheader';
 import Main from 'components/main/Main';

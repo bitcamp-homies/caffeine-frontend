@@ -15,7 +15,7 @@ const OrderNowProduct = ({ coffeePrice, totalPay }: any) => {
 
   return (
     <>
-      <div className="mt-10 flex justify-center sm:gap-5 lg:flex-row lg:justify-start">
+      <div className="mt-10 flex justify-center sm:gap-5 lg:flex-row lfex lg:justify-start">
         <img
           className="top-0 mx-auto h-[130px] w-[130px] sm:mx-0 lg:rounded-full"
           src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAyMjFfMTk3%2FMDAxNjQ1NDIwMTQxNDcy.sLG1bvlwCxnepYWJAfxl-ThjVBdn9uyUv1ta3xcPiGkg.aaC0rjVctlb1Fu30NzxYxNrUBNv12j1lsZ32LyB4Anog.JPEG.jang2721%2FIMG_3650.jpg&type=sc960_832"
