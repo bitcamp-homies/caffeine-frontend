@@ -15,25 +15,21 @@ const CafeDetail = () => {
 
   return (
     <div className="h-128 basis-full lg:flex lg:basis-2/5 lg:flex-col">
-      <div>
+      <div className="w-full lg:w-[28rem] px-4">
         <Link to="/store">
           <button className="mt-3">
             <XIcon />
           </button>
         </Link>
-      </div>
 
-      <div className="w-full lg:w-[28rem]">
-        <div className="pt-2 text-center">
-          <div className="pr-4 pb-5">
-            {isSuccess && <Carousel data={cafedata} />}
-          </div>
+        <div className="pt-2 pb-5 text-center">
+          {isSuccess && <Carousel data={cafedata} />}
         </div>
 
         <div className="pt-2 text-center">
           <h3 className="text-bold bg-gray-300 px-4 text-base">COMMENT</h3>
           <div className="pr-2.5 pt-4 pb-5">
-            <div className="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
+            <div className="container m-auto px-8 text-gray-600 md:px-12 xl:px-6">
               <div className="rounded-xl border border-gray-100 bg-gray-50 p-6 sm:flex sm:space-x-8 sm:p-2">
                 {isSuccess &&
                   cafedata.map((item) => {
