@@ -23,7 +23,7 @@ const Carousel = ({data}) => {
             test = 'https://storage.cloud.google.com/bitcamp-caffeine.appspot.com'+data[0].file_path+item;
             {
             return <div>
-              <img className="h-96" src={test}>
+              <img src={test} style={{ width: "100%", height: "24rem" }}>
               </img>
             </div>
             }

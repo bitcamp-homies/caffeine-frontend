@@ -24,24 +24,8 @@ const CafeDetail = () => {
       </div>
 
       <div className="w-full lg:w-[28rem]">
-        <div className="pb-5 text-center">
-          <h1 className="text-bold pr-7 text-lg"></h1>
-          <p>
-            <span></span>
-            <span></span>
-            <span></span>
-          </p>
-          <button
-            className="ml-4 h-8 w-40 rounded-full border-2 border-green-800 text-center text-green-800"
-            type="submit"
-          >
-            Get Location
-          </button>
-        </div>
-
         <div className="-ml-5 pt-2 text-center">
-          <div className="px-4 pt-4 pb-5">
-          <h3 className="text-bold bg-gray-300 px-4 text-base">PICTURE</h3>
+          <div className="px-4 pb-5">
             {isSuccess && <Carousel data={cafedata} />}
           </div>
         </div>
@@ -50,7 +34,7 @@ const CafeDetail = () => {
           <h3 className="text-bold bg-gray-300 px-4 text-base">COMMENT</h3>
           <div className="px-4 pt-4 pb-5">
             <div className="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
-              <div className="rounded-xl border border-gray-100 bg-gray-50 p-6 sm:flex sm:space-x-8 sm:p-8">
+              <div className="rounded-xl border border-gray-100 bg-gray-50 p-6 sm:flex sm:space-x-8 sm:p-2">
                 {isSuccess &&
                   cafedata.map((item) => {
                     const profile =
@@ -86,6 +70,21 @@ const CafeDetail = () => {
           <h3 className="text-bold bg-gray-300 px-4 text-base">REVIEW</h3>
           <div className="px-4 pt-4 pb-5">
             <p></p>
+          </div>
+
+          <div className="pb-5 text-center">
+            <h1 className="text-bold pr-7 text-lg"></h1>
+            <p>
+              <span></span>
+              <span></span>
+              <span></span>
+            </p>
+            <button
+              className="ml-4 h-8 w-40 rounded-full border-2 border-green-800 text-center text-green-800"
+              type="submit"
+            >
+              Get Location
+            </button>
           </div>
         </div>
       </div>
