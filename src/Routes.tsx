@@ -37,10 +37,10 @@ const MainRoutes = () => {
           <Route path='cafes/menu/hot-coffees' element={ <AllDetails />}/>
           <Route path='featured' >
             <Route index element={<Featured/>}/>
-            <Route path=":OrderNow/cafe_Id/" element={<OrderNow/>}/>
+            <Route path="order-now/:cafe_Id/" element={<OrderNow/>}/>
           </Route>
           
-          <Route path='featured/order-now/:cafe_Id/payment' element={<Payment/>}/>
+          <Route path='/order-now/:cafe_Id/payment' element={<Payment/>}/>
         </Route>
 
         <Route path='/store' element={ <FindStore /> } />

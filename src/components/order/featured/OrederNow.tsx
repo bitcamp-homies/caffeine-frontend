@@ -1,27 +1,30 @@
+// @ts-nocheck
 import { count } from 'console'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useQuery } from 'react-query'
+import { Link, useParams } from 'react-router-dom'
+import { listAllMybatis } from 'store/api'
 import OrderNowProduct from './featuredList/OrderNowProduct'
 
 import Size from './featuredList/Size'
 const OrderNow = () => {
   const coffeePrice: number = 5000
   const [totalPay, setTotalPay] = useState(coffeePrice)
-  const instagram = "https://www.instagram.com/"
-  const map = "https://map.naver.com/v5/search/"
-  const url = "yangwoongbee"
-  const address = "경기도 김포시 운양동 김포한강11로 37"
-  const store = "DROP COFFE"
+  const {cafe_Id} = useParams()
+  const { data, isSuccess } = useQuery(
+    'listAllMybatis',
+    listAllMybatis,
+  )
+
+  const cafedata = data?.data.filter((item) => item.cafe_name === cafe_Id)
   return (
     <>
-
-
       <div className="flex flex-col gap-1 lg:ml-[70px] xl:flex-row">
         <div className="my-10 mx-auto lg:mx-[150px]">
-          <img
+          {isSuccess && <img
             className="w-[400px] lg:min-h-[500px] lg:min-w-[500px]"
             src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fdnvefa72aowie.cloudfront.net%2Forigin%2Farticle%2F202207%2FBD21914A2E3300AF9A241AEF915AE6B47E21CE8AAB402DA1BF4E07BE51CA7BA7.jpg%3Fq%3D95%26s%3D1440x1440%26t%3Dinside&type=sc960_832"
-          />
+          />}
           <div className='flex flex-row w-full lg:w-[500px] lg:max-w-[500px] mt-2'>
             <p className='font-bold text-xl lg:text-2xl w-[90%]'>Cafe Americano</p>
             <p className='font-bold text-xl lg:text-2xl mr-2'>{coffeePrice}₩</p>
