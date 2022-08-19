@@ -1,4 +1,4 @@
-import App from 'App';
+import App from 'App.jsx';
 import Cardheader from 'components/cards/Cardheader';
 import Main from 'components/main/Main';
 import AllCafes from 'components/order/allcafe/AllCafes';
@@ -34,9 +34,12 @@ const MainRoutes = () => {
           <Route path='cafes/location' element= {<AllCafesLocation /> }/>
           <Route path='cafes/menu' element={ <AllProducts /> }/>
           <Route path='cafes/menu/hot-coffees' element={ <AllDetails />}/>
-          <Route path='featured' element={ <Featured /> } />
-          <Route path='featured/order-now' element={<OrderNow/>}/>
-          <Route path='featured/order-now/payment' element={<Payment/>}/>
+          <Route path='featured' >
+            <Route index element={<Featured/>}/>
+            <Route path=":OrderNow/cafe_Id/" element={<OrderNow/>}/>
+          </Route>
+          
+          <Route path='featured/order-now/:cafe_Id/payment' element={<Payment/>}/>
         </Route>
 
         <Route path='/store' element={ <FindStore /> } />
