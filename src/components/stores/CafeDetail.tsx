@@ -24,15 +24,15 @@ const CafeDetail = () => {
       </div>
 
       <div className="w-full lg:w-[28rem]">
-        <div className="-ml-5 pt-2 text-center">
-          <div className="px-4 pb-5">
+        <div className="pt-2 text-center">
+          <div className="pr-4 pb-5">
             {isSuccess && <Carousel data={cafedata} />}
           </div>
         </div>
 
-        <div className="-ml-5 pt-2 text-center">
+        <div className="pt-2 text-center">
           <h3 className="text-bold bg-gray-300 px-4 text-base">COMMENT</h3>
-          <div className="px-4 pt-4 pb-5">
+          <div className="pr-4 pt-4 pb-5">
             <div className="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
               <div className="rounded-xl border border-gray-100 bg-gray-50 p-6 sm:flex sm:space-x-8 sm:p-2">
                 {isSuccess &&
