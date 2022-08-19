@@ -122,8 +122,7 @@ const CafeCoordManage = () => {
         </table>
       </div>
     </div>
-    
   );
-};
+};  
 
 export default CafeCoordManage;

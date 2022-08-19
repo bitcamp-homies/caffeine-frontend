@@ -66,9 +66,16 @@ import SearchPlace from './SearchPlace'
     insertUserLocationAndGetCafeList();
   }, [])
 
+  useEffect(() => {
+    if(userLocation.lon !== 0){
+      getCafeList(userLocation)
+    }
+  }, [userLocation])
+
   return (
     <div className="ml-4 flex flex-row mt-5">
       <div className="h-128 flex w-96 flex-col">
+        <div>사용자 위치 경도 {userLocation.lon} 위도 : {userLocation.lat} </div>
         {cafename === undefined ? (
           <SearchPlace 
             setPlace={setPlace} 

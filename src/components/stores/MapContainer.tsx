@@ -1,6 +1,7 @@
 //@ts-nocheck
 
-import React from 'react'
+import cluster from 'cluster'
+import React, { useEffect, useState } from 'react'
 
 let map
 let customOverlay = new kakao.maps.CustomOverlay({
@@ -13,7 +14,6 @@ const MapContainer = (
  ) => {
 
   const setMarkerUserLocationOnMap = (userLocation, map) => {
-    console.log('Map Container... setMarkerUserLocationOnMap... userLocation : ', userLocation.lon, userLocation.lat);
     var locPosition = new window.kakao.maps.LatLng(
       userLocation.lat,
       userLocation.lon
@@ -27,10 +27,23 @@ const MapContainer = (
 
   const displayMarker = (locPosition, message, map) => {
     // 마커를 생성합니다
+    var infowindow;
+
     var marker = new window.kakao.maps.Marker({
       map: map,
       position: locPosition,
+      draggable : true,
     })
+    kakao.maps.event.addListener(marker, 'dragstart', function() {
+      infowindow.close();
+      clusterer.clear();
+      marker.setVisible(false);
+    });
+    //marker가 drag 되었을 때 사용자 좌표 변경 시도..!
+    kakao.maps.event.addListener(marker, 'dragend', function() {
+      alert(marker.getPosition().getLat() + ' '+marker.getPosition().getLng());
+      setUserLocation({lon : marker.getPosition().getLng(), lat:marker.getPosition().getLat()});
+    });
 
     var iwContent = message, // 인포윈도우에 표시할 내용
         iwRemoveable = true
@@ -69,6 +82,7 @@ const MapContainer = (
     customOverlay.setMap(map);
  
   }
+  
 
   React.useEffect(() => {
     // map 렌더링
@@ -82,7 +96,6 @@ const MapContainer = (
   }, [])
 
   React.useEffect(() => {
-    console.log('MapCotainer..userEffect[cafeList]... cafeList.length', cafeList.length);
     
     if(cafeList.length > 0){
       for (var i = 0; i < cafeList.length; i++) {
@@ -93,9 +106,7 @@ const MapContainer = (
 
   React.useEffect(() => {
 
-    console.log('MapCotainer..userEffect[userLocation]... userLocation.lon', userLocation.lon);
     if(userLocation.lon !== 0){
-      console.log('userLocaton.lon is not zero...!' , userLocation.lon, userLocation.lat);
       setMarkerUserLocationOnMap(userLocation, map);
     }
   }, [userLocation])
