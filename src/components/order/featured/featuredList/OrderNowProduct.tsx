@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Size from './Size'
 import style from './FeaturedStyle.module.css'
-const OrderNowProduct = ({ coffeePrice, totalPay }: any) => {
+const OrderNowProduct = ({ data }: any) => {
   const [count, setCount] = useState(0)
   const productPrice: any = 15000
-
+  
   const plus = () => {
     setCount(count + 1)
   }

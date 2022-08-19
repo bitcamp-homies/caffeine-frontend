@@ -8,4 +8,3 @@ export const listAllMybatis = () =>{
     const temp = api.get('/cafe/listAllMybatis');
     return temp;
 }
-
