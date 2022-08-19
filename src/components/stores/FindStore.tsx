@@ -35,7 +35,6 @@ const FindStore = () => {
         },
       })
       .then((res) => {
-        console.log('FindStore... 3000m 반경이내의 카페...', res.data)
         setCafeList(res.data)
       })
       .catch((err) => {

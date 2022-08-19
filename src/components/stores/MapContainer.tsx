@@ -7,7 +7,7 @@ let customOverlay = new kakao.maps.CustomOverlay({
   position: new window.kakao.maps.LatLng(37.54699, 127.09598),
   content: '',
 })
-var cafeMarkers = [];
+var cafeMarkers = []
 
 const MapContainer = ({
   userLocation,
@@ -17,7 +17,6 @@ const MapContainer = ({
   hoverCafe,
   setHoverCafe,
 }) => {
-  
   const setMarkerUserLocationOnMap = (userLocation, map) => {
     var locPosition = new window.kakao.maps.LatLng(
       userLocation.lat,
@@ -40,13 +39,12 @@ const MapContainer = ({
       draggable: true,
     })
     kakao.maps.event.addListener(marker, 'dragstart', function () {
-      customOverlay.setMap(null);
+      customOverlay.setMap(null)
       infowindow.close()
       marker.setVisible(false)
     })
     //marker가 drag 되었을 때 사용자 좌표 변경 시도..!
     kakao.maps.event.addListener(marker, 'dragend', function () {
-
       setUserLocation({
         lon: marker.getPosition().getLng(),
         lat: marker.getPosition().getLat(),
@@ -87,7 +85,21 @@ const MapContainer = ({
       cafeData.latitude,
       cafeData.longitude,
     )
-    var content = `<div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-green-500 border-none  mb-9 text-white font-semibold text-[12px]'>${cafeData.cafe_name}</div>`
+    
+    console.log('cafeData 이미지 경로 뽑아보기   : ', cafeData.file_path );
+    // const profile =
+    //   'https://storage.cloud.google.com/bitcamp-caffeine.appspot.com' +
+    //   cafeData.file_path +
+    //   cafeData.img_file.split(',').splice(-1, 1);
+    // <span>
+    //   <img src=${profile} alt="cafeProfile"/>
+    // </span>
+   
+    var content = `
+      <div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-green-500 border-none  mb-9 text-white font-semibold text-[12px]'>
+        ${cafeData.cafe_name}
+      </div>
+    `;
 
     customOverlay = new kakao.maps.CustomOverlay({
       position: coords,
@@ -109,8 +121,9 @@ const MapContainer = ({
   }, [])
 
   React.useEffect(() => {
-    for(var i = 0; i < cafeMarkers.length; i++){
-      cafeMarkers[i].setVisible(false);
+    //풍혁0819 : 마커를 이동하게 된다면, 사용자의 위치가 업데이트 되고
+    for (var i = 0; i < cafeMarkers.length; i++) {
+      cafeMarkers[i].setVisible(false)
     }
     console.log('MapContainer...cafeMarkers before...' + cafeMarkers.length)
     if (cafeList.length > 0) {
@@ -129,10 +142,12 @@ const MapContainer = ({
 
   React.useEffect(() => {
     customOverlay.setMap(null)
-    setHoverCafeOverlay(hoverCafe, map)
+    if(hoverCafe.cafe_id > 0){
+      setHoverCafeOverlay(hoverCafe, map)
+    }
   }, [hoverCafe])
 
-  return <div className='w-full lg:h-[32rem] h-[17rem]' id='myMap'></div>
+  return <div className="h-[17rem] w-full lg:h-[32rem]" id="myMap"></div>
 }
 
 export default MapContainer
