@@ -32,7 +32,7 @@ const CafeDetail = () => {
 
         <div className="pt-2 text-center">
           <h3 className="text-bold bg-gray-300 px-4 text-base">COMMENT</h3>
-          <div className="pr-4 pt-4 pb-5">
+          <div className="pr-2.5 pt-4 pb-5">
             <div className="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
               <div className="rounded-xl border border-gray-100 bg-gray-50 p-6 sm:flex sm:space-x-8 sm:p-2">
                 {isSuccess &&
