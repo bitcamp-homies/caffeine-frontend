@@ -13,18 +13,19 @@ const CafeCoordManage = () => {
 
   var geocoder = new window.kakao.maps.services.Geocoder();
 
-  const getGeoCoord = (addr2, addr3) => {
-    geocoder.addressSearch(`${addr2} ${addr3}`, function(result, status) {
-      // 정상적으로 검색이 완료됐으면 
-      if (status === window.kakao.maps.services.Status.OK) {
-          setLongitude(result[0].x);
-          setLatitude(result[0].y);
+  const getCafeListAll = (userLocation) => {
+    axios
+    .get('http://localhost:8080/cafe/listAlllWithCoordMybatis',{
+      params:{
+        userLong : userLocation.long, userLat : userLocation.lat
       }
     })
+    .then((res) => {setData(res.data)})
+    .catch((err) => {console.log(err)})
 
   }
 
-  const getUserLocation = () => {
+  const getUserLocationAndGetCafeList = () => {
     console.log('user loc 집어넣기');
 
     if (navigator.geolocation) {
@@ -35,6 +36,7 @@ const CafeCoordManage = () => {
           console.log('사용자 위치 : ',lon,lat);
           setUserLong(lon);
           setUserLat(lat);
+          getCafeListAll({long : lon, lat : lat });
       });
       
     } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
@@ -43,13 +45,14 @@ const CafeCoordManage = () => {
   }
 
   const setGeoCoord = (addr2, addr3, cafe_id) => {
-    
+    console.log('좌표 넣기...! ', addr2, addr3, cafe_id);
     geocoder.addressSearch(`${addr2} ${addr3}`, function(result, status) {
       if (status === window.kakao.maps.services.Status.OK) {
           setLongitude(result[0].x);
           setLatitude(result[0].y);
+          console.log('좌표 검색 결과 : ', result[0].y, result[0].x);
           axios
-          .get('http://localhost:8080/cafe/updateCoord',{
+          .get('http://localhost:8080/cafe/updateCoordMybatis',{
             params:{
               longitude : result[0].x, latitude : result[0].y, cafe_id : cafe_id
             }
@@ -67,16 +70,7 @@ const CafeCoordManage = () => {
   }
 
   React.useEffect(() => {
-    getUserLocation()
-
-    axios
-    .get('http://localhost:8080/cafe/listAlllWithCoord',{
-      params:{
-        userLong : userLong, userLat : userLat
-      }
-    })
-    .then((res) => {setData(res.data)})
-    .catch((err) => {console.log(err)})
+    getUserLocationAndGetCafeList()
 
   },[])
   
