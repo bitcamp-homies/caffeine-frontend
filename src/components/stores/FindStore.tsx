@@ -30,7 +30,7 @@ import SearchPlace from './SearchPlace'
 
   const getCafeList = (userLocation) => {
     axios
-      .get('http://localhost:8080/cafe/listBoundary3000', {
+      .get('http://localhost:8080/cafe/listBoundary3000Mybatis', {
         params: {
           userLong: userLocation.lon,
           userLat: userLocation.lat
