@@ -30,13 +30,14 @@ import SearchPlace from './SearchPlace'
 
   const getCafeList = (userLocation) => {
     axios
-      .get('http://localhost:8080/cafe/listAlllWithCoord', {
+      .get('http://localhost:8080/cafe/listBoundary3000Mybatis', {
         params: {
           userLong: userLocation.lon,
           userLat: userLocation.lat
         },
       })
       .then((res) => {
+        console.log('FindStore... 3000m 반경이내의 카페...', res.data);
         setCafeList(res.data); 
       })
       .catch((err) => {
@@ -44,37 +45,53 @@ import SearchPlace from './SearchPlace'
       })
   }
 
+  const insertUserLocationAndGetCafeList = () => {
+    if (navigator.geolocation) {
+      // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var lat = position.coords.latitude, // 위도
+          lon = position.coords.longitude // 경도
+        console.log('FindStore...insertUserLocation....사용자 위치 : ', lon, lat)
+        setUserLocation({ lon: lon, lat: lat })
+        getCafeList({ lon: lon, lat: lat });
+      })
+    } else {
+      // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+      console.log('FindStore...insertUserLocation....위치불러오기실패...!')
+    }
+  }
+
   //풍혁 0818 : userLocation이랑 cafeList 초기화시켜주기
   useEffect(() => {
-    getCafeList(userLocation);
+    insertUserLocationAndGetCafeList();
   }, [])
 
   return (
     <>
-      <div className="ml-4 flex flex-col-reverse lg:flex-row">
-        {cafename === undefined ? (
-          <SearchPlace 
-            setPlace={setPlace} 
-            setHoverCafe={setHoverCafe} 
-            cafeList={cafeList}
-            setCafeList = {setCafeList}
-          />
-        ) : (
-          <CafeDetail />
-        )}
-        <div className="lg:basis-full lg:flex lg:ml-0 -ml-64 items-stretch">
-          <MapContainer 
-            searchPlace={place}
-            userLocation = {userLocation} 
-            setUserLocation={setUserLocation} 
-            cafeList={cafeList}
-            setCafeList={setCafeList} 
-            hoverCafe = {hoverCafe}
-            setHoverCafe = {setHoverCafe}
-          />
-        </div>
-      </div>   
-    </>
+    <div className="ml-4 flex flex-col-reverse lg:flex-row">
+      {cafename === undefined ? (
+        <SearchPlace 
+          setPlace={setPlace} 
+          setHoverCafe={setHoverCafe} 
+          cafeList={cafeList}
+          setCafeList = {setCafeList}
+        />
+      ) : (
+        <CafeDetail />
+      )}
+      <div className="lg:basis-full lg:flex lg:ml-0 -ml-64 items-stretch">
+        <MapContainer 
+          searchPlace={place}
+          userLocation = {userLocation} 
+          setUserLocation={setUserLocation} 
+          cafeList={cafeList}
+          setCafeList={setCafeList} 
+          hoverCafe = {hoverCafe}
+          setHoverCafe = {setHoverCafe}
+        />
+      </div>
+    </div>   
+  </>
   )
 }
 
