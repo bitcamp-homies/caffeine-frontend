@@ -1,10 +1,19 @@
+//@ts-nocheck
 
 import React, { useState } from 'react'
 import Logo from './components/Logo'
 import MapMarker from './components/MapMarker'
 import { Squash as Hamburger } from 'hamburger-react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+
+import Main from 'components/main/Main';
+import Order from 'components/order/Order';
+import AllProducts from 'components/order/allproduct/AllProducts';
+import Featured from 'components/order/featured/Featured';
+import AllCafes from 'components/order/allcafe/AllCafes';
 import MainRoutes from 'Routes';
+import FindStore from 'components/stores/FindStore';
+import CafeCoordManage from 'components/stores/CafeCoordManage'
 
 function App() {
   const [isOpen, setOpen] = useState(false)
@@ -44,7 +53,7 @@ function App() {
               <span className='ml-4 mr-10 font-semibold'>Find a store</span>
             </Link>
             <button className='px-4 py-1.5 border border-black rounded-full font-semibold'>Sign in</button>
-            <button className='ml-4 px-4 py-1.5 border border-black bg-black text-white rounded-full font-semibold'><Link to="/member">Join now</Link></button>
+            <button className='ml-4 px-4 py-1.5 border border-black bg-black text-white rounded-full font-semibold'>Join now</button>
           </div>
         </div>
       </nav>

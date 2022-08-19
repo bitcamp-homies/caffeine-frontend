@@ -1,5 +1,5 @@
 import App from 'App';
-import Card from 'components/cards/Card';
+import Cardheader from 'components/cards/Cardheader';
 import Main from 'components/main/Main';
 import AllCafes from 'components/order/allcafe/AllCafes';
 import AllCafesLocation from 'components/order/allcafe/AllCafesLocation';
@@ -13,14 +13,23 @@ import Payment from 'components/order/featured/Payment';
 
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import MemberWrite from 'components/member/MemberWrite';
+import MemberWrite from 'components/member/memberwrite'
+import CafeCoordManage from 'components/stores/CafeCoordManage';
+import Gift from 'components/cards/Gift';
+import Point from 'components/cards/Point';
+
 
 const MainRoutes = () => {
   return (
       <Routes>
         <Route path='/' element={ <App /> } />
         <Route index element={ <Main /> } />
-        <Route path='cards' element={<Card/> } />
+
+        <Route path='card' element={ <Cardheader /> }>
+          <Route path='gift' element={<Gift/> } />
+          <Route path='point' element={<Point />}/>
+        </Route>
+
         <Route path='order' element={ <Order /> }>
           <Route path='cafes' element= {<AllCafes /> }/>
           <Route path='cafes/location' element= {<AllCafesLocation /> }/>
@@ -30,8 +39,11 @@ const MainRoutes = () => {
           <Route path='featured/order-now' element={<OrderNow/>}/>
           <Route path='featured/order-now/payment' element={<Payment/>}/>
         </Route>
+
         <Route path='/store' element={ <FindStore /> } />
         <Route path='member' element={<MemberWrite/> } />
+        <Route path="/store/:cafename" element={<FindStore/>}></Route>
+        <Route path="coord" element={<CafeCoordManage />}></Route>
       </Routes>
   );
 };

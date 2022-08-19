@@ -1,10 +1,55 @@
 // @ts-nocheck
 import React, { useState } from 'react';
-
+import { useQueries, useQuery } from 'react-query';
+import { isQueryKey } from 'react-query/types/core/utils';
+import { useNavigate } from 'react-router-dom';
+import { NickNameCheck,EmailCheck } from 'store/api';
+import { createMember } from 'store/api';
 const MemberWrite = () => {
-    
+  
+  const [NickName, setNickName] = useState('')
+  const [Email, setEmail] = useState('')
+  const [Password,setPassword] = useState('')
+  const [RePassword, setRePassword] = useState('')
+  const [Sung,setSung] = useState('')
+  const [Name, setName] = useState('')
+  const getnickname = useQuery(
+    ['getNickName',NickName],
+    () => NickNameCheck(NickName),
+    {
+      enabled : !! NickName, //닉네임이 검출 안되면 실행안함
+    }
+  ) 
+  
+    const passwordcheck = password =>{  //비밀번호 정규식
+      const regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,25}$/
+      return regExp.test(password)
+    }
+    const checkpassword = passwordcheck(Password);//비밀번호 textbox에 들어간 값이 정규식이 맞냐 안맞냐
 
-    return (
+  const emailcheck = useQuery(
+    ['getEmail',Email],
+    () => EmailCheck(Email),
+    {
+      enabled : !! Email,
+    }
+    )
+ const validateEmail = email => {
+    const regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    return regex.test(email);
+}
+const email = validateEmail(Email)  //true false 반환 이메일 정규식
+
+const data = {
+  'sung' : Sung,
+  'name' : Name,
+  'email' : Email,
+  'nickname' : NickName,
+  'password' : Password
+}
+const qs = require('qs');
+
+  return (
 <div>
     <div className="navOffsetContainer___2wNOX">
   <main className="relative">
@@ -25,27 +70,34 @@ const MemberWrite = () => {
                 <h2 className="font-semibold text-base mb-3">개인정보</h2>
                 <div>
                   <div className="py-3 relative">
+
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="text" className="w-full" id="firstName" name="firstName" placeholder="* 홍" onChange={onChangefirstName}/>
+                      <input type="text" className="w-full" id="firstName" name="firstName" placeholder="* 홍" onChange={(e)=>setSung(e.target.value)}/>
                     </div>
                     <div className="">
                     </div>
                   </div>
                   <div className="py-3 relative">
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="text" className="w-full" id="LastName" name="LastName" placeholder="* 길동" onChange={onchangeLastName}/>
+                      <input type="text" className="w-full" id="LastName" name="LastName" placeholder="* 길동" onChange={(e)=>setName(e.target.value)}/>
                     </div>
                     <div className="">
                     </div>
                   </div>
                   <div className="pt-10 py-3 relative">
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="text" className="w-full" id="Nickname" name="Nickname" placeholder="* 길동이" onChange={onchangeNickname}/>
+                      <input type="text" className="w-full" id="Nickname" name="Nickname" placeholder="* 길동이" onChange={(e) => setNickName(e.target.value)}/>
                     </div>
                     <div className="">
                     </div>
                     <div className="pt-2 text-sm">
-                      <p>사용자 별명입니다.</p>
+                      {
+                       NickName !== null && getnickname.data?.data === 'ok' ? <p className='text-blue-700'>사용가능한 닉네임입니다.</p>
+                        : ''
+                      }
+                      {
+                        getnickname.data?.data === 'fail' ? <p className='text-red-700'>중복인 닉네임입니다.</p> : ''
+                      }
                     </div>
                   </div>
                 </div>
@@ -55,29 +107,53 @@ const MemberWrite = () => {
                 <div>
                   <div className="py-3 relative">
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="Email" className="w-full" id="Email" name="Email" placeholder="* 아이디(이메일)" onChange={onchangeEmail}/>
+                      <input type="Email" className="w-full" id="Email" name="Email" placeholder="* 아이디(이메일)" onChange={(e)=>setEmail(e.target.value)}/>
                     </div>
                     <div className="">
                     </div>
                     <div className="pt-2 text-sm">
-                      <p>사용자의 계정 이름입니다.</p>
+                      {
+                        email ? '' :<p>이메일 형식에 맞춰 입력해주세요</p>,
+                        email ? emailcheck.data === 'ok'? <p>사용가능한 불가능한 이메일입니다.</p> : <p>사용 가능한 이메일입니다.</p> : ''
+                      }
                     </div>
                   </div>
                   <div className="py-3 relative">
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="password" className="w-full" id="password" name="password" placeholder="* 비밀번호" onChange={onchangepassword}/>
+                      <input type="password" className="w-full" id="password" name="password" placeholder="* 비밀번호" onChange={(e)=>setPassword(e.target.value)}/>
                     </div>
                     <div className="">
+                      
                     </div>
                     <div className="pt-2 text-sm">
-                      <p>8~25자 길이의 비밀번호를 입력해야합니다.</p>
+                      {
+                        checkpassword ? <p>사용 가능한 비밀번호 입니다.</p>
+                        : <p>8~25자 길이의 비밀번호를 입력해야합니다.</p>
+                      }
                     </div>
+                    
+                  </div>
+                  <div className="py-3 relative">
+                    <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
+                      <input type="password" className="w-full" id="password" name="password" placeholder="* 비밀번호재확인" onChange={(e)=>setRePassword(e.target.value)}/>
+                    </div>
+                    <div className="">
+                      
+                    </div>
+                    <div className="pt-2 text-sm">
+                      {
+                    checkpassword ? 
+                        RePassword === Password ? ''
+                        : '비밀번호가 맞지않습니다.' : '비밀번호를 한번더 입력해주세요'
+                      }
+                    </div>
+                    
                   </div>
                 </div>
               </fieldset>
               <div>
                 <div className="flex justify-end mt-6"> 
-                  <button className="bg-[#00754a] rounded-[500px] text-white text-lg font-semibold px-[18px] py-[15px] text-center" type="submit">계정 생성</button>
+                  <button className="bg-[#00754a] rounded-[500px] text-white text-lg font-semibold px-[18px] py-[15px] text-center" type="button">계정 생성</button>
                 </div>
               </div>
             </div>

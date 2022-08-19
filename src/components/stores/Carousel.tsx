@@ -1,8 +1,8 @@
+// @ts-nocheck
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-const Carousel = () => {
+const Carousel = ({data}) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -10,14 +10,26 @@ const Carousel = () => {
     slidesToShow: 1,
     slidesToScroll: 1
   };
+  
+  let img = data[0].img_file.split(',')
+  img = img.filter((element, index) => index < img.length - 1);
+  let test;
 
   return(
     <div className="carousel">
       <Slider {...settings}>
-        <div className="bg-slate-500"><h3>1</h3></div>
-        <div className="bg-blue-300"><h3>2</h3></div>
-        <div className="bg-red-700"><h3>3</h3></div>
-        <div className="bg-orange-500"><h3>4</h3></div>
+      {
+          img.map((item) => {
+            test = 'https://storage.cloud.google.com/bitcamp-caffeine.appspot.com'+data[0].file_path+item;
+            {
+            return <div>
+              <img className="h-96" src={test}>
+              </img>
+            </div>
+            }
+
+          })
+        }
       </Slider>
     </div>
   );
