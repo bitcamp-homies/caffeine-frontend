@@ -1,6 +1,6 @@
 //@ts-nocheck
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from './components/Logo'
 import MapMarker from './components/MapMarker'
 import { Squash as Hamburger } from 'hamburger-react'
@@ -12,12 +12,12 @@ import AllProducts from 'components/order/allproduct/AllProducts';
 import Featured from 'components/order/featured/Featured';
 import AllCafes from 'components/order/allcafe/AllCafes';
 import MainRoutes from 'Routes';
-import FindStore from 'components/stores/FindStore';
-import CafeCoordManage from 'components/stores/CafeCoordManage'
+
+
 
 function App() {
   const [isOpen, setOpen] = useState(false)
-
+  
   return (
     <>
       <nav
