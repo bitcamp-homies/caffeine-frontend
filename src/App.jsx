@@ -12,57 +12,11 @@ import AllProducts from 'components/order/allproduct/AllProducts';
 import Featured from 'components/order/featured/Featured';
 import AllCafes from 'components/order/allcafe/AllCafes';
 import MainRoutes from 'Routes';
-import FindStore from 'components/stores/FindStore';
-import CafeCoordManage from 'components/stores/CafeCoordManage'
-import { useDispatch, useSelector } from 'react-redux'
-import { setCoord } from 'store/userLocation'
-import { setCafeList } from 'store/cafeListBoundary'
-import axios from 'axios'
 
 
 
 function App() {
   const [isOpen, setOpen] = useState(false)
-  const userLocation = useSelector((state) => state.user.value);
-  const cafeList = useSelector((state) => state.cafeList.value);
-  const dispatch = useDispatch();
-
-  const getCafeList = (userLocation) => {
-    axios
-      .get('http://localhost:8080/cafe/listAlllWithCoord', {
-        params: {
-          userLong: userLocation.longitude,
-          userLat: userLocation.latitude
-        },
-      })
-      .then((res) => {
-        dispatch(setCafeList(res.data)); 
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
-  const insertUserLocationAndGetCafeList = () => {
-    if (navigator.geolocation) {
-      // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-      navigator.geolocation.getCurrentPosition(function (position) {
-        var lat = position.coords.latitude, // 위도
-          lon = position.coords.longitude // 경도
-        console.log('FindStore...insertUserLocation....사용자 위치 : ', lon, lat)
-        var userCoord = {longitude : lon, latitude: lat};
-        dispatch(setCoord(userCoord));
-        getCafeList(userCoord)
-      })
-    } else {
-      // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-      console.log('FindStore...insertUserLocation....위치불러오기실패...!')
-    }
-  }
-
-  useEffect(() => {
-    insertUserLocationAndGetCafeList();
-  },[]);
   
   return (
     <>
@@ -103,8 +57,6 @@ function App() {
           </div>
         </div>
       </nav>
-      <div>{userLocation.longitude} {userLocation.latitude}</div>
-      <div>{cafeList[345].cafe_name}</div>
       <MainRoutes/>
     </>
   );
