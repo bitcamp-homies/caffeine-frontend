@@ -67,19 +67,19 @@ import SearchPlace from './SearchPlace'
   }, [])
 
   return (
-    <div className="ml-4 flex flex-row mt-5">
-      <div className="h-128 flex w-96 flex-col">
-        {cafename === undefined ? (
-          <SearchPlace 
-            setPlace={setPlace} 
-            setHoverCafe={setHoverCafe} 
-            cafeList={cafeList}
-          />
-        ) : (
-          <CafeDetail />
-        )}
-      </div>
-      <div className="flex h-full w-full items-stretch">
+    <>
+    <div className="ml-4 flex flex-col-reverse lg:flex-row">
+      {cafename === undefined ? (
+        <SearchPlace 
+          setPlace={setPlace} 
+          setHoverCafe={setHoverCafe} 
+          cafeList={cafeList}
+          setCafeList = {setCafeList}
+        />
+      ) : (
+        <CafeDetail />
+      )}
+      <div className="lg:basis-full lg:flex lg:ml-0 -ml-64 items-stretch">
         <MapContainer 
           searchPlace={place}
           userLocation = {userLocation} 
@@ -90,7 +90,8 @@ import SearchPlace from './SearchPlace'
           setHoverCafe = {setHoverCafe}
         />
       </div>
-    </div>
+    </div>   
+  </>
   )
 }
 

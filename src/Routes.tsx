@@ -40,6 +40,7 @@ const MainRoutes = () => {
         </Route>
 
         <Route path='/store' element={ <FindStore /> } />
+        <Route path="/store/:cafename" element={<FindStore/>}></Route>
         <Route path="coord" element={<CafeCoordManage />}></Route>
       </Routes>
   );

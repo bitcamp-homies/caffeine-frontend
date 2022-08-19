@@ -1,6 +1,5 @@
 import React from 'react'
 import CafeSwipe from './CafeSwipe'
-
 const Main = () => {
   return (
     <div id="main" className="flex h-[83.55vh] flex-col lg:flex-row">
