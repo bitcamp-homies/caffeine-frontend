@@ -7,7 +7,7 @@ const CafeList = ({ filterData, setHoverCafe }) => {
   let DetailLink
 
   return (
-    <ul className="h-[440px] w-full overflow-scroll overflow-x-hidden lg:w-[28rem]">
+    <ul className="h-[440px] w-full overflow-scroll overflow-x-hidden lg:w-[28rem] xl:w-[35rem]">
       {filterData.map((item, index) => {
         DetailLink = `/store/${item.cafe_name}`
         return (
@@ -24,14 +24,14 @@ const CafeList = ({ filterData, setHoverCafe }) => {
                 </div>
               </div>
               <div>
-              <button className="relative ml-6 h-4 w-4">
-                <LikeIcon fill="#dd9c4f" />
-              </button>
-              <Link to={DetailLink}>
                 <button className="relative ml-6 h-4 w-4">
-                  <InfoIcon fill="#dd9c4f" />
+                  <LikeIcon fill="#dd9c4f" />
                 </button>
-              </Link>
+                <Link to={DetailLink}>
+                  <button className="relative ml-6 h-4 w-4">
+                    <InfoIcon fill="#dd9c4f" />
+                  </button>
+                </Link>
               </div>
             </div>
           </li>
