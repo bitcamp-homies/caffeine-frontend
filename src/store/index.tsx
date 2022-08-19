@@ -1,10 +1,15 @@
-//@ts-nocheck
-
-import { combineReducers } from "redux";
-import reducer from "./modules/mapMarker";
-import locationReducer from "./modules/userLocation";
-import cafeListBoundaryReducer from "./modules/cafeListBoundary";
-
-export default combineReducers({
-  reducer
-})
+//store/index.js
+// @ts-nocheck
+import {
+    combineReducers,
+    configureStore,
+    getDefaultMiddleware,
+  } from "@reduxjs/toolkit";
+  import { todoReducer } from "./modules/todoReducer";
+  
+  const reducer = combineReducers({ todoReducer: todoReducer.reducer });
+  
+  export default configureStore({
+    reducer,
+    middleware: [...getDefaultMiddleware()],
+  });

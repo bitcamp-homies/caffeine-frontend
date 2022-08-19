@@ -7,16 +7,16 @@ const Size = () => {
 
   const clickbtn = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSize(e.target.value)
-    if (e.target.value === 'Tall') {
+    if (e.target.value === 'Regular') {
       setSelectsize('8px')
       setSizeCoast(0)
-    } else if (e.target.value === 'Grande') {
+    } else if (e.target.value === 'Tall') {
       setSelectsize('80px')
       setSizeCoast(500)
-    } else if (e.target.value === 'Venti') {
+    } else if (e.target.value === 'Grande') {
       setSelectsize('152px')
       setSizeCoast(1000)
-    } else if (e.target.value === 'Trenta') {
+    } else if (e.target.value === 'Venti') {
       setSelectsize('224px')
       setSizeCoast(1500)
     }
@@ -39,6 +39,22 @@ const Size = () => {
           <label>
             <input
               className="absolute top-0 z-[-1] h-[104px] w-[72px] appearance-none"
+              id="Regular"
+              name="size"
+              type="radio"
+              value="Regular"
+              checked={size === 'Regular'}
+              onChange={clickbtn}
+            />
+            <div className="mx-6 my-2 h-[40px] w-[24px] cursor-pointer bg-[url(https://www.starbucks.com/app-assets/76b8892b0db8f5d411988fe1bbbe4141.svg)] "></div>
+            <p className="text-center text-base font-semibold">Regular</p>
+            <p className="text-center text-sm"> 12 fl oz</p>
+          </label>
+        </div>
+        <div className="relative m-0 my-3 inline-block h-[104px] w-[72px] px-0 text-left align-top">
+          <label>
+            <input
+              className="absolute top-0 z-[-1] h-[104px] w-[72px] appearance-none"
               id="Tall"
               name="size"
               type="radio"
@@ -46,9 +62,11 @@ const Size = () => {
               checked={size === 'Tall'}
               onChange={clickbtn}
             />
-            <div className="mx-6 my-2 h-[40px] w-[24px] cursor-pointer bg-[url(https://www.starbucks.com/app-assets/76b8892b0db8f5d411988fe1bbbe4141.svg)] "></div>
-            <p className="text-center text-base font-semibold">Tall</p>
-            <p className="text-center text-sm"> 12 fl oz</p>
+            <div className="mx-6 my-2 h-[40px] w-[24px] cursor-pointer bg-[url(https://www.starbucks.com/app-assets/2920fb2a8c34d3ddb95ad262872526e9.svg)] "></div>
+            <p className="text-center text-base font-semibold">
+              Tall
+            </p>
+            <p className="text-center text-sm"> 16 fl oz</p>
           </label>
         </div>
         <div className="relative m-0 my-3 inline-block h-[104px] w-[72px] px-0 text-left align-top">
@@ -62,11 +80,9 @@ const Size = () => {
               checked={size === 'Grande'}
               onChange={clickbtn}
             />
-            <div className="mx-6 my-2 h-[40px] w-[24px] cursor-pointer bg-[url(https://www.starbucks.com/app-assets/2920fb2a8c34d3ddb95ad262872526e9.svg)] "></div>
-            <p className="text-center text-base font-semibold">
-              Grande
-            </p>
-            <p className="text-center text-sm"> 16 fl oz</p>
+            <div className="mx-6 my-2 h-[40px] w-[24px] cursor-pointer bg-[url(https://www.starbucks.com/app-assets/55e7819f7cf8e1959ec35e680d46d9a9.svg)]"></div>
+            <p className="text-center text-base font-semibold">Grande</p>
+            <p className="text-center text-sm"> 24 fl oz</p>
           </label>
         </div>
         <div className="relative m-0 my-3 inline-block h-[104px] w-[72px] px-0 text-left align-top">
@@ -80,25 +96,9 @@ const Size = () => {
               checked={size === 'Venti'}
               onChange={clickbtn}
             />
-            <div className="mx-6 my-2 h-[40px] w-[24px] cursor-pointer bg-[url(https://www.starbucks.com/app-assets/55e7819f7cf8e1959ec35e680d46d9a9.svg)]"></div>
-            <p className="text-center text-base font-semibold">Venti</p>
-            <p className="text-center text-sm"> 24 fl oz</p>
-          </label>
-        </div>
-        <div className="relative m-0 my-3 inline-block h-[104px] w-[72px] px-0 text-left align-top">
-          <label>
-            <input
-              className="absolute top-0 z-[-1] h-[104px] w-[72px] appearance-none"
-              id="Trenta"
-              name="size"
-              type="radio"
-              value="Trenta"
-              checked={size === 'Trenta'}
-              onChange={clickbtn}
-            />
             <div className="mx-6 my-2 h-[40px] w-[24px] cursor-pointer bg-[url(https://www.starbucks.com/app-assets/3abf3fc78365ef0b59bbfd0ecd1c8490.svg)]"></div>
             <p className="text-center text-base font-semibold">
-              Trenta
+              Venti
             </p>
             <p className="text-center text-sm"> 30 fl oz</p>
           </label>

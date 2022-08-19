@@ -5,22 +5,25 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals.ts';
-import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { createStore } from 'redux';
 import rootReducer from './store';
 import { BrowserRouter } from 'react-router-dom';
-
-const store = createStore(rootReducer, composeWithDevTools());
+import { QueryClient, QueryClientProvider } from 'react-query';
+//index에서 QueryClient생성
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+
 root.render(
   <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
