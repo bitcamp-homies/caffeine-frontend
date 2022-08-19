@@ -81,9 +81,9 @@ const CafeCoordManage = () => {
       <div>
         <button onClick={() => setGeoCoordAllCafe(data)} className='bg-green-300 border-none text-center text-white text-semibold'>전체 카페 좌표 최신화</button>
       </div>
-      <div>
+      <div className='h-32'>
         <table>
-          <thead>
+          <thead className='sticky top-0 bg-gray-300'>
             <tr>
               <th>CAFE_ID</th>
               <th>USER_ID</th>
