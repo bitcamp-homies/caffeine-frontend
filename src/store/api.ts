@@ -1,3 +1,4 @@
+// @ts-nocheck
 import axios from "axios";
 import { useMutation } from "react-query";
 
@@ -10,7 +11,7 @@ export const listAllMybatis = () =>{
     return temp;
 }
 
-export const NickNameCheck = (NickName : string) =>{
+export const NickNameCheck = (NickName) =>{
     const temp = api.get('/cafe/NickNameCheck',{
         params : {
             NickName : NickName
@@ -19,15 +20,15 @@ export const NickNameCheck = (NickName : string) =>{
     return temp
 }
 
-export const EmailCheck = (Eamil : string) => {
+export const EmailCheck = (Email) => {
     const temp = api.get('/cafe/EmailCheck',{
         params : {
-            Eamil : Eamil 
+            Email : Email
         }
     })
     return temp
 }
 
-export const createMember = (Member : []) =>{
+export const createMember = (Member) =>{
     const temp = api.post('/cafe/createMember',Member)
 }

@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useState } from 'react';
-import { useQueries, useQuery } from 'react-query';
+import { useMutation, useQueries, useQuery } from 'react-query';
 import { isQueryKey } from 'react-query/types/core/utils';
 import { useNavigate } from 'react-router-dom';
 import { NickNameCheck,EmailCheck } from 'store/api';
@@ -13,6 +13,9 @@ const MemberWrite = () => {
   const [RePassword, setRePassword] = useState('')
   const [Sung,setSung] = useState('')
   const [Name, setName] = useState('')
+  const [UserType, setUserType] = useState(null)
+  const [Insta_Account, setInsta_Account] = useState(null)
+  const nevigate = useNavigate();
   const getnickname = useQuery(
     ['getNickName',NickName],
     () => NickNameCheck(NickName),
@@ -26,28 +29,42 @@ const MemberWrite = () => {
       return regExp.test(password)
     }
     const checkpassword = passwordcheck(Password);//비밀번호 textbox에 들어간 값이 정규식이 맞냐 안맞냐
-
+    const writepassword = checkpassword && Password === RePassword //회원가입 비밀번호 유효성 검사
   const emailcheck = useQuery(
     ['getEmail',Email],
     () => EmailCheck(Email),
-    {
-      enabled : !! Email,
-    }
+      {
+        enabled : !! Email,
+      }
     )
+
  const validateEmail = email => {
     const regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
     return regex.test(email);
 }
 const email = validateEmail(Email)  //true false 반환 이메일 정규식
 
-const data = {
+const data2 = {
   'sung' : Sung,
   'name' : Name,
   'email' : Email,
   'nickname' : NickName,
-  'password' : Password
+  'password' : Password,
+  'user_type' : UserType,
+  'insta_account' : Insta_Account
 }
+
 const qs = require('qs');
+const saveMember = useMutation(data => createMember(data))
+const MemberSubmit = () =>{
+  if(emailcheck?.data?.data == 'ok' && getnickname.data?.data == 'ok' && writepassword && Sung != '' && Name != ''){
+  console.log(data2)
+    saveMember.mutate(qs.stringify(data2))
+    nevigate('/')
+  }else{
+    alert('내용을 입력해주세요 ')
+  }
+}
 
   return (
 <div>
@@ -113,8 +130,7 @@ const qs = require('qs');
                     </div>
                     <div className="pt-2 text-sm">
                       {
-                        email ? '' :<p>이메일 형식에 맞춰 입력해주세요</p>,
-                        email ? emailcheck.data === 'ok'? <p>사용가능한 불가능한 이메일입니다.</p> : <p>사용 가능한 이메일입니다.</p> : ''
+                        email ? emailcheck?.data?.data === 'fail'? <p>사용불가능한 이메일입니다.</p> : <p>사용 가능한 이메일입니다.</p> : <p>이메일 형식에 맞게 입력해주세요.</p>
                       }
                     </div>
                   </div>
@@ -153,7 +169,7 @@ const qs = require('qs');
               </fieldset>
               <div>
                 <div className="flex justify-end mt-6"> 
-                  <button className="bg-[#00754a] rounded-[500px] text-white text-lg font-semibold px-[18px] py-[15px] text-center" type="button">계정 생성</button>
+                  <button className="bg-[#00754a] rounded-[500px] text-white text-lg font-semibold px-[18px] py-[15px] text-center" onClick={MemberSubmit} type="button">계정 생성</button>
                 </div>
               </div>
             </div>
