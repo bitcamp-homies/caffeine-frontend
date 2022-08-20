@@ -12,7 +12,11 @@ module.exports = {
       'xl': '1280px',
       '2xl': '1536px',
     },
-    extend: {},
+    fontFamily: {
+      'sans': ['GmarketSansMedium', 'system-ui'],
+    },
+    extend: {
+    },
   },
   plugins: [],
 }
