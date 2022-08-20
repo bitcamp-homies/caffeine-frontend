@@ -32,3 +32,8 @@ export const EmailCheck = (Email) => {
 export const createMember = (Member) =>{
     const temp = api.post('/cafe/createMember',Member)
 }
+
+export const Login = (login) =>{
+    const temp = api.post('/cafe/Login',login)
+    return temp
+}

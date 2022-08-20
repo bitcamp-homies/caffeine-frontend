@@ -1,11 +1,30 @@
+// @ts-nocheck
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import SigninBtn from './SigninBtn'
-
+import { Login } from 'store/api'
 const Join = () => {
   const [id,setId] = useState('')
   const [password,setPassword] = useState('')
-  
+  const navigate = useNavigate();
+  const logindata = {
+    id : id,
+    password : password
+  }
+
+
+  const LoginBtn = () =>{
+    const qs = require('qs');
+    Login(qs.stringify(logindata))
+    .then((res) => {
+      if(res == undefined){
+        alert('사용자 정보가 일치하지않습니다.')
+      }else{
+        sessionStorage.setItem("Id",res.data.email)
+        navigate('/')
+      }
+    })
+  }
   return (
     <body className="bg-gradient-to-br from-green-100 to-white antialiased">
       <div className="container mx-auto px-6">
@@ -37,9 +56,9 @@ const Join = () => {
                   />
                 </div>
                 <div id="button" className="my-5 flex w-full flex-col">
-                  <Link to='cardlist'>
-                    <SigninBtn />
-                  </Link>
+                  {/* <Link to='cardlist'> */}
+                    <SigninBtn LoginBtn = {LoginBtn}/>
+                  {/* </Link> */}
                   <div className="mt-5 flex justify-evenly">
                     <a
                       href="#"
