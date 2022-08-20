@@ -18,6 +18,7 @@ import MemberWrite from 'components/member/memberwrite'
 import CafeCoordManage from 'components/stores/CafeCoordManage';
 import Gift from 'components/cards/Gift';
 import Point from 'components/cards/Point';
+import Join from 'components/cards/Join';
 
 
 const MainRoutes = () => {
@@ -45,6 +46,7 @@ const MainRoutes = () => {
         <Route path='member' element={<MemberWrite/> } />
         <Route path="/store/:cafename" element={<FindStore/>}></Route>
         <Route path="coord" element={<CafeCoordManage />}></Route>
+        <Route path="login" element={<Join/>}></Route>
       </Routes>
   );
 };

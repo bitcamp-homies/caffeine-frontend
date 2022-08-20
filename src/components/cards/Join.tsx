@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import SigninBtn from './SigninBtn'
 
 const Join = () => {
+  const [id,setId] = useState('')
+  const [password,setPassword] = useState('')
+  
   return (
     <body className="bg-gradient-to-br from-green-100 to-white antialiased">
       <div className="container mx-auto px-6">
@@ -20,6 +23,7 @@ const Join = () => {
                     id="username"
                     placeholder="Please insert your username"
                     className="appearance-none rounded-lg border-2 border-gray-100 px-4 py-3 placeholder-gray-300 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                    onChange={(e)=>setId(e.target.value)}
                   />
                 </div>
                 <div id="input" className="my-5 flex w-full flex-col">
@@ -29,6 +33,7 @@ const Join = () => {
                     id="password"
                     placeholder="Please insert your password"
                     className="appearance-none rounded-lg border-2 border-gray-100 px-4 py-3 placeholder-gray-300 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                    onChange={(e)=>setPassword(e.target.value)}
                   />
                 </div>
                 <div id="button" className="my-5 flex w-full flex-col">
