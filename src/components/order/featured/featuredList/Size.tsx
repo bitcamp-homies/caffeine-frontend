@@ -1,11 +1,12 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react';
 
-const Size = () => {
-  const [size, setSize] = useState<string | null>()
+const Size = ({recommended, mainSize}) => {
+  const [size, setSize] = useState()
   const [selectsize, setSelectsize] = useState('8px')
   const [sizeCoast, setSizeCoast] = useState(0);
-
-  const clickbtn = (e: React.ChangeEvent<HTMLInputElement>) => {
+  
+  const clickbtn = (e) => {
     setSize(e.target.value)
     if (e.target.value === 'Regular') {
       setSelectsize('8px')

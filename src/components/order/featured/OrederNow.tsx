@@ -10,9 +10,8 @@ import OrderNowProduct from './featuredList/OrderNowProduct'
 import Size from './featuredList/Size'
 const OrderNow = () => {
   const { cafe_id, product_id } = useParams()
-  console.log(cafe_id)
-  console.log(product_id)
   const [data, setData] = useState([])
+  
   //useEffect에서 카페와 Recommend 값 받아오기
   useEffect(() => {
     axios
@@ -22,17 +21,17 @@ const OrderNow = () => {
         },
       })
       .then((res) => setData(res.data))
-  }, [])
-  console.log(data)
-
-  function findProductInfo(ele){
-    if(ele.product_id == product_id){
-      return true;
+    }, [])
+    function findProductInfo(ele){
+      if(ele.product_id == product_id){
+        return true;
+      }
     }
-  }
-  const productInfo = data.find(findProductInfo)
-  
-  const coffeePrice = productInfo.price;
+    const productInfo = data.find(findProductInfo)
+    console.log(productInfo)
+    const coffeePrice = 1;
+
+
   const [totalPay, setTotalPay] = useState(coffeePrice)
 
   return (
@@ -50,7 +49,7 @@ const OrderNow = () => {
             </p>
             <p className="mr-2 text-xl font-bold lg:text-2xl">{coffeePrice}₩</p>
           </div>
-          <Size data={data}/>
+          <Size mainSize={productInfo}/>
         </div>
         <div></div>
         <div className="mx-auto w-full sm:mb-24 lg:my-10 lg:ml-32 xl:mx-0">
