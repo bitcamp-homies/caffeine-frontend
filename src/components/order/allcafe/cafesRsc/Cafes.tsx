@@ -1,30 +1,53 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import PropTypes from "prop-types";
 
 const Cafes = () => {
+  const [loading, setLoading] = useState(true) //로딩이 되는 순간의 state ㅅ설정 -> return에 loading 조건문 확인.
+  const [cafes, setCafes] = useState<any[]>([]);
+  const getCafes = async () => {
+    const json = await (
+      await fetch(`http://localhost:8080/cafe/listAllMybatis`)
+    ).json()
+    setCafes(json.data.cafes)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getCafes()
+  }, [])
+
+  console.log(cafes)
+
   return (
-   
-    <div className="grid grid-cols-1 text-xs pt-5 gap-4 md:grid-cols-2 md:text-sm w-auto"> {/* axios 작업분량 */}
-      <Link to="../cafes/menu">
-      <div className="flex flex-row gap-3 bg-white h-20 items-center md:h-28">
-        <img className="object-fill rounded-full h-20 w-20 md:h-28 md:w-28" src="https://modo-phinf.pstatic.net/20191117_101/15739932413125YWd4_PNG/mosawUb5vX.png?type=f320_320"></img>
-        <div className="flex flex-col gap-1">
-        <p>에이쓰리바우트커피</p>
-        <p>대표 메뉴 </p>
+    <div>
+      {loading ? (
+        <h1>Now Loading</h1>
+      ) : (
+        <div className="grid w-auto grid-cols-1 gap-4 pt-5 text-xs md:grid-cols-2 md:text-sm">
+          {cafes.map((cafe) => (
+          <Link to="../cafes/menu">
+            <div className="flex h-20 flex-row items-center gap-3 bg-white md:h-28">
+              <img
+                className="h-20 w-20 rounded-full object-fill md:h-28 md:w-28"
+                src="https://modo-phinf.pstatic.net/20191117_101/15739932413125YWd4_PNG/mosawUb5vX.png?type=f320_320"
+              ></img>
+              <div className="flex flex-col gap-1">
+                <p>{cafe.cafe_name}</p>
+                <p>{} </p>
+              </div>
+            </div>
+          </Link>
+          ))}
         </div>
-      </div>
-      </Link>
-      <Link to="../cafes/menu">
-      <div className="flex flex-row gap-3 bg-white h-20 items-center md:h-28">
-        <img className="object-fill rounded-full h-20 w-20 md:h-28 md:w-28" src="https://blog.kakaocdn.net/dn/b2dbIm/btrmNnzEqgO/286Zb8ce0Wh4rwqQvYCik0/img.jpg"></img>
-        <div className="flex flex-col gap-1">
-        <p>에이비 카페</p>
-        <p>대표 메뉴 </p>
-        </div>
-      </div>
-      </Link>
+      )}
     </div>
-  );
+  )
+}
+Cafes.propTypes = {
+  cafe_name:PropTypes.string.isRequired,
 };
 
-export default Cafes;
+export default Cafes
