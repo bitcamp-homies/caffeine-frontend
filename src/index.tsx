@@ -9,6 +9,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './store';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import sotre from './store/index'
 //index에서 QueryClient생성
 const queryClient = new QueryClient();
 

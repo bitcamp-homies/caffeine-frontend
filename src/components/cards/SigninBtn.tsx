@@ -1,10 +1,12 @@
+// @ts-nocheck
 import React from 'react'
 
-const SigninBtn = () => {
+const SigninBtn = ({LoginBtn}:any) => {
   return (
     <button
       type="button"
       className="w-full rounded-lg bg-green-600 py-4 text-green-100"
+      onClick={LoginBtn}
     >
       <div className="flex flex-row items-center justify-center">
         <div className="mr-2">
