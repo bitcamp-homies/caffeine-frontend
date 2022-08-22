@@ -1,11 +1,14 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react';
 
-const Size = ({recommended, mainSize}) => {
+const Size = ({recommended, data}) => {
   const [size, setSize] = useState()
   const [selectsize, setSelectsize] = useState('8px')
   const [sizeCoast, setSizeCoast] = useState(0);
+  const recSize = data.filter((item) => item.recommended == 'Y');
   
+  
+
   const clickbtn = (e) => {
     setSize(e.target.value)
     if (e.target.value === 'Regular') {

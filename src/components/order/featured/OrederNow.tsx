@@ -7,32 +7,37 @@ import { Link, useParams } from 'react-router-dom'
 import Cafeinfo from './featuredList/Cafeinfo'
 import OrderNowProduct from './featuredList/OrderNowProduct'
 
+
 import Size from './featuredList/Size'
 const OrderNow = () => {
   const { cafe_id, product_id } = useParams()
   const [data, setData] = useState([])
-  
-  //useEffect에서 카페와 Recommend 값 받아오기
+
   useEffect(() => {
-    axios
-      .get('http://localhost:8080/order/getProduct', {
-        params: {
-          cafe_id: cafe_id,
-        },
-      })
-      .then((res) => setData(res.data))
-    }, [])
-    function findProductInfo(ele){
-      if(ele.product_id == product_id){
-        return true;
-      }
+    const efg = getCafeProductList()
+    setData(efg)
+    console.log(efg)
+  }, [])
+  
+  async function getCafeProductList() {
+    const response = await axios.get(`http://localhost:8080/order/getProduct`, {
+      params: {
+        cafe_id: cafe_id,
+      },
+    })
+    return response.data
+  }
+
+
+
+  function findProductInfo(ele) {
+    if (ele.product_id == product_id) {
+      return true
     }
-    const productInfo = data.find(findProductInfo)
-    console.log(productInfo)
-    const coffeePrice = 1;
+  }
+  
 
-
-  const [totalPay, setTotalPay] = useState(coffeePrice)
+  const [totalPay, setTotalPay] = useState(4000)
 
   return (
     <>
@@ -47,9 +52,9 @@ const OrderNow = () => {
             <p className="w-[90%] text-xl font-bold lg:text-2xl">
               Cafe Americano
             </p>
-            <p className="mr-2 text-xl font-bold lg:text-2xl">{coffeePrice}₩</p>
+            <p className="mr-2 text-xl font-bold lg:text-2xl">1₩</p>
           </div>
-          <Size mainSize={productInfo}/>
+        {/* <Size data={data} /> */}
         </div>
         <div></div>
         <div className="mx-auto w-full sm:mb-24 lg:my-10 lg:ml-32 xl:mx-0">
@@ -58,7 +63,7 @@ const OrderNow = () => {
               Recommend Menu
             </span>
           </h2>
-          <OrderNowProduct data={data}/>
+          {/* <OrderNowProduct data={data} /> */}
         </div>
       </div>
       <div className="fixed bottom-0 h-[70px] w-full bg-red-800">
@@ -68,7 +73,7 @@ const OrderNow = () => {
           </button>
         </div>
         <div className="float-right mt-2 mr-3 inline-block rounded-3xl border p-3 text-white lg:mr-10">
-          <Link to="./payment">
+          <Link to="./payment/23000">
             <button className="text-xl text-white">Next</button>
           </Link>
         </div>

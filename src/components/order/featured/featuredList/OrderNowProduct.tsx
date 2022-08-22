@@ -15,7 +15,7 @@ const OrderNowProduct = ({ data }) => {
   }
 
   const recommended = data.filter((item) => item.recommended == 'Y')
-
+  
   const recommendedMenu = recommended.map((item) => (
     <div key={item.product_id} >
       <div className="lfex mt-10 flex justify-center sm:gap-5 lg:flex-row lg:justify-start">
@@ -48,7 +48,7 @@ const OrderNowProduct = ({ data }) => {
         </div>
       </div>
       <div className="lg:min-w-[288px]">
-        {item.category === 'Drinks' ? <Size recommended={item} /> : null}
+        {item.category === 'Drinks' ? <Size data={data} /> : null}
       </div>
     </div>
   ))
