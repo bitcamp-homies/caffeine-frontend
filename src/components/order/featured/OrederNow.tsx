@@ -14,8 +14,8 @@ const OrderNow = () => {
   const [data, setData] = useState([])
   const [price, setPrice] = useState(0)
   const [sizeCoast, setSizeCoast] = useState(0);
-  const [recomendCoast,setRecomendCoast] = useState(0)
-  const [count,setCount] = useState(0)
+  const[test,setest] = useState(0)
+  const[test1,settest1] = useState([])
     const {data : productdata,isSuccess,isError,isLoading} = useQuery(
       ['getCafeProductList',cafe_id],
       () => getCafeProductList(cafe_id),
@@ -24,12 +24,8 @@ const OrderNow = () => {
       useEffect(()=>{
         setPrice(4000)
       },[price])
-
-      useEffect(()=>{
-        setPrice(4000)
-      },[price])
-  const data1 = productdata?.data.find((item)=> item.product_id == product_id)
       
+  const data1 = productdata?.data.find((item)=> item.product_id == product_id)
   return (
     <>
       <Cafeinfo />
@@ -56,14 +52,14 @@ const OrderNow = () => {
               Recommend Menu
             </span>
           </h2>
-          {isSuccess && <OrderNowProduct data={productdata} setRecommendPrice={setRecommendPrice} setSizeCoast={setSizeCoast}/>}
+          {isSuccess && <OrderNowProduct data={productdata} setSizeCoast={setSizeCoast} setest={setest} test={test} settest1={settest1} test1={test1}/>}
         </div>
       </div>
       <div className="fixed bottom-0 h-[70px] w-full bg-red-800">
         <div className="my-5 ml-5 inline-block">
           <button className="text-xl font-bold text-white">
             {
-              isSuccess && data1.price + price + sizeCoast + count + recomendCoast
+              isSuccess && data1.price + price + sizeCoast + test1
             }
           </button>
 

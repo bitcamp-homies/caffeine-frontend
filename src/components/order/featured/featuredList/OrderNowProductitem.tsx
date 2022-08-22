@@ -22,22 +22,22 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
     data,
     style,
     setSizeCoast,
-    setRecommendPrice,
+    setest,
+    settest1,
+    test,
+    test1
 }) => {
   const [count, setCount] = useState(0);
 
   const handleClickPlus = useCallback(() => {
-    setCount((prevCount) => prevCount + 1);
-  }, []);
-
-  const handleClickMinus = useCallback(() => {
+    setCount((prevCount) => prevCount + 1)
+}, []);
+    settest1(count)
+const handleClickMinus = useCallback(() => {
     setCount((prevCount) => prevCount > 1 ? prevCount - 1 : 0);
-  }, []);
-  
-  useEffect(()=>{
-    setRecommendPrice((data.price + setSizeCoast) * count)
-  },[count])
-  
+}, []);
+
+
   return (
     <div key={key}>
       <div className="mt-10 flex justify-center sm:gap-5 lg:flex-row lg:justify-start">
@@ -70,7 +70,7 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
         </div>
       </div>
       <div className="lg:min-w-[288px]">
-        {data?.category === 'Drinks' ? <Size data={data as any} setSizeCoast={setSizeCoast} /> : null}
+        {data?.category === 'Drinks' ? <Size data={data as any} setSizeCoast={setSizeCoast} setest={setest} item="100"/> : null}
       </div>
     </div>
   )
