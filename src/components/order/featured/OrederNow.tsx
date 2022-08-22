@@ -6,38 +6,25 @@ import { useQuery } from 'react-query'
 import { Link, useParams } from 'react-router-dom'
 import Cafeinfo from './featuredList/Cafeinfo'
 import OrderNowProduct from './featuredList/OrderNowProduct'
-
+import { getCafeProductList } from 'store/api'
 
 import Size from './featuredList/Size'
 const OrderNow = () => {
   const { cafe_id, product_id } = useParams()
   const [data, setData] = useState([])
-
-  useEffect(() => {
-    const efg = getCafeProductList()
-    setData(efg)
-    console.log(efg)
-  }, [])
-  
-  async function getCafeProductList() {
-    const response = await axios.get(`http://localhost:8080/order/getProduct`, {
-      params: {
-        cafe_id: cafe_id,
-      },
-    })
-    return response.data
-  }
+  const [price, setPrice] = useState(0)
+  const [sizeCoast, setSizeCoast] = useState(0);
+    const {data : productdate,isSuccess,isError,isLoading} = useQuery(
+      ['getCafeProductList',cafe_id],
+      () => getCafeProductList(cafe_id),
+    ) 
 
 
-
-  function findProductInfo(ele) {
-    if (ele.product_id == product_id) {
-      return true
-    }
-  }
-  
-
-  const [totalPay, setTotalPay] = useState(4000)
+      useEffect(()=>{
+        setPrice(4000)
+      },[price])
+  const data1 = productdate?.data.find((item)=> item.product_id == product_id)
+ 
 
   return (
     <>
@@ -54,7 +41,7 @@ const OrderNow = () => {
             </p>
             <p className="mr-2 text-xl font-bold lg:text-2xl">1₩</p>
           </div>
-        {/* <Size data={data} /> */}
+        {isSuccess && <Size data={data1} setSizeCoast={setSizeCoast} /> }
         </div>
         <div></div>
         <div className="mx-auto w-full sm:mb-24 lg:my-10 lg:ml-32 xl:mx-0">
@@ -69,8 +56,11 @@ const OrderNow = () => {
       <div className="fixed bottom-0 h-[70px] w-full bg-red-800">
         <div className="my-5 ml-5 inline-block">
           <button className="text-xl font-bold text-white">
-            Price : {totalPay}
+            {
+              isSuccess && data1.price + price + sizeCoast
+            }
           </button>
+
         </div>
         <div className="float-right mt-2 mr-3 inline-block rounded-3xl border p-3 text-white lg:mr-10">
           <Link to="./payment/23000">
