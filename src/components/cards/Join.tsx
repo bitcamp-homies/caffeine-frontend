@@ -30,7 +30,7 @@ const Join = (props) => {
         }else{
           sessionStorage.setItem("Id",res.data.email)
           if(props.pathname == '/cards/point'){
-            navigate('/cards/list')
+            navigate('/cards/list') 
           }else{
             navigate('/')
           }
