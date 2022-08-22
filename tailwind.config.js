@@ -16,6 +16,9 @@ module.exports = {
       'sans': ['GmarketSansMedium', 'system-ui'],
     },
     extend: {
+      colors: {
+        'black-rgba': 'rgba(0, 0, 0, 0.50)',
+      }
     },
   },
   plugins: [],

@@ -26,10 +26,8 @@ function App() {
             onToggle={isOpen => {
               if (isOpen) {
                 setOpen(true)
-                console.log('setOpen: ' + isOpen)
               } else {
                 setOpen(false)
-                console.log('setOpen: ' + isOpen)
               }
             }}
           />

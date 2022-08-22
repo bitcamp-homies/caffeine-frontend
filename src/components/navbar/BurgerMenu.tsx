@@ -4,11 +4,14 @@ interface BurgerProps {
   toggled: boolean
 }
 
+const burgerMenuClass = 'fixed z-20 bg-black h-full w-full bg-black-rgba flex flex-row'
+
 const BurgerMenu = (props :BurgerProps) => {
-  console.log('BurgerMenu: ' + props.toggled)
   return (
-    <div id='burgerMenu' className={props.toggled ? 'fixed z-20' : 'hidden'}>
-      <p className='text-white'>Hello World</p>
+    <div id='burgerMenu' className={props.toggled ? burgerMenuClass : 'hidden'}>
+      <div className='bg-white basis-10/12'>
+        
+      </div>
     </div>
   );
 };
