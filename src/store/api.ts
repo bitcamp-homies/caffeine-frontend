@@ -38,8 +38,8 @@ export const Login = (login) =>{
     return temp
 }
 
-export const getCafeProductList = (cafe_id, product_id) => {
-    const temp = api.get(`/order/featured/order-now/cafe/${cafe_id}/product/${product_id}`,{
+export const getCafeProductList = (cafe_id) => {
+    const temp = api.get(`/order/getProduct`,{
         params:{
             cafe_id:cafe_id
         }

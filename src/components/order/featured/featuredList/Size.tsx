@@ -1,12 +1,12 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react';
 
-const Size = ({recommended, data}) => {
+const Size = ({data}) => {
   const [size, setSize] = useState()
   const [selectsize, setSelectsize] = useState('8px')
   const [sizeCoast, setSizeCoast] = useState(0);
-  const recSize = data.filter((item) => item.recommended == 'Y');
-  
+  // const recSize = data.filter((item) => item.recommended == 'Y');
+  console.log
   
 
   const clickbtn = (e) => {

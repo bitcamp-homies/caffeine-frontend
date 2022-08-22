@@ -48,7 +48,7 @@ const OrderNowProduct = ({ data }) => {
         </div>
       </div>
       <div className="lg:min-w-[288px]">
-        {item.category === 'Drinks' ? <Size data={data} /> : null}
+        {item.category === 'Drinks' ? <Size data={item} /> : null}
       </div>
     </div>
   ))

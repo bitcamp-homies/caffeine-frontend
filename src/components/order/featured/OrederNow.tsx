@@ -11,25 +11,20 @@ import { getCafeProductList } from 'store/api'
 import Size from './featuredList/Size'
 const OrderNow = () => {
   const { cafe_id, product_id } = useParams()
-  const [data, setData] = useState([])
-
-  getCafeProductList(cafe_id , product_id)
-  .then((res) => {
-    setData(res.data);
-  })
-  
+  const [price, setPrice] = useState(0)
+    const {data : productdata,isSuccess,isError,isLoading} = useQuery(
+      ['getCafeProductList',cafe_id],
+      () => getCafeProductList(cafe_id),
+    ) 
 
 
+      useEffect(()=>{
+        setPrice(4000)
+      },[price])
 
-  function findProductInfo(ele) {
-    if (ele.product_id == product_id) {
-      return true
-    }
-  }
-  
+  const data1 = productdata?.data.find((item)=> item.product_id == product_id)
 
-  const [totalPay, setTotalPay] = useState(4000)
-
+      
   return (
     <>
       <Cafeinfo />
@@ -45,7 +40,7 @@ const OrderNow = () => {
             </p>
             <p className="mr-2 text-xl font-bold lg:text-2xl">1₩</p>
           </div>
-        {/* <Size data={data} /> */}
+        {isSuccess && <Size data={productdata} />}
         </div>
         <div></div>
         <div className="mx-auto w-full sm:mb-24 lg:my-10 lg:ml-32 xl:mx-0">
@@ -54,14 +49,17 @@ const OrderNow = () => {
               Recommend Menu
             </span>
           </h2>
-          {/* <OrderNowProduct data={data} /> */}
+          {isSuccess && <OrderNowProduct data={productdata} />}
         </div>
       </div>
       <div className="fixed bottom-0 h-[70px] w-full bg-red-800">
         <div className="my-5 ml-5 inline-block">
           <button className="text-xl font-bold text-white">
-            Price : {totalPay}
+            {
+              isSuccess && data1.price + price
+            }
           </button>
+
         </div>
         <div className="float-right mt-2 mr-3 inline-block rounded-3xl border p-3 text-white lg:mr-10">
           <Link to="./payment/23000">
