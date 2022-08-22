@@ -11,11 +11,11 @@ import { getCafeProductList } from 'store/api'
 import Size from './featuredList/Size'
 const OrderNow = () => {
   const { cafe_id, product_id } = useParams()
-  const [data, setData] = useState([])
+  const [data, setData] = useState(0) //data.price
   const [price, setPrice] = useState(0)
   const [sizeCoast, setSizeCoast] = useState(0);
-  const[test,setest] = useState(0)
-  const[test1,settest1] = useState([])
+  const[test,setest] = useState(0)  //500/1000/1500
+  const[test1,settest1] = useState(0) //count
     const {data : productdata,isSuccess,isError,isLoading} = useQuery(
       ['getCafeProductList',cafe_id],
       () => getCafeProductList(cafe_id),
@@ -24,7 +24,9 @@ const OrderNow = () => {
       useEffect(()=>{
         setPrice(4000)
       },[price])
-      
+
+      console.log(data+test)
+
   const data1 = productdata?.data.find((item)=> item.product_id == product_id)
   return (
     <>
@@ -52,7 +54,7 @@ const OrderNow = () => {
               Recommend Menu
             </span>
           </h2>
-          {isSuccess && <OrderNowProduct data={productdata} setSizeCoast={setSizeCoast} setest={setest} test={test} settest1={settest1} test1={test1}/>}
+          {isSuccess && <OrderNowProduct data={productdata} setSizeCoast={setSizeCoast} setest={setest} test={test} settest1={settest1} test1={test1} setData={setData}/>}
         </div>
       </div>
       <div className="fixed bottom-0 h-[70px] w-full bg-red-800">

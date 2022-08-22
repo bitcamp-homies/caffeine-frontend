@@ -25,16 +25,21 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
     setest,
     settest1,
     test,
-    test1
+    test1,
+    setData
 }) => {
   const [count, setCount] = useState(0);
 
   const handleClickPlus = useCallback(() => {
     setCount((prevCount) => prevCount + 1)
+    settest1((item) => item+1)
+    setData((item) => item+data.price)
 }, []);
-    settest1(count)
+
 const handleClickMinus = useCallback(() => {
     setCount((prevCount) => prevCount > 1 ? prevCount - 1 : 0);
+    settest1((prevCount) => prevCount > 1 ? prevCount - 1 : 0);
+    setData((item) => item-data.price)
 }, []);
 
 
@@ -52,6 +57,7 @@ const handleClickMinus = useCallback(() => {
           <div id="totalPay" className="my-2 text-base text-gray-600 lg:ml-5">
             <p id="price" defaultValue={data.price}>
             ₩ {data.price}
+           
             </p>
           </div>
           <button className="w-7 border border-black lg:ml-5" onClick={handleClickPlus}>
