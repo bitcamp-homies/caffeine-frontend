@@ -3,7 +3,9 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import SigninBtn from './SigninBtn'
 import { Login } from 'store/api'
-const Join = () => {
+const Join = (props) => {
+  console.log("확인 : "+props.pathname)
+
   const [id,setId] = useState('')
   const [password,setPassword] = useState('')
   const navigate = useNavigate();
@@ -11,19 +13,30 @@ const Join = () => {
     id : id,
     password : password
   }
-
+  const validateEmail = email => { //이메일 정규식
+    const regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    return regex.test(email);
+}
 
   const LoginBtn = () =>{
-    const qs = require('qs');
-    Login(qs.stringify(logindata))
-    .then((res) => {
-      if(res == undefined){
-        alert('사용자 정보가 일치하지않습니다.')
-      }else{
-        sessionStorage.setItem("Id",res.data.email)
-        navigate('/')
-      }
-    })
+    if(validateEmail(id) == false){
+      alert('이메일 형식으로 입력해 주세요.')
+    }else{
+      const qs = require('qs');
+      Login(qs.stringify(logindata))
+      .then((res) => {
+        if(res.data == ''){
+          alert('사용자 정보가 일치하지않습니다.')
+        }else{
+          sessionStorage.setItem("Id",res.data.email)
+          if(props.pathname == '/cards/point'){
+            navigate('/cards/list')
+          }else{
+            navigate('/')
+          }
+        }
+      })
+    }
   }
   return (
     <body className="bg-gradient-to-br from-green-100 to-white antialiased">

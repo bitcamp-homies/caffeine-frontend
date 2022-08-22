@@ -1,8 +1,10 @@
+// @ts-nocheck
 import React from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 const Cardheader = () => {
   let navigate = useNavigate()
+
 
   return (
     <>
@@ -16,7 +18,7 @@ const Cardheader = () => {
           <li className="mr-7 inline-block text-sm">
             <button
               onClick={() => {
-                navigate('/card/point')
+                navigate('/cards/point')
               }}
             >
               Thumbs Point
@@ -25,7 +27,7 @@ const Cardheader = () => {
           <li className="mr-7 inline-block text-sm">
             <button
               onClick={() => {
-                navigate('/card/gift')
+                navigate('/cards/gift')
               }}
             >
               Thumbs Card
