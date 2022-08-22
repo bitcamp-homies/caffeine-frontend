@@ -14,9 +14,12 @@ import Payment from 'components/order/featured/Payment';
 
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import MemberWrite from 'components/member/memberwrite'
 import CafeCoordManage from 'components/stores/CafeCoordManage';
 import Gift from 'components/cards/Gift';
 import Point from 'components/cards/Point';
+import Join from 'components/cards/Join';
+import CardList from 'components/cards/CardList';
 
 
 const MainRoutes = () => {
@@ -25,9 +28,10 @@ const MainRoutes = () => {
         <Route path='/' element={ <App /> } />
         <Route index element={ <Main /> } />
 
-        <Route path='card' element={ <Cardheader /> }>
+        <Route path='cards' element={ <Cardheader /> }>
           <Route path='gift' element={<Gift/> } />
           <Route path='point' element={<Point />}/>
+          <Route path='list' element={<CardList/>}/>
         </Route>
 
         <Route path='order' element={ <Order /> }>
@@ -41,8 +45,10 @@ const MainRoutes = () => {
         </Route>
 
         <Route path='/store' element={ <FindStore /> } />
+        <Route path='member' element={<MemberWrite/> } />
         <Route path="/store/:cafename" element={<FindStore/>}></Route>
         <Route path="coord" element={<CafeCoordManage />}></Route>
+        <Route path="login" element={<Join/>}></Route>
       </Routes>
   );
 };

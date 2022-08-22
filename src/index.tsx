@@ -7,6 +7,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals.ts';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import sotre from './store/index'
 //index에서 QueryClient생성
 const queryClient = new QueryClient();
 
