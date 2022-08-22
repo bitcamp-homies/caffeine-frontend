@@ -3,9 +3,15 @@ import { ReactComponent as LikeIcon } from './svg/heart-svgrepo-com.svg'
 import { ReactComponent as InfoIcon } from './svg/info-svgrepo-com.svg'
 import { ReactComponent as FilLikeIcon } from './svg/fill-heart-svgrepo-com.svg'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 const CafeList = ({ filterData, setHoverCafe }) => {
   let DetailLink
+
+  const [like, setLike] = useState(false)
+  const toggleLike = () => {
+    setLike(!like)
+  }
 
   return (
     <ul className="h-[440px] w-full overflow-scroll overflow-x-hidden lg:w-[28rem] xl:w-[35rem]">
@@ -25,9 +31,10 @@ const CafeList = ({ filterData, setHoverCafe }) => {
                 </div>
               </div>
               <div>
-                <button className="relative ml-6 h-4 w-4">
-                  <LikeIcon fill="#dd9c4f" />
+                <button className="relative ml-6 h-4 w-4" onClick={toggleLike}>
+                  {like ? <LikeIcon fill="#dd9c4f" /> : <FilLikeIcon />}
                 </button>
+
                 <Link to={DetailLink}>
                   <button className="relative ml-6 h-4 w-4">
                     <InfoIcon fill="#dd9c4f" />
