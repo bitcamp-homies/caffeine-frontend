@@ -1,6 +1,7 @@
 //@ts-nocheck
 import { ReactComponent as LikeIcon } from './svg/heart-svgrepo-com.svg'
 import { ReactComponent as InfoIcon } from './svg/info-svgrepo-com.svg'
+import { ReactComponent as FilLikeIcon } from './svg/fill-heart-svgrepo-com.svg'
 import { Link } from 'react-router-dom'
 
 const CafeList = ({ filterData, setHoverCafe }) => {

@@ -14,10 +14,11 @@ const CafeDetail = () => {
     'listAllMybatis',
     listAllMybatis,
   )
-  const [LocInfo ,setLocInfo] = React.useState([])
+  const [LocInfo, setLocInfo] = React.useState([])
   const [userLong, setUserLong] = React.useState(0)
   const [userLat, setUserLat] = React.useState(0)
   const cafedata = data?.data.filter((item) => item.cafe_name === cafename)
+  const Locdata = LocInfo.filter((item) => item.cafe_name === cafename)
 
   const getCafeListAll = (userLocation) => {
     axios
@@ -28,6 +29,7 @@ const CafeDetail = () => {
         },
       })
       .then((res) => {
+        console.log(res.data)
         setLocInfo(res.data)
       })
       .catch((err) => {
@@ -57,10 +59,10 @@ const CafeDetail = () => {
   React.useEffect(() => {
     getUserLocationAndGetCafeList()
   }, [])
-  
+
   return (
     <div className="h-128 basis-full lg:flex lg:basis-2/5 lg:flex-col">
-      <div className="w-full lg:w-[28rem] xl:w-[35rem] px-4">
+      <div className="w-full px-4 lg:w-[28rem] xl:w-[35rem]">
         <Link to="/store">
           <button className="mt-3">
             <XIcon />
@@ -111,7 +113,9 @@ const CafeDetail = () => {
           <h3 className="text-bold bg-gray-300 px-4 text-base">REVIEW</h3>
           <div className="px-4 pt-4 pb-5">
             <p>
-
+              {Locdata.map((item,index) => {
+                return <span key={index}>{Math.round(item.distance * 10) / 10}</span>
+              })}
             </p>
           </div>
 
@@ -124,7 +128,8 @@ const CafeDetail = () => {
             </p>
             <button
               className="ml-4 h-8 w-40 rounded-full border-2 border-green-800 text-center text-green-800"
-              type="submit"
+              type="button"
+              onClick={() => findLoad()}
             >
               Get Location
             </button>
