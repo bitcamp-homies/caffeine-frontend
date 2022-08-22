@@ -5,8 +5,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals.ts';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import rootReducer from './store';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 //index에서 QueryClient생성
