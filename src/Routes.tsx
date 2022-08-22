@@ -32,7 +32,7 @@ const MainRoutes = () => {
 
         <Route path='order' element={ <Order /> }>
           <Route path='cafes' element= {<AllCafes /> }/>
-          <Route path='cafes/location' element= {<AllCafesLocation /> }/>
+          <Route path="cafes/:address2" element= {<AllCafesLocation /> }/>
           <Route path='cafes/menu' element={ <AllProducts /> }/>
           <Route path='cafes/menu/hot-coffees' element={ <AllDetails />}/>
           <Route path='featured' element={ <Featured /> } />

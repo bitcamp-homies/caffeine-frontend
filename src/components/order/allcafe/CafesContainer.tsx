@@ -5,13 +5,7 @@ import Cafes from './cafesRsc/Cafes'
 import { CafeProps } from './Interfaces'
 
 const CafesContainer = (_cafesData: CafeProps[]) => {
-  {
-    /* <div>{cafesData.map(post => (
-    <li key={post.cafe_id}>{post.cafe_name}</li>
-  ))}
-  </div>
-   */
-  }
+
   return (
     <>
       <div>
@@ -19,12 +13,7 @@ const CafesContainer = (_cafesData: CafeProps[]) => {
           <div className="text-bold pb-4 pt-5 text-3xl font-bold">cafes</div>
           <div className="pb-2 text-xl font-bold">Gang-nam</div>
           <hr />
-          <div>
-            {_cafesData.map((post) => (
-              <li key={post.cafe_id}>{post.cafe_name}</li>
-            ))}
-          </div>
-          <Cafes />
+          <Cafes/>
         </div>
       </div>
     </>
