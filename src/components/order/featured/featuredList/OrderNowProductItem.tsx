@@ -1,11 +1,12 @@
-import React, {FC, memo, useCallback, useState} from 'react'
-
+// @ts-nocheck
+import React, {FC, memo, useCallback, useEffect, useState} from 'react'
 import Size from './Size';
 
 interface OrderNowProductItemProps {
     key: string;
     style?: string;
     setSizeCoast:number;
+    setRecommendPrice:number;
     data: {
         product_id: any;
         eng: any;
@@ -21,6 +22,7 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
     data,
     style,
     setSizeCoast,
+    setRecommendPrice,
 }) => {
   const [count, setCount] = useState(0);
 
@@ -31,7 +33,11 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
   const handleClickMinus = useCallback(() => {
     setCount((prevCount) => prevCount > 1 ? prevCount - 1 : 0);
   }, []);
-
+  
+  useEffect(()=>{
+    setRecommendPrice((data.price + setSizeCoast) * count)
+  },[count])
+  
   return (
     <div key={key}>
       <div className="mt-10 flex justify-center sm:gap-5 lg:flex-row lg:justify-start">
@@ -45,7 +51,7 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
           </div>
           <div id="totalPay" className="my-2 text-base text-gray-600 lg:ml-5">
             <p id="price" defaultValue={data.price}>
-            ₩{data.price}
+            ₩ {data.price}
             </p>
           </div>
           <button className="w-7 border border-black lg:ml-5" onClick={handleClickPlus}>

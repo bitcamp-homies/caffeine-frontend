@@ -14,6 +14,7 @@ const OrderNow = () => {
   const [data, setData] = useState([])
   const [price, setPrice] = useState(0)
   const [sizeCoast, setSizeCoast] = useState(0);
+  const [recommendPrice, setRecommendPrice] = useState(0);
     const {data : productdata,isSuccess,isError,isLoading} = useQuery(
       ['getCafeProductList',cafe_id],
       () => getCafeProductList(cafe_id),
@@ -54,7 +55,7 @@ const OrderNow = () => {
               Recommend Menu
             </span>
           </h2>
-          {isSuccess && <OrderNowProduct data={productdata} setSizeCoast={setSizeCoast}/>}
+          {isSuccess && <OrderNowProduct data={productdata} setRecommendPrice={setRecommendPrice} setSizeCoast={setSizeCoast}/>}
         </div>
       </div>
       <div className="fixed bottom-0 h-[70px] w-full bg-red-800">
