@@ -1,24 +1,40 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 
-const Size = ({data,setSizeCoast}) => {
+const Size = ({data,setSizeCoast,setRecomendCoast,count1}) => {
+
   const [size, setSize] = useState()
   const [selectsize, setSelectsize] = useState('8px')
-
+  console.log(count1)
   const clickbtn = (e) => {
     setSize(e.target.value)
     if (e.target.value === data.size1) {
       setSelectsize('8px')
       setSizeCoast(0)
+      if(count1 !== 0){
+        console.log('확인')
+        setRecomendCoast(0)
+      }
     } else if (e.target.value === data.size2) {
       setSelectsize('80px')
       setSizeCoast(500)
+      if(count1 !== 0){
+        setRecomendCoast(500)
+      }
     } else if (e.target.value === data.size3) {
       setSelectsize('152px')
       setSizeCoast(1000)
+      if(count1 !== 0){
+        setRecomendCoast(1000)
+      }
     } else if (e.target.value === data.size4) {
       setSelectsize('224px')
       setSizeCoast(1500)
+      if(count1 !== 0){
+
+        setRecomendCoast(1500)
+      }
     }
   }
   return (

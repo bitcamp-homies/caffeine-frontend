@@ -14,7 +14,9 @@ const OrderNow = () => {
   const [data, setData] = useState([])
   const [price, setPrice] = useState(0)
   const [sizeCoast, setSizeCoast] = useState(0);
-    const {data : productdate,isSuccess,isError,isLoading} = useQuery(
+  const [recomendCoast,setRecomendCoast] = useState(0)
+  const [count,setCount] = useState(0)
+    const {data : productdata,isSuccess,isError,isLoading} = useQuery(
       ['getCafeProductList',cafe_id],
       () => getCafeProductList(cafe_id),
     ) 
@@ -23,7 +25,7 @@ const OrderNow = () => {
       useEffect(()=>{
         setPrice(4000)
       },[price])
-  const data1 = productdate?.data.find((item)=> item.product_id == product_id)
+  const data1 = productdata?.data.find((item)=> item.product_id == product_id)
  
 
   return (
@@ -41,7 +43,7 @@ const OrderNow = () => {
             </p>
             <p className="mr-2 text-xl font-bold lg:text-2xl">1₩</p>
           </div>
-        {isSuccess && <Size data={data1} setSizeCoast={setSizeCoast} /> }
+        {isSuccess && <Size data={data1} setSizeCoast={setSizeCoast} setRecomendCoast={setRecomendCoast} /> }
         </div>
         <div></div>
         <div className="mx-auto w-full sm:mb-24 lg:my-10 lg:ml-32 xl:mx-0">
@@ -50,14 +52,14 @@ const OrderNow = () => {
               Recommend Menu
             </span>
           </h2>
-          {/* <OrderNowProduct data={data} /> */}
+          {isSuccess && <OrderNowProduct data={productdata} product_id={product_id} setSizeCoast={setSizeCoast} count={count} setCount={setCount} setRecomendCoast={setRecomendCoast} /> }
         </div>
       </div>
       <div className="fixed bottom-0 h-[70px] w-full bg-red-800">
         <div className="my-5 ml-5 inline-block">
           <button className="text-xl font-bold text-white">
             {
-              isSuccess && data1.price + price + sizeCoast
+              isSuccess && data1.price + price + sizeCoast + count + recomendCoast
             }
           </button>
 
