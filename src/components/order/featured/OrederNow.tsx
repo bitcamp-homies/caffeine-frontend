@@ -21,13 +21,15 @@ const OrderNow = () => {
       () => getCafeProductList(cafe_id),
     ) 
 
+      useEffect(()=>{
+        setPrice(4000)
+      },[price])
 
       useEffect(()=>{
         setPrice(4000)
       },[price])
   const data1 = productdata?.data.find((item)=> item.product_id == product_id)
- 
-
+      
   return (
     <>
       <Cafeinfo />
@@ -43,7 +45,9 @@ const OrderNow = () => {
             </p>
             <p className="mr-2 text-xl font-bold lg:text-2xl">1₩</p>
           </div>
-        {isSuccess && <Size data={data1} setSizeCoast={setSizeCoast} setRecomendCoast={setRecomendCoast} /> }
+
+        {isSuccess && <Size data={data1} setSizeCoast={setSizeCoast} /> }
+
         </div>
         <div></div>
         <div className="mx-auto w-full sm:mb-24 lg:my-10 lg:ml-32 xl:mx-0">
@@ -52,7 +56,7 @@ const OrderNow = () => {
               Recommend Menu
             </span>
           </h2>
-          {isSuccess && <OrderNowProduct data={productdata} product_id={product_id} setSizeCoast={setSizeCoast} count={count} setCount={setCount} setRecomendCoast={setRecomendCoast} /> }
+          {isSuccess && <OrderNowProduct data={productdata} setRecommendPrice={setRecommendPrice} setSizeCoast={setSizeCoast}/>}
         </div>
       </div>
       <div className="fixed bottom-0 h-[70px] w-full bg-red-800">
