@@ -19,6 +19,11 @@ const CafeDetail = () => {
   const [userLat, setUserLat] = React.useState(0)
   const cafedata = data?.data.filter((item) => item.cafe_name === cafename)
   const Locdata = LocInfo.filter((item) => item.cafe_name === cafename)
+  console.log(Locdata)
+
+  const onClick = (Loclong, Loclat) => {
+    location.href=`https://map.kakao.com/link/to/${cafename},${Loclong},${Loclat}`
+  }
 
   const getCafeListAll = (userLocation) => {
     axios
@@ -29,7 +34,6 @@ const CafeDetail = () => {
         },
       })
       .then((res) => {
-        console.log(res.data)
         setLocInfo(res.data)
       })
       .catch((err) => {
@@ -126,13 +130,16 @@ const CafeDetail = () => {
               <span></span>
               <span></span>
             </p>
-            <button
+            {Locdata.map((item,index) => {
+              return <button
               className="ml-4 h-8 w-40 rounded-full border-2 border-green-800 text-center text-green-800"
               type="button"
-              onClick={() => findLoad()}
+              onClick={() => onClick(item.longitude, item.latitude)}
             >
               Get Location
             </button>
+            })
+            }
           </div>
         </div>
       </div>
