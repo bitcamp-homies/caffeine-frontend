@@ -1,8 +1,43 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+// @ts-nocheck
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import SigninBtn from './SigninBtn'
+import { Login } from 'store/api'
+const Join = (props) => {
+  console.log("확인 : "+props.pathname)
 
-const Join = () => {
+  const [id,setId] = useState('')
+  const [password,setPassword] = useState('')
+  const navigate = useNavigate();
+  const logindata = {
+    id : id,
+    password : password
+  }
+  const validateEmail = email => { //이메일 정규식
+    const regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    return regex.test(email);
+}
+
+  const LoginBtn = () =>{
+    if(validateEmail(id) == false){
+      alert('이메일 형식으로 입력해 주세요.')
+    }else{
+      const qs = require('qs');
+      Login(qs.stringify(logindata))
+      .then((res) => {
+        if(res.data == ''){
+          alert('사용자 정보가 일치하지않습니다.')
+        }else{
+          sessionStorage.setItem("Id",res.data.email)
+          if(props.pathname == '/cards/point'){
+            navigate('/cards/list') 
+          }else{
+            navigate('/')
+          }
+        }
+      })
+    }
+  }
   return (
     <body className="bg-gradient-to-br from-green-100 to-white antialiased">
       <div className="container mx-auto px-6">
@@ -20,6 +55,7 @@ const Join = () => {
                     id="username"
                     placeholder="Please insert your username"
                     className="appearance-none rounded-lg border-2 border-gray-100 px-4 py-3 placeholder-gray-300 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                    onChange={(e)=>setId(e.target.value)}
                   />
                 </div>
                 <div id="input" className="my-5 flex w-full flex-col">
@@ -29,12 +65,13 @@ const Join = () => {
                     id="password"
                     placeholder="Please insert your password"
                     className="appearance-none rounded-lg border-2 border-gray-100 px-4 py-3 placeholder-gray-300 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                    onChange={(e)=>setPassword(e.target.value)}
                   />
                 </div>
                 <div id="button" className="my-5 flex w-full flex-col">
-                  <Link to='cardlist'>
-                    <SigninBtn />
-                  </Link>
+                  {/* <Link to='cardlist'> */}
+                    <SigninBtn LoginBtn = {LoginBtn}/>
+                  {/* </Link> */}
                   <div className="mt-5 flex justify-evenly">
                     <a
                       href="#"
