@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 interface BurgerProps {
   toggled: boolean
+  toggle: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const burgerMenuClass = 'fixed bg-black h-full w-full bg-black-rgba flex flex-row-reverse z-40'
