@@ -6,27 +6,18 @@ import { useQuery } from 'react-query'
 import { Link, useParams } from 'react-router-dom'
 import Cafeinfo from './featuredList/Cafeinfo'
 import OrderNowProduct from './featuredList/OrderNowProduct'
-
+import { getCafeProductList } from 'store/api'
 
 import Size from './featuredList/Size'
 const OrderNow = () => {
   const { cafe_id, product_id } = useParams()
   const [data, setData] = useState([])
 
-  useEffect(() => {
-    const efg = getCafeProductList()
-    setData(efg)
-    console.log(efg)
-  }, [])
+  getCafeProductList(cafe_id , product_id)
+  .then((res) => {
+    setData(res.data);
+  })
   
-  async function getCafeProductList() {
-    const response = await axios.get(`http://localhost:8080/order/getProduct`, {
-      params: {
-        cafe_id: cafe_id,
-      },
-    })
-    return response.data
-  }
 
 
 
