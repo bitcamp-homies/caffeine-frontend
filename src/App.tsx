@@ -1,10 +1,11 @@
-
+// @ts-nocheck
 import React, { useState } from 'react'
 import Logo from './components/Logo'
 import MapMarker from './components/MapMarker'
 import { Squash as Hamburger } from 'hamburger-react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import MainRoutes from 'Routes';
+import BurgerMenu from 'components/navbar/BurgerMenu'
 
 function App() {
   const [isOpen, setOpen] = useState(false)
@@ -22,8 +23,15 @@ function App() {
           <Hamburger
             color="#787878"
             size={20}
-            toggled={isOpen}
-            toggle={setOpen}
+            onToggle={isOpen => {
+              if (isOpen) {
+                setOpen(true)
+                console.log('setOpen: ' + isOpen)
+              } else {
+                setOpen(false)
+                console.log('setOpen: ' + isOpen)
+              }
+            }}
           />
         </div>
         <div id="desktopNav" className="hidden w-full flex-row md:flex">
@@ -48,7 +56,8 @@ function App() {
           </div>
         </div>
       </nav>
-      <MainRoutes/>
+      <BurgerMenu toggled={isOpen}/>
+      <MainRoutes />
     </>
   );
 }
