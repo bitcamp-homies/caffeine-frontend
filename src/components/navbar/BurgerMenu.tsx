@@ -4,7 +4,7 @@ interface BurgerProps {
   toggled: boolean
 }
 
-const burgerMenuClass = 'fixed z-20 bg-black h-full w-full bg-black-rgba flex flex-row'
+const burgerMenuClass = 'fixed bg-black h-full w-full bg-black-rgba flex flex-row-reverse'
 
 const BurgerMenu = (props :BurgerProps) => {
   return (
