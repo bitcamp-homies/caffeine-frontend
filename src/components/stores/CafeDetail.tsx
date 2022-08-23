@@ -19,7 +19,7 @@ const CafeDetail = () => {
   const [userLat, setUserLat] = React.useState(0)
   const cafedata = data?.data.filter((item) => item.cafe_name === cafename)
   const Locdata = LocInfo.filter((item) => item.cafe_name === cafename)
-  console.log(Locdata)
+  //console.log(Locdata)
 
   const onClick = (Loclong, Loclat) => {
     location.href=`https://map.kakao.com/link/to/${cafename},${Loclong},${Loclat}`
