@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import CafesDetailContainer from '../CafesDetailContainer'
 import { CafeProps } from '../Interfaces'
 
 const Cafes = () => {

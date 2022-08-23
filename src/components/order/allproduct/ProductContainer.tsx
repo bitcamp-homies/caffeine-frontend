@@ -13,7 +13,7 @@ const ProductContainer = () => {
       <div className="pt-5 text-xl font-bold">Drinks</div>
       <hr />
       <Drinks />
-    </div>
+    </div> 
   )
 }
 

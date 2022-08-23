@@ -18,14 +18,14 @@ const Carousel = ({ data }) => {
   return (
     <div className="carousel">
       <Slider {...settings}>
-        {img.map((item) => {
+        {img.map((item, index) => {
           test =
             'https://storage.cloud.google.com/bitcamp-caffeine.appspot.com' +
             data[0].file_path +
             item
           {
             return (
-              <div>
+              <div key={index}>
                 <img
                   src={test}
                   style={{ width: '100%', height: '24rem' }}
