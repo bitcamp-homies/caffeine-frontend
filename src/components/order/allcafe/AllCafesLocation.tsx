@@ -11,7 +11,6 @@ const AllCafesLocation = () => {
     'listAllMybatis',
     listAllMybatis,
   )
-  const data1 = data?.data.filter((item) => item.address2 == address)
   return (
     <div>
       <div className="flex flex-row gap-4">
@@ -19,7 +18,7 @@ const AllCafesLocation = () => {
         <LocaContainer  setAddress={setAddress}/>
         </div>
         <div className="basis-full font-semibold pb-4">
-         {isSuccess && <CafesDetailContainer data={data1}/>}
+         {isSuccess && <CafesDetailContainer data={data?.data.filter((item) => item.address2 == address)} isSuccess ={isSuccess} address={address}/>}
         </div>
       </div>
     </div>
