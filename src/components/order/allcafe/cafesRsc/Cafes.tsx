@@ -1,24 +1,26 @@
+// @ts-nocheck
 import axios, { AxiosResponse } from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import CafesDetailContainer from '../CafesDetailContainer'
 import { CafeProps } from '../Interfaces'
-
-const Cafes = () => {
+import { listAllMybatis } from 'store/api'
+import { useQuery } from 'react-query'
+const Cafes = ({data1}) => {
   const [cafesData, setCafesData] = useState<CafeProps[]>([])
- 
-  useEffect(() => {
-    axios
-      .get<CafeProps[]>('http://localhost:8080/cafe/listAllMybatis')
-      .then((response: AxiosResponse) => {
-        console.log(response)
-        setCafesData(response.data)
-      })
-  }, [])
- 
+  const { data, status, isFetching, isLoading, isSuccess } = useQuery(
+    'listAllMybatis',
+    listAllMybatis,
+  )
+  let data3
+  if(data1 != undefined){
+   
+  }
+
+
   return (
     <div className="grid w-auto grid-cols-1 gap-4 pt-5 text-xs md:grid-cols-2 md:text-sm">
-      {cafesData.map((post, idx) => (
+      {isSuccess && data?.data.map((post, idx) => (
         <div key={idx}>
           <Link to="../cafes/menu">
             <div className="flex h-20 flex-row items-center gap-3 bg-white md:h-28">

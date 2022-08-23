@@ -1,10 +1,11 @@
+// @ts-nocheck
 import { type } from '@testing-library/user-event/dist/type'
 import axios, { AxiosResponse } from 'axios'
 import React, { useEffect, useState } from 'react'
 import Cafes from './cafesRsc/Cafes'
 import { CafeProps } from './Interfaces'
 
-const CafesContainer = (_cafesData: CafeProps[]) => {
+const CafesContainer = () => {
 
   return (
     <>

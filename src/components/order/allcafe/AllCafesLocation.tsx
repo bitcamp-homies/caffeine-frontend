@@ -1,16 +1,25 @@
-import React from 'react';
+// @ts-nocheck
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
+import { listAllMybatis } from 'store/api';
 import CafesDetailContainer from './CafesDetailContainer';
 import LocaContainer from './LocaContainer';
 
 const AllCafesLocation = () => {
+  const [address, setAddress] = useState('')
+  const { data, status, isFetching, isLoading, isSuccess } = useQuery(
+    'listAllMybatis',
+    listAllMybatis,
+  )
+  const data1 = data?.data.filter((item) => item.address2 == address)
   return (
     <div>
       <div className="flex flex-row gap-4">
         <div className="basis-1/4 hidden lg:block">
-          <LocaContainer />
+        <LocaContainer  setAddress={setAddress}/>
         </div>
         <div className="basis-full font-semibold pb-4">
-          <CafesDetailContainer />
+         {isSuccess && <CafesDetailContainer data={data1}/>}
         </div>
       </div>
     </div>
