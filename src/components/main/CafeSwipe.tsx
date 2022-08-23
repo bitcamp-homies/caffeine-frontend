@@ -1,11 +1,55 @@
-import React from 'react'
-import { getDownloadURL, getStorage, ref } from 'firebase/storage'
-import app from 'api/firebase'
+// @ts-nocheck
 import TempIndexIcon from './TempIndexIcon'
+import axios from 'axios'
+import React from 'react'
+
+const [LocInfo, setLocInfo] = React.useState([])
+const [userLong, setUserLong] = React.useState(0)
+const [userLat, setUserLat] = React.useState(0)
+const cafedata = data?.data.filter((item) => item.cafe_name === cafename)
+const Locdata = LocInfo.filter((item) => item.cafe_name === cafename)
+//console.log(Locdata)
+
+const getCafeListAll = (userLocation) => {
+  axios
+    .get('http://localhost:8080/cafe/listAlllWithCoordMybatis', {
+      params: {
+        userLong: userLocation.long,
+        userLat: userLocation.lat,
+      },
+    })
+    .then((res) => {
+      setLocInfo(res.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+const getUserLocationAndGetCafeList = () => {
+  console.log('user loc 집어넣기')
+
+  if (navigator.geolocation) {
+    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var lat = position.coords.latitude, // 위도
+        lon = position.coords.longitude // 경도
+      console.log('사용자 위치 : ', lon, lat)
+      setUserLong(lon)
+      setUserLat(lat)
+      getCafeListAll({ long: lon, lat: lat })
+    })
+  } else {
+    // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+    console.log('위치불러오기실패...!')
+  }
+}
+
+React.useEffect(() => {
+  getUserLocationAndGetCafeList()
+}, [])
 
 const CafeSwipe = () => {
-  app.automaticDataCollectionEnabled // Initialize firebase
-  const storage = getStorage() //
 
   return (
     <div id="CafeSwipe" className="md:mx-auto md:mt-4 md:max-w-[24rem] md:shadow">
