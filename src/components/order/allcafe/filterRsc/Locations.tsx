@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { CafeProps } from '../Interfaces'
 import { cafeDistLocation } from 'store/api'
-const Locations = ({data}) => {
+const Locations = () => {
   const [locations, setLocations] = useState<CafeProps[]>([])
   useEffect(()=>{
     cafeDistLocation()
