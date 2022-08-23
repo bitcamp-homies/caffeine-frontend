@@ -1,7 +1,5 @@
 //@ts-nocheck
-import { ReactComponent as LikeIcon } from './svg/heart-svgrepo-com.svg'
 import { ReactComponent as InfoIcon } from './svg/info-svgrepo-com.svg'
-import { ReactComponent as FilLikeIcon } from './svg/fill-heart-svgrepo-com.svg'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
@@ -16,15 +14,13 @@ const CafeList = ({ filterData, setHoverCafe }) => {
   const toggleLike = () => {
     if (session === null || session === '' || session === undefined) {
       Swal.fire({
-        title: '정말로 그렇게 하시겠습니까?',
         text: 'You must sign in to add this store to your favorites.',
         icon: 'warning',
-
         showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
         confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
-        cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
-        confirmButtonText: '승인', // confirm 버튼 텍스트 지정
-        cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+        cancelButtonColor: '#00754a', // cancel 버튼 색깔 지정
+        confirmButtonText: 'Sign in', // confirm 버튼 텍스트 지정
+        cancelButtonText: 'Cancel', // cancel 버튼 텍스트 지정
 
         reverseButtons: true, // 버튼 순서 거꾸로
       }).then((result) => {
@@ -35,7 +31,7 @@ const CafeList = ({ filterData, setHoverCafe }) => {
           Swal.fire('승인이 완료되었습니다.', '화끈하시네요~!', 'success')
         }
       })
-    } else null//setLike(!like)
+    } else setLike(!like)
   }
 
   return (
@@ -57,7 +53,7 @@ const CafeList = ({ filterData, setHoverCafe }) => {
               </div>
               <div>
                 <button className="relative ml-6 h-4 w-4" onClick={toggleLike}>
-                  <CafeLikeIcon index={index} item={item}/>
+                  <CafeLikeIcon index={index} item={item} />
                 </button>
 
                 <Link to={DetailLink}>
