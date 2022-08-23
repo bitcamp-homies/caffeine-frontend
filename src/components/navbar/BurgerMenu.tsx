@@ -1,17 +1,24 @@
 import React, { useState } from 'react'
+import { motion, useCycle } from 'framer-motion'
 
 interface BurgerProps {
   toggled: boolean
   toggle: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const burgerMenuClass = 'block'
-
 const BurgerMenu = (props: BurgerProps) => {
+  const isOpen = props.toggled
+  const setOpen = props.toggle
+
   return (
-    <div id="burgerMenu" className={props.toggled ? burgerMenuClass : 'hidden'}>
+    <div id="burgerMenu" className={isOpen ? 'block' : 'hidden'}>
       <div className="fixed z-40 flex h-full w-full flex-row-reverse bg-black bg-black-rgba">
-        <div className="basis-10/12 bg-white px-2 pt-10">
+        <motion.div
+          className="basis-10/12 bg-white px-2 pt-10"
+          animate={{ x: 0 }}
+          initial={{ x: 500 }}
+          transition={{ delay: 1, ease: "linear" }}
+        >
           <ul>
             <li className="mb-8 px-6 text-2xl">Order</li>
             <li className="mb-8 px-6 text-2xl">Cards</li>
@@ -26,7 +33,7 @@ const BurgerMenu = (props: BurgerProps) => {
               Join now
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   )
