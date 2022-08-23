@@ -13,7 +13,7 @@ const MemberWrite = () => {
   const [RePassword, setRePassword] = useState('')
   const [Name, setName] = useState('')
   const [UserType, setUserType] = useState(null)
-  const [BusinessNum, setBusinessNum] = useState(null)
+  const [BusinessNum, setBusinessNum] = useState(0)
   const [BusinessName, setBusinessName] = useState(null)
   const [BusinessAddress, setBusinessAddress] = useState(null)
   const [Insta_Account, setInsta_Account] = useState(null)
