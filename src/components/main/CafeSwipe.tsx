@@ -4,34 +4,19 @@ import app from 'api/firebase'
 import TempIndexIcon from './TempIndexIcon'
 
 const CafeSwipe = () => {
-  //Firebase 불러오기 (import from "firebase/storage")
   app.automaticDataCollectionEnabled // Initialize firebase
   const storage = getStorage() //
 
-  /*
-  // 이미지 URL 불러오기
-  const gsReference = ref(storage, 'gs://bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-1.jpg')
-  const gsReference2 = ref(storage, 'gs://bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-profile.jpg')
-  
-  // getDownloadURL() 메서드는 Promise를 호출함에 따라 .then으로 반환된 URL(string)을 가공해야함
-  getDownloadURL(gsReference).then((img) => {
-    const imgUrl = document.getElementById("img1")
-    imgUrl?.setAttribute('src', img)
-  })
-  
-  개선사항: setAttribute가 아닌 jsx(return 내부)에서 반환된 URL값으로 요소를 생성하는 방법을 고안해야할듯...
-  */
-
   return (
-    <div id="CafeSwipe" className="">
-      <div className="h-3/5">
+    <div id="CafeSwipe" className="md:mx-auto md:mt-4 md:max-w-[24rem] md:shadow">
+      <div className="">
         <img
           id="img1"
           src="https://storage.googleapis.com/bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-1.jpg"
-          className="h-full w-full object-contain"
+          className="max-h-96 w-full object-contain"
         />
       </div>
-      <div id="cafe_profile" className="flex flex-col items-center px-5">
+      <div id="cafe_profile" className="flex flex-col items-center px-5 md:pb-6">
         <div id="head" className="flex flex-row border-b py-4">
           <div>
             <div id="profile_img" className="relative pr-6">
