@@ -32,7 +32,7 @@ function App() {
               <Link to="/order/cafes">ORDER</Link>
             </li>
             <li className="mr-7 inline-block">
-            <Link to="/cards">CARDS</Link>
+            <Link to="/cards/point">CARDS</Link>
             </li>
             <li className="inline-block">
               <button>GIFT</button>
