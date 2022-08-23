@@ -75,7 +75,7 @@ const MapContainer = ({
   hoverCafe,
   setHoverCafe,
 }) => {
-  console.log('MapContainter... props 확인...', userLocation)
+  //console.log('MapContainter... props 확인...', userLocation)
   const setMarkerUserLocationOnMap = (map) => {
     // console.log('Map Container... setMarkerUserLocationOnMap... userLocation : ', userLocation.lon, userLocation,lat);
     var locPosition = new window.kakao.maps.LatLng(

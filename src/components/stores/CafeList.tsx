@@ -6,11 +6,13 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import CafeLikeIcon from './CafeLikeIcon'
 
 const CafeList = ({ filterData, setHoverCafe }) => {
   let DetailLink
   const session = sessionStorage.getItem('Id')
-  const [like, setLike] = useState(false)
+
+  const [check, setCheck] = useState([])
   const toggleLike = () => {
     if (session === null || session === '' || session === undefined) {
       Swal.fire({
@@ -33,7 +35,7 @@ const CafeList = ({ filterData, setHoverCafe }) => {
           Swal.fire('승인이 완료되었습니다.', '화끈하시네요~!', 'success')
         }
       })
-    } else setLike(!like)
+    } else null//setLike(!like)
   }
 
   return (
@@ -55,7 +57,7 @@ const CafeList = ({ filterData, setHoverCafe }) => {
               </div>
               <div>
                 <button className="relative ml-6 h-4 w-4" onClick={toggleLike}>
-                  {like ? <LikeIcon fill="#dd9c4f" /> : <FilLikeIcon />}
+                  <CafeLikeIcon index={index} item={item}/>
                 </button>
 
                 <Link to={DetailLink}>
