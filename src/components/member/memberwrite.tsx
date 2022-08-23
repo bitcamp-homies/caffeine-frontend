@@ -13,6 +13,9 @@ const MemberWrite = () => {
   const [RePassword, setRePassword] = useState('')
   const [Name, setName] = useState('')
   const [UserType, setUserType] = useState(null)
+  const [BusinessNum, setBusinessNum] = useState(null)
+  const [BusinessName, setBusinessName] = useState(null)
+  const [BusinessAddress, setBusinessAddress] = useState(null)
   const [Insta_Account, setInsta_Account] = useState(null)
   const nevigate = useNavigate();
   const getnickname = useQuery(
@@ -49,6 +52,9 @@ const data2 = {
   'nickname' : NickName,
   'password' : Password,
   'user_type' : UserType,
+  'business_reg_num' : BusinessNum,
+  'business_name' : BusinessName,
+  'business_address' : BusinessAddress,
   'insta_account' : Insta_Account
 }
 
