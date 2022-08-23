@@ -24,12 +24,12 @@ const SearchPlace = ({ setPlace, cafeList, setHoverCafe, setCafeList }) => {
     <div className="h-128 basis-full lg:flex lg:basis-2/5 lg:flex-col">
       <form className="inputForm pr-5 pl-14 " onSubmit={handleSubmit}>
         <div className="text-center lg:text-left">
-          <div className="my-6 inline-block w-3/4 border-b-2 border-gray-400 lg:w-64">
+          <div className="my-6 inline-block w-3/4 border-b-2 border-gray-400 lg:w-64 xl:w-96">
             <input
               placeholder="Find a store"
               onChange={onChange}
               value={inputText}
-              className="w-4/5 outline-0 lg:w-56"
+              className="w-4/5 outline-0 lg:w-56 xl:w-[22rem]"
             />
             <button>
               <img
