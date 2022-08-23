@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
+import Logo from './components/Logo'
+import MapMarker from './components/MapMarker'
+import { Squash as Hamburger } from 'hamburger-react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import { motion, useCycle } from 'framer-motion'
-import MainRoutes from 'Routes';
-import BurgerMenu from 'components/navbar/BurgerMenu'
-import MainNavBar from 'components/navbar/MainNavBar'
-import Logo from 'components/Logo';
-import Hamburger from 'hamburger-react';
-import MapMarker from 'components/MapMarker';
+import MainRoutes from 'Routes'
 
 function App() {
   const [isOpen, setOpen] = useState(false)
-  const [openBurger, openBurgerCycle] = useCycle(false, true)
 
   return (
     <>
@@ -35,28 +31,29 @@ function App() {
               <Link to="/order/cafes">ORDER</Link>
             </li>
             <li className="mr-7 inline-block">
-            <Link to="/cards/point">CARDS</Link>
+              <Link to="/cards/point">CARDS</Link>
             </li>
             <li className="inline-block">
               <button>GIFT</button>
             </li>
           </ul>
-          <div className='ml-auto flex flex-row flex-shrink-0 self-center'>
-            <Link to="/store" className='flex flex-row self-center'>
+          <div className="ml-auto flex flex-shrink-0 flex-row self-center">
+            <Link to="/store" className="flex flex-row self-center">
               <MapMarker />
-              <span className='ml-4 mr-10 font-semibold'>Find a store</span>
+              <span className="ml-4 mr-10 font-semibold">Find a store</span>
             </Link>
-            <button className='px-4 py-1.5 border border-black rounded-full font-semibold'><Link to="login">Sign in</Link></button>
-            <button className='ml-4 px-4 py-1.5 border border-black bg-black text-white rounded-full font-semibold'><Link to="/member">Join now</Link></button>
+            <button className="rounded-full border border-black px-4 py-1.5 font-semibold">
+              <Link to="login">Sign in</Link>
+            </button>
+            <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
+              <Link to="/member">Join now</Link>
+            </button>
           </div>
         </div>
       </nav>
-      <MainRoutes/>
-      <MainNavBar toggled={isOpen} toggle={setOpen}/>
-      <BurgerMenu toggled={isOpen} toggle={setOpen}/>
       <MainRoutes />
     </>
-  );
+  )
 }
 
 export default App

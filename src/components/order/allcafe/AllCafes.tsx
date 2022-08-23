@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
 import CafesContainer from './CafesContainer';
@@ -9,7 +8,7 @@ import { listAllMybatis } from 'store/api';
 import { useQuery } from 'react-query';
 //AllCafes : Parent
 //Cafes Container : Child
-//cafesRsc.Cafes : Grand Child 
+// cafesRsc.Cafes : Grand Child 
 const AllCafes = () => {
   const [cafesData, setCafesData] = useState<CafeProps[]>([])
   const [address, setAddress] = useState('')

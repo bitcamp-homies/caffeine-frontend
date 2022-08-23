@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { listAllMybatis } from 'store/api';
