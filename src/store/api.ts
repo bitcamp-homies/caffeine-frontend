@@ -11,6 +11,11 @@ export const listAllMybatis = () =>{
     return temp;
 }
 
+export const cafeDistLocation = () =>{
+    const temp = api.get('/cafe/cafeDistLocation');
+    return temp;
+}
+
 export const NickNameCheck = (NickName) =>{
     const temp = api.get('/cafe/NickNameCheck',{
         params : {

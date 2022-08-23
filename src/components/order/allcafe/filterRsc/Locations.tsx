@@ -2,11 +2,16 @@
 
 import axios, { AxiosResponse } from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { CafeProps } from '../Interfaces'
 
-const Locations = (cafesData) => {
- 
+import { cafeDistLocation } from 'store/api'
+const Locations = () => {
+  const [locations, setLocations] = useState<CafeProps[]>([])
+  useEffect(() => {
+    cafeDistLocation().then((res) => setLocations(res.data))
+  }, [])
+  
   return (
     <div>
       {locations.map((post) => (
