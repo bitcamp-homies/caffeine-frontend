@@ -72,7 +72,6 @@ const CafeDetail = () => {
             <XIcon />
           </button>
         </Link>
-
         <div className="pt-2 pb-5 text-center">
           {isSuccess && <Carousel data={cafedata} />}
         </div>
