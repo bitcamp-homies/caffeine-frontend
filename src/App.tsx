@@ -6,13 +6,12 @@ import BurgerMenu from 'components/navbar/BurgerMenu'
 import MainNavBar from 'components/navbar/MainNavBar'
 
 function App() {
-  const [isOpen, setOpen] = useState(false)
-  const [openBurger, openBurgerCycle] = useCycle(false, true)
+  const [isBurger, burgerCycle] = useCycle(false, true)
 
   return (
     <>
-      <MainNavBar toggled={isOpen} toggle={setOpen}/>
-      <BurgerMenu toggled={isOpen} toggle={setOpen}/>
+      <MainNavBar burgered={isBurger} burger={burgerCycle}/>
+      <BurgerMenu burgered={isBurger} burger={burgerCycle}/>
       <MainRoutes />
     </>
   );
