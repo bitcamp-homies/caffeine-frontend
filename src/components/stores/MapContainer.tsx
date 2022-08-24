@@ -31,11 +31,11 @@ const MapContainer = ({
 
   const displayMarker = (locPosition, message, map) => {
     // 마커를 생성합니다
-    var infowindow;
-    var imageSrc = 'img/current_location_green.svg'; // 마커이미지의 주소입니다    
-    var imageSize = new kakao.maps.Size(30, 30); // 마커이미지의 크기입니다
+    var infowindow
+    var imageSrc = 'img/current_location_green.svg' // 마커이미지의 주소입니다
+    var imageSize = new kakao.maps.Size(30, 30) // 마커이미지의 크기입니다
     // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize)
 
     var marker = new window.kakao.maps.Marker({
       map: map,
@@ -76,12 +76,12 @@ const MapContainer = ({
     var coords = new window.kakao.maps.LatLng(
       aCafeData.latitude,
       aCafeData.longitude,
-    );
+    )
 
-    var imageSrc = 'img/map_dot_green.svg'; // 마커이미지의 주소입니다    
-    var imageSize = new kakao.maps.Size(18, 18); // 마커이미지의 크기입니다
+    var imageSrc = 'img/map_dot_green.svg' // 마커이미지의 주소입니다
+    var imageSize = new kakao.maps.Size(18, 18) // 마커이미지의 크기입니다
     // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize)
 
     var cafeMarker = new window.kakao.maps.Marker({
       map: map,
@@ -90,7 +90,25 @@ const MapContainer = ({
       clickable: true,
     })
 
+    //cafe_name으로 title 설정해두고 marker click 했을 때 getTitle해서 title로 cafeList에서 focus 맞추기 + pin 모양변경시키기
+    cafeMarker.setTitle(aCafeData.cafe_name)
 
+    var hoverMarkerImage = new kakao.maps.MarkerImage(
+      'img/map_pin_green.svg',
+      new kakao.maps.Size(30, 30),
+    )
+    
+    kakao.maps.event.addListener(cafeMarker, 'mouseover', function () {
+      cafeMarker.setImage(hoverMarkerImage);
+    })
+
+    kakao.maps.event.addListener(cafeMarker, 'mouseout', function () {
+      cafeMarker.setImage(markerImage);
+    })
+
+    kakao.maps.event.addListener(cafeMarker, 'click', function () {
+      alert(cafeMarker.getTitle())
+    })
 
     cafeMarkers = [...cafeMarkers, cafeMarker]
   }
@@ -100,12 +118,12 @@ const MapContainer = ({
       cafeData.latitude,
       cafeData.longitude,
     )
-    
+
     var content = `
       <div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-none drop-shadow-lg border-[#007f00] mb-9 text-black font-semibold text-[14px]'>
         ${cafeData.cafe_name}
       </div>
-    `;
+    `
 
     customOverlay = new kakao.maps.CustomOverlay({
       position: coords,
@@ -148,7 +166,7 @@ const MapContainer = ({
 
   React.useEffect(() => {
     customOverlay.setMap(null)
-    if(hoverCafe.cafe_id > 0){
+    if (hoverCafe.cafe_id > 0) {
       setHoverCafeOverlay(hoverCafe, map)
     }
   }, [hoverCafe])
