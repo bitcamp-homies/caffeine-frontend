@@ -11,13 +11,13 @@ const BurgerMenu = (props: BurgerProps) => {
   const burgerCycle = props.burger
 
   return (
-    <div id="burgerMenu" className={isBurger ? 'block' : 'hidden'}>
+    <div id="burgerMenu">
       <div className="fixed z-40 flex h-full w-full flex-row-reverse bg-black bg-black-rgba">
         <motion.div
           className="basis-10/12 bg-white px-2 pt-10"
           animate={{ x: 0 }}
-          initial={{ x: 500 }}
-          transition={{ delay: 1, ease: "linear" }}
+          initial={{ x: 350 }}
+          transition={{ ease: 'linear' }}
           onTap={() => burgerCycle}
         >
           <ul>
