@@ -5,13 +5,13 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 interface BurgerProps {
-  toggled: boolean
-  toggle: React.Dispatch<React.SetStateAction<boolean>>
+  burgered: boolean
+  burger: Function
 }
 
 const MainNavBar = (props :BurgerProps) => {
-  const isOpen = props.toggled
-  const setOpen = props.toggle
+  const isBurger = props.burgered
+  const burgerCycle = props.burger
 
   return (
     <nav
@@ -25,11 +25,11 @@ const MainNavBar = (props :BurgerProps) => {
         <Hamburger
           color="#787878"
           size={20}
-          onToggle={(isOpen) => {
-            if (isOpen) {
-              setOpen(true)
+          onToggle={(isBurger) => {
+            if (isBurger) {
+              burgerCycle(true)
             } else {
-              setOpen(false)
+              burgerCycle(false)
             }
           }}
         />

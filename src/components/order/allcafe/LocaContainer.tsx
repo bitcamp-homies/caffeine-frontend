@@ -18,4 +18,4 @@ const LocaContainer = ({setAddress}) => {
   )
 }
 
-export default LocaContainer
+export default LocaContainer;
