@@ -18,7 +18,7 @@ const MapContainer = ({
   hoverCafe,
   setHoverCafe,
 }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const setMarkerUserLocationOnMap = (userLocation, map) => {
     var locPosition = new window.kakao.maps.LatLng(
@@ -110,29 +110,26 @@ const MapContainer = ({
     })
 
     kakao.maps.event.addListener(cafeMarker, 'click', function () {
-      customOverlay.setMap(null);
-      cafeMarker.setImage(hoverMarkerImage);
-      map.setCenter(cafeMarker.getPosition());
-      map.setLevel(4, {
-        animate: {
-          duration: 500
-        }
-      });
+      customOverlay.setMap(null)
 
-      navigate(`/store/${aCafeData.cafe_name}`);
+      setHoverCafe(
+        cafeList.find((item) => item.cafe_name === cafeMarker.getTitle()),
+      )
+
+      navigate(`/store/${aCafeData.cafe_name}`)
     })
 
     cafeMarkers = [...cafeMarkers, cafeMarker]
   }
 
-  const setHoverCafeOverlay = (cafeData, map) => {
+  const setHoverCafeOverlay = (cafeData, map, fontSize) => {
     var coords = new window.kakao.maps.LatLng(
       cafeData.latitude,
       cafeData.longitude,
     )
 
     var content = `
-      <div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-none drop-shadow-lg border-[#007f00] mb-9 text-black font-semibold text-[14px]'>
+      <div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-none drop-shadow-lg border-[#007f00] mb-9 text-black font-semibold text-[${fontSize}px]'>
         ${cafeData.cafe_name}
       </div>
     `
@@ -147,13 +144,13 @@ const MapContainer = ({
 
   React.useEffect(() => {
     // map 렌더링
-    console.log('map렌더링 되나유~?');
     const container = document.getElementById('myMap')
     const options = {
       center: new window.kakao.maps.LatLng(37.4923615, 127.0292881),
       level: 7,
     }
     map = new window.kakao.maps.Map(container, options)
+
     // 맵 렌더링
   }, [])
 
@@ -177,8 +174,26 @@ const MapContainer = ({
 
   React.useEffect(() => {
     customOverlay.setMap(null)
+    if (hoverCafe.cafe_id === 0) {
+      map.setCenter(
+        new window.kakao.maps.LatLng(userLocation.lat, userLocation.lon),
+      )
+      map.setLevel(7, {
+        animate: {
+          duration: 500,
+        },
+      })
+    }
     if (hoverCafe.cafe_id > 0) {
-      setHoverCafeOverlay(hoverCafe, map)
+      setHoverCafeOverlay(hoverCafe, map, 16)
+      map.setCenter(
+        new window.kakao.maps.LatLng(hoverCafe.latitude, hoverCafe.longitude),
+      )
+      map.setLevel(4, {
+        animate: {
+          duration: 500,
+        },
+      })
     }
   }, [hoverCafe])
 
