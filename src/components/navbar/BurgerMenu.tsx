@@ -2,22 +2,23 @@ import React, { useState } from 'react'
 import { motion, useCycle } from 'framer-motion'
 
 interface BurgerProps {
-  toggled: boolean
-  toggle: React.Dispatch<React.SetStateAction<boolean>>
+  burgered: boolean
+  burger: Function
 }
 
 const BurgerMenu = (props: BurgerProps) => {
-  const isOpen = props.toggled
-  const setOpen = props.toggle
+  const isBurger = props.burgered
+  const burgerCycle = props.burger
 
   return (
-    <div id="burgerMenu" className={isOpen ? 'block' : 'hidden'}>
+    <div id="burgerMenu">
       <div className="fixed z-40 flex h-full w-full flex-row-reverse bg-black bg-black-rgba">
         <motion.div
           className="basis-10/12 bg-white px-2 pt-10"
           animate={{ x: 0 }}
-          initial={{ x: 500 }}
-          transition={{ delay: 1, ease: "linear" }}
+          initial={{ x: 350 }}
+          transition={{ ease: 'linear' }}
+          onTap={() => burgerCycle}
         >
           <ul>
             <li className="mb-8 px-6 text-2xl">Order</li>
