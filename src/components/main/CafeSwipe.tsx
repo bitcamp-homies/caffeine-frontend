@@ -6,41 +6,81 @@ import app from 'api/firebase'
 import TempIndexIcon from './TempIndexIcon'
 import { motion } from 'framer-motion'
 import ThumbsUpLetter from './ThumbsUpLetter'
+import ThumbsDownLetter from './ThumbsDownLetter'
 
-let x = 0
+let currentX = 0
+const offsetDivider = 500
 
 const CafeSwipe = () => {
   const [likeOpacity, setLikeOpacity] = useState(0)
+  const [nopeOpacity, setNopeOpacity] = useState(0)
   const [cafeSwipeOpacity, setCafeSwipeOpacity] = useState(1)
 
+  //스와이프 opacity 변화
   const handleOpacityUpdate = (offsetX) => {
-    if (offsetX != x && offsetX % 10 > 1) {
-      setLikeOpacity(likeOpacity + (offsetX / 10000))
-      setCafeSwipeOpacity(cafeSwipeOpacity - (offsetX / 10000))
-      x = offsetX
-    }
+    if (offsetX > 0) {
+      if (offsetX > currentX) {
+        setLikeOpacity(likeOpacity + (offsetX - currentX) / offsetDivider)
+        setCafeSwipeOpacity(
+          cafeSwipeOpacity - (offsetX - currentX) / offsetDivider,
+        )
+        currentX = offsetX
+      } else {
+        setLikeOpacity(likeOpacity - (currentX - offsetX) / offsetDivider)
+        setCafeSwipeOpacity(
+          cafeSwipeOpacity + (currentX - offsetX) / offsetDivider,
+        )
+        currentX = offsetX
+      }
+    } else if (offsetX < 0) {
+      if (offsetX < currentX) {
+        setNopeOpacity(nopeOpacity + (currentX - offsetX) / offsetDivider)
+        setCafeSwipeOpacity(
+          cafeSwipeOpacity - (currentX - offsetX) / offsetDivider,
+        )
+        currentX = offsetX
+      } else {
+        setNopeOpacity(nopeOpacity - (offsetX - currentX) / offsetDivider)
+        setCafeSwipeOpacity(
+          cafeSwipeOpacity + (offsetX - currentX) / offsetDivider,
+        )
+        currentX = offsetX
+      }
+    } else return
+  }
+  //스와이프 action
+  const LikeOrNope = (offsetX) => {
+    console.log("LikeOrNope")
   }
 
   return (
     <div className="relative">
       <div
-        className="absolute inset-0 z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-blue-500"
+        id="like_box"
+        className="absolute inset-0 z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-blue-500 shadow-lg"
         style={{ opacity: likeOpacity }}
       >
         <ThumbsUpLetter />
         <p className="mb-1 text-4xl">👍🏻</p>
       </div>
+      <div
+        id="nope_box"
+        className="absolute inset-0 z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-red-500 shadow-lg"
+        style={{ opacity: nopeOpacity }}
+      >
+        <ThumbsDownLetter />
+        <p className="mb-1 text-4xl">👎🏻</p>
+      </div>
       <motion.div
         id="CafeSwipe"
         className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-4 md:max-w-[24rem]"
-        style={{ opacity: cafeSwipeOpacity}}
+        style={{ opacity: cafeSwipeOpacity }}
         drag
         dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
         dragElastic={0.7}
         dragPropagation
-        onDrag={(event, info) => 
-          handleOpacityUpdate(info.offset.x)
-        }
+        onDrag={(event, info) => handleOpacityUpdate(info.offset.x)}
+        onDragEnd={(event, info) => LikeOrNope(info.offset.x)}
       >
         <div className="">
           <img
@@ -89,7 +129,7 @@ const CafeSwipe = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-row pt-3 pb-4">
+          <div className="flex flex-row pt-3 pb-5">
             <div className="temp_index  px-6">
               <p className="font-medium tracking-widest">온도지수</p>
               <div className="flex flex-row">
