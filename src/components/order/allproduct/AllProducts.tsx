@@ -12,15 +12,14 @@ const AllProducts = () => {
     getCafesMenusAll(cafe_id)
     .then(res => SetData(res.data))
   },[cafe_id])
-
   return (
     <div>
       <div className="flex flex-row gap-4">
         <div className="basis-1/4 hidden lg:block">
-         {data !='' && <FilterContainer  data={data}/>}
+         <FilterContainer  data={data}/>
         </div>
         <div className="basis-full font-semibold pb-4">
-          {data != '' && <ProductContainer data={data}/>}
+          <ProductContainer data={data}/>
         </div>
       </div>
     </div>

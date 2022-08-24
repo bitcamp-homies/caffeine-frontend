@@ -11,7 +11,7 @@ const Cafes = ({data1}) => {
     'listAll',
     listAllMybatis,
   )
-    console.log(data)
+  
   return (
     <div className="grid w-auto grid-cols-1 gap-4 pt-5 text-xs md:grid-cols-2 md:text-sm">
       {status && data1 === undefined ? data?.data.map((post, idx) => (
