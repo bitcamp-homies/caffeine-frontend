@@ -18,7 +18,12 @@ const CafeSwipe = () => {
 
   //스와이프 opacity 변화
   const handleOpacityUpdate = (offsetX) => {
-    if (offsetX > 0) {
+    if (Math.abs(offsetX) < 30) {
+      setCafeSwipeOpacity(1)
+      setLikeOpacity(0)
+      setNopeOpacity(0)
+      currentX = offsetX
+    } else if (offsetX > 0) {
       if (offsetX > currentX) {
         setLikeOpacity(likeOpacity + (offsetX - currentX) / offsetDivider)
         setCafeSwipeOpacity(
@@ -70,7 +75,7 @@ const CafeSwipe = () => {
     <div className="relative">
       <div
         id="like_box"
-        className="absolute inset-0 z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-blue-500 shadow-lg"
+        className="absolute inset-0 -z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-blue-500 shadow-lg"
         style={{ opacity: likeOpacity }}
       >
         <ThumbsUpLetter />
@@ -78,7 +83,7 @@ const CafeSwipe = () => {
       </div>
       <div
         id="nope_box"
-        className="absolute inset-0 z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-red-500 shadow-lg"
+        className="absolute inset-0 -z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-red-500 shadow-lg"
         style={{ opacity: nopeOpacity }}
       >
         <ThumbsDownLetter />
