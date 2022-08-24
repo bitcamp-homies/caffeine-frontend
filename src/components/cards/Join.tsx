@@ -29,6 +29,8 @@ const Join = (props) => {
           alert('사용자 정보가 일치하지않습니다.')
         }else{
           sessionStorage.setItem("Id",res.data.email)
+          sessionStorage.setItem("UserType",res.data.user_type)
+          sessionStorage.setItem("NickName",res.data.nickname)
           if(props.pathname == '/cards/point'){
             navigate('/cards/list') 
           }else{
