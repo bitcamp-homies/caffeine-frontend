@@ -7,7 +7,7 @@ const CafeLikeIcon = ({ index, item }) => {
   const [like, setLike] = useState(false)
 
   const likeBtn = (checkthis) => {
-    if (checkthis.id == 'cafe_1') {
+    if (checkthis.id == 'cafe_1' && sessionStorage.getItem("Id") !== null) {
       setLike(!like)
     }
   }

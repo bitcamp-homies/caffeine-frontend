@@ -19,19 +19,13 @@ const CafeInfo = ({ cafeInfo }) => {
               item.file_path +
               item.img_file.split(',').splice(-1, 1)
             const text = item.about
-            const textTransformation = (text) => {
-                return text.split("\n").map((line) => (
-                  <>
-                    {line}
-                    <br />
-                  </>
-                ));
-              };
             return (
               <>
                 <div>
                   <div id="profile_img" className="relative pr-6">
-                    <img src={profile} alt="user avatar"
+                    <img
+                      src={profile}
+                      alt="user avatar"
                       className="h-20 w-20 rounded-full bg-contain bg-center outline outline-1 outline-gray-300"
                     ></img>
                     <button className="absolute left-14 top-0.5 rounded-full bg-orange-600 px-1 pt-2 pb-1 font-gMarketLight text-[11px] text-white">
@@ -40,16 +34,17 @@ const CafeInfo = ({ cafeInfo }) => {
                   </div>
                 </div>
                 <div className="flex flex-col" id="profile_info">
-                  <p className="text-lg font-semibold">
-                    {item.cafe_name}
+                  <p className="text-lg font-semibold">{item.cafe_name}</p>
+                  <p className="pt-1 text-sm text-gray-500">
+                    {item.address1} {item.address2} {item.address3}{' '}
+                    {item.address4}
                   </p>
                   <p className="pt-1 text-sm text-gray-500">
-                    {item.address1} {item.address2} {item.address3} {item.address4}
+                    @{item.insta_account}
                   </p>
-                  <p className="pt-1 text-sm text-gray-500">@{item.insta_account}</p>
                   <div className="h-[11.5rem] shrink">
-                    <p className="whitespace-pre-wrap mt-4 line-clamp-[9]">
-                        {item.about}
+                    <p className="mt-4 max-w-[17rem] whitespace-pre-wrap line-clamp-[9]">
+                      {text?.length > 110 ? text.substr(0, 110 - 1) + "..." : text}
                     </p>
                   </div>
                 </div>
