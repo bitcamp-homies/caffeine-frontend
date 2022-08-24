@@ -12,7 +12,7 @@ const CafesContainer = () => {
       <div>
         <div className="grid-col grid gap-5 bg-white px-6 pt-5 ">
           <div className="text-bold pb-4 pt-5 text-3xl font-bold">cafes</div>
-          <div className="pb-2 text-xl font-bold">Gang-nam</div>
+          <div className="pb-2 text-xl font-bold">All cafes</div>
           <hr />
           <Cafes/>
         </div>

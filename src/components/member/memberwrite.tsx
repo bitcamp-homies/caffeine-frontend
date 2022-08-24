@@ -11,9 +11,11 @@ const MemberWrite = () => {
   const [Email, setEmail] = useState('')
   const [Password,setPassword] = useState('')
   const [RePassword, setRePassword] = useState('')
-  const [Sung,setSung] = useState('')
   const [Name, setName] = useState('')
   const [UserType, setUserType] = useState(null)
+  const [BusinessNum, setBusinessNum] = useState(0)
+  const [BusinessName, setBusinessName] = useState(null)
+  const [BusinessAddress, setBusinessAddress] = useState(null)
   const [Insta_Account, setInsta_Account] = useState(null)
   const nevigate = useNavigate();
   const getnickname = useQuery(
@@ -45,19 +47,21 @@ const MemberWrite = () => {
 const email = validateEmail(Email)  //true false 반환 이메일 정규식
 
 const data2 = {
-  'sung' : Sung,
   'name' : Name,
   'email' : Email,
   'nickname' : NickName,
   'password' : Password,
   'user_type' : UserType,
+  'business_reg_num' : BusinessNum,
+  'business_name' : BusinessName,
+  'business_address' : BusinessAddress,
   'insta_account' : Insta_Account
 }
 
 const qs = require('qs');
 const saveMember = useMutation(data => createMember(data))
 const MemberSubmit = () =>{
-  if(emailcheck?.data?.data == 'ok' && getnickname.data?.data == 'ok' && writepassword && Sung != '' && Name != ''){
+  if(emailcheck?.data?.data == 'ok' && getnickname.data?.data == 'ok' && writepassword && Name != ''){
   console.log(data2)
     saveMember.mutate(qs.stringify(data2))
     nevigate('/')
@@ -81,29 +85,23 @@ const MemberSubmit = () =>{
       <div>
         <div className="sm-pt0 md:p-12">
           <form method="post">
-            <p className="md:text-lg"><span className="text-[#00754a]">* </span>표시는 필수 항목입니다.</p>
+            <p className="md:text-lg"><span className="text-red-800">* </span>표시는 필수 항목입니다.</p>
             <div className="pt-5 md:pt-8">
               <fieldset className="pb-10">
                 <h2 className="font-semibold text-base mb-3">개인정보</h2>
                 <div>
                   <div className="py-3 relative">
-
+                    <label class=" mx-3 font-medium text-sm"><span class="text-red-800">* </span>이름</label>
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="text" className="w-full" id="firstName" name="firstName" placeholder="* 홍" onChange={(e)=>setSung(e.target.value)}/>
+                    <input type="text" className="w-full" id="Name" name="Name" onChange={(e)=>setName(e.target.value)}/>
                     </div>
                     <div className="">
                     </div>
                   </div>
                   <div className="py-3 relative">
+                    <label class=" mx-3 font-medium text-sm"><span class="text-red-800">* </span>닉네임</label>
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="text" className="w-full" id="LastName" name="LastName" placeholder="* 길동" onChange={(e)=>setName(e.target.value)}/>
-                    </div>
-                    <div className="">
-                    </div>
-                  </div>
-                  <div className="pt-10 py-3 relative">
-                    <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="text" className="w-full" id="Nickname" name="Nickname" placeholder="* 길동이" onChange={(e) => setNickName(e.target.value)}/>
+                      <input type="text" className="w-full" id="Nickname" name="Nickname"  onChange={(e) => setNickName(e.target.value)}/>
                     </div>
                     <div className="">
                     </div>
@@ -123,44 +121,47 @@ const MemberSubmit = () =>{
                 <h2 className="font-semibold text-base mb-3">계정정보</h2>
                 <div>
                   <div className="py-3 relative">
+                    <label class=" mx-3 font-medium text-sm"><span class="text-red-800">* </span>이메일</label>
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="Email" className="w-full" id="Email" name="Email" placeholder="* 아이디(이메일)" onChange={(e)=>setEmail(e.target.value)}/>
+                      <input type="Email" className="w-full" id="Email" name="Email" onChange={(e)=>setEmail(e.target.value)}/>
                     </div>
                     <div className="">
                     </div>
                     <div className="pt-2 text-sm">
                       {
-                        email ? emailcheck?.data?.data === 'fail'? <p>사용불가능한 이메일입니다.</p> : <p>사용 가능한 이메일입니다.</p> : <p>이메일 형식에 맞게 입력해주세요.</p>
+                        email ? emailcheck?.data?.data === 'fail'? <p className='text-red-700'>사용불가능한 이메일입니다.</p> : <p className='text-blue-700'>사용 가능한 이메일입니다.</p> : <p>이메일 형식에 맞게 입력해주세요.</p>
                       }
                     </div>
                   </div>
                   <div className="py-3 relative">
+                    <label class=" mx-3 font-medium text-sm"><span class="text-red-800">* </span>비밀번호</label>
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="password" className="w-full" id="password" name="password" placeholder="* 비밀번호" onChange={(e)=>setPassword(e.target.value)}/>
+                      <input type="password" className="w-full" id="password" name="password" onChange={(e)=>setPassword(e.target.value)}/>
                     </div>
                     <div className="">
                       
                     </div>
                     <div className="pt-2 text-sm">
                       {
-                        checkpassword ? <p>사용 가능한 비밀번호 입니다.</p>
+                        checkpassword ? <p  className='text-blue-700'>사용 가능한 비밀번호 입니다.</p>
                         : <p>8~25자 길이의 비밀번호를 입력해야합니다.</p>
                       }
                     </div>
                     
                   </div>
                   <div className="py-3 relative">
+                    <label class=" mx-3 font-medium text-sm"><span class="text-red-800">* </span>비밀번호 확인</label>
                     <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                      <input type="password" className="w-full" id="password" name="password" placeholder="* 비밀번호재확인" onChange={(e)=>setRePassword(e.target.value)}/>
+                      <input type="password" className="w-full" id="password" name="password" onChange={(e)=>setRePassword(e.target.value)}/>
                     </div>
                     <div className="">
                       
                     </div>
-                    <div className="pt-2 text-sm">
+                    <div className="0 pt-2 text-sm">
                       {
                     checkpassword ? 
                         RePassword === Password ? ''
-                        : '비밀번호가 맞지않습니다.' : '비밀번호를 한번더 입력해주세요'
+                        : <p className='text-red-700'>비밀번호가 맞지않습니다.</p> : '비밀번호를 한번더 입력해주세요'
                       }
                     </div>
                     
@@ -169,7 +170,7 @@ const MemberSubmit = () =>{
               </fieldset>
               <div>
                 <div className="flex justify-end mt-6"> 
-                  <button className="bg-[#00754a] rounded-[500px] text-white text-lg font-semibold px-[18px] py-[15px] text-center" onClick={MemberSubmit} type="button">계정 생성</button>
+                  <button className="bg-red-800 rounded-[500px] text-white text-lg font-semibold px-[18px] py-[15px] text-center" onClick={MemberSubmit} type="button">계정 생성</button>
                 </div>
               </div>
             </div>

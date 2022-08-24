@@ -17,6 +17,9 @@ module.exports = {
       'sans': ['Noto Sans KR', 'system-ui'],
     },
     extend: {
+      colors: {
+        'black-rgba': 'rgba(0, 0, 0, 0.50)',
+      },
       fontFamily: {
         'gMarketLight' : 'GmarketSansLight',
         'notoSansKR' : 'Noto Sans KR',
