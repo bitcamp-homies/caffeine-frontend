@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import React, { useEffect, useState } from 'react'
 import { getDownloadURL, getStorage, ref } from 'firebase/storage'
 import app from 'api/firebase'
@@ -17,7 +15,7 @@ const CafeSwipe = () => {
   const [cafeSwipeOpacity, setCafeSwipeOpacity] = useState(1)
 
   //스와이프 opacity 변화
-  const handleOpacityUpdate = (offsetX) => {
+  const handleOpacityUpdate = (offsetX :number) => {
     if (Math.abs(offsetX) < 30) {
       setCafeSwipeOpacity(1)
       setLikeOpacity(0)
@@ -54,7 +52,7 @@ const CafeSwipe = () => {
     } else return
   }
   //스와이프 action
-  const LikeOrNope = (offsetX) => {
+  const LikeOrNope = (offsetX :number) => {
     if (offsetX > 200) {
       alert('LIKE: 즐겨찾는 카페에 등록되었습니다.')
       setCafeSwipeOpacity(1)
