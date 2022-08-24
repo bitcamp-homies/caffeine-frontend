@@ -9,7 +9,7 @@ import ThumbsUpLetter from './ThumbsUpLetter'
 import ThumbsDownLetter from './ThumbsDownLetter'
 
 let currentX = 0
-const offsetDivider = 500
+const offsetDivider = 250
 
 const CafeSwipe = () => {
   const [likeOpacity, setLikeOpacity] = useState(0)
@@ -50,7 +50,20 @@ const CafeSwipe = () => {
   }
   //스와이프 action
   const LikeOrNope = (offsetX) => {
-    console.log("LikeOrNope")
+    if (offsetX > 200) {
+      alert('LIKE: 즐겨찾는 카페에 등록되었습니다.')
+      setCafeSwipeOpacity(1)
+      setLikeOpacity(0)
+    } else if (offsetX < -200) {
+      alert('NOPE: 다른 카페를 보여줍니다.')
+      setCafeSwipeOpacity(1)
+      setNopeOpacity(0)
+    } else {
+      setCafeSwipeOpacity(1)
+      setLikeOpacity(0)
+      setNopeOpacity(0)
+    }
+    currentX = 0
   }
 
   return (
