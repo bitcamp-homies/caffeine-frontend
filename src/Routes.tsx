@@ -20,6 +20,8 @@ import Gift from 'components/cards/Gift';
 import Point from 'components/cards/Point';
 import Join from 'components/cards/Join';
 import CardList from 'components/cards/CardList';
+import WriteSelect from 'components/member/WriteSelect';
+import BusinessWrite from 'components/member/BusinessWrite';
 
 
 const MainRoutes = () => {
@@ -36,7 +38,7 @@ const MainRoutes = () => {
 
         <Route path='order' element={ <Order /> }>
           <Route path='cafes' element= {<AllCafes /> }/>
-          <Route path='cafes/location' element= {<AllCafesLocation /> }/>
+          <Route path="cafes/:address2" element= {<AllCafesLocation /> }/>
           <Route path='cafes/menu' element={ <AllProducts /> }/>
           <Route path='cafes/menu/hot-coffees' element={ <AllDetails />}/>
           <Route path='featured' element={ <Featured /> } />
@@ -45,7 +47,9 @@ const MainRoutes = () => {
         </Route>
 
         <Route path='/store' element={ <FindStore /> } />
-        <Route path='member' element={<MemberWrite/> } />
+        <Route path='member' element={<WriteSelect/> } />
+        <Route path='member/memberwrite' element={<MemberWrite/> } />
+        <Route path='member/businesswrite' element={<BusinessWrite/> } />
         <Route path="/store/:cafename" element={<FindStore/>}></Route>
         <Route path="coord" element={<CafeCoordManage />}></Route>
         <Route path="login" element={<Join/>}></Route>

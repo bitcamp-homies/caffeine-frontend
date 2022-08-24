@@ -1,18 +1,21 @@
-import React from 'react';
-import Locations from './filterRsc/Locations';
+// @ts-nocheck
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import Locations from './filterRsc/Locations'
+import { CafeProps } from './Interfaces'
 
-const LocaContainer = () => {
+const LocaContainer = ({setAddress}) => {
+  const {address2} = useParams()
+  setAddress(address2)
+
   return (
-    <div className="flex flex-col gap-4 text-center px-3 pt-5 font-semibold">
-      <div className="bg-white pt-5 text-xl">Seoul
-      <Locations/>
+    <div className="flex flex-col gap-4 px-3 pt-5 text-center font-semibold">
+      <div className="bg-white pt-5 text-xl">
+        Seoul
+        <Locations/>
       </div>
-      <div className="bg-white pt-5 text-xl">Jeju
-      <Locations/>
-      </div>
-   </div>
-  
-  );
-};
+    </div>
+  )
+}
 
 export default LocaContainer;
