@@ -48,7 +48,6 @@ const CafeCoordManage = () => {
   }
 
   const setGeoCoord = (addr2, addr3, cafe_id) => {
-    console.log('좌표 넣기...! ', addr2, addr3, cafe_id)
     geocoder.addressSearch(`${addr2} ${addr3}`, function (result, status) {
       if (status === window.kakao.maps.services.Status.OK) {
         setLongitude(result[0].x)
@@ -63,6 +62,10 @@ const CafeCoordManage = () => {
             },
           })
           .catch((err) => console.log(err))
+      }else if(status === window.kakao.maps.services.Status.ZERO_RESULT){
+        console.log('ZERO_RESULT...검색결과가 없습니다.');
+      }else if(status === window.kakao.maps.services.Status.ERROR){
+        console.log('error발생..!');
       }
     })
   }
