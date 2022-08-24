@@ -24,19 +24,24 @@ const MapContainer = ({
     )
     // kakao api는 위도 경도 순으로 입력해야하고, POINT TYPE은 경도 위도 순으로 입력해야해서 헷갈리기 쉽다
     var message =
-      '<div class="w-[150px] h-9 text-center py-2 px-1 text-[16px] bg-blue-500 text-white font-bold">내 위치</div>' // 인포윈도우에 표시될 내용입니다
+      '<div class="w-[150px] h-9 text-center py-2 px-1 text-[16px] bg-[#007f00] text-white font-bold">내 위치</div>' // 인포윈도우에 표시될 내용입니다
 
     displayMarker(locPosition, message, map)
   }
 
   const displayMarker = (locPosition, message, map) => {
     // 마커를 생성합니다
-    var infowindow
+    var infowindow;
+    var imageSrc = 'img/current_location_green.svg'; // 마커이미지의 주소입니다    
+    var imageSize = new kakao.maps.Size(30, 30); // 마커이미지의 크기입니다
+    // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
     var marker = new window.kakao.maps.Marker({
       map: map,
       position: locPosition,
       draggable: true,
+      image: markerImage,
     })
     kakao.maps.event.addListener(marker, 'dragstart', function () {
       customOverlay.setMap(null)
@@ -71,13 +76,23 @@ const MapContainer = ({
     var coords = new window.kakao.maps.LatLng(
       aCafeData.latitude,
       aCafeData.longitude,
-    )
-    var marker = new window.kakao.maps.Marker({
+    );
+
+    var imageSrc = 'img/map_dot_green.svg'; // 마커이미지의 주소입니다    
+    var imageSize = new kakao.maps.Size(18, 18); // 마커이미지의 크기입니다
+    // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+    var cafeMarker = new window.kakao.maps.Marker({
       map: map,
       position: coords,
+      image: markerImage,
+      clickable: true,
     })
 
-    cafeMarkers = [...cafeMarkers, marker]
+
+
+    cafeMarkers = [...cafeMarkers, cafeMarker]
   }
 
   const setHoverCafeOverlay = (cafeData, map) => {
@@ -86,17 +101,8 @@ const MapContainer = ({
       cafeData.longitude,
     )
     
-    console.log('cafeData 이미지 경로 뽑아보기   : ', cafeData.file_path );
-    // const profile =
-    //   'https://storage.cloud.google.com/bitcamp-caffeine.appspot.com' +
-    //   cafeData.file_path +
-    //   cafeData.img_file.split(',').splice(-1, 1);
-    // <span>
-    //   <img src=${profile} alt="cafeProfile"/>
-    // </span>
-   
     var content = `
-      <div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-green-500 border-none  mb-9 text-white font-semibold text-[12px]'>
+      <div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-none drop-shadow-lg border-[#007f00] mb-9 text-black font-semibold text-[14px]'>
         ${cafeData.cafe_name}
       </div>
     `;
