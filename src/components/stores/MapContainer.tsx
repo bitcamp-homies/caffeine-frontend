@@ -1,6 +1,7 @@
 //@ts-nocheck
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 let map
 let customOverlay = new kakao.maps.CustomOverlay({
@@ -17,6 +18,8 @@ const MapContainer = ({
   hoverCafe,
   setHoverCafe,
 }) => {
+  const navigate = useNavigate();
+
   const setMarkerUserLocationOnMap = (userLocation, map) => {
     var locPosition = new window.kakao.maps.LatLng(
       userLocation.lat,
@@ -97,17 +100,25 @@ const MapContainer = ({
       'img/map_pin_green.svg',
       new kakao.maps.Size(30, 30),
     )
-    
+
     kakao.maps.event.addListener(cafeMarker, 'mouseover', function () {
-      cafeMarker.setImage(hoverMarkerImage);
+      cafeMarker.setImage(hoverMarkerImage)
     })
 
     kakao.maps.event.addListener(cafeMarker, 'mouseout', function () {
-      cafeMarker.setImage(markerImage);
+      cafeMarker.setImage(markerImage)
     })
 
     kakao.maps.event.addListener(cafeMarker, 'click', function () {
-      alert(cafeMarker.getTitle())
+      customOverlay.setMap(null);
+      map.setLevel(4, {
+        anchor: cafeMarker.getPosition(),
+        animate: {
+          duration: 500
+        }
+      });
+
+      navigate(`/store/${aCafeData.cafe_name}`);
     })
 
     cafeMarkers = [...cafeMarkers, cafeMarker]
@@ -149,13 +160,11 @@ const MapContainer = ({
     for (var i = 0; i < cafeMarkers.length; i++) {
       cafeMarkers[i].setVisible(false)
     }
-    console.log('MapContainer...cafeMarkers before...' + cafeMarkers.length)
     if (cafeList.length > 0) {
       for (var i = 0; i < cafeList.length; i++) {
         cafeLocPin(cafeList[i], map)
       }
     }
-    console.log('MapContainer...cafeMarkers after...' + cafeMarkers.length)
   }, [cafeList])
 
   React.useEffect(() => {
