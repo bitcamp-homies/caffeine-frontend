@@ -11,6 +11,16 @@ export const listAllMybatis = () =>{
     return temp;
 }
 
+export const listBoundary3000Mybatis = (userLong,userLat) => {
+    const temp = api.get('/cafe/listBoundary3000Mybatis',{
+        params: {
+            userLong: userLong,
+            userLat: userLat
+        }
+    })
+    return temp
+}
+
 export const NickNameCheck = (NickName) =>{
     const temp = api.get('/cafe/NickNameCheck',{
         params : {

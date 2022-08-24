@@ -1,18 +1,16 @@
 // @ts-nocheck
 import TempIndexIcon from './TempIndexIcon'
-
-const CafeSwipe = () => {
-
+const CafeInfo = () => {
   return (
-    <div id="CafeSwipe" className="md:mx-auto md:mt-4 md:max-w-[24rem] md:shadow">
-      <div className="">
-        <img
-          id="img1"
-          src="https://storage.googleapis.com/bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-1.jpg"
-          className="max-h-96 w-full object-contain"
-        />
-      </div>
-      <div id="cafe_profile" className="flex flex-col items-center px-5 md:pb-6">
+    <>
+      <div
+        className="h-96 w-full bg-zinc-900 bg-[url('https://storage.googleapis.com/bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-1.jpg')] bg-contain bg-center bg-no-repeat
+      pt-2"
+      ></div>
+      <div
+        id="cafe_profile"
+        className="flex flex-col items-center px-5 md:pb-6"
+      >
         <div id="head" className="flex flex-row border-b py-4">
           <div>
             <div id="profile_img" className="relative pr-6">
@@ -38,9 +36,9 @@ const CafeSwipe = () => {
                 <br />
                 Sat - Sun 10:00~18:00
                 <br />
-                서울시 강남구 강남대로 154길19
+                서울시 강남구 강남대로 154길19
                 <br />
-                에이쓰리커피집 강남배전소
+                에이쓰리커피집 강남배전소
                 <br />
                 ⬇️온라인샵⬇️
                 <br />
@@ -49,7 +47,7 @@ const CafeSwipe = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-row pt-3">
+        <div className="flex flex-row pt-3 pb-5">
           <div className="temp_index  px-6">
             <p className="font-medium tracking-widest">온도지수</p>
             <div className="flex flex-row">
@@ -65,8 +63,7 @@ const CafeSwipe = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
-
-export default CafeSwipe
+export default CafeInfo
