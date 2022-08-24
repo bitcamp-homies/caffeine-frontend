@@ -11,7 +11,7 @@ const Drinks = ({data}) => {
     <div className="flex flex-col gap-3 pt-3 text-gray-400 font-semibold text-xs">
       {data !== undefined &&
         result.map((item) => (
-         <Link to={`./Drinks/${item}`} state={{data : data}}><div>{item}</div></Link>
+         <Link to={`/order/cafes/menu/${data[0].cafe_id}/Drinks/${item}`} state={{data : data}}><div>{item}</div></Link>
         ))
       }
     </div>
