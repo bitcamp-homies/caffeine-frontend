@@ -43,6 +43,20 @@ const CafeList = ({ filterData, setHoverCafe }) => {
             className="p-4 hover:bg-gray-100"
             key={index}
             onMouseOver={() => setHoverCafe(item)}
+            onMouseLeave={() =>
+              setHoverCafe({
+                cafe_id: 0,
+                user_id: 0,
+                cafe_name: '',
+                address1: '',
+                address2: '',
+                address3: '',
+                address4: '',
+                longitude: 0,
+                latitude: 0,
+                distance: 0,
+              })
+            }
           >
             <div className="flex justify-around space-x-4">
               <div className="w-60">
@@ -55,7 +69,6 @@ const CafeList = ({ filterData, setHoverCafe }) => {
                 <button className="relative ml-6 h-4 w-4" onClick={toggleLike}>
                   <CafeLikeIcon index={index} item={item} />
                 </button>
-
                 <Link to={DetailLink}>
                   <button className="relative ml-6 h-4 w-4">
                     <InfoIcon fill="#dd9c4f" />

@@ -1,71 +1,14 @@
 //@ts-nocheck
 
-import React from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 let map
 let customOverlay = new kakao.maps.CustomOverlay({
   position: new window.kakao.maps.LatLng(37.54699, 127.09598),
   content: '',
 })
-
-const insertUserLocation = (setUserLocation, fnc1, fnc2) => {
-  if (navigator.geolocation) {
-    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-    navigator.geolocation.getCurrentPosition(function (position) {
-      var lat = position.coords.latitude, // 위도
-        lon = position.coords.longitude // 경도
-      console.log(
-        'MapContainer...insertUserLocation....사용자 위치 : ',
-        lon,
-        lat,
-      )
-      setUserLocation({ lon: lon, lat: lat })
-      fnc1()
-      fnc2()
-    })
-  } else {
-    // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-    console.log('MapContainer...insertUserLocation....위치불러오기실패...!')
-  }
-}
-
-const setHoverCafeOverlay = (cafeData, map) => {
-  // for (var i = 0; i < customOverLaies.length; i++) {
-  //   customOverLaies[i].setMap(null)
-  // }
-
-  // customOverLaies = [];
-
-  console.log('MapCotainer...cafe 정보 : ', cafeData.cafe_name)
-  var coords = new window.kakao.maps.LatLng(
-    cafeData.latitude,
-    cafeData.longitude,
-  )
-  var content = `<div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-green-500 border-none  mb-9 text-white font-semibold text-[12px]'>${cafeData.cafe_name}</div>`
-
-  customOverlay = new kakao.maps.CustomOverlay({
-    position: coords,
-    content: content,
-  })
-
-  customOverlay.setMap(map)
-
-  // customOverLaies.push(customOverlay)
-  // for (var i = 0; i < customOverLaies.length; i++) {
-  //   customOverLaies[i].setMap(map)
-  // }
-}
-
-const cafeLocPin = (aCafeData, map) => {
-  var coords = new window.kakao.maps.LatLng(
-    aCafeData.latitude,
-    aCafeData.longitude,
-  )
-  var marker = new window.kakao.maps.Marker({
-    map: map,
-    position: coords,
-  })
-}
+var cafeMarkers = []
 
 const MapContainer = ({
   userLocation,
@@ -75,25 +18,45 @@ const MapContainer = ({
   hoverCafe,
   setHoverCafe,
 }) => {
-  //console.log('MapContainter... props 확인...', userLocation)
-  const setMarkerUserLocationOnMap = (map) => {
-    // console.log('Map Container... setMarkerUserLocationOnMap... userLocation : ', userLocation.lon, userLocation,lat);
+  const navigate = useNavigate()
+
+  const setMarkerUserLocationOnMap = (userLocation, map) => {
     var locPosition = new window.kakao.maps.LatLng(
       userLocation.lat,
       userLocation.lon,
     )
     // kakao api는 위도 경도 순으로 입력해야하고, POINT TYPE은 경도 위도 순으로 입력해야해서 헷갈리기 쉽다
     var message =
-      '<div class="w-[150px] h-9 text-center py-2 px-1 text-[16px] bg-blue-500 text-white font-bold">내 위치</div>' // 인포윈도우에 표시될 내용입니다
+      '<div class="w-[150px] h-9 text-center py-2 px-1 text-[16px] bg-[#007f00] text-white font-bold">내 위치</div>' // 인포윈도우에 표시될 내용입니다
 
     displayMarker(locPosition, message, map)
   }
 
   const displayMarker = (locPosition, message, map) => {
     // 마커를 생성합니다
+    var infowindow
+    var imageSrc = '/img/current_location_green.svg' // 마커이미지의 주소입니다
+    var imageSize = new kakao.maps.Size(30, 30) // 마커이미지의 크기입니다
+    // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize)
+
     var marker = new window.kakao.maps.Marker({
       map: map,
       position: locPosition,
+      draggable: true,
+      image: markerImage,
+    })
+    kakao.maps.event.addListener(marker, 'dragstart', function () {
+      customOverlay.setMap(null)
+      infowindow.close()
+      marker.setVisible(false)
+    })
+    //marker가 drag 되었을 때 사용자 좌표 변경 시도..!
+    kakao.maps.event.addListener(marker, 'dragend', function () {
+      setUserLocation({
+        lon: marker.getPosition().getLng(),
+        lat: marker.getPosition().getLat(),
+      })
     })
 
     var iwContent = message, // 인포윈도우에 표시할 내용
@@ -112,9 +75,74 @@ const MapContainer = ({
     map.setCenter(locPosition)
   }
 
-  React.useEffect(() => {
-    // insertUserLocation(setUserLocation, setMarkerUserLocationOnMap(map));
+  const cafeLocPin = (aCafeData, map) => {
+    var coords = new window.kakao.maps.LatLng(
+      aCafeData.latitude,
+      aCafeData.longitude,
+    )
 
+    var imageSrc = '/img/map_dot_green.svg' // 마커이미지의 주소입니다
+    var imageSize = new kakao.maps.Size(18, 18) // 마커이미지의 크기입니다
+    // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize)
+
+    var cafeMarker = new window.kakao.maps.Marker({
+      map: map,
+      position: coords,
+      image: markerImage,
+      clickable: true,
+    })
+
+    //cafe_name으로 title 설정해두고 marker click 했을 때 getTitle해서 title로 cafeList에서 focus 맞추기 + pin 모양변경시키기
+    cafeMarker.setTitle(aCafeData.cafe_name)
+
+    var hoverMarkerImage = new kakao.maps.MarkerImage(
+      '/img/map_pin_green.svg',
+      new kakao.maps.Size(30, 30),
+    )
+
+    kakao.maps.event.addListener(cafeMarker, 'mouseover', function () {
+      cafeMarker.setImage(hoverMarkerImage)
+    })
+
+    kakao.maps.event.addListener(cafeMarker, 'mouseout', function () {
+      cafeMarker.setImage(markerImage)
+    })
+
+    kakao.maps.event.addListener(cafeMarker, 'click', function () {
+      customOverlay.setMap(null)
+
+      setHoverCafe(
+        cafeList.find((item) => item.cafe_name === cafeMarker.getTitle()),
+      )
+
+      navigate(`/store/${aCafeData.cafe_name}`)
+    })
+
+    cafeMarkers = [...cafeMarkers, cafeMarker]
+  }
+
+  const setHoverCafeOverlay = (cafeData, map, fontSize) => {
+    var coords = new window.kakao.maps.LatLng(
+      cafeData.latitude,
+      cafeData.longitude,
+    )
+
+    var content = `
+      <div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-none drop-shadow-lg border-[#007f00] mb-9 text-black font-semibold text-[${fontSize}px]'>
+        ${cafeData.cafe_name}
+      </div>
+    `
+
+    customOverlay = new kakao.maps.CustomOverlay({
+      position: coords,
+      content: content,
+    })
+
+    customOverlay.setMap(map)
+  }
+
+  React.useEffect(() => {
     // map 렌더링
     const container = document.getElementById('myMap')
     const options = {
@@ -122,21 +150,52 @@ const MapContainer = ({
       level: 7,
     }
     map = new window.kakao.maps.Map(container, options)
+
     // 맵 렌더링
-
-    // 사용자 위치 map에 marker, infowindow 생성하기
-    // setMarkerUserLocationOnMap(map);
-
-    // 사용자 위치 map에 marker, infowindow 생성하기
-
-    // for (var i = 0; i < cafeList.length; i++) {
-    //   cafeLocPin(cafeList[i], map)
-    // }
   }, [])
 
-  // React.useEffect(() => {
-  //   setHoverCafeOverlay(hoverCafe, map)
-  // }, [hoverCafe])
+  React.useEffect(() => {
+    //풍혁0819 : 마커를 이동하게 된다면, 사용자의 위치가 업데이트 되고
+    for (var i = 0; i < cafeMarkers.length; i++) {
+      cafeMarkers[i].setVisible(false)
+    }
+    if (cafeList.length > 0) {
+      for (var i = 0; i < cafeList.length; i++) {
+        cafeLocPin(cafeList[i], map)
+      }
+    }
+  }, [cafeList])
+
+  React.useEffect(() => {
+    if (userLocation.lon !== 0) {
+      setMarkerUserLocationOnMap(userLocation, map)
+    }
+  }, [userLocation])
+
+  React.useEffect(() => {
+    customOverlay.setMap(null)
+    if (hoverCafe.cafe_id === 0) {
+      map.setCenter(
+        new window.kakao.maps.LatLng(userLocation.lat, userLocation.lon),
+      )
+      map.setLevel(7, {
+        animate: {
+          duration: 500,
+        },
+      })
+    }
+    if (hoverCafe.cafe_id > 0) {
+      setHoverCafeOverlay(hoverCafe, map, 16)
+      map.setCenter(
+        new window.kakao.maps.LatLng(hoverCafe.latitude, hoverCafe.longitude),
+      )
+      map.setLevel(4, {
+        animate: {
+          duration: 500,
+        },
+      })
+    }
+  }, [hoverCafe])
 
   return <div className="h-[17rem] w-full lg:h-[32rem]" id="myMap"></div>
 }
