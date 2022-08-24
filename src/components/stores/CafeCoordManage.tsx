@@ -1,14 +1,29 @@
 //@ts-nocheck
 
 import axios from 'axios'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { setCafeList } from 'store/cafeListBoundary'
 
 const CafeCoordManage = () => {
-  const [data, setData] = React.useState([])
-  const [longitude, setLongitude] = React.useState(0)
-  const [latitude, setLatitude] = React.useState(0)
-  const [userLong, setUserLong] = React.useState(0)
-  const [userLat, setUserLat] = React.useState(0)
+  const [data, setData] = useState([])
+  const [longitude, setLongitude] = useState(0)
+  const [latitude, setLatitude] = useState(0)
+  const [userLong, setUserLong] = useState(0)
+  const [userLat, setUserLat] = useState(0)
+  const options = [
+    {value: '', text: '--필터--'},
+    {value: 'cafe_name', text: '카페이름'},
+    {value: 'address1', text: '주소1(예 : 서울)'},
+    {value: 'address2', text: '주소2(예 : 강남구)'},
+  ];
+
+  const [selected, setSelected] = useState(options[0].value);
+  const [keyword, setKeyword] = useState('');
+
+  const handleChange = event => {
+    console.log(event.target.value);
+    setSelected(event.target.value);
+  };
 
   var geocoder = new window.kakao.maps.services.Geocoder()
 
@@ -80,9 +95,18 @@ const CafeCoordManage = () => {
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     getUserLocationAndGetCafeList()
   }, [])
+
+  var filteredData = data;
+  if(selected === 'cafe_name'){
+    filteredData = data.filter((item) => item.cafe_name.indexOf(keyword)>=0);
+  }else if(selected === 'address1'){
+    filteredData = data.filter((item) => item.address1.indexOf(keyword)>=0);
+  }else if(selected === 'address2'){
+    filteredData = data.filter((item) => item.address2.indexOf(keyword)>=0);
+  }
 
   return (
     <div>
@@ -99,6 +123,21 @@ const CafeCoordManage = () => {
         >
           전체 카페 좌표 최신화
         </button>
+      </div>
+      <div>
+        {selected} {keyword}
+      </div>  
+      <div className='my-2'>
+        <select value={selected} onChange={handleChange}>
+          {options.map(
+            (option, index) => (
+            <option key={index} value={option.value}>
+              {option.text}
+            </option>
+            )
+          )}
+        </select>
+        <input type="text" className='border-b-2 border-black' disabled={selected ? false : true} onChange={(event) => setKeyword(event.target.value)}/>
       </div>
       <div className="h-32">
         <table>
@@ -118,7 +157,7 @@ const CafeCoordManage = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => {
+            {filteredData.map((item, index) => {
               return (
                 <tr
                   className="border-t-2 border-green-200 text-center"
