@@ -8,11 +8,8 @@ import React from 'react'
 const CafeDetail = () => {
   const { cafename } = useParams()
 
-  const [LocInfo, setLocInfo] = React.useState([])
-  const [userLong, setUserLong] = React.useState(0)
-  const [userLat, setUserLat] = React.useState(0)
-  // const cafedata = data?.data.filter((item) => item.cafe_name === cafename)
-   const Locdata = LocInfo.filter((item) => item.cafe_name === cafename)
+  const [cafeData, setcafeData] = React.useState([])
+  const cafeInfo = cafeData.filter((item) => item.cafe_name === cafename)
 
   const onClick = (Loclong, Loclat) => {
     location.href = `https://map.kakao.com/link/to/${cafename},${Loclong},${Loclat}`
@@ -27,7 +24,7 @@ const CafeDetail = () => {
         },
       })
       .then((res) => {
-        setLocInfo(res.data)
+        setcafeData(res.data)
       })
       .catch((err) => {
         console.log(err)
@@ -35,8 +32,6 @@ const CafeDetail = () => {
   }
 
   const getUserLocationAndGetCafeList = () => {
-    console.log('user loc 집어넣기')
-
     if (navigator.geolocation) {
       // GeoLocation을 이용해서 접속 위치를 얻어옵니다
       navigator.geolocation.getCurrentPosition(function (position) {
@@ -64,7 +59,7 @@ const CafeDetail = () => {
           </button>
         </Link>
         <div className="pt-2 pb-5 text-center">
-          { LocInfo !== '' && <Carousel data={Locdata}/> }
+          {cafeData !== '' && <Carousel data={cafeInfo} />}
         </div>
 
         <div className="pt-2 text-center">
@@ -72,7 +67,7 @@ const CafeDetail = () => {
           <div className="pr-2.5 pt-4 pb-5">
             <div className="container m-auto px-8 text-gray-600 md:px-12 xl:px-6">
               <div className="rounded-xl border border-gray-100 bg-gray-50 p-6 sm:flex sm:space-x-8 sm:p-2">
-                {Locdata.map((item) => {
+                {cafeInfo.map((item) => {
                   const profile =
                     'https://storage.cloud.google.com/bitcamp-caffeine.appspot.com' +
                     item.file_path +
@@ -92,7 +87,7 @@ const CafeDetail = () => {
                 <div className="mt-4 space-y-4 text-center sm:mt-0 sm:text-left">
                   <p className="text-gray-600">
                     <span className="font-serif">"</span>
-                    {Locdata.map((item) => {
+                    {cafeInfo.map((item) => {
                       return <span key={item.cafe_id}>{item.about}</span>
                     })}
                     <span className="font-serif">"</span>
@@ -105,7 +100,7 @@ const CafeDetail = () => {
           <h3 className="text-bold bg-gray-300 px-4 text-base">REVIEW</h3>
           <div className="px-4 pt-4 pb-5">
             <p>
-              {Locdata.map((item, index) => {
+              {cafeInfo.map((item, index) => {
                 return (
                   <span key={index}>{Math.round(item.distance * 10) / 10}</span>
                 )
@@ -120,7 +115,7 @@ const CafeDetail = () => {
               <span></span>
               <span></span>
             </p>
-            {Locdata.map((item, index) => {
+            {cafeInfo.map((item, index) => {
               return (
                 <button
                   className="ml-4 h-8 w-40 rounded-full border-2 border-green-800 text-center text-green-800"
