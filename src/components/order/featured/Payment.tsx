@@ -6,7 +6,6 @@ import PaymentProduct from './paymentList/PaymentProduct'
 const payment = () => {
   const [paymentOption, setPaymentOption] = useState('1')
 
-  //@ts-ignore
   const paymentOptionHandler = (e) => {
     console.log(e.target.value)
     setPaymentOption(e.target.value)

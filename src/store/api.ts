@@ -42,3 +42,15 @@ export const Login = (login) =>{
     const temp = api.post('/cafe/Login',login)
     return temp
 }
+<<<<<<< HEAD
+=======
+
+export const getCafeProductList = (cafe_id) =>{
+    const temp = api.get(`/order/getProduct/`,{
+        params : {
+            cafe_id : cafe_id
+        }
+    })
+    return temp
+}
+>>>>>>> 60a5f0f09c1c1dc1d5a153fac326a0a44f5b3fc6

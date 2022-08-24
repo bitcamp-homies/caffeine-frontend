@@ -7,16 +7,14 @@ import { CafeProps } from '../Interfaces'
 import { listAllMybatis } from 'store/api'
 import { useQuery } from 'react-query'
 const Cafes = ({data1}) => {
-  const [cafesData, setCafesData] = useState<CafeProps[]>([])
   const { data, status, isFetching, isLoading, isSuccess } = useQuery(
-    'listAllMybatis',
+    'listAll',
     listAllMybatis,
   )
 
-
   return (
     <div className="grid w-auto grid-cols-1 gap-4 pt-5 text-xs md:grid-cols-2 md:text-sm">
-      {isSuccess && data1 === undefined ? data?.data.map((post, idx) => (
+      {status && data1 === undefined ? data?.data.map((post, idx) => (
         <div key={idx}>
           <Link to="../cafes/menu">
             <div className="flex h-20 flex-row items-center gap-3 bg-white md:h-28">

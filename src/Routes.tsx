@@ -21,12 +21,29 @@ import Point from 'components/cards/Point';
 import Join from 'components/cards/Join';
 import CardList from 'components/cards/CardList';
 
-
 const MainRoutes = () => {
   return (
-      <Routes>
-        <Route path='/' element={ <App /> } />
-        <Route index element={ <Main /> } />
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route index element={<Main />} />
+
+      <Route path="card" element={<Cardheader />}>
+        <Route path="gift" element={<Gift />} />
+        <Route path="point" element={<Point />} />
+      </Route>
+
+
+      <Route path="order" element={<Order />}>
+        <Route path="cafes" element={<AllCafes />} />
+        <Route path="cafes/location" element={<AllCafesLocation />} />
+        <Route path="cafes/menu" element={<AllProducts />} />
+        <Route path="cafes/menu/hot-coffees" element={<AllDetails />} />
+        <Route path="featured">
+          <Route index element={<Featured />} />
+          <Route path="order-now/cafe/:cafe_id">
+            <Route path="product/:product_id" element={<OrderNow />} />
+          </Route>
+        </Route>
 
         <Route path='cards' element={ <Cardheader /> }>
           <Route path='gift' element={<Gift/> } />
@@ -34,6 +51,7 @@ const MainRoutes = () => {
           <Route path='list' element={<CardList/>}/>
         </Route>
 
+<<<<<<< HEAD
         <Route path='order' element={ <Order /> }>
           <Route path='cafes' element= {<AllCafes /> }/>
           <Route path="cafes/:address2" element= {<AllCafesLocation /> }/>
@@ -42,7 +60,14 @@ const MainRoutes = () => {
           <Route path='featured' element={ <Featured /> } />
           <Route path='featured/order-now' element={<OrderNow/>}/>
           <Route path='featured/order-now/payment' element={<Payment/>}/>
+=======
+        <Route path="/order-now/cafe/:cafe_id">
+          <Route path="product/:product_id/">
+            <Route path="payment/:totalPrice" element={<Payment />} />
+          </Route>
+>>>>>>> 60a5f0f09c1c1dc1d5a153fac326a0a44f5b3fc6
         </Route>
+      </Route>
 
         <Route path='/store' element={ <FindStore /> } />
         <Route path='member' element={<MemberWrite/> } />
@@ -53,4 +78,4 @@ const MainRoutes = () => {
   );
 };
 
-export default MainRoutes;
+export default MainRoutes
