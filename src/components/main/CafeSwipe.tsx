@@ -95,13 +95,10 @@ const CafeSwipe = () => {
         onDrag={(event, info) => handleOpacityUpdate(info.offset.x)}
         onDragEnd={(event, info) => LikeOrNope(info.offset.x)}
       >
-        <div className="">
-          <img
-            id="img1"
-            src="https://storage.googleapis.com/bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-1.jpg"
-            className="max-h-96 w-full object-contain pt-2"
-          />
-        </div>
+        <div
+          className="h-96 w-full bg-contain bg-no-repeat bg-center bg-zinc-900 bg-[url('https://storage.googleapis.com/bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-1.jpg')]
+        pt-2"
+        ></div>
         <div
           id="cafe_profile"
           className="flex flex-col items-center px-5 md:pb-6"
