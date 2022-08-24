@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import SigninBtn from './SigninBtn'
 import { Login } from 'store/api'
 const Join = (props) => {
-  console.log("확인 : "+props.pathname)
 
   const [id,setId] = useState('')
   const [password,setPassword] = useState('')
