@@ -13,10 +13,20 @@ const CafeInfo = ({ cafeInfo }) => {
       >
         <div id="head" className="flex flex-row border-b pt-10 pb-4">
           {cafeInfo.map((item) => {
+            console.log(item.about)
             const profile =
               'https://storage.cloud.google.com/bitcamp-caffeine.appspot.com' +
               item.file_path +
               item.img_file.split(',').splice(-1, 1)
+            const text = item.about
+            const textTransformation = (text) => {
+                return text.split("\n").map((line) => (
+                  <>
+                    {line}
+                    <br />
+                  </>
+                ));
+              };
             return (
               <>
                 <div>
@@ -38,19 +48,8 @@ const CafeInfo = ({ cafeInfo }) => {
                   </p>
                   <p className="pt-1 text-sm text-gray-500">@{item.insta_account}</p>
                   <div className="h-[11.5rem] shrink">
-                    <p className="whitespace-pre-wrap pt-3 text-sm line-clamp-[9]">
-                      2019 로스팅 월드 챔피언이 있는 곳<br />
-                      Mon - Fri 8:00~18:00
-                      <br />
-                      Sat - Sun 10:00~18:00
-                      <br />
-                      서울시 강남구 강남대로 154길19
-                      <br />
-                      에이쓰리커피집 강남배전소
-                      <br />
-                      ⬇️온라인샵⬇️
-                      <br />
-                      m.smartstore.naver.com/a3bout
+                    <p className="whitespace-pre-wrap mt-4 line-clamp-[9]">
+                        {item.about}
                     </p>
                   </div>
                 </div>

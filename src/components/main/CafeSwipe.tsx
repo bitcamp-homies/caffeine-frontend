@@ -12,7 +12,7 @@ const offsetDivider = 250
 
 const CafeSwipe = () => {
   const [cafeData, setcafeData] = useState([])
-  let cafeInfo = cafeData.filter((item,index) => index === 10)
+  let cafeInfo = cafeData.filter((item,index) => index === 4)
   console.log(cafeInfo)
   const [likeOpacity, setLikeOpacity] = useState(0)
   const [nopeOpacity, setNopeOpacity] = useState(0)
