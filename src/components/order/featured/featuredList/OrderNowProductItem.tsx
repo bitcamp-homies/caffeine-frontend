@@ -5,7 +5,7 @@ import Size from './Size';
 interface OrderNowProductItemProps {
     key: string;
     style?: string;
-    setSizeCoast:number;
+    setSizePrice:number;
     setRecommendPrice:number;
     data: {
         product_id: any;
@@ -21,23 +21,26 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
     key,
     data,
     style,
-    setSizeCoast,
-    setRecommendPrice,
+    setSizePrice,
+    setRecommendedSizePrice,
+    setRecommendedCount,
+    setRecommendedPrice
 }) => {
   const [count, setCount] = useState(0);
-
+  
   const handleClickPlus = useCallback(() => {
-    setCount((prevCount) => prevCount + 1);
-  }, []);
+    setCount((prevCount) => prevCount + 1)
+    setRecommendedCount((item) => item+1)
+    setRecommendedPrice((item) => item+data.price)
+}, []);
 
-  const handleClickMinus = useCallback(() => {
+const handleClickMinus = useCallback(() => {
     setCount((prevCount) => prevCount > 1 ? prevCount - 1 : 0);
-  }, []);
-  
-  useEffect(()=>{
-    setRecommendPrice((data.price + setSizeCoast) * count)
-  },[count])
-  
+    setRecommendedCount((prevCount) => prevCount > 1 ? prevCount - 1 : 0);
+    setRecommendedPrice((item) => item-data.price)
+}, []);
+
+
   return (
     <div key={key}>
       <div className="mt-10 flex justify-center sm:gap-5 lg:flex-row lg:justify-start">
@@ -52,6 +55,7 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
           <div id="totalPay" className="my-2 text-base text-gray-600 lg:ml-5">
             <p id="price" defaultValue={data.price}>
             ₩ {data.price}
+           
             </p>
           </div>
           <button className="w-7 border border-black lg:ml-5" onClick={handleClickPlus}>
@@ -70,7 +74,7 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
         </div>
       </div>
       <div className="lg:min-w-[288px]">
-        {data?.category === 'Drinks' ? <Size data={data as any} setSizeCoast={setSizeCoast} /> : null}
+        {data?.category === 'Drinks' ? <Size data={data as any} setSizePrice={setSizePrice} setRecommendedSizePrice={setRecommendedSizePrice} item="100"/> : null}
       </div>
     </div>
   )
