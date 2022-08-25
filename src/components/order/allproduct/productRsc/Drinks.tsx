@@ -15,7 +15,6 @@ const Drinks = ({data}) => {
             <p>{data.name_kor}</p>
             <p>{data.name_eng}</p>
             <p>₩ {(data.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-            
           </div>
         </div>
       </Link>
