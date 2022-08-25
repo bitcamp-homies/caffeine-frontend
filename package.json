@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
     "@material-tailwind/react": "^1.2.3",
+    "@popperjs/core": "2.9.1",
     "@reduxjs/toolkit": "^1.8.4",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
