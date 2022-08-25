@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Size from './Size'
 import style from './FeaturedStyle.module.css'
 import { useParams } from 'react-router-dom'
-import OrderNowProductItem from './OrderNowProductItem'
+import OrderNowProductItem from './OrderNowProductitem'
 
 const OrderNowProduct = ({ data, setSizeCoast,setest,test,settest1,test1,setData}) => {
   const {product_id} = useParams();
