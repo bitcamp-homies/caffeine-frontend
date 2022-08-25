@@ -1,6 +1,7 @@
 // @ts-nocheck
 import Carousel from 'components/stores/Carousel'
-import TempIndexIcon from './TempIndexIcon'
+import TempIndexIcon from 'components/resources/TempIndexIcon'
+
 const CafeInfo = ({ cafeInfo }) => {
   return (
     <>
