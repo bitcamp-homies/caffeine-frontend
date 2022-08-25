@@ -71,7 +71,7 @@ const CafeList = ({ filterData, setHoverCafe }) => {
                 </button>
                 <Link to={DetailLink}>
                   <button className="relative ml-6 h-4 w-4">
-                    <InfoIcon fill="#dd9c4f" />
+                    <InfoIcon fill="#9F2042" />
                   </button>
                 </Link>
               </div>
