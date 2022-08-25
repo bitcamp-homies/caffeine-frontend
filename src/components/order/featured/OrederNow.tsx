@@ -6,7 +6,7 @@ import { useQuery } from 'react-query'
 import { Link, useParams } from 'react-router-dom'
 import Cafeinfo from './featuredList/Cafeinfo'
 import OrderNowProduct from './featuredList/OrderNowProduct'
-import { getCafeProductList } from 'store/api'
+import { getCafesMenusAll } from 'store/api'
 
 import Size from './featuredList/Size'
 const OrderNow = () => {
@@ -18,16 +18,16 @@ const OrderNow = () => {
   const[test1,settest1] = useState(0) //count
     const {data : productdata,isSuccess,isError,isLoading} = useQuery(
       ['getCafeProductList',cafe_id],
-      () => getCafeProductList(cafe_id),
+      () => getCafesMenusAll(cafe_id),
     ) 
 
       useEffect(()=>{
         setPrice(4000)
       },[price])
 
-      console.log(data+test)
 
   const data1 = productdata?.data.find((item)=> item.product_id == product_id)
+
   return (
     <>
       <Cafeinfo />

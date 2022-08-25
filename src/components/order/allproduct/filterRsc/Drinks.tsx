@@ -3,7 +3,6 @@ import React from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Drinks = ({data,cafe_name}) => {
-  let navigate = useNavigate();
   const Drinks = data.filter((item) => item.category === 'Drinks')
   const result = [...new Set( Drinks.map(item => item.subcategory))];
   return (
