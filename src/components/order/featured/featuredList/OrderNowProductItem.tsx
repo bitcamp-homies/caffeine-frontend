@@ -22,22 +22,27 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
     data,
     style,
     setSizeCoast,
-    setRecommendPrice,
+    setest,
+    settest1,
+    test,
+    test1,
+    setData
 }) => {
   const [count, setCount] = useState(0);
 
   const handleClickPlus = useCallback(() => {
-    setCount((prevCount) => prevCount + 1);
-  }, []);
+    setCount((prevCount) => prevCount + 1)
+    settest1((item) => item+1)
+    setData((item) => item+data.price)
+}, []);
 
-  const handleClickMinus = useCallback(() => {
+const handleClickMinus = useCallback(() => {
     setCount((prevCount) => prevCount > 1 ? prevCount - 1 : 0);
-  }, []);
-  
-  useEffect(()=>{
-    setRecommendPrice((data.price + setSizeCoast) * count)
-  },[count])
-  
+    settest1((prevCount) => prevCount > 1 ? prevCount - 1 : 0);
+    setData((item) => item-data.price)
+}, []);
+
+
   return (
     <div key={key}>
       <div className="mt-10 flex justify-center sm:gap-5 lg:flex-row lg:justify-start">
@@ -52,6 +57,7 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
           <div id="totalPay" className="my-2 text-base text-gray-600 lg:ml-5">
             <p id="price" defaultValue={data.price}>
             ₩ {data.price}
+           
             </p>
           </div>
           <button className="w-7 border border-black lg:ml-5" onClick={handleClickPlus}>
@@ -70,7 +76,7 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
         </div>
       </div>
       <div className="lg:min-w-[288px]">
-        {data?.category === 'Drinks' ? <Size data={data as any} setSizeCoast={setSizeCoast} /> : null}
+        {data?.category === 'Drinks' ? <Size data={data as any} setSizeCoast={setSizeCoast} setest={setest} item="100"/> : null}
       </div>
     </div>
   )
