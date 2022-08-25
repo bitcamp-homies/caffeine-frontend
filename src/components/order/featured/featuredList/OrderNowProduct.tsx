@@ -9,11 +9,11 @@ const OrderNowProduct = ({ data, setSizePrice,setRecommendedSizePrice,recommende
   const {product_id} = useParams();
   const recommended = data.data.filter((item) => item.recommended == 'Y' && item.product_id != product_id )
   return <>
-   {/*  {
+   {
       recommended.map((item) => (
         <OrderNowProductItem key={item.product_id} data={item} setRecommendedSizePrice={setRecommendedSizePrice} setSizePrice={setSizePrice} setRecommendedCount={setRecommendedCount} style={style} setRecommendedPrice={setRecommendedPrice}/>
       ))
-    } */}
+    }
   </>
 }
 

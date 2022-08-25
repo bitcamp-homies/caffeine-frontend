@@ -15,11 +15,11 @@ const Size = ({data,setSizePrice,item,setRecommendedSizePrice}) => {
       sessionStorage.setItem(`recommendedSizePrice${data.name_kor}`, recommendedSizeCoast);
       sessionStorage.setItem(`recommendedSize${data.name_kor}`, recommendedSize);
     } else{
-      sessionStorage.setItem(`mainProductSizePrice${data.name_kor}`, mainProductSizeCoast);
-      sessionStorage.setItem(`mainProductSize${data.name_kor}`, mainProductSize);
+      sessionStorage.setItem("mainProductSizePrice", mainProductSizeCoast);
+      sessionStorage.setItem("mainProductSize", mainProductSize);
     }
   },[selectsize])
-  console.log(data);
+  
   const clickbtn = (e) => {
     setSize(e.target.value)
     if (e.target.value === data.size1) {
