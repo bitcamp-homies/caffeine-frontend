@@ -32,6 +32,14 @@ const MapContainer = ({
     displayMarker(locPosition, message, map)
   }
 
+  const getDistance = (distance) => {
+    if(distance < 1000){
+      return Math.round(distance)+'m';
+    }else{
+      return Math.round(distance/100)/10+'km';
+    }
+  }
+
   const displayMarker = (locPosition, message, map) => {
     // 마커를 생성합니다
     var infowindow
@@ -129,8 +137,11 @@ const MapContainer = ({
     )
 
     var content = `
-      <div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-none drop-shadow-lg border-[#007f00] mb-9 text-black font-semibold text-[${fontSize}px]'>
+      <div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-none drop-shadow-lg mb-9 text-black font-semibold text-[${fontSize}px]'>
         ${cafeData.cafe_name}
+        <span class='text-[#9F2042]'> 
+          ${getDistance(cafeData.distance)}
+        </span>
       </div>
     `
 
