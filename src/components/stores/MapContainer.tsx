@@ -27,7 +27,7 @@ const MapContainer = ({
     )
     // kakao api는 위도 경도 순으로 입력해야하고, POINT TYPE은 경도 위도 순으로 입력해야해서 헷갈리기 쉽다
     var message =
-      '<div class="w-[150px] h-9 text-center py-2 px-1 text-[16px] bg-[#3D1308] text-white font-bold">내 위치</div>' // 인포윈도우에 표시될 내용입니다
+      '<div class="w-[150px] h-9 text-center py-2 px-1 text-[16px] bg-[#3D1308] z-10 text-white font-bold">내 위치</div>' // 인포윈도우에 표시될 내용입니다
 
     displayMarker(locPosition, message, map)
   }
@@ -137,7 +137,7 @@ const MapContainer = ({
     )
 
     var content = `
-      <div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-none drop-shadow-lg mb-9 text-black font-semibold text-[${fontSize}px]'>
+      <div class='w-[170px] h-[25px] rounded-2xl text-center bg-white drop-shadow-lg mb-9 text-black font-semibold text-[${fontSize}px]'>
         ${cafeData.cafe_name}
         <span class='text-[#9F2042]'> 
           ${getDistance(cafeData.distance)}
@@ -208,7 +208,7 @@ const MapContainer = ({
     }
   }, [hoverCafe])
 
-  return <div className="h-[17rem] w-full lg:h-[32rem]" id="myMap"></div>
+  return <div className="h-[17rem] w-full lg:h-[50rem]" id="myMap"></div>
 }
 
 export default MapContainer

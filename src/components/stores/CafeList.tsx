@@ -26,8 +26,8 @@ const CafeList = ({ filterData, setHoverCafe }) => {
         text: 'You must sign in to add this store to your favorites.',
         icon: 'warning',
         showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
-        confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
-        cancelButtonColor: '#00754a', // cancel 버튼 색깔 지정
+        confirmButtonColor: '#9F2042', // confrim 버튼 색깔 지정
+        cancelButtonColor: '#e18e96', // cancel 버튼 색깔 지정
         confirmButtonText: 'Sign in', // confirm 버튼 텍스트 지정
         cancelButtonText: 'Cancel', // cancel 버튼 텍스트 지정
 
@@ -44,7 +44,7 @@ const CafeList = ({ filterData, setHoverCafe }) => {
   }
 
   return (
-    <ul className="h-[440px] w-full overflow-scroll overflow-x-hidden lg:w-[28rem] xl:w-[35rem]">
+    <ul className="h-[45rem] w-full overflow-scroll overflow-x-hidden lg:w-[28rem] xl:w-[35rem]">
       {filterData.map((item, index) => {
         DetailLink = `/store/${item.cafe_name}`
         return (

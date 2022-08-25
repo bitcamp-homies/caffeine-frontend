@@ -46,6 +46,14 @@ const CafeDetail = ({ setHoverCafe }) => {
     }
   }
 
+  const getDistance = (distance) => {
+    if (distance < 1000) {
+      return Math.round(distance) + 'm'
+    } else {
+      return Math.round(distance / 100) / 10 + 'km'
+    }
+  }
+
   React.useEffect(() => {
     getUserLocationAndGetCafeList()
   }, [])
@@ -82,7 +90,9 @@ const CafeDetail = ({ setHoverCafe }) => {
             {cafeInfo.map((item, index) => {
               return (
                 <>
-                <span key={index}>{Math.round(item.distance * 10) / 10}</span>
+                <span key={index} className="text-base text-gray-500">
+                  {getDistance(item.distance)} away
+                </span>
                 <button
                   className="ml-4 h-8 w-40 rounded-full border-2 border-green-800 text-center text-green-800"
                   type="button"
