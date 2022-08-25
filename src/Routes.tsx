@@ -33,11 +33,15 @@ const MainRoutes = () => {
         <Route path="cafes" element={<AllCafes />} />
         <Route path="cafes/:address2" element={<AllCafesLocation />} />
         <Route path="cafes/menu/:cafe_id" element={<AllProducts />} />
-        <Route path="cafes/menu/:cafe_id/Drinks/:menu" element={<AllDetails />} />
+        <Route
+          path="cafes/menu/:cafe_id/Drinks/:menu"
+          element={<AllDetails />}
+        />
         <Route path="featured">
           <Route index element={<Featured />} />
           <Route path="order-now/cafe/:cafe_id">
             <Route path="product/:product_id" element={<OrderNow />} />
+            <Route path="product/:product_id/payment/:totalPrice" element={<Payment />} />
           </Route>
         </Route>
 
@@ -45,12 +49,6 @@ const MainRoutes = () => {
           <Route path="gift" element={<Gift />} />
           <Route path="point" element={<Point />} />
           <Route path="list" element={<CardList />} />
-        </Route>
-
-        <Route path="/order-now/cafe/:cafe_id">
-          <Route path="product/:product_id/">
-            <Route path="payment/:totalPrice" element={<Payment />} />
-          </Route>
         </Route>
       </Route>
 

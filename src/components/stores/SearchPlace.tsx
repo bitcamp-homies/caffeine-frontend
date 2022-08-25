@@ -40,7 +40,7 @@ const SearchPlace = ({ setPlace, cafeList, setHoverCafe, setCafeList }) => {
             </button>
           </div>
           <button
-            className="ml-4 h-8 w-16 rounded-full border-2 border-green-800 text-center text-green-800"
+            className="ml-4 h-8 w-16 rounded-full border-2 border-[#9F2042] text-center text-[#9F2042]"
             type="submit"
           >
             Filter

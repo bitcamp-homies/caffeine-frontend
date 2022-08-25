@@ -5,7 +5,7 @@ import Size from './Size';
 interface OrderNowProductItemProps {
     key: string;
     style?: string;
-    setSizeCoast:number;
+    setSizePrice:number;
     setRecommendPrice:number;
     data: {
         product_id: any;
@@ -21,25 +21,23 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
     key,
     data,
     style,
-    setSizeCoast,
-    setest,
-    settest1,
-    test,
-    test1,
-    setData
+    setSizePrice,
+    setRecommendedSizePrice,
+    setRecommendedCount,
+    setRecommendedPrice
 }) => {
   const [count, setCount] = useState(0);
-
+  
   const handleClickPlus = useCallback(() => {
     setCount((prevCount) => prevCount + 1)
-    settest1((item) => item+1)
-    setData((item) => item+data.price)
+    setRecommendedCount((item) => item+1)
+    setRecommendedPrice((item) => item+data.price)
 }, []);
 
 const handleClickMinus = useCallback(() => {
     setCount((prevCount) => prevCount > 1 ? prevCount - 1 : 0);
-    settest1((prevCount) => prevCount > 1 ? prevCount - 1 : 0);
-    setData((item) => item-data.price)
+    setRecommendedCount((prevCount) => prevCount > 1 ? prevCount - 1 : 0);
+    setRecommendedPrice((item) => item-data.price)
 }, []);
 
 
@@ -76,7 +74,7 @@ const handleClickMinus = useCallback(() => {
         </div>
       </div>
       <div className="lg:min-w-[288px]">
-        {data?.category === 'Drinks' ? <Size data={data as any} setSizeCoast={setSizeCoast} setest={setest} item="100"/> : null}
+        {data?.category === 'Drinks' ? <Size data={data as any} setSizePrice={setSizePrice} setRecommendedSizePrice={setRecommendedSizePrice} item="100"/> : null}
       </div>
     </div>
   )

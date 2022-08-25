@@ -1,6 +1,8 @@
-import React from 'react'
+// @ts-nocheck
 import CafeSwipe from './CafeSwipe'
+
 const Main = () => {
+
   return (
     <div id="main" className="flex flex-col lg:flex-row">
       <div id="leftDiv" className="hidden md:flex basis-2/5 border-r-[1px] bg-white">
@@ -9,7 +11,7 @@ const Main = () => {
         </div>
       </div>
       <div id="rightDiv" className="basis-3/5">
-        <CafeSwipe />
+        <CafeSwipe/>
       </div>
     </div>
   )

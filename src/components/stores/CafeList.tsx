@@ -5,10 +5,19 @@ import { useState } from 'react'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import CafeLikeIcon from './CafeLikeIcon'
+import { useNavigate } from 'react-router-dom'
 
 const CafeList = ({ filterData, setHoverCafe }) => {
   let DetailLink
   const session = sessionStorage.getItem('Id')
+  const navigate = useNavigate()
+  const getDistance = (distance) => {
+    if (distance < 1000) {
+      return Math.round(distance) + 'm'
+    } else {
+      return Math.round(distance / 100) / 10 + 'km'
+    }
+  }
 
   const [check, setCheck] = useState([])
   const toggleLike = () => {
@@ -27,11 +36,11 @@ const CafeList = ({ filterData, setHoverCafe }) => {
         // 만약 Promise리턴을 받으면,
         if (result.isConfirmed) {
           // 만약 모달창에서 confirm 버튼을 눌렀다면
-
-          Swal.fire('승인이 완료되었습니다.', '화끈하시네요~!', 'success')
+          navigate('/login')
         }
       })
-    } else setLike(!like)
+    } else if (session !== null || session !== '' || session !== undefined)
+      setLike(!like)
   }
 
   return (
@@ -64,6 +73,9 @@ const CafeList = ({ filterData, setHoverCafe }) => {
                 <div className="text-xs">
                   {item.address2},{item.address3}
                 </div>
+                <div className="text-xs text-gray-500">
+                  {getDistance(item.distance)} away
+                </div>
               </div>
               <div>
                 <button className="relative ml-6 h-4 w-4" onClick={toggleLike}>
@@ -71,7 +83,7 @@ const CafeList = ({ filterData, setHoverCafe }) => {
                 </button>
                 <Link to={DetailLink}>
                   <button className="relative ml-6 h-4 w-4">
-                    <InfoIcon fill="#dd9c4f" />
+                    <InfoIcon fill="#9F2042" />
                   </button>
                 </Link>
               </div>
