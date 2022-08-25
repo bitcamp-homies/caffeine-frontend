@@ -109,7 +109,7 @@ const CafeCoordManage = () => {
   }
 
   return (
-    <div>
+    <div className='mx-10 my-8'>
       <div>
         현재좌표 경도longitude : {longitude} 위도 latitude : {latitude}
       </div>
@@ -139,12 +139,12 @@ const CafeCoordManage = () => {
         </select>
         <input type="text" className='border-b-2 border-black' disabled={selected ? false : true} onChange={(event) => setKeyword(event.target.value)}/>
       </div>
-      <div className="h-32">
-        <table>
+      <div className="h-[36rem] w-[72rem] overflow-scroll ">
+        <table className='w-[100rem]'>
           <thead className="sticky top-0 bg-gray-300">
-            <tr>
+            <tr className='h-16'>
               <th>CAFE_ID</th>
-              <th>USER_ID</th>
+              <th>USER_ ID</th>
               <th>CAFE_NAME</th>
               <th>ADDRESS1</th>
               <th>ADDRESS2</th>
@@ -160,7 +160,7 @@ const CafeCoordManage = () => {
             {filteredData.map((item, index) => {
               return (
                 <tr
-                  className="border-t-2 border-green-200 text-center"
+                  className="h-12 border-t-2 border-green-200 text-center hover:bg-gray-100"
                   key={index}
                 >
                   <td>{item.cafe_id}</td>
