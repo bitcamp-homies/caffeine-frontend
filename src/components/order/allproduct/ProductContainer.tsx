@@ -13,7 +13,7 @@ const ProductContainer = ({data,cafe_name}) => {
       {
         data.map((item) => (
           <>
-           <div className="pb-2 text-xl font-bold" key={item.cafe_id}>{item.subcategory}</div>
+          <div className="pb-2 text-xl font-bold" key={item.cafe_id}>{item.subcategory}</div>
              <Drinks data={item}/>
              <hr />
           </>
