@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import CafeDetail from './CafeDetail'
+import ListFilter from './ListFilter'
 import MapContainer from './MapContainer'
 
 import SearchPlace from './SearchPlace'
@@ -25,6 +26,7 @@ const FindStore = () => {
     latitude: 0,
     distance: 0,
   })
+  const [showFilter, setShowFilter] = useState(false)
 
   const getCafeList = (userLocation) => {
     axios
@@ -71,16 +73,27 @@ const FindStore = () => {
   return (
     <>
       <div className="ml-4 flex flex-col-reverse lg:flex-row">
-        {cafename === undefined ? (
+        { (cafename !== undefined) && <CafeDetail setHoverCafe={setHoverCafe} /> }
+        { (cafename === undefined && !showFilter) &&
           <SearchPlace
             setPlace={setPlace}
             setHoverCafe={setHoverCafe}
             cafeList={cafeList}
             setCafeList={setCafeList}
+            setShowFilter={setShowFilter}
           />
-        ) : (
-          <CafeDetail setHoverCafe={setHoverCafe} />
-        )}
+        }
+        {
+          (cafename === undefined && showFilter) &&
+          <ListFilter 
+            showFilter={showFilter}
+            setShowFilter={setShowFilter}
+          />
+        }
+        
+        
+        
+
         <div className="-ml-64 items-stretch lg:ml-0 lg:flex lg:basis-full">
           <MapContainer
             searchPlace={place}
