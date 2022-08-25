@@ -71,6 +71,7 @@ const SearchPlace = ({
         cafeList={cafeList}
         setHoverCafe={setHoverCafe}
         filterData={filterData}
+        filterOptions={filterOptions}
       />
     </div>
   )
