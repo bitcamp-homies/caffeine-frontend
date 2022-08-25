@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { getDownloadURL, getStorage, ref } from 'firebase/storage'
 import app from 'api/firebase'
-import TempIndexIcon from './TempIndexIcon'
 import { motion } from 'framer-motion'
-import ThumbsUpLetter from './ThumbsUpLetter'
-import ThumbsDownLetter from './ThumbsDownLetter'
+import ThumbsUpLetter from 'components/resources/ThumbsUpLetter'
+import ThumbsDownLetter from 'components/resources/ThumbsDownLetter'
+import TempIndexIcon from 'components/resources/TempIndexIcon'
 
 let currentX = 0
 const offsetDivider = 250
@@ -89,7 +89,7 @@ const CafeSwipe = () => {
       </div>
       <motion.div
         id="CafeSwipe"
-        className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-4 md:max-w-[24rem]"
+        className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-3 md:max-w-[24rem]"
         style={{ opacity: cafeSwipeOpacity }}
         drag
         dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
@@ -99,7 +99,7 @@ const CafeSwipe = () => {
         onDragEnd={(event, info) => LikeOrNope(info.offset.x)}
       >
         <div
-          className="h-96 w-full bg-contain bg-no-repeat bg-center bg-zinc-900 bg-[url('https://storage.googleapis.com/bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-1.jpg')]
+          className="h-[22rem] md:h-[22.5rem] w-full bg-contain bg-no-repeat bg-center bg-zinc-900 bg-[url('https://storage.googleapis.com/bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-1.jpg')]
         pt-2"
         ></div>
         <div
@@ -142,7 +142,7 @@ const CafeSwipe = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-row pt-3 pb-5">
+          <div className="flex flex-row pt-3">
             <div className="temp_index  px-6">
               <p className="font-medium tracking-widest">온도지수</p>
               <div className="flex flex-row">
