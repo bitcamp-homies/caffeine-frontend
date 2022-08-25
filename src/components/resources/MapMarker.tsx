@@ -3,11 +3,10 @@ import React from "react";
 function MapMarker() {
   return (
     <svg
-      className="w-6 h-6 self-center"
+      className="w-6 h-6 self-center fill-colorEmph1"
       xmlns="http://www.w3.org/2000/svg"
       x="0"
       y="0"
-      enableBackground="new 0 0 46.412 46.412"
       version="1.1"
       viewBox="0 0 46.412 46.412"
       xmlSpace="preserve"

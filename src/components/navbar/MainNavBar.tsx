@@ -1,35 +1,35 @@
-import Logo from 'components/Logo'
-import MapMarker from 'components/MapMarker'
+import MapMarker from 'components/resources/MapMarker'
+import ThumbsLogo from 'components/resources/ThumbsLogo'
 import Hamburger from 'hamburger-react'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 interface BurgerProps {
-  toggled: boolean
-  toggle: React.Dispatch<React.SetStateAction<boolean>>
+  burgered: boolean
+  burger: Function
 }
 
 const MainNavBar = (props :BurgerProps) => {
-  const isOpen = props.toggled
-  const setOpen = props.toggle
+  const isBurger = props.burgered
+  const burgerCycle = props.burger
 
   return (
     <nav
       id="navBar"
-      className="sticky top-0 z-50 flex flex-row bg-white px-4 py-4 shadow md:px-6 md:py-6 lg:px-10 lg:py-7"
+      className="sticky top-0 z-50 flex flex-row bg-white px-4 py-3 shadow md:px-6 md:py-6 lg:px-10 lg:py-5"
     >
       <Link to="/">
-        <Logo />
+        <ThumbsLogo />
       </Link>
       <div id="mobileNav" className="ml-auto md:hidden">
         <Hamburger
           color="#787878"
           size={20}
-          onToggle={(isOpen) => {
-            if (isOpen) {
-              setOpen(true)
+          onToggle={(isBurger) => {
+            if (isBurger) {
+              burgerCycle(true)
             } else {
-              setOpen(false)
+              burgerCycle(false)
             }
           }}
         />

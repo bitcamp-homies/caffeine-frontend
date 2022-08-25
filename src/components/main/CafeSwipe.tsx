@@ -1,8 +1,8 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import ThumbsUpLetter from './ThumbsUpLetter'
-import ThumbsDownLetter from './ThumbsDownLetter'
+import ThumbsUpLetter from 'components/resources/ThumbsUpLetter'
+import ThumbsDownLetter from 'components/resources/ThumbsDownLetter'
 
 import CafeInfo from './CafeInfo'
 import axios from 'axios'
@@ -12,8 +12,7 @@ const offsetDivider = 250
 
 const CafeSwipe = () => {
   const [cafeData, setcafeData] = useState([])
-  let cafeInfo = cafeData.filter((item,index) => index === 4)
-  console.log(cafeInfo)
+  let cafeInfo = cafeData.filter((item, index) => index === 4)
   const [likeOpacity, setLikeOpacity] = useState(0)
   const [nopeOpacity, setNopeOpacity] = useState(0)
   const [cafeSwipeOpacity, setCafeSwipeOpacity] = useState(1)
@@ -41,7 +40,6 @@ const CafeSwipe = () => {
       navigator.geolocation.getCurrentPosition(function (position) {
         var lat = position.coords.latitude, // 위도
           lon = position.coords.longitude // 경도
-        console.log('사용자 위치 : ', lon, lat)
         getCafeListAll({ long: lon, lat: lat })
       })
     } else {
@@ -55,7 +53,7 @@ const CafeSwipe = () => {
   }, [])
 
   //스와이프 opacity 변화
-  const handleOpacityUpdate = (offsetX) => {
+  const handleOpacityUpdate = (offsetX: number) => {
     if (Math.abs(offsetX) < 30) {
       setCafeSwipeOpacity(1)
       setLikeOpacity(0)
@@ -92,7 +90,7 @@ const CafeSwipe = () => {
     } else return
   }
   //스와이프 action
-  const LikeOrNope = (offsetX) => {
+  const LikeOrNope = (offsetX: number) => {
     if (offsetX > 200) {
       alert('LIKE: 즐겨찾는 카페에 등록되었습니다.')
       setCafeSwipeOpacity(1)
@@ -129,7 +127,7 @@ const CafeSwipe = () => {
       </div>
       <motion.div
         id="CafeSwipe"
-        className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-4 md:max-w-[24rem]"
+        className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-3 md:max-w-[24rem]"
         style={{ opacity: cafeSwipeOpacity }}
         drag
         dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
@@ -138,7 +136,7 @@ const CafeSwipe = () => {
         onDrag={(event, info) => handleOpacityUpdate(info.offset.x)}
         onDragEnd={(event, info) => LikeOrNope(info.offset.x)}
       >
-        <CafeInfo cafeInfo={cafeInfo}/>
+        <CafeInfo cafeInfo={cafeInfo} />
       </motion.div>
     </div>
   )

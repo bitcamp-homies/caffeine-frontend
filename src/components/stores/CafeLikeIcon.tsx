@@ -18,7 +18,7 @@ const CafeLikeIcon = ({ index, item }) => {
         <FilLikeIcon onClick={(e) => likeBtn(e.target)} />
       ) : (
         <LikeIcon
-          fill="#dd9c4f"
+          fill="#9F2042"
           className="checkbox"
           onClick={(e) => likeBtn(e.target)}
           id={'cafe_1'}

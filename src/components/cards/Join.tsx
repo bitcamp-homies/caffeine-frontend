@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import SigninBtn from './SigninBtn'
 import { Login } from 'store/api'
 const Join = (props) => {
-  console.log("확인 : "+props.pathname)
 
   const [id,setId] = useState('')
   const [password,setPassword] = useState('')
@@ -31,7 +30,7 @@ const Join = (props) => {
           sessionStorage.setItem("Id",res.data.email)
           sessionStorage.setItem("UserType",res.data.user_type)
           sessionStorage.setItem("NickName",res.data.nickname)
-          if(props.pathname == '/cards/point'){
+          if(props.pathname){
             navigate('/cards/list') 
           }else{
             navigate('/')
