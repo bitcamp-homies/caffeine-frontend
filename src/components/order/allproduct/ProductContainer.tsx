@@ -18,16 +18,7 @@ const ProductContainer = ({data,cafe_name}) => {
           </>
         ))
       }
-
-    </div>
-      <div className="text-bold pb-4 pt-5 text-3xl font-bold">Menu</div>
-      <div className="pb-2 text-xl font-bold">Best Menu</div>
-      <hr />
-      <Drinks />
-      <div className="pt-5 text-xl font-bold">Drinks</div>
-      <hr />
-      <Drinks />
-    </div> 
+  </div>
   )
 }
 
