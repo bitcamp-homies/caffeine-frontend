@@ -2,7 +2,8 @@
 import React from 'react';
 import { Link,} from 'react-router-dom';
 
-const Drinks = ({data}) => {
+const Drinks = ({data,result}) => {
+
   return (
     <div className="grid w-auto grid-cols-1 gap-4 pt-5 text-xs md:grid-cols-2 md:text-sm">
       <Link to={`/order/featured/order-now/cafe/${data.cafe_id}/product/${data.product_id}`}>

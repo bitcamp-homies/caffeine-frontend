@@ -16,18 +16,16 @@ const OrderNow = () => {
   const [sizeCoast, setSizeCoast] = useState(0);
   const[test,setest] = useState(0)  //500/1000/1500
   const[test1,settest1] = useState(0) //count
-    const {data : productdata,isSuccess,isError,isLoading} = useQuery(
+    const {data : productdata,isSuccess,isError,isLoading,status} = useQuery(
       ['getCafeProductList',cafe_id],
       () => getCafesMenusAll(cafe_id),
     ) 
 
-      useEffect(()=>{
-        setPrice(4000)
-      },[price])
-
 
   const data1 = productdata?.data.find((item)=> item.product_id == product_id)
-
+   let paymentPrice
+    if(isSuccess)
+      paymentPrice = data1.price + test + data + sizeCoast
   return (
     <>
       <Cafeinfo />
@@ -61,15 +59,18 @@ const OrderNow = () => {
         <div className="my-5 ml-5 inline-block">
           <button className="text-xl font-bold text-white">
             {
-              isSuccess && data1.price + price + sizeCoast + test1
+             isSuccess && paymentPrice
             }
           </button>
 
         </div>
         <div className="float-right mt-2 mr-3 inline-block rounded-3xl border p-3 text-white lg:mr-10">
-          <Link to="./payment/23000">
+          { status &&
+          ///order/featured/order-now/
+            <Link to={`/order/featured/order-now/cafe/${cafe_id}/product_id/${product_id}/payment/${paymentPrice}`}>
             <button className="text-xl text-white">Next</button>
           </Link>
+          }
         </div>
       </div>
     </>
