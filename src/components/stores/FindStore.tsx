@@ -35,7 +35,6 @@ const FindStore = () => {
         },
       })
       .then((res) => {
-        //console.log('FindStore... 3000m 반경이내의 카페...', res.data)
         setCafeList(res.data)
       })
       .catch((err) => {
@@ -80,7 +79,7 @@ const FindStore = () => {
             setCafeList={setCafeList}
           />
         ) : (
-          <CafeDetail />
+          <CafeDetail setHoverCafe={setHoverCafe} />
         )}
         <div className="-ml-64 items-stretch lg:ml-0 lg:flex lg:basis-full">
           <MapContainer

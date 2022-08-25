@@ -4,11 +4,10 @@ import Carousel from './Carousel'
 import { useQuery } from 'react-query'
 import { listAllMybatis } from '../../store/api'
 import { ReactComponent as XIcon } from './svg/x-svgrepo-com.svg'
-
 import axios from 'axios'
 import React from 'react'
 
-const CafeDetail = () => {
+const CafeDetail = ({ setHoverCafe }) => {
   const { cafename } = useParams()
   const { data, status, isFetching, isLoading, isSuccess } = useQuery(
     'listAllMybatis',
@@ -68,7 +67,23 @@ const CafeDetail = () => {
     <div className="h-128 basis-full lg:flex lg:basis-2/5 lg:flex-col">
       <div className="w-full px-4 lg:w-[28rem] xl:w-[35rem]">
         <Link to="/store">
-          <button className="mt-3">
+          <button
+            className="mt-3"
+            onClick={() =>
+              setHoverCafe({
+                cafe_id: 0,
+                user_id: 0,
+                cafe_name: '',
+                address1: '',
+                address2: '',
+                address3: '',
+                address4: '',
+                longitude: 0,
+                latitude: 0,
+                distance: 0,
+              })
+            }
+          >
             <XIcon />
           </button>
         </Link>
