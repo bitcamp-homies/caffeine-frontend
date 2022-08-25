@@ -1,8 +1,8 @@
 import Logo from 'components/Logo'
 import MapMarker from 'components/MapMarker'
 import Hamburger from 'hamburger-react'
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 interface BurgerProps {
   burgered: boolean
@@ -12,6 +12,19 @@ interface BurgerProps {
 const MainNavBar = (props :BurgerProps) => {
   const isBurger = props.burgered
   const burgerCycle = props.burger
+  const userType = sessionStorage.getItem("UserType")
+  const [login,setLogin] = useState(userType)
+
+  const navegate = useNavigate()
+    console.log(userType)
+
+  const logoutBtn = () => {
+    sessionStorage.clear()
+    navegate('/')
+  }
+
+  
+
 
   return (
     <nav
@@ -51,12 +64,30 @@ const MainNavBar = (props :BurgerProps) => {
             <MapMarker />
             <span className="ml-4 mr-10 font-semibold">Find a store</span>
           </Link>
-          <button className="rounded-full border border-black px-4 py-1.5 font-semibold">
+          {
+            userType === null ? 
+
+            <>
+          
+            <button className="rounded-full border border-black px-4 py-1.5 font-semibold">
             <Link to="login">Sign in</Link>
           </button>
           <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
             <Link to="/member">Join now</Link>
           </button>
+          </>
+          : 
+          <>
+
+          <button className="rounded-full border border-black px-4 py-1.5 font-semibold" onClick={logoutBtn}>
+            Sign out
+          </button>
+          <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
+            <Link to="/member">My Page</Link>
+          </button>
+          </>
+            
+          }
         </div>
       </div>
     </nav>
