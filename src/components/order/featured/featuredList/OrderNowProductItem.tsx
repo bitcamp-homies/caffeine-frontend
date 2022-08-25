@@ -2,21 +2,6 @@
 import React, {FC, memo, useCallback, useEffect, useState} from 'react'
 import Size from './Size';
 
-interface OrderNowProductItemProps {
-    key: string;
-    style?: string;
-    setSizePrice:number;
-    setRecommendPrice:number;
-    data: {
-        product_id: any;
-        eng: any;
-        name_eng: string;
-        name_kor: string;
-        price: number;
-        category: string;
-    };
-}
-
 const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
     key,
     data,
@@ -24,25 +9,33 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
     setSizePrice,
     setRecommendedSizePrice,
     setRecommendedCount,
-    setRecommendedPrice
+    setRecommendedPrice,
 }) => {
   const [count, setCount] = useState(0);
-  
-  const handleClickPlus = useCallback(() => {
+
+  //Plus 핸들러
+  const handleClickPlus = () => {
     setCount((prevCount) => prevCount + 1)
     setRecommendedCount((item) => item+1)
     setRecommendedPrice((item) => item+data.price)
-}, []);
+};
 
-const handleClickMinus = useCallback(() => {
+//세션 스토리지에 값 넣기
+useEffect(() => {
+  count > 0 ? sessionStorage.setItem(`recomendedProductName${data.name_kor}`, data.name_kor) : sessionStorage.removeItem('recomendedProductName');
+  count > 0 ? sessionStorage.setItem(`recomendedCount${data.name_kor}`, count) : sessionStorage.removeItem('recomendedCount');
+  count > 0 ? sessionStorage.setItem(`recomendedProductPrice${data.name_kor}`, data.price) : sessionStorage.removeItem('recomendedProductPrice');
+},[count])
+
+const handleClickMinus = () => {
     setCount((prevCount) => prevCount > 1 ? prevCount - 1 : 0);
     setRecommendedCount((prevCount) => prevCount > 1 ? prevCount - 1 : 0);
-    setRecommendedPrice((item) => item-data.price)
-}, []);
-
-
+    setRecommendedPrice((item) => count > 0 ? item-data.price : 0);
+};
+  
   return (
-    <div key={key}>
+    
+        <div key={key}>
       <div className="mt-10 flex justify-center sm:gap-5 lg:flex-row lg:justify-start">
         <img
           className="top-0 mx-auto h-[130px] w-[130px] sm:mx-0 lg:rounded-full"
@@ -77,8 +70,9 @@ const handleClickMinus = useCallback(() => {
         {data?.category === 'Drinks' ? <Size data={data as any} setSizePrice={setSizePrice} setRecommendedSizePrice={setRecommendedSizePrice} item="100"/> : null}
       </div>
     </div>
+  
+  
   )
-}
-
+};
 
 export default memo(OrderNowProductItem);

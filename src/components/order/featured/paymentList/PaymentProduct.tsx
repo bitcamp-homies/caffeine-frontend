@@ -1,9 +1,25 @@
+// @ts-nocheck
 import React from 'react';
+import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import { getCafesMenusAll } from 'store/api';
 
 
-const PaymentProduct = () => {
-  return (
+const PaymentProduct = ({cafe_id, product_id}) => {
+  console.log(product_id);
+  console.log(cafe_id);
+  let a;
+  const {data : productdata,isSuccess,isError,isLoading} = useQuery(
+    ['getCafeProductList',cafe_id],
+    () => getCafesMenusAll(cafe_id),
+  )
+
+  productdata?.data.map((item, index)=>{
+    const name = sessionStorage.getItem(`recomendedProductName${item.name_kor}`);
+    const price = sessionStorage.getItem(`recomendedProductPrice${item.name_kor}`);
+    const count = sessionStorage.getItem(`recomendedCount${item.name_kor}`);
+    const size = sessionStorage.getItem(`recomendedSize${item.name_kor}`);
+    const sizePrice = sessionStorage.getItem(`recomendedSizePrice${item.name_kor}`); 
     <div className="flex flex-row justify-center gap-10 lg:gap-20">
           <div>
             <img
@@ -13,14 +29,19 @@ const PaymentProduct = () => {
           </div>
           <div className="my-auto flex flex-col">
             <span className="text-xs font-bold lg:text-base lg:mr-0 mr-2">
-              카라멜 리본 크런치 프라푸치노 블렌디드 베버리지
+              {name}
             </span>
             <span className="text-xs font-bold lg:text-base">
-              선택 수량 : 5
+              선택 수량 : {count}
             </span>
-            <span className="text-xs font-bold lg:text-base">금액 : 30000</span>
+            <span className="text-xs font-bold lg:text-base">금액 : {sizePrice + price}</span>
           </div>
         </div>
+  });
+  
+  return (
+    <>
+    </>
   );
 };
 

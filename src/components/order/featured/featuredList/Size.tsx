@@ -2,39 +2,69 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
-const Size = ({data,setSizeCoast,item,setRecommendedSizePrice}) => {
+const Size = ({data,setSizePrice,item,setRecommendedSizePrice}) => {
   const [size, setSize] = useState()
   const [selectsize, setSelectsize] = useState('8px')
+  const [recommendedSizeCoast, setRecommendedSizeCoast] = useState(0);
+  const [mainProductSizeCoast, setMainProductSizeCoast] = useState(0);
+  const [recommendedSize, setRecommendedSize] = useState('');
+  const [mainProductSize, setMainProductSize] = useState('');
+
+  useEffect(()=>{
+    if(item == '100'){
+      sessionStorage.setItem(`recommendedSizePrice${data.name_kor}`, recommendedSizeCoast);
+      sessionStorage.setItem(`recommendedSize${data.name_kor}`, recommendedSize);
+    } else{
+      sessionStorage.setItem(`mainProductSizePrice${data.name_kor}`, mainProductSizeCoast);
+      sessionStorage.setItem(`mainProductSize${data.name_kor}`, mainProductSize);
+    }
+  },[selectsize])
+  console.log(data);
   const clickbtn = (e) => {
     setSize(e.target.value)
     if (e.target.value === data.size1) {
       setSelectsize('8px')
       if(item == '100'){
-        setRecommendedSizePrice(0)
+        setRecommendedSizePrice(0);
+        setRecommendedSizeCoast(0);
+        setRecommendedSize(data.size1);
       }else{
-        setSizeCoast(0)
+        setSizePrice(0);
+        setMainProductSizeCoast(0);
+        setMainProductSize(data.size1);
       }
     } else if (e.target.value === data.size2) {
       setSelectsize('80px')
       if(item == '100'){
-        setRecommendedSizePrice(500)
+        setRecommendedSizePrice(500);
+        setRecommendedSizeCoast(500);
+        setRecommendedSize(data.size2);
       }else{
-        setSizeCoast(500)
-
+        setSizePrice(500);
+        setMainProductSizeCoast(500);
+        setMainProductSize(data.size2);
       }
     } else if (e.target.value === data.size3) {
       setSelectsize('152px')
       if(item == '100'){
-        setRecommendedSizePrice(1000)
+        setRecommendedSizePrice(1000);
+        setRecommendedSizeCoast(1000);
+        setRecommendedSize(data.size3);
       }else{
-        setSizeCoast(1000)
+        setSizePrice(1000);
+        setMainProductSizeCoast(1000);
+        setMainProductSize(data.size3);
       }
     } else if (e.target.value === data.size4) {
       setSelectsize('224px')
       if(item == '100'){
-        setRecommendedSizePrice(1500)
+        setRecommendedSizePrice(1500);
+        setRecommendedSizeCoast(1500);
+        setRecommendedSize(data.size4);
       }else{
-        setSizeCoast(1500)
+        setSizePrice(1500);
+        setMainProductSizeCoast(1500);
+        setMainProductSize(data.size4);
       }
     }
   }

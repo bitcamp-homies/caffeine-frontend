@@ -24,12 +24,10 @@ const OrderNow = () => {
     
   const data1 = productdata?.data.find((item)=> item.product_id == product_id)
   let recommendedPrices = recommendedPrice + recommendedSizePrice * recommendedCount 
-  console.log(recommendedPrice)
 
   let paymentPrice
   if(isSuccess){
     paymentPrice = (data1.price < 0 ? data1.price : data1.price + sizePrice + recommendedPrices)
-    // paymentPrice = data1.price + sizePrice + recommendedPrices
   }
   
   return (
@@ -60,7 +58,7 @@ const OrderNow = () => {
               Recommend Menu
             </span>
           </h2>
-          {isSuccess && <OrderNowProduct data={productdata} setSizePrice={setSizePrice} setRecommendedSizePrice={setRecommendedSizePrice} recommendedSizePrice={recommendedSizePrice} setRecommendedCount={setRecommendedCount} recommendedCount={recommendedCount} setRecommendedPrice={setRecommendedPrice}/>}
+          {isSuccess && <OrderNowProduct data={productdata} recommendedPrice={recommendedPrice} recommendedSizePrice={recommendedSizePrice} setSizePrice={setSizePrice} setRecommendedSizePrice={setRecommendedSizePrice} recommendedSizePrice={recommendedSizePrice} setRecommendedCount={setRecommendedCount} recommendedCount={recommendedCount} setRecommendedPrice={setRecommendedPrice}/>}
         </div>
       </div>
       <div className="fixed bottom-0 h-[70px] w-full bg-red-800">

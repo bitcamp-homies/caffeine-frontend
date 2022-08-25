@@ -6,11 +6,8 @@ import PaymentProduct from './paymentList/PaymentProduct'
 
 const payment = () => {
   const [paymentOption, setPaymentOption] = useState('1')
-  const { totalPrice } = useParams();
-  console.log(totalPrice)
-  
+  const { totalPrice, cafe_id, product_id} = useParams();
   const paymentOptionHandler = (e) => {
-    console.log(e.target.value)
     setPaymentOption(e.target.value)
   }
   return (
@@ -20,7 +17,7 @@ const payment = () => {
         <p className="text-2xl font-bold">주문 내역</p>
       </div>
       <div className="mx-auto mb-24 h-full w-full border lg:w-[700px]">
-        <PaymentProduct />
+        <PaymentProduct cafe_id={cafe_id} product_id={product_id}/>
 
         <div className="flex flex-col border-t p-5">
           <p className="text-xl font-bold">결제 수단</p>
@@ -43,6 +40,9 @@ const payment = () => {
             <span className="ml-2 lg:text-xl">포인트 결제</span>
             <span className='text-gray-400 text-sm ml-3'>포인트 결제시 ?% 할인혜택</span>
           </label>
+        </div>
+        <div className="flex flex-col border-t p-5">
+          총 결제금액 : {totalPrice}
         </div>
       </div>
       <div className="fixed bottom-0 h-[70px] w-full bg-red-800">
