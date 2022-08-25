@@ -22,6 +22,7 @@ import Join from 'components/cards/Join'
 import CardList from 'components/cards/CardList'
 import WriteSelect from 'components/member/WriteSelect'
 import BusinessWrite from 'components/member/BusinessWrite'
+import AdminContainer from 'components/admin/AdminContainer'
 
 const MainRoutes = () => {
   return (
@@ -29,11 +30,16 @@ const MainRoutes = () => {
       <Route path="/" element={<App />} />
       <Route index element={<Main />} />
 
+      <Route path="admin" element={<AdminContainer />} />
+
       <Route path="order" element={<Order />}>
         <Route path="cafes" element={<AllCafes />} />
         <Route path="cafes/:address2" element={<AllCafesLocation />} />
         <Route path="cafes/menu/:cafe_id" element={<AllProducts />} />
-        <Route path="cafes/menu/:cafe_id/Drinks/:menu" element={<AllDetails />} />
+        <Route
+          path="cafes/menu/:cafe_id/Drinks/:menu"
+          element={<AllDetails />}
+        />
         <Route path="featured">
           <Route index element={<Featured />} />
           <Route path="order-now/cafe/:cafe_id">
