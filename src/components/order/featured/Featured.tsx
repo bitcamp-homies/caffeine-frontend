@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import FeaturedMenu from './featuredList/FeaturedMenu'
-import OrderNow from './OrederNow'
 
 const Featured = () => {
   return (
