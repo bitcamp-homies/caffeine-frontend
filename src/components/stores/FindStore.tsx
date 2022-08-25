@@ -28,8 +28,14 @@ const FindStore = () => {
   })
   const [showFilter, setShowFilter] = useState(false)
 
-  //풍혁 0826
+  //풍혁 0826 : filter 용 state
   const [boundary, setBoundary] = useState(3);
+  const [filterOptions, setFilterOptions] = useState({
+    openFilter : false,
+    petFilter : false,
+    parkingFilter : false,
+  });
+  //
   
 
   const getCafeList = (userLocation) => {
@@ -86,10 +92,18 @@ const FindStore = () => {
             cafeList={cafeList}
             setCafeList={setCafeList}
             setShowFilter={setShowFilter}
+            filterOptions={filterOptions}
           />
         )}
         {cafename === undefined && showFilter && (
-          <ListFilter showFilter={showFilter} setShowFilter={setShowFilter} boundary={boundary} setBoundary={setBoundary}/>
+          <ListFilter 
+            showFilter={showFilter} 
+            setShowFilter={setShowFilter} 
+            boundary={boundary} 
+            setBoundary={setBoundary}
+            filterOptions={filterOptions}
+            setFilterOptions={setFilterOptions}
+          />
         )}
 
         <div className="-ml-64 items-stretch lg:ml-0 lg:flex lg:basis-full">

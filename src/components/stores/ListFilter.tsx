@@ -6,13 +6,7 @@ import { ReactComponent as ParkingIcon } from './svg/parking-car-svgrepo-com.svg
 import Slider from '@mui/material/Slider';
 import { useState } from 'react';
 
-const ListFilter = ({ showFilter, setShowFilter, boundary, setBoundary }) => {
-  const [filterOptions, setFilterOptions] = useState({
-    openFilter : false,
-    petFilter : false,
-    parkingFilter : false,
-  });
-
+const ListFilter = ({ showFilter, setShowFilter, boundary, setBoundary,filterOptions, setFilterOptions}) => {
   function valuetext(value) {
     setBoundary(value);
   }

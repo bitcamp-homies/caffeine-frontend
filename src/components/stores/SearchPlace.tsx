@@ -1,9 +1,9 @@
 //@ts-nocheck
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CafeList from './CafeList'
 
-const SearchPlace = ({ setPlace, cafeList, setHoverCafe, setCafeList, setShowFilter }) => {
+const SearchPlace = ({ setPlace, cafeList, setHoverCafe, setCafeList, setShowFilter, filterOptions }) => {
   const [inputText, setInputText] = useState('')
 
   const handleSubmit = (event) => {
@@ -19,6 +19,20 @@ const SearchPlace = ({ setPlace, cafeList, setHoverCafe, setCafeList, setShowFil
   const filterData = cafeList.filter((data) => {
     return data.cafe_name.toLowerCase().includes(inputText.toLowerCase())
   })
+
+  const getFilterNum = () => {
+    var num = 0;
+    
+    for(var i in filterOptions){
+      if(filterOptions[i]){
+        num++;
+      }
+    }
+
+    return num;
+  }
+
+  
 
   return (
     <div className="h-128 basis-full lg:flex lg:basis-2/5 lg:flex-col">
@@ -40,10 +54,10 @@ const SearchPlace = ({ setPlace, cafeList, setHoverCafe, setCafeList, setShowFil
             </button>
           </div>
           <button onClick={() => setShowFilter(true)}
-            className="ml-4 h-8 w-16 rounded-full border-2 border-[#9F2042] text-center text-[#9F2042] hover:bg-[#F8E5EE]"
+            className="ml-4 h-8 w-20 rounded-full border-2 border-[#9F2042] text-center text-[#9F2042] hover:bg-[#F8E5EE]"
             type="submit"
           >
-            Filter
+            Filter {getFilterNum() > 0 && ('('+getFilterNum()+')')}
           </button>
         </div>
       </form>
