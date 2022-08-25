@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
-const Size = ({data,setSizeCoast,item,setest}) => {
+const Size = ({data,setSizeCoast,item,setRecommendedSizePrice}) => {
   const [size, setSize] = useState()
   const [selectsize, setSelectsize] = useState('8px')
   const clickbtn = (e) => {
@@ -10,14 +10,14 @@ const Size = ({data,setSizeCoast,item,setest}) => {
     if (e.target.value === data.size1) {
       setSelectsize('8px')
       if(item == '100'){
-        setest(0)
+        setRecommendedSizePrice(0)
       }else{
         setSizeCoast(0)
       }
     } else if (e.target.value === data.size2) {
       setSelectsize('80px')
       if(item == '100'){
-        setest(500)
+        setRecommendedSizePrice(500)
       }else{
         setSizeCoast(500)
 
@@ -25,14 +25,14 @@ const Size = ({data,setSizeCoast,item,setest}) => {
     } else if (e.target.value === data.size3) {
       setSelectsize('152px')
       if(item == '100'){
-        setest(1000)
+        setRecommendedSizePrice(1000)
       }else{
         setSizeCoast(1000)
       }
     } else if (e.target.value === data.size4) {
       setSelectsize('224px')
       if(item == '100'){
-        setest(1500)
+        setRecommendedSizePrice(1500)
       }else{
         setSizeCoast(1500)
       }

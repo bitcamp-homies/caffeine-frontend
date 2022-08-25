@@ -11,23 +11,27 @@ import { getCafesMenusAll } from 'store/api'
 import Size from './featuredList/Size'
 const OrderNow = () => {
   const { cafe_id, product_id } = useParams()
-  const [data, setData] = useState(0) //data.price
+  const [recommendedPrice, setRecommendedPrice] = useState(0) //data.price
   const [price, setPrice] = useState(0)
-  const [sizeCoast, setSizeCoast] = useState(0);
-  const[test,setest] = useState(0)  //500/1000/1500
-  const[test1,settest1] = useState(0) //count
+  const [sizePrice, setSizePrice] = useState(0); //sizeCoast
+  const [recommendedSizePrice, setRecommendedSizePrice] = useState(0)  //500/1000/1500 test
+  const [recommendedCount,setRecommendedCount] = useState(0) //count test1
     const {data : productdata,isSuccess,isError,isLoading} = useQuery(
       ['getCafeProductList',cafe_id],
       () => getCafesMenusAll(cafe_id),
     ) 
-
-      useEffect(()=>{
-        setPrice(4000)
-      },[price])
-
-
+  
+    
   const data1 = productdata?.data.find((item)=> item.product_id == product_id)
+  let recommendedPrices = recommendedPrice + recommendedSizePrice * recommendedCount 
+  console.log(recommendedPrice)
 
+  let paymentPrice
+  if(isSuccess){
+    paymentPrice = (data1.price < 0 ? data1.price : data1.price + sizePrice + recommendedPrices)
+    // paymentPrice = data1.price + sizePrice + recommendedPrices
+  }
+  
   return (
     <>
       <Cafeinfo />
@@ -41,10 +45,12 @@ const OrderNow = () => {
             <p className="w-[90%] text-xl font-bold lg:text-2xl">
               Cafe Americano
             </p>
-            <p className="mr-2 text-xl font-bold lg:text-2xl">1₩</p>
+            <p className="mr-2 text-xl font-bold lg:text-2xl">{
+              isSuccess && data1.price
+            }₩</p>
           </div>
 
-        {isSuccess && <Size data={data1} setSizeCoast={setSizeCoast} /> }
+        {isSuccess && <Size data={data1} setSizePrice={setSizePrice} /> }
 
         </div>
         <div></div>
@@ -54,20 +60,20 @@ const OrderNow = () => {
               Recommend Menu
             </span>
           </h2>
-          {isSuccess && <OrderNowProduct data={productdata} setSizeCoast={setSizeCoast} setest={setest} test={test} settest1={settest1} test1={test1} setData={setData}/>}
+          {isSuccess && <OrderNowProduct data={productdata} setSizePrice={setSizePrice} setRecommendedSizePrice={setRecommendedSizePrice} recommendedSizePrice={recommendedSizePrice} setRecommendedCount={setRecommendedCount} recommendedCount={recommendedCount} setRecommendedPrice={setRecommendedPrice}/>}
         </div>
       </div>
       <div className="fixed bottom-0 h-[70px] w-full bg-red-800">
         <div className="my-5 ml-5 inline-block">
           <button className="text-xl font-bold text-white">
             {
-              isSuccess && data1.price + price + sizeCoast + test1
+              isSuccess && paymentPrice
             }
           </button>
 
         </div>
         <div className="float-right mt-2 mr-3 inline-block rounded-3xl border p-3 text-white lg:mr-10">
-          <Link to="./payment/23000">
+        <Link to={`/order/featured/order-now/cafe/${cafe_id}/product/${product_id}/payment/${paymentPrice}`}>
             <button className="text-xl text-white">Next</button>
           </Link>
         </div>
