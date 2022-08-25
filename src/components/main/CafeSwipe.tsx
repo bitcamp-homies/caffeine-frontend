@@ -1,21 +1,59 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react'
-import { getDownloadURL, getStorage, ref } from 'firebase/storage'
-import app from 'api/firebase'
 import { motion } from 'framer-motion'
 import ThumbsUpLetter from 'components/resources/ThumbsUpLetter'
 import ThumbsDownLetter from 'components/resources/ThumbsDownLetter'
-import TempIndexIcon from 'components/resources/TempIndexIcon'
+
+import CafeInfo from './CafeInfo'
+import axios from 'axios'
 
 let currentX = 0
 const offsetDivider = 250
 
 const CafeSwipe = () => {
+  const [cafeData, setcafeData] = useState([])
+  let cafeInfo = cafeData.filter((item, index) => index === 4)
   const [likeOpacity, setLikeOpacity] = useState(0)
   const [nopeOpacity, setNopeOpacity] = useState(0)
   const [cafeSwipeOpacity, setCafeSwipeOpacity] = useState(1)
 
+  //3000미터 근방 카페
+  const getCafeListAll = (userLocation) => {
+    axios
+      .get('http://localhost:8080/cafe/listBoundary3000Mybatis', {
+        params: {
+          userLong: userLocation.long,
+          userLat: userLocation.lat,
+        },
+      })
+      .then((res) => {
+        setcafeData(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  const getUserLocationAndGetCafeList = () => {
+    if (navigator.geolocation) {
+      // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var lat = position.coords.latitude, // 위도
+          lon = position.coords.longitude // 경도
+        getCafeListAll({ long: lon, lat: lat })
+      })
+    } else {
+      // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+      console.log('위치불러오기실패...!')
+    }
+  }
+
+  React.useEffect(() => {
+    getUserLocationAndGetCafeList()
+  }, [])
+
   //스와이프 opacity 변화
-  const handleOpacityUpdate = (offsetX :number) => {
+  const handleOpacityUpdate = (offsetX: number) => {
     if (Math.abs(offsetX) < 30) {
       setCafeSwipeOpacity(1)
       setLikeOpacity(0)
@@ -52,7 +90,7 @@ const CafeSwipe = () => {
     } else return
   }
   //스와이프 action
-  const LikeOrNope = (offsetX :number) => {
+  const LikeOrNope = (offsetX: number) => {
     if (offsetX > 200) {
       alert('LIKE: 즐겨찾는 카페에 등록되었습니다.')
       setCafeSwipeOpacity(1)
@@ -98,66 +136,7 @@ const CafeSwipe = () => {
         onDrag={(event, info) => handleOpacityUpdate(info.offset.x)}
         onDragEnd={(event, info) => LikeOrNope(info.offset.x)}
       >
-        <div
-          className="h-[22rem] md:h-[22.5rem] w-full bg-contain bg-no-repeat bg-center bg-zinc-900 bg-[url('https://storage.googleapis.com/bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-1.jpg')]
-        pt-2"
-        ></div>
-        <div
-          id="cafe_profile"
-          className="flex flex-col items-center px-5 md:pb-6"
-        >
-          <div id="head" className="flex flex-row border-b py-4">
-            <div>
-              <div id="profile_img" className="relative pr-6">
-                <button
-                  className="h-20 w-20 rounded-full bg-[url('https://storage.googleapis.com/bitcamp-caffeine.appspot.com/cafe/seoul/gangnam/a3boutcoffee/gangnam-a3boutcoffee-profile.jpg')]
-                  bg-contain bg-center outline outline-1 outline-gray-300"
-                ></button>
-                <button className="absolute left-14 rounded-full bg-orange-600 px-1 pt-2 pb-1 font-gMarketLight text-[11px] text-white">
-                  385
-                </button>
-              </div>
-            </div>
-            <div className="flex flex-col" id="profile_info">
-              <p className="text-lg font-semibold">에이쓰리바우트 커피 🚨</p>
-              <p className="pt-1 text-sm text-gray-500">
-                서울 강남구 강남대로154길 19
-              </p>
-              <p className="pt-1 text-sm text-gray-500">@a3boutcoffee</p>
-              <div className="h-[11.5rem] shrink">
-                <p className="pt-3 text-sm line-clamp-[9]">
-                  2019 로스팅 월드 챔피언이 있는 곳<br />
-                  Mon - Fri 8:00~18:00
-                  <br />
-                  Sat - Sun 10:00~18:00
-                  <br />
-                  서울시 강남구 강남대로 154길19
-                  <br />
-                  에이쓰리커피집 강남배전소
-                  <br />
-                  ⬇️온라인샵⬇️
-                  <br />
-                  m.smartstore.naver.com/a3bout
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-row pt-3">
-            <div className="temp_index  px-6">
-              <p className="font-medium tracking-widest">온도지수</p>
-              <div className="flex flex-row">
-                <TempIndexIcon />
-                <p className="text-2xl font-bold text-[#F24E1E]">87°</p>
-              </div>
-            </div>
-            <div className="text-left">
-              <p className="font-medium tracking-widest">한줄리뷰</p>
-              <p className="pt-1 font-medium text-[#F24E1E]">
-                아기자기한 소품 구경하기 좋아요!
-              </p>
-            </div>
-          </div>
-        </div>
+        <CafeInfo cafeInfo={cafeInfo} />
       </motion.div>
     </div>
   )
