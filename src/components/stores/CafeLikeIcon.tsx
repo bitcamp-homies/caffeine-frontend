@@ -7,7 +7,7 @@ const CafeLikeIcon = ({ index, item }) => {
   const [like, setLike] = useState(false)
 
   const likeBtn = (checkthis) => {
-    if (checkthis.id == 'cafe_1') {
+    if (checkthis.id == 'cafe_1' && sessionStorage.getItem("Id") !== null) {
       setLike(!like)
     }
   }
@@ -18,7 +18,7 @@ const CafeLikeIcon = ({ index, item }) => {
         <FilLikeIcon onClick={(e) => likeBtn(e.target)} />
       ) : (
         <LikeIcon
-          fill="#dd9c4f"
+          fill="#9F2042"
           className="checkbox"
           onClick={(e) => likeBtn(e.target)}
           id={'cafe_1'}

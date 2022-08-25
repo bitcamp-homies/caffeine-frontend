@@ -37,25 +37,32 @@ const MainRoutes = () => {
       <Route path="/" element={<App />} />
       <Route index element={<Main />} />
 
-      <Route path="admin" element={<AdminContainer />} >
-        <Route path="CafeAdminPage" element={<CafeAdminPage/>}/>
-        <Route path="LikeList" element={<LikeList/>}/>
-        <Route path="OrderedList" element={<OrderedList/>}/>
-        <Route path="OrderList" element={<OrderList/>}/>
-        <Route path="PointUsed" element={<PointUsed/>}/>
-        <Route path="Profile" element={<Profile/>}/>
-      </Route>  
+      <Route path="admin" element={<AdminContainer />}>
+        <Route path="CafeAdminPage" element={<CafeAdminPage />} />
+        <Route path="LikeList" element={<LikeList />} />
+        <Route path="OrderedList" element={<OrderedList />} />
+        <Route path="OrderList" element={<OrderList />} />
+        <Route path="PointUsed" element={<PointUsed />} />
+        <Route path="Profile" element={<Profile />} />
+      </Route>
 
       <Route path="order" element={<Order />}>
         <Route path="cafes" element={<AllCafes />} />
         <Route path="cafes/:address2" element={<AllCafesLocation />} />
         <Route path="cafes/menu/:cafe_id" element={<AllProducts />} />
-        <Route path="cafes/menu/:cafe_id/Drinks/:menu" element={<AllDetails />}
+
+        <Route
+          path="cafes/menu/:cafe_id/Drinks/:menu"
+          element={<AllDetails />}
         />
         <Route path="featured">
           <Route index element={<Featured />} />
           <Route path="order-now/cafe/:cafe_id">
             <Route path="product/:product_id" element={<OrderNow />} />
+            <Route
+              path="product/:product_id/payment/:totalPrice"
+              element={<Payment />}
+            />
           </Route>
         </Route>
 
@@ -63,12 +70,6 @@ const MainRoutes = () => {
           <Route path="gift" element={<Gift />} />
           <Route path="point" element={<Point />} />
           <Route path="list" element={<CardList />} />
-        </Route>
-
-        <Route path="/order-now/cafe/:cafe_id">
-          <Route path="product/:product_id/">
-            <Route path="payment/:totalPrice" element={<Payment />} />
-          </Route>
         </Route>
       </Route>
 

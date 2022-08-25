@@ -27,15 +27,23 @@ const MapContainer = ({
     )
     // kakao api는 위도 경도 순으로 입력해야하고, POINT TYPE은 경도 위도 순으로 입력해야해서 헷갈리기 쉽다
     var message =
-      '<div class="w-[150px] h-9 text-center py-2 px-1 text-[16px] bg-[#007f00] text-white font-bold">내 위치</div>' // 인포윈도우에 표시될 내용입니다
+      '<div class="w-[150px] h-9 text-center py-2 px-1 text-[16px] bg-[#3D1308] text-white font-bold">내 위치</div>' // 인포윈도우에 표시될 내용입니다
 
     displayMarker(locPosition, message, map)
+  }
+
+  const getDistance = (distance) => {
+    if(distance < 1000){
+      return Math.round(distance)+'m';
+    }else{
+      return Math.round(distance/100)/10+'km';
+    }
   }
 
   const displayMarker = (locPosition, message, map) => {
     // 마커를 생성합니다
     var infowindow
-    var imageSrc = '/img/current_location_green.svg' // 마커이미지의 주소입니다
+    var imageSrc = '/img/current_location_maincolor.svg' // 마커이미지의 주소입니다
     var imageSize = new kakao.maps.Size(30, 30) // 마커이미지의 크기입니다
     // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다
     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize)
@@ -81,7 +89,7 @@ const MapContainer = ({
       aCafeData.longitude,
     )
 
-    var imageSrc = '/img/map_dot_green.svg' // 마커이미지의 주소입니다
+    var imageSrc = '/img/map_dot_maincolor.svg' // 마커이미지의 주소입니다
     var imageSize = new kakao.maps.Size(18, 18) // 마커이미지의 크기입니다
     // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다
     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize)
@@ -97,7 +105,7 @@ const MapContainer = ({
     cafeMarker.setTitle(aCafeData.cafe_name)
 
     var hoverMarkerImage = new kakao.maps.MarkerImage(
-      '/img/map_pin_green.svg',
+      '/img/map_pin_maincolor.svg',
       new kakao.maps.Size(30, 30),
     )
 
@@ -129,8 +137,11 @@ const MapContainer = ({
     )
 
     var content = `
-      <div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-none drop-shadow-lg border-[#007f00] mb-9 text-black font-semibold text-[${fontSize}px]'>
+      <div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-none drop-shadow-lg mb-9 text-black font-semibold text-[${fontSize}px]'>
         ${cafeData.cafe_name}
+        <span class='text-[#9F2042]'> 
+          ${getDistance(cafeData.distance)}
+        </span>
       </div>
     `
 
