@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import ContentContainer from './ContentContainer'
 import NaviContainer from './NaviContainer'
 
@@ -46,6 +46,7 @@ const AdminContainer = () => {
           {/* 우상단 profile end*/}
         </nav>
         <ContentContainer/>
+        <Outlet />
       </main>
     </div>
   )
