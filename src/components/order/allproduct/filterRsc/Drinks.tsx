@@ -1,16 +1,18 @@
+// @ts-nocheck
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
-const Drinks = () => {
+const Drinks = ({data,cafe_name}) => {
+  const Drinks = data.filter((item) => item.category === 'Drinks')
+  const result = [...new Set( Drinks.map(item => item.subcategory))];
   return (
     <div className="flex flex-col gap-3 pt-3 text-gray-400 font-semibold text-xs">
-      <div>Hot Coffees</div>
-      <div>Hot Teas</div>
-      <div>Hot Drinks</div>
-      <div>Frappuccino Blended Beverage</div>
-      <div>Cold Coffees</div>
-      <div>Iced Teas</div>
-      <div>Cold Drink</div>
+      {data !== undefined &&
+        result.map((item) => (
+         <Link to={`/order/cafes/menu/${data[0].cafe_id}/Drinks/${item}`} 
+         state={{data : data,cafe_name : cafe_name}}><div>{item}</div></Link>
+        ))
+      }
     </div>
   );
 };

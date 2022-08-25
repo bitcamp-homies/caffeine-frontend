@@ -9,6 +9,14 @@ import CafeLikeIcon from './CafeLikeIcon'
 const CafeList = ({ filterData, setHoverCafe }) => {
   let DetailLink
   const session = sessionStorage.getItem('Id')
+  const getDistance = (distance) => {
+    if(distance < 1000){
+      return Math.round(distance)+'m';
+    }else{
+      return Math.round(distance/100)/10+'km';
+    }
+  }
+
 
   const [check, setCheck] = useState([])
   const toggleLike = () => {
@@ -64,6 +72,9 @@ const CafeList = ({ filterData, setHoverCafe }) => {
                 <div className="text-xs">
                   {item.address2},{item.address3}
                 </div>
+                <div className="text-xs text-gray-500">
+                  {getDistance(item.distance)} away 
+                </div>
               </div>
               <div>
                 <button className="relative ml-6 h-4 w-4" onClick={toggleLike}>
@@ -71,7 +82,7 @@ const CafeList = ({ filterData, setHoverCafe }) => {
                 </button>
                 <Link to={DetailLink}>
                   <button className="relative ml-6 h-4 w-4">
-                    <InfoIcon fill="#dd9c4f" />
+                    <InfoIcon fill="#9F2042" />
                   </button>
                 </Link>
               </div>
