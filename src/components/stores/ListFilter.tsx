@@ -4,12 +4,49 @@ import { ReactComponent as CheckIcon } from './svg/check-svg-maincolor.svg'
 import { ReactComponent as DogIcon } from './svg/dog-svgrepo-com.svg'
 import { ReactComponent as ParkingIcon } from './svg/parking-car-svgrepo-com.svg'
 import Slider from '@mui/material/Slider';
+import { useState } from 'react';
 
-const ListFilter = ({ showFilter, setShowFilter }) => {
-  
+const ListFilter = ({ showFilter, setShowFilter, boundary, setBoundary }) => {
+  const [filterOptions, setFilterOptions] = useState({
+    openFilter : false,
+    petFilter : false,
+    parkingFilter : false,
+  });
+
   function valuetext(value) {
-    return `${value}°C`;
+    setBoundary(value);
   }
+
+  const marks = [
+    {
+      value: 1,
+      label: '1km',
+    },
+    {
+      value: 2,
+      label: '2km',
+    },
+    {
+      value: 3,
+      label: '3km',
+    },
+    {
+      value: 4,
+      label: '4km',
+    },
+    {
+      value: 5,
+      label: '5km',
+    },
+    {
+      value: 6,
+      label: '6km',
+    },
+    {
+      value: 7,
+      label: '7km',
+    },
+  ];
 
   return (
     <div className="h-128 basis-full lg:flex lg:basis-2/5 lg:flex-col">
@@ -28,10 +65,17 @@ const ListFilter = ({ showFilter, setShowFilter }) => {
             영업시간
           </div>
         </div>
-        <div className="h-16 py-4 pl-4 text-base text-gray-400 hover:bg-gray-200">
-          <OpenIcon className="mx-6 inline h-8 w-8 " fill="#9ca3af" />
+        <div 
+          className={'h-16 py-4 pl-4 text-base hover:bg-gray-200 '+`${filterOptions.openFilter ? 'text-black ' : 'text-gray-400'}`}
+          onClick={() => setFilterOptions({
+            openFilter : !filterOptions.openFilter,
+            petFilter : filterOptions.petFilter,
+            parkingFilter : filterOptions.parkingFilter,
+          })}  
+        >
+          <OpenIcon className="mx-6 inline h-8 w-8 " fill= {filterOptions.openFilter ? '#000000 ' : '#9ca3af'} />
           지금 영업중
-          <CheckIcon className="float-right mx-6 inline h-6 w-6" />
+          {filterOptions.openFilter && <CheckIcon className="float-right mx-6 inline h-6 w-6" />}
         </div>
 
         <div className="h-12 bg-[#F8E5EE] pl-4 text-lg ">
@@ -39,32 +83,46 @@ const ListFilter = ({ showFilter, setShowFilter }) => {
             편의사항
           </div>
         </div>
-        <div className="h-16 py-4 pl-4 text-base text-gray-400 hover:bg-gray-200">
-          <DogIcon className="mx-6 inline h-8 w-8 " fill="#9ca3af" />
+        <div 
+          className={'h-16 py-4 pl-4 text-base hover:bg-gray-200 '+`${filterOptions.petFilter ? 'text-black ' : 'text-gray-400'}`}
+          onClick={() => setFilterOptions({
+            openFilter : filterOptions.openFilter,
+            petFilter : !filterOptions.petFilter,
+            parkingFilter : filterOptions.parkingFilter,
+          })}
+        >
+          <DogIcon className="mx-6 inline h-8 w-8 " fill={filterOptions.petFilter ? '#000000 ' : '#9ca3af'} />
           애견동반
-          <CheckIcon className="float-right mx-6 inline h-6 w-6" />
+          {filterOptions.petFilter && <CheckIcon className="float-right mx-6 inline h-6 w-6" />}
         </div>
-        <div className="h-16 py-4 pl-4 text-base text-gray-400 hover:bg-gray-200">
-          <ParkingIcon className="mx-6 inline h-8 w-8 " fill="#9ca3af" />
+        <div 
+          className={'h-16 py-4 pl-4 text-base hover:bg-gray-200 '+`${filterOptions.parkingFilter ? 'text-black ' : 'text-gray-400'}`}
+          onClick={() => setFilterOptions({
+            openFilter : filterOptions.openFilter,
+            petFilter : filterOptions.petFilter,
+            parkingFilter : !filterOptions.parkingFilter,
+          })}
+        >
+          <ParkingIcon className="mx-6 inline h-8 w-8 " fill={filterOptions.parkingFilter ? '#000000 ' : '#9ca3af'} />
           주차가능
-          <CheckIcon className="float-right mx-6 inline h-6 w-6" />
+          {filterOptions.parkingFilter && <CheckIcon className="float-right mx-6 inline h-6 w-6" />}
         </div>
 
         <div className="h-12 bg-[#F8E5EE] pl-4 text-lg ">
           <div className="py-2 font-semibold tracking-widest text-[#3D1308] opacity-70">
-            반경조절
+            반경조절 {boundary} km
           </div>
         </div>
-        <div className='w-96 '>
+        <div className='w-auto my-4 text-center px-10'>
           <Slider
-            aria-label="Temperature"
-            defaultValue={1}
+            aria-label="Distance"
+            defaultValue={3}
             getAriaValueText={valuetext}
-            valueLabelDisplay="auto"
+            valueLabelDisplay="off"
             step={1}
-            marks
+            marks={marks}
             min={1}
-            max={10}
+            max={7}
             color="secondary"
           />
         </div>

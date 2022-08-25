@@ -28,12 +28,17 @@ const FindStore = () => {
   })
   const [showFilter, setShowFilter] = useState(false)
 
+  //풍혁 0826
+  const [boundary, setBoundary] = useState(3);
+  
+
   const getCafeList = (userLocation) => {
     axios
-      .get('http://localhost:8080/cafe/listBoundary3000Mybatis', {
+      .get('http://localhost:8080/cafe/listBoundaryMybatis', {
         params: {
           userLong: userLocation.lon,
           userLat: userLocation.lat,
+          boundary: boundary,
         },
       })
       .then((res) => {
@@ -68,13 +73,13 @@ const FindStore = () => {
     if (userLocation.lon !== 0) {
       getCafeList(userLocation)
     }
-  }, [userLocation])
+  }, [userLocation, boundary])
 
   return (
     <>
       <div className="ml-4 flex flex-col-reverse lg:flex-row">
-        { (cafename !== undefined) && <CafeDetail setHoverCafe={setHoverCafe} /> }
-        { (cafename === undefined && !showFilter) &&
+        {cafename !== undefined && <CafeDetail setHoverCafe={setHoverCafe} />}
+        { cafename === undefined && !showFilter && (
           <SearchPlace
             setPlace={setPlace}
             setHoverCafe={setHoverCafe}
@@ -82,17 +87,10 @@ const FindStore = () => {
             setCafeList={setCafeList}
             setShowFilter={setShowFilter}
           />
-        }
-        {
-          (cafename === undefined && showFilter) &&
-          <ListFilter 
-            showFilter={showFilter}
-            setShowFilter={setShowFilter}
-          />
-        }
-        
-        
-        
+        )}
+        {cafename === undefined && showFilter && (
+          <ListFilter showFilter={showFilter} setShowFilter={setShowFilter} boundary={boundary} setBoundary={setBoundary}/>
+        )}
 
         <div className="-ml-64 items-stretch lg:ml-0 lg:flex lg:basis-full">
           <MapContainer

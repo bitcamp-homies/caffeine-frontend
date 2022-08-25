@@ -40,7 +40,7 @@ const SearchPlace = ({ setPlace, cafeList, setHoverCafe, setCafeList, setShowFil
             </button>
           </div>
           <button onClick={() => setShowFilter(true)}
-            className="ml-4 h-8 w-16 rounded-full border-2 border-[#9F2042] text-center text-[#9F2042]"
+            className="ml-4 h-8 w-16 rounded-full border-2 border-[#9F2042] text-center text-[#9F2042] hover:bg-[#F8E5EE]"
             type="submit"
           >
             Filter
