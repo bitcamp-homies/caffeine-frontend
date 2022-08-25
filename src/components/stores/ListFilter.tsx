@@ -3,12 +3,19 @@ import { ReactComponent as OpenIcon } from './svg/open-svgrepo-com.svg'
 import { ReactComponent as CheckIcon } from './svg/check-svg-maincolor.svg'
 import { ReactComponent as DogIcon } from './svg/dog-svgrepo-com.svg'
 import { ReactComponent as ParkingIcon } from './svg/parking-car-svgrepo-com.svg'
-import Slider from '@mui/material/Slider';
-import { useState } from 'react';
+import Slider from '@mui/material/Slider'
+import { useState } from 'react'
 
-const ListFilter = ({ showFilter, setShowFilter, boundary, setBoundary,filterOptions, setFilterOptions}) => {
+const ListFilter = ({
+  showFilter,
+  setShowFilter,
+  boundary,
+  setBoundary,
+  filterOptions,
+  setFilterOptions,
+}) => {
   function valuetext(value) {
-    setBoundary(value);
+    setBoundary(value)
   }
 
   const marks = [
@@ -40,7 +47,7 @@ const ListFilter = ({ showFilter, setShowFilter, boundary, setBoundary,filterOpt
       value: 7,
       label: '7km',
     },
-  ];
+  ]
 
   return (
     <div className="h-128 basis-full lg:flex lg:basis-2/5 lg:flex-col">
@@ -59,17 +66,27 @@ const ListFilter = ({ showFilter, setShowFilter, boundary, setBoundary,filterOpt
             영업시간
           </div>
         </div>
-        <div 
-          className={'h-16 py-4 pl-4 text-base hover:bg-gray-200 '+`${filterOptions.openFilter ? 'text-black ' : 'text-gray-400'}`}
-          onClick={() => setFilterOptions({
-            openFilter : !filterOptions.openFilter,
-            petFilter : filterOptions.petFilter,
-            parkingFilter : filterOptions.parkingFilter,
-          })}  
+        <div
+          className={
+            'h-16 py-4 pl-4 text-base hover:bg-gray-200 ' +
+            `${filterOptions.openFilter ? 'text-black ' : 'text-gray-400'}`
+          }
+          onClick={() =>
+            setFilterOptions({
+              openFilter: !filterOptions.openFilter,
+              petFilter: filterOptions.petFilter,
+              parkingFilter: filterOptions.parkingFilter,
+            })
+          }
         >
-          <OpenIcon className="mx-6 inline h-8 w-8 " fill= {filterOptions.openFilter ? '#000000 ' : '#9ca3af'} />
+          <OpenIcon
+            className="mx-6 inline h-8 w-8 "
+            fill={filterOptions.openFilter ? '#000000 ' : '#9ca3af'}
+          />
           지금 영업중
-          {filterOptions.openFilter && <CheckIcon className="float-right mx-6 inline h-6 w-6" />}
+          {filterOptions.openFilter && (
+            <CheckIcon className="float-right mx-6 inline h-6 w-6" />
+          )}
         </div>
 
         <div className="h-12 bg-[#F8E5EE] pl-4 text-lg ">
@@ -77,29 +94,49 @@ const ListFilter = ({ showFilter, setShowFilter, boundary, setBoundary,filterOpt
             편의사항
           </div>
         </div>
-        <div 
-          className={'h-16 py-4 pl-4 text-base hover:bg-gray-200 '+`${filterOptions.petFilter ? 'text-black ' : 'text-gray-400'}`}
-          onClick={() => setFilterOptions({
-            openFilter : filterOptions.openFilter,
-            petFilter : !filterOptions.petFilter,
-            parkingFilter : filterOptions.parkingFilter,
-          })}
+        <div
+          className={
+            'h-16 py-4 pl-4 text-base hover:bg-gray-200 ' +
+            `${filterOptions.petFilter ? 'text-black ' : 'text-gray-400'}`
+          }
+          onClick={() =>
+            setFilterOptions({
+              openFilter: filterOptions.openFilter,
+              petFilter: !filterOptions.petFilter,
+              parkingFilter: filterOptions.parkingFilter,
+            })
+          }
         >
-          <DogIcon className="mx-6 inline h-8 w-8 " fill={filterOptions.petFilter ? '#000000 ' : '#9ca3af'} />
+          <DogIcon
+            className="mx-6 inline h-8 w-8 "
+            fill={filterOptions.petFilter ? '#000000 ' : '#9ca3af'}
+          />
           애견동반
-          {filterOptions.petFilter && <CheckIcon className="float-right mx-6 inline h-6 w-6" />}
+          {filterOptions.petFilter && (
+            <CheckIcon className="float-right mx-6 inline h-6 w-6" />
+          )}
         </div>
-        <div 
-          className={'h-16 py-4 pl-4 text-base hover:bg-gray-200 '+`${filterOptions.parkingFilter ? 'text-black ' : 'text-gray-400'}`}
-          onClick={() => setFilterOptions({
-            openFilter : filterOptions.openFilter,
-            petFilter : filterOptions.petFilter,
-            parkingFilter : !filterOptions.parkingFilter,
-          })}
+        <div
+          className={
+            'h-16 py-4 pl-4 text-base hover:bg-gray-200 ' +
+            `${filterOptions.parkingFilter ? 'text-black ' : 'text-gray-400'}`
+          }
+          onClick={() =>
+            setFilterOptions({
+              openFilter: filterOptions.openFilter,
+              petFilter: filterOptions.petFilter,
+              parkingFilter: !filterOptions.parkingFilter,
+            })
+          }
         >
-          <ParkingIcon className="mx-6 inline h-8 w-8 " fill={filterOptions.parkingFilter ? '#000000 ' : '#9ca3af'} />
+          <ParkingIcon
+            className="mx-6 inline h-8 w-8 "
+            fill={filterOptions.parkingFilter ? '#000000 ' : '#9ca3af'}
+          />
           주차가능
-          {filterOptions.parkingFilter && <CheckIcon className="float-right mx-6 inline h-6 w-6" />}
+          {filterOptions.parkingFilter && (
+            <CheckIcon className="float-right mx-6 inline h-6 w-6" />
+          )}
         </div>
 
         <div className="h-12 bg-[#F8E5EE] pl-4 text-lg ">
@@ -107,7 +144,7 @@ const ListFilter = ({ showFilter, setShowFilter, boundary, setBoundary,filterOpt
             반경조절 {boundary} km
           </div>
         </div>
-        <div className='w-auto my-4 text-center px-10'>
+        <div className="my-4 w-auto px-10 text-center">
           <Slider
             aria-label="Distance"
             defaultValue={3}
