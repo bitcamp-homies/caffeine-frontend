@@ -52,8 +52,12 @@ export const Login = (login) => {
   return temp
 }
 
-export const setMakeList = (user_id) => {
-  const temp = api.post('/cafe/makeList', user_id)
+export const setMakeList = (email) => {
+  const temp = api.post('/cafe/makeList', email)
+}
+
+export const setMakeCafeList = (email) => {
+  const temp = api.post('/cafe/makeCafeList', email)
 }
 
 export const getCafesMenusAll = (cafe_id) => {
