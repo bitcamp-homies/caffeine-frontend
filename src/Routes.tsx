@@ -58,6 +58,8 @@ const MainRoutes = () => {
         <Route path="featured">
           <Route index element={<Featured />} />
           <Route path="order-now/cafe/:cafe_id">
+            <Route path="product/:product_id" element={<OrderNow />}/>
+            <Route path="product_id/:product_id/payment/:totalPrice" element={<Payment />} />          
             <Route path="product/:product_id" element={<OrderNow />} />
             <Route
               path="product/:product_id/payment/:totalPrice"
@@ -65,6 +67,8 @@ const MainRoutes = () => {
             />
           </Route>
         </Route>
+
+
 
         <Route path="cards" element={<Cardheader />}>
           <Route path="gift" element={<Gift />} />

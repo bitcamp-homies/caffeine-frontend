@@ -52,11 +52,11 @@ export const Login = (login) => {
   return temp
 }
 
-export const getCafesMenusAll = (cafe_id) => {
-  const temp = api.get('/cafe/getCafesMenusAll', {
-    params: {
-      cafe_id: cafe_id,
-    },
-  })
-  return temp
+export const getCafeitemList = (cafe_id) => {
+    const temp = api.get('/cafe/getCafeitemList',{
+        params : {
+            cafe_id : cafe_id
+        }
+    })
+    return temp
 }

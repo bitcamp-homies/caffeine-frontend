@@ -1,10 +1,15 @@
 // @ts-nocheck
 import React, { useState } from 'react'
+
+import { useLocation } from 'react-router-dom'
+
 import { useParams } from 'react-router-dom'
+
 import Cafeinfo from './featuredList/Cafeinfo'
 import PaymentProduct from './paymentList/PaymentProduct'
 
 const payment = () => {
+  console.log(useLocation())
   const [paymentOption, setPaymentOption] = useState('1')
   const { totalPrice } = useParams();
   console.log(totalPrice)
