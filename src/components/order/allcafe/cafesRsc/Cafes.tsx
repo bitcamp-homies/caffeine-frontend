@@ -16,9 +16,7 @@ const Cafes = ({data1}) => {
     <div className="grid w-auto grid-cols-1 gap-4 pt-5 text-xs md:grid-cols-2 md:text-sm">
       {status && data1 === undefined ? data?.data.map((post, idx) => (
         <div key={idx}>
-        
-          <Link to={`../cafes/menu/${post.cafe_id}`} state={{cafe_name : post.cafe_name}}>
-
+          <Link to={`../cafes/menu/${post.cafe_id}`} state={{cafe_name : post.cafe_name, img : post.file_path+post.img_file.split(',').at(-1)}}>
             <div className="flex h-20 flex-row items-center gap-3 bg-white md:h-28">
               <img
                 className="h-20 w-20 rounded-full object-fill md:h-28 md:w-28"

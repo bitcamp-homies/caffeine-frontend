@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import CafeDetail from './CafeDetail'
+import ListFilter from './ListFilter'
 import MapContainer from './MapContainer'
 
 import SearchPlace from './SearchPlace'
@@ -25,13 +26,24 @@ const FindStore = () => {
     latitude: 0,
     distance: 0,
   })
+  const [showFilter, setShowFilter] = useState(false)
+
+  //풍혁 0826 : filter 용 state
+  const [boundary, setBoundary] = useState(3)
+  const [filterOptions, setFilterOptions] = useState({
+    openFilter: false,
+    petFilter: false,
+    parkingFilter: false,
+  })
+  //
 
   const getCafeList = (userLocation) => {
     axios
-      .get('http://localhost:8080/cafe/listBoundary3000Mybatis', {
+      .get('http://localhost:8080/cafe/listBoundaryMybatis', {
         params: {
           userLong: userLocation.lon,
           userLat: userLocation.lat,
+          boundary: boundary,
         },
       })
       .then((res) => {
@@ -66,21 +78,33 @@ const FindStore = () => {
     if (userLocation.lon !== 0) {
       getCafeList(userLocation)
     }
-  }, [userLocation])
+  }, [userLocation, boundary])
 
   return (
     <>
       <div className="ml-4 flex flex-col-reverse lg:flex-row">
-        {cafename === undefined ? (
+        {cafename !== undefined && <CafeDetail setHoverCafe={setHoverCafe} />}
+        {cafename === undefined && !showFilter && (
           <SearchPlace
             setPlace={setPlace}
             setHoverCafe={setHoverCafe}
             cafeList={cafeList}
             setCafeList={setCafeList}
+            setShowFilter={setShowFilter}
+            filterOptions={filterOptions}
           />
-        ) : (
-          <CafeDetail setHoverCafe={setHoverCafe} />
         )}
+        {cafename === undefined && showFilter && (
+          <ListFilter
+            showFilter={showFilter}
+            setShowFilter={setShowFilter}
+            boundary={boundary}
+            setBoundary={setBoundary}
+            filterOptions={filterOptions}
+            setFilterOptions={setFilterOptions}
+          />
+        )}
+
         <div className="-ml-64 items-stretch lg:ml-0 lg:flex lg:basis-full">
           <MapContainer
             searchPlace={place}

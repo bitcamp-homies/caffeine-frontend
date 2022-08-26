@@ -5,7 +5,7 @@ import { useQuery } from 'react-query'
 import { Link, useParams } from 'react-router-dom'
 import Cafeinfo from './featuredList/Cafeinfo'
 import OrderNowProduct from './featuredList/OrderNowProduct'
-import { getCafesMenusAll } from 'store/api'
+import { getCafeitemList } from 'store/api'
 import style from './featuredList/FeaturedStyle.module.css'
 import Size from './featuredList/Size'
 const OrderNow = () => {
@@ -15,6 +15,7 @@ const OrderNow = () => {
   const [sizePrice, setSizePrice] = useState(0) //메인제품 사이즈 가격
   const [recommendedSizePrice, setRecommendedSizePrice] = useState(0) //추천메뉴 사이즈 가격
   const [recommendedCount, setRecommendedCount] = useState(0) //추천메뉴 카운트
+
   
   //세션스토리지에 값이 남아있을수 있기떄문에 초기화 진행해주기
   useEffect(() => {
@@ -27,7 +28,7 @@ const OrderNow = () => {
     isSuccess,
     isError,
     isLoading,
-  } = useQuery(['getCafeProductList', cafe_id], () => getCafesMenusAll(cafe_id))
+  } = useQuery(['getCafeitemList', cafe_id], () => getCafeitemList(cafe_id))
 
   //유저가 선택한 제품 찾기
   const mainProduct = productdata?.data.find((item) => item.product_id == product_id)
@@ -112,6 +113,7 @@ const OrderNow = () => {
       </div>
       <div className="fixed bottom-0 h-[70px] w-full bg-red-800">
         <div className="my-5 ml-5 inline-block">
+
           <p className="text-xl font-bold text-white">
             {isSuccess && mainProductPrice}
           </p>
@@ -120,8 +122,10 @@ const OrderNow = () => {
           <Link
             to={`/order/featured/order-now/cafe/${cafe_id}/product/${product_id}/payment/${mainProductPrice}`}
           >
+
             <button className="text-xl text-white">Next</button>
           </Link>
+          
         </div>
       </div>
     </>

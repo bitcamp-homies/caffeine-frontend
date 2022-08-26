@@ -11,19 +11,19 @@ const CafeCoordManage = () => {
   const [userLong, setUserLong] = useState(0)
   const [userLat, setUserLat] = useState(0)
   const options = [
-    {value: '', text: '--필터--'},
-    {value: 'cafe_name', text: '카페이름'},
-    {value: 'address1', text: '주소1(예 : 서울)'},
-    {value: 'address2', text: '주소2(예 : 강남구)'},
-  ];
+    { value: '', text: '--필터--' },
+    { value: 'cafe_name', text: '카페이름' },
+    { value: 'address1', text: '주소1(예 : 서울)' },
+    { value: 'address2', text: '주소2(예 : 강남구)' },
+  ]
 
-  const [selected, setSelected] = useState(options[0].value);
-  const [keyword, setKeyword] = useState('');
+  const [selected, setSelected] = useState(options[0].value)
+  const [keyword, setKeyword] = useState('')
 
-  const handleChange = event => {
-    console.log(event.target.value);
-    setSelected(event.target.value);
-  };
+  const handleChange = (event) => {
+    console.log(event.target.value)
+    setSelected(event.target.value)
+  }
 
   var geocoder = new window.kakao.maps.services.Geocoder()
 
@@ -77,10 +77,10 @@ const CafeCoordManage = () => {
             },
           })
           .catch((err) => console.log(err))
-      }else if(status === window.kakao.maps.services.Status.ZERO_RESULT){
-        console.log('ZERO_RESULT...검색결과가 없습니다.');
-      }else if(status === window.kakao.maps.services.Status.ERROR){
-        console.log('error발생..!');
+      } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
+        console.log('ZERO_RESULT...검색결과가 없습니다.')
+      } else if (status === window.kakao.maps.services.Status.ERROR) {
+        console.log('error발생..!')
       }
     })
   }
@@ -99,17 +99,17 @@ const CafeCoordManage = () => {
     getUserLocationAndGetCafeList()
   }, [])
 
-  var filteredData = data;
-  if(selected === 'cafe_name'){
-    filteredData = data.filter((item) => item.cafe_name.indexOf(keyword)>=0);
-  }else if(selected === 'address1'){
-    filteredData = data.filter((item) => item.address1.indexOf(keyword)>=0);
-  }else if(selected === 'address2'){
-    filteredData = data.filter((item) => item.address2.indexOf(keyword)>=0);
+  var filteredData = data
+  if (selected === 'cafe_name') {
+    filteredData = data.filter((item) => item.cafe_name.indexOf(keyword) >= 0)
+  } else if (selected === 'address1') {
+    filteredData = data.filter((item) => item.address1.indexOf(keyword) >= 0)
+  } else if (selected === 'address2') {
+    filteredData = data.filter((item) => item.address2.indexOf(keyword) >= 0)
   }
 
   return (
-    <div>
+    <div className="mx-10 my-8">
       <div>
         현재좌표 경도longitude : {longitude} 위도 latitude : {latitude}
       </div>
@@ -126,25 +126,28 @@ const CafeCoordManage = () => {
       </div>
       <div>
         {selected} {keyword}
-      </div>  
-      <div className='my-2'>
+      </div>
+      <div className="my-2">
         <select value={selected} onChange={handleChange}>
-          {options.map(
-            (option, index) => (
+          {options.map((option, index) => (
             <option key={index} value={option.value}>
               {option.text}
             </option>
-            )
-          )}
+          ))}
         </select>
-        <input type="text" className='border-b-2 border-black' disabled={selected ? false : true} onChange={(event) => setKeyword(event.target.value)}/>
+        <input
+          type="text"
+          className="border-b-2 border-black"
+          disabled={selected ? false : true}
+          onChange={(event) => setKeyword(event.target.value)}
+        />
       </div>
-      <div className="h-32">
-        <table>
+      <div className="h-[36rem] w-[72rem] overflow-scroll ">
+        <table className="w-[100rem]">
           <thead className="sticky top-0 bg-gray-300">
-            <tr>
+            <tr className="h-16">
               <th>CAFE_ID</th>
-              <th>USER_ID</th>
+              <th>USER_ ID</th>
               <th>CAFE_NAME</th>
               <th>ADDRESS1</th>
               <th>ADDRESS2</th>
@@ -160,7 +163,7 @@ const CafeCoordManage = () => {
             {filteredData.map((item, index) => {
               return (
                 <tr
-                  className="border-t-2 border-green-200 text-center"
+                  className="h-12 border-t-2 border-green-200 text-center hover:bg-gray-100"
                   key={index}
                 >
                   <td>{item.cafe_id}</td>
