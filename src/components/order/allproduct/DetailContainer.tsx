@@ -16,7 +16,7 @@ const DetailContainer = ({data,menu,cafe_name,img}) => {
   }  
   return (
     <div className="bg-white grid gap-5 grid-col px-6 pt-5 ">
-             <div className="h-full w-full bg-red-800">
+             <div className="h-full w-full bg-red-800 rounded">
           <div className="my-5 flex h-full flex-col justify-center lg:mr-[100px] lg:flex-row">
                   <img
                     className="my-5 mx-auto rounded-full h-[200px] w-[50px] min-w-[200px] lg:my-auto lg:mx-[99px]"

@@ -16,7 +16,6 @@ const MainNavBar = (props :BurgerProps) => {
   const [login,setLogin] = useState(userType)
 
   const navegate = useNavigate()
-    console.log(userType)
 
   const logoutBtn = () => {
     sessionStorage.clear()

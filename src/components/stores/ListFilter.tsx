@@ -7,7 +7,6 @@ import Slider from '@mui/material/Slider'
 import { useState } from 'react'
 
 const ListFilter = ({
-  showFilter,
   setShowFilter,
   boundary,
   setBoundary,
