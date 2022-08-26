@@ -2,7 +2,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
-import { getCafesMenusAll } from 'store/api'
+import { getCafeitemList } from 'store/api'
 
 const PaymentProduct = ({ cafe_id, product_id }) => {
   //api 사용해서 카페제품들 불러오기
@@ -11,7 +11,7 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
     isSuccess,
     isError,
     isLoading,
-  } = useQuery(['getCafeProductList', cafe_id], () => getCafesMenusAll(cafe_id))
+  } = useQuery(['getCafeitemList', cafe_id], () => getCafeitemList(cafe_id))
   //추가 메뉴
   const name = []
   const price = []

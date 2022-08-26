@@ -1,5 +1,4 @@
 // @ts-nocheck
-import axios from 'axios'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import { Link, useParams } from 'react-router-dom'
