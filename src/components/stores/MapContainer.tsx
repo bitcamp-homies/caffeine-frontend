@@ -216,15 +216,16 @@ const MapContainer = ({
 
   return (
     <div id="map_wrap" className="h-[17rem] w-full lg:h-[32rem]">
-      <div className="h-full w-full static" id="myMap">
-        <button className='w-9 h-9 absolute bottom-[2.5rem] lg:bottom-[17.5rem] right-0 z-10 rounded-lg bg-white border-2 drop-shadow-lg'
+      <div className="static h-full w-full" id="myMap">
+        <button
+          className="absolute bottom-[2.5rem] right-0 z-10 h-9 w-9 rounded-lg border-2 bg-white drop-shadow-lg lg:bottom-[17.5rem]"
           onClick={() => {
             map.setCenter(
               new window.kakao.maps.LatLng(userLocation.lat, userLocation.lon)
             )
           }}
-        >  
-          <MyLocationIcon className='w-8 h-8'/>
+        >
+          <MyLocationIcon className="h-8 w-8" />
         </button>
       </div>
     </div>
