@@ -2,39 +2,71 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
-const Size = ({data,setSizeCoast,item,setest}) => {
+const Size = ({data,setSizePrice,item,setRecommendedSizePrice}) => {
   const [size, setSize] = useState()
   const [selectsize, setSelectsize] = useState('8px')
+  const [recommendedSizeCoast, setRecommendedSizeCoast] = useState(0);
+  const [mainProductSizeCoast, setMainProductSizeCoast] = useState(0);
+  const [recommendedSize, setRecommendedSize] = useState('');
+  const [mainProductSize, setMainProductSize] = useState('');
+
+  useEffect(()=>{
+    if(item == '100'){
+      sessionStorage.setItem(`recommendedSizePrice${data.product_name_kor}`, recommendedSizeCoast);
+      sessionStorage.setItem(`recommendedSize${data.product_name_kor}`, recommendedSize);
+    } else{
+      sessionStorage.setItem("mainProductSizePrice", mainProductSizeCoast);
+      sessionStorage.setItem("mainProductSize", mainProductSize);
+    }
+  },[selectsize])
+
+
+
   const clickbtn = (e) => {
     setSize(e.target.value)
     if (e.target.value === 'Short') {
       setSelectsize('8px')
       if(item == '100'){
-        setest(0)
+        setRecommendedSizePrice(0);
+        setRecommendedSizeCoast(0);
+        setRecommendedSize('Short');
       }else{
-        setSizeCoast(0)
+        setSizePrice(0);
+        setMainProductSizeCoast(0);
+        setMainProductSize('Short');
       }
     } else if (e.target.value === 'Tall') {
       setSelectsize('80px')
       if(item == '100'){
-        setest(500)
+        setRecommendedSizePrice(500);
+        setRecommendedSizeCoast(500);
+        setRecommendedSize('Tall');
       }else{
-        setSizeCoast(500)
-
+        setSizePrice(500);
+        setMainProductSizeCoast(500);
+        setMainProductSize('Tall');
       }
     } else if (e.target.value === 'Grande') {
       setSelectsize('152px')
       if(item == '100'){
-        setest(1000)
+        setRecommendedSizePrice(1000);
+        setRecommendedSizeCoast(1000);
+        setRecommendedSize('Grande');
       }else{
-        setSizeCoast(1000)
+        setSizePrice(1000);
+        setMainProductSizeCoast(1000);
+        setMainProductSize('Grande');
       }
     } else if (e.target.value === 'Venti') {
       setSelectsize('224px')
       if(item == '100'){
-        setest(1500)
+        setRecommendedSizePrice(1500);
+        setRecommendedSizeCoast(1500);
+        setRecommendedSize('Venti');
       }else{
-        setSizeCoast(1500)
+        setSizePrice(1500);
+        setMainProductSizeCoast(1500);
+        setMainProductSize('Venti');
       }
     }
   }
@@ -126,7 +158,7 @@ const Size = ({data,setSizeCoast,item,setest}) => {
               checked={size === 'Venti'}
               onChange={clickbtn}
             />
-            <div className="mx-6 my-2 h-[40px] w-[24px] cursor-pointer bg-[url(https://www.starbucks.com/app-assets/3abf3fc78365ef0b59bbfd0ecd1c8490.svg)]"></div>
+         <div className="mx-6 my-2 h-[40px] w-[24px] cursor-pointer bg-[url(https://www.starbucks.com/app-assets/3abf3fc78365ef0b59bbfd0ecd1c8490.svg)]"></div>
             <p className="text-center text-base font-semibold">
               Venti
             </p>

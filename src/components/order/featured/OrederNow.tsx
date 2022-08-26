@@ -1,5 +1,4 @@
 // @ts-nocheck
-import axios from 'axios'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import { Link, useParams } from 'react-router-dom'
@@ -16,12 +15,6 @@ const OrderNow = () => {
   const [recommendedSizePrice, setRecommendedSizePrice] = useState(0) //추천메뉴 사이즈 가격
   const [recommendedCount, setRecommendedCount] = useState(0) //추천메뉴 카운트
 
-  
-  //세션스토리지에 값이 남아있을수 있기떄문에 초기화 진행해주기
-  useEffect(() => {
-    sessionStorage.clear()
-  }, [])
-
   //api 호출 후 해당카페의 제품들 전부 불러오기
   const {
     data: productdata,
@@ -30,42 +23,54 @@ const OrderNow = () => {
     isLoading,
   } = useQuery(['getCafeitemList', cafe_id], () => getCafeitemList(cafe_id))
 
-
   //유저가 선택한 제품 찾기
   const mainProduct = productdata?.data.find((item) => item.product_id == product_id)
 
   //추천메뉴들의 총 가격
   let recommendedPrices =
-    recommendedPrice + recommendedSizePrice * recommendedCount
-
-  
+    Number(recommendedPrice) + Number(recommendedSizePrice) * Number(recommendedCount)
   //총가격 표시
   let mainProductPrice;
   if (isSuccess) {
-    mainProductPrice =  (mainProduct.price + sizePrice) * mainProductCount + recommendedPrices
+    mainProductPrice =  (Number(mainProduct.price) + Number(sizePrice)) * Number(mainProductCount) + Number(recommendedPrices)
   }
-
+  isSuccess && sessionStorage.setItem('mainProductprice', mainProduct.price)
+  isSuccess && sessionStorage.setItem('mainProductName', mainProduct.product_name_kor)
   //메인제품 카운트 핸들러
   const countPlus = useCallback => {
     setMainProductCount((PrevCount) => PrevCount + 1);
+    sessionStorage.setItem('mainProductCount', mainProductCount)
   }
 
   const countMinus = useCallback => {
-    setMainProductCount((PrevCount)=> PrevCount > 0 ? PrevCount -1 : 0)
+    setMainProductCount((PrevCount)=> PrevCount > 1 ? PrevCount -1 : 1)
+    sessionStorage.setItem('mainProductCount', mainProductCount)
   }
+
+    //세션스토리지에 값이 남아있을수 있기떄문에 초기화 진행해주기
+    useEffect(() => {
+      sessionStorage.clear()
+      sessionStorage.setItem('mainProductSize', sizePrice)
+      sessionStorage.setItem('mainProductCount', mainProductCount)
+    }, [])
   return (
     <>
       <Cafeinfo />
       <div className="flex flex-col gap-1 lg:ml-[70px] xl:flex-row">
         <div className="my-10 mx-auto lg:mx-[150px]">
-          <img
-            className="w-[400px] lg:min-h-[500px] lg:min-w-[500px]"
-            src={`https://storage.cloud.google.com/bitcamp-caffeine.appspot.com${mainProduct.file_path}${mainProduct.img_file}`}
-          />
+          {
+            isSuccess &&        
+            <img
+              className="w-[400px] lg:min-h-[500px] lg:min-w-[500px]"
+              src={`https://storage.cloud.google.com/bitcamp-caffeine.appspot.com${mainProduct.file_path}${mainProduct.img_file}`}
+            />
+          }
           {/* 고객이 선택한 제품 표시 */}
           <div className="mt-2 flex w-full flex-row lg:w-[500px] lg:max-w-[500px]">
             <p className="w-[90%] text-xl font-bold lg:text-2xl">
+
               {isSuccess && mainProduct.product_name_kor}
+
             </p>
             <p className="mr-2 text-xl font-bold lg:text-2xl">
               {isSuccess && mainProduct.price}₩
@@ -89,7 +94,7 @@ const OrderNow = () => {
             </div>
           </div>
           
-          {isSuccess && <Size data={mainProduct} setSizePrice={setSizePrice} />}
+          {isSuccess && mainProduct.category !== 'Food' && <Size data={mainProduct} setSizePrice={setSizePrice} /> }
         </div>
         
         <div className="mx-auto lg:w-90 sm:mb-24 lg:my-10 lg:ml-32 xl:mx-0">
@@ -109,6 +114,7 @@ const OrderNow = () => {
               setRecommendedCount={setRecommendedCount}
               recommendedCount={recommendedCount}
               setRecommendedPrice={setRecommendedPrice}
+              mainProduct={mainProduct}
             />
           )}
         </div>
