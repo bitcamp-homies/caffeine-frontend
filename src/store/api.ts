@@ -56,10 +56,6 @@ export const setMakeList = (email) => {
   const temp = api.post('/cafe/makeList', email)
 }
 
-export const setMakeCafeList = (email) => {
-  const temp = api.post('/cafe/makeCafeList', email)
-}
-
 export const getCafesMenusAll = (cafe_id) => {
   const temp = api.get('/cafe/getCafesMenusAll', {
     params: {

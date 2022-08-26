@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 import { ReactComponent as LikeIcon } from './svg/heart-svgrepo-com.svg'
 import { ReactComponent as FilLikeIcon } from './svg/fill-heart-svgrepo-com.svg'
 
-const CafeLikeIcon = ({ index, item }) => {
+const CafeLikeIcon = ({ index, item , likeList}) => {
   const [like, setLike] = useState(false)
 
   const likeBtn = (checkthis) => {
-    if (checkthis.id == 'cafe_1' && sessionStorage.getItem("Id") !== null) {
+    if (checkthis.id === 'cafe_1' && sessionStorage.getItem("Id") !== null) {
       setLike(!like)
     }
   }

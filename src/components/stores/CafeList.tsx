@@ -1,11 +1,12 @@
 //@ts-nocheck
 import { ReactComponent as InfoIcon } from './svg/info-svgrepo-com.svg'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import CafeLikeIcon from './CafeLikeIcon'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const CafeList = ({ filterData, setHoverCafe }) => {
   let DetailLink
@@ -18,8 +19,8 @@ const CafeList = ({ filterData, setHoverCafe }) => {
       return Math.round(distance / 100) / 10 + 'km'
     }
   }
+  const [likeList, setLikeList] = useState([])
 
-  const [check, setCheck] = useState([])
   const toggleLike = () => {
     if (session === null || session === '' || session === undefined) {
       Swal.fire({
@@ -42,6 +43,31 @@ const CafeList = ({ filterData, setHoverCafe }) => {
     } else if (session !== null || session !== '' || session !== undefined)
       setLike(!like)
   }
+
+  const data = {
+    'email' : session
+  }
+  const qs = require('qs');
+
+  const getLikeList = () => {
+    axios({
+      method : 'post',
+      url : 'http://localhost:8080/cafe/getLikeList',
+      data : qs.stringify(data),
+    })
+      .then((res) => {
+        setLikeList(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  useEffect(() => {
+    if (session !== null || session !== '' || session !== undefined) {
+      getLikeList(JSON.stringify(session))
+    }
+  }, [])
 
   return (
     <ul className="h-[45rem] w-full overflow-scroll overflow-x-hidden lg:w-[28rem] xl:w-[35rem]">
@@ -79,7 +105,7 @@ const CafeList = ({ filterData, setHoverCafe }) => {
               </div>
               <div>
                 <button className="relative ml-6 h-4 w-4" onClick={toggleLike}>
-                  <CafeLikeIcon index={index} item={item} />
+                 {likeList !== '' && <CafeLikeIcon index={index} item={item} likeList={likeList}/>}
                 </button>
                 <Link to={DetailLink}>
                   <button className="relative ml-6 h-4 w-4">

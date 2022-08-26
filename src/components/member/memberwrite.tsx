@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { NickNameCheck,EmailCheck } from 'store/api';
 import { createMember } from 'store/api';
 import { setMakeList } from 'store/api';
-import { setMakeCafeList } from 'store/api';
 const MemberWrite = () => {
   
   const [NickName, setNickName] = useState('')
@@ -63,14 +62,10 @@ const data2 = {
 const qs = require('qs');
 const saveMember = useMutation(data => createMember(data))
 const makeList = useMutation(data => setMakeList(data))
-const makeCafeList = useMutation(data => setMakeCafeList(data))
 const MemberSubmit = () =>{
   if(emailcheck?.data?.data == 'ok' && getnickname.data?.data == 'ok' && writepassword && Name != ''){
-  console.log(data2)
-  console.log(data2.email)
     saveMember.mutate(qs.stringify(data2))
     makeList.mutate(qs.stringify(data2))
-    makeCafeList.mutate(qs.stringify(data2))
     //nevigate('/')
   }else{
     alert('내용을 입력해주세요 ')
