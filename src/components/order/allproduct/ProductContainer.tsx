@@ -26,7 +26,7 @@ const ProductContainer = ({ data, cafe_name, img, file_path, img_file }) => {
         <div className="flex flex-row justify-center gap-10">
           <img
             className="bg-white h-16 w-16 rounded-full"
-            /* src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${result.file_path}${result.img_file.split(',').at(-1)}`} */
+            src={`https://storage.cloud.google.com/bitcamp-caffeine.appspot.com${img}`}
             alt="user avatar"
             loading="lazy"
           />
