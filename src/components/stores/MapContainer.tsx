@@ -221,7 +221,7 @@ const MapContainer = ({
           className="absolute bottom-[2.5rem] right-0 z-10 h-9 w-9 rounded-lg border-2 bg-white drop-shadow-lg lg:bottom-[17.5rem]"
           onClick={() => {
             map.setCenter(
-              new window.kakao.maps.LatLng(userLocation.lat, userLocation.lon)
+              new window.kakao.maps.LatLng(userLocation.lat, userLocation.lon),
             )
           }}
         >
