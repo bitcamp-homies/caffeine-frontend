@@ -17,8 +17,39 @@ const payment = () => {
     setPaymentOption(e.target.value)
   }
 
-  function kakaocall(){
-    alert('확인')
+  function kakaocall(productName,productCount,totalPrice){
+    const temp = axios.post({
+      url: "/v1/payment/ready",
+      headers: {
+        //카카오 dev에 등록한 admin Key 등록
+        Authorization : "KakaoAK 7d170046a599f182cb614154a7298d41",
+        "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+      },
+      params: {
+        cid: "TC0ONETIME",
+        partner_order_id: "partner_order_id",
+        partner_user_id: "partner_user_id",
+        item_name: productName,
+        quantity: productCount,
+        total_amount: totalPrice,
+        vat_amount: 0,
+        tax_free_amount: 0,
+        //성공
+        approval_url: "http://localhost:3000/",
+        //실패
+        fail_url: "http://localhost:3000/",
+        //취소
+        cancel_url: "http://localhost:3000/",
+      },
+    }).then((response) => {
+      const {
+        data: {next_redirect_pc_url, tid}
+      } = response;
+      console.log(next_redirect_pc_url);
+      console.log(tid);
+      window.localStorage.setItem("tid",tid);
+      window.localStorage.setItem("next_redirect_pc_url",next_redirect_pc_url);
+    });
   }
 
   return (
@@ -63,7 +94,7 @@ const payment = () => {
         </div>
         <div className="float-right mt-2 mr-3 inline-block rounded-3xl border p-2 text-white lg:mr-10">
           
-          <button className="text-lg text-white" onClick={kakaocall()}>결제하기</button>
+          <button className="text-lg text-white" onClick={() =>kakaocall(productName,productCount,totalPrice)}>결제하기</button>
           
         </div>
       </div>
