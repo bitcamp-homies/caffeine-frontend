@@ -123,22 +123,26 @@ const CafeCoordManage = () => {
     }
   }
 
+  const updateCafeinfo = (cafe_id) => {
+    const cafeinfo = {
+      opentime: getRandomOpentime(),
+      closetime: getRandomClosetime(),
+      pet: getRandomY(),
+      parking: getRandomY(),
+      cafe_id: cafe_id,
+    }
+
+    axios
+      .get('http://localhost:8080/cafe/updateCafeinfo', {
+        params: cafeinfo,
+      })
+      .catch((err) => console.log(err))
+  }
+
   const setRandomInfoAllCafe = (cafeList) => {
     console.log(cafeList.length + ' 개의 카페에 랜덤으로 info 를 넣겠습니다.')
     for (var i = 0; i < cafeList.length; i++) {
-      const cafeinfo = {
-        opentime: getRandomOpentime(),
-        closetime: getRandomClosetime(),
-        pet: getRandomY(),
-        parking: getRandomY(),
-        cafe_id: i,
-      }
-
-      axios
-        .get('http://localhost:8080/cafe/updateCafeinfo', {
-          params: cafeinfo,
-        })
-        .catch((err) => console.log(err))
+      updateCafeinfo(i)
     }
     alert('setRandomInfoAllCafe 완료')
   }
@@ -219,6 +223,7 @@ const CafeCoordManage = () => {
               <th>pet</th>
               <th>parking</th>
               <th>좌표최신화</th>
+              <th>랜덤카페정보</th>
             </tr>
           </thead>
           <tbody>
@@ -242,13 +247,20 @@ const CafeCoordManage = () => {
                   <td>{item.closetime}</td>
                   <td>{item.pet}</td>
                   <td>{item.parking}</td>
-                  <button
-                    onClick={() =>
-                      setGeoCoord(item.address2, item.address3, item.cafe_id)
-                    }
-                  >
-                    좌표넣기
-                  </button>
+                  <td>
+                    <button
+                      onClick={() =>
+                        setGeoCoord(item.address2, item.address3, item.cafe_id)
+                      }
+                    >
+                      좌표넣기
+                    </button>
+                  </td>
+                  <td>
+                    <button onClick={() => updateCafeinfo(item.cafe_id)}>
+                      랜덤정보삽입
+                    </button>
+                  </td>
                 </tr>
               )
             })}
