@@ -6,7 +6,7 @@ import { useQuery } from 'react-query'
 import { Link, useParams } from 'react-router-dom'
 import Cafeinfo from './featuredList/Cafeinfo'
 import OrderNowProduct from './featuredList/OrderNowProduct'
-import { getCafesMenusAll } from 'store/api'
+import { getCafeitemList } from 'store/api'
 
 import Size from './featuredList/Size'
 const OrderNow = () => {
@@ -17,8 +17,8 @@ const OrderNow = () => {
   const[test,setest] = useState(0)  //500/1000/1500
   const[test1,settest1] = useState(0) //count
     const {data : productdata,isSuccess,isError,isLoading,status} = useQuery(
-      ['getCafeProductList',cafe_id],
-      () => getCafesMenusAll(cafe_id),
+      ['getCafeitemList',cafe_id],
+      () => getCafeitemList(cafe_id),
     ) 
 
 
@@ -67,7 +67,7 @@ const OrderNow = () => {
         <div className="float-right mt-2 mr-3 inline-block rounded-3xl border p-3 text-white lg:mr-10">
           { status &&
           ///order/featured/order-now/
-            <Link to={`/order/featured/order-now/cafe/${cafe_id}/product_id/${product_id}/payment/${paymentPrice}`}>
+            <Link to={`/order/featured/order-now/cafe/${cafe_id}/product_id/${product_id}/payment/${paymentPrice}`} state={{data : data1,count : test1}}>
             <button className="text-xl text-white">Next</button>
           </Link>
           }
