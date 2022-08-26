@@ -159,9 +159,14 @@ const MapContainer = ({
     const options = {
       center: new window.kakao.maps.LatLng(37.4923615, 127.0292881),
       level: 7,
+      draggable: true,
+      scrollwheel: true,
+      disableDoubleClick: false,
+      disableDoubleClickZoom: false
     }
-    map = new window.kakao.maps.Map(container, options)
-
+    map = new window.kakao.maps.Map(container, options);
+    const zoomControl = new kakao.maps.ZoomControl();
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
     // 맵 렌더링
   }, [])
 
