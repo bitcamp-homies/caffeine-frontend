@@ -6,7 +6,7 @@ import { useQuery } from 'react-query'
 import { Link, useParams } from 'react-router-dom'
 import Cafeinfo from './featuredList/Cafeinfo'
 import OrderNowProduct from './featuredList/OrderNowProduct'
-import { getCafeitemList } from 'store/api'
+import { getCafeitem, getCafeitemList } from 'store/api'
 
 import Size from './featuredList/Size'
 const OrderNow = () => {
@@ -19,10 +19,9 @@ const OrderNow = () => {
     const {data : productdata,isSuccess,isError,isLoading,status} = useQuery(
       ['getCafeitemList',cafe_id],
       () => getCafeitemList(cafe_id),
-    ) 
-
-
-  const data1 = productdata?.data.find((item)=> item.product_id == product_id)
+    )
+    const data1 = productdata?.data.find((item)=> item.product_id == product_id)
+    console.log(data1)
    let paymentPrice
     if(isSuccess)
       paymentPrice = data1.price + test + data + sizeCoast
@@ -30,7 +29,7 @@ const OrderNow = () => {
     <>
       <Cafeinfo />
       <div className="flex flex-col gap-1 lg:ml-[70px] xl:flex-row">
-        <div className="my-10 mx-auto lg:mx-[150px]">
+        {/* <div className="my-10 mx-auto lg:mx-[150px]">
           <img
             className="w-[400px] lg:min-h-[500px] lg:min-w-[500px]"
             src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fdnvefa72aowie.cloudfront.net%2Forigin%2Farticle%2F202207%2FBD21914A2E3300AF9A241AEF915AE6B47E21CE8AAB402DA1BF4E07BE51CA7BA7.jpg%3Fq%3D95%26s%3D1440x1440%26t%3Dinside&type=sc960_832"
@@ -71,7 +70,7 @@ const OrderNow = () => {
             <button className="text-xl text-white">Next</button>
           </Link>
           }
-        </div>
+        </div> */}
       </div>
     </>
   )

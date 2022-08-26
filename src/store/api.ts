@@ -51,3 +51,13 @@ export const getCafeitemList = (cafe_id) => {
     })
     return temp
 }
+
+export const getCafeitem = (cafe_id,product_id) => {
+    const temp = api.get('/cafe/getCafeitem',{
+        params : {
+            cafe_id : cafe_id,
+            product_id : product_id
+        }
+    })
+    return temp
+}
