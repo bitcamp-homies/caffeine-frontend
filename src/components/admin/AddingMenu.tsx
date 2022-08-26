@@ -28,7 +28,7 @@ const AddingMenu = () => {
               for="file-upload"
               className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
             >
-              <span>Upload a file</span>
+              <span>사진 업로드</span>
               <input
                 id="file-upload"
                 name="file-upload"

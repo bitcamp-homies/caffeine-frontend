@@ -23,6 +23,14 @@ const CafeAdminPage = () => {
               <p className="mt-1 text-sm text-gray-600">
                 카페 프로필을 자유롭게 수정해주세요
               </p>
+              <div className="pt-8">
+                <img
+                  className="h-32 w-32 rounded-full bg-white md:h-52 md:w-52"
+                  src={`https://bluebottlecoffee.com/assets/fb-og-image-default-1c81ddb4bcb02ad6edba3bea1f198ae69821c8825a76f8fb98bddf66a2efc912.jpg`}
+                  alt="image loading.."
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
           <div className="mt-5 md:col-span-2 md:mt-0">
@@ -39,16 +47,14 @@ const CafeAdminPage = () => {
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
                         <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
-                       
                           https://www.instagram.com/
-                          
                         </span>
                         <input
                           type="text"
                           name="company-website"
                           id="company-website"
-                          className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                          placeholder="인스타계정"
+                          className="text-center block w-full flex-1 rounded-none rounded-r-md border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          placeholder="Instagram ID"
                         />
                       </div>
                     </div>
@@ -59,8 +65,7 @@ const CafeAdminPage = () => {
                       for="about"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      {' '}
-                      카페 소개{' '}
+                      카페 소개
                     </label>
                     <div className="mt-1">
                       <textarea
@@ -124,7 +129,7 @@ const CafeAdminPage = () => {
                             for="file-upload"
                             className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
                           >
-                            <span>Upload a file</span>
+                            <span>사진 업로드</span>
                             <input
                               id="file-upload"
                               name="file-upload"
@@ -142,7 +147,7 @@ const CafeAdminPage = () => {
                   </div>
                 </div>
 
-                <AddingMenu/>
+                <AddingMenu />
 
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                   <button
