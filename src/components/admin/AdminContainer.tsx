@@ -17,10 +17,10 @@ const AdminContainer = () => {
         className="sticky top-0 border-[1px] border-gray-300 bg-gray-100 text-right md:block md:px-6 md:py-2 lg:px-10 lg:py-3"
       >
         <div className="flex flex-row gap-5 justify-center text-xs md:text-sm grid-col">
-          <div className="hidden md:flex flex-row items-center gap-4 rounded-full bg-blue-200">Thumbs ID : {'Im the best'}</div>
-          <div className="hidden sm:flex flex-row items-center gap-4 rounded-full bg-blue-200">Thumbs Point : {'20000000'}</div>
-          <div className="hidden md:flex flex-row items-center gap-4 rounded-full bg-blue-200">사용자 : {'private'} / {'Business'}</div>
-          <div className="flex flex-row items-center gap-4 rounded-full bg-blue-200">
+          <div className="hidden md:flex flex-row items-center gap-4 rounded-full bg-gray-200">Thumbs ID : {'Im the best'}</div>
+          <div className="hidden sm:flex flex-row items-center gap-4 rounded-full bg-gray-200">Thumbs Point : {'20000000'}</div>
+          <div className="hidden md:flex flex-row items-center gap-4 rounded-full bg-gray-200">사용자 : {'private'} / {'Business'}</div>
+          <div className="flex flex-row items-center gap-4 rounded-full bg-gray-200">
             <p>profile 님 안녕하세요!</p>
             <img
               className="w-8 rounded-full"
@@ -39,7 +39,7 @@ const AdminContainer = () => {
       <div className="flex">
         <NaviContainer />
         <main className=" min-h-screen w-full">
-          <nav className="flex justify-between bg-white px-10 py-6" />
+          <nav className="flex justify-between bg-white px-10 py-5" />
           <ContentContainer />
           <Outlet />
         </main>

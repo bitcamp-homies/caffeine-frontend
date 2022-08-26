@@ -6,11 +6,11 @@ const NaviContainer = () => {
     <div className="hidden h-screen w-2/5 bg-white md:grid md:w-1/4 lg:grid">
       <div className="mx-auto py-10">
         {/* left Navi */}
-        <h1 className="duration-15 mb-10 cursor-pointer text-2xl font-bold text-[#EC5252]">
+        <h1 className="duration-15 mb-10 cursor-pointer text-2xl font-bold text-[#9F2042]">
           Thumbs!
         </h1>
         <ul>
-          <li className="mt-5 flex cursor-pointer space-x-2 duration-150 hover:text-[#EC5252]">
+          <li className="mt-5 flex cursor-pointer space-x-2 duration-150 hover:text-[#9F2042]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -29,7 +29,7 @@ const NaviContainer = () => {
               Like List
             </Link>
           </li>
-          <li className="mt-10 flex cursor-pointer space-x-2 duration-150 hover:text-[#EC5252]">
+          <li className="mt-10 flex cursor-pointer space-x-2 duration-150 hover:text-[#9F2042]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -48,7 +48,7 @@ const NaviContainer = () => {
               포인트 사용 내역
             </Link>
           </li>
-          <li className="mt-10 flex cursor-pointer space-x-2 duration-150 hover:text-[#EC5252]">
+          <li className="mt-10 flex cursor-pointer space-x-2 duration-150 hover:text-[#9F2042]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -69,7 +69,7 @@ const NaviContainer = () => {
               내 카페 관리
             </Link>
           </li>
-          <li className="mt-10 flex cursor-pointer space-x-2 duration-150 hover:text-[#EC5252]">
+          <li className="mt-10 flex cursor-pointer space-x-2 duration-150 hover:text-[#9F2042]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -88,7 +88,7 @@ const NaviContainer = () => {
               프로필 수정
             </Link>
           </li>
-          <li className="mt-10 flex cursor-pointer space-x-2 duration-150 hover:text-[#EC5252]">
+          <li className="mt-10 flex cursor-pointer space-x-2 duration-150 hover:text-[#9F2042]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -107,7 +107,7 @@ const NaviContainer = () => {
               주문 받은 내역
             </Link>
           </li>
-          <li className="mt-10 flex cursor-pointer space-x-2 duration-150 hover:text-[#EC5252]">
+          <li className="mt-10 flex cursor-pointer space-x-2 duration-150 hover:text-[#9F2042]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -126,7 +126,7 @@ const NaviContainer = () => {
               내 주문 내역
             </Link>
           </li>
-          <button className="mt-10 w-full rounded-full bg-[#EC5252] py-1.5 text-white">
+          <button className="mt-10 w-full rounded-full bg-[#9F2042] py-1.5 text-white">
             Learn
           </button>
         </ul>
