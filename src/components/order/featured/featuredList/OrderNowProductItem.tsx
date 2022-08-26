@@ -12,27 +12,27 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
   setRecommendedPrice,
 }) => {
   const [count, setCount] = useState(0)
-
+  console.log(data)
   //Plus 핸들러
   const handleClickPlus = () => {
     setCount((prevCount) => prevCount + 1)
     setRecommendedCount((item) => item + 1)
-    setRecommendedPrice((item) => item + data.price)
+    setRecommendedPrice((item) => Number(item) + Number(data.price))
   }
   //세션 스토리지에 값 넣기
   useEffect(() => {
     count > 0
       ? sessionStorage.setItem(
-          `recomendedProductName${data.name_kor}`,
-          data.name_kor,
+          `recomendedProductName${data.Product_name_kor}`,
+          data.Product_name_kor,
         )
       : sessionStorage.removeItem('recomendedProductName')
     count > 0
-      ? sessionStorage.setItem(`recomendedCount${data.name_kor}`, count)
+      ? sessionStorage.setItem(`recomendedCount${data.Product_name_kor}`, count)
       : sessionStorage.removeItem('recomendedCount')
     count > 0
       ? sessionStorage.setItem(
-          `recomendedProductPrice${data.name_kor}`,
+          `recomendedProductPrice${data.Product_name_kor}`,
           data.price,
         )
       : sessionStorage.removeItem('recomendedProductPrice')
@@ -49,13 +49,12 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
       <div className="mt-10 flex sm:gap-5 gap-3 lg:flex-row justify-start">
         <img
           className="top-0 h-[130px] w-[130px] sm:mx-0 lg:rounded-full"
-          src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAyMjFfMTk3%2FMDAxNjQ1NDIwMTQxNDcy.sLG1bvlwCxnepYWJAfxl-ThjVBdn9uyUv1ta3xcPiGkg.aaC0rjVctlb1Fu30NzxYxNrUBNv12j1lsZ32LyB4Anog.JPEG.jang2721%2FIMG_3650.jpg&type=sc960_832"
+          src={`https://storage.cloud.google.com/bitcamp-caffeine.appspot.com${data.file_path}${data.img_file}`}
         />
         <div className="sm:mx-0 lg:my-3">
           <div className="mx-auto text-xl font-bold lg:ml-5 lg:text-2xl">
             <p id="ProductName">
-              {' '}
-              {data.eng == null ? data.name_eng : data.name_kor}
+              {data.product_name_eng}
             </p>
           </div>
           <div id="totalPay" className="my-2 text-base text-gray-600 lg:ml-5">

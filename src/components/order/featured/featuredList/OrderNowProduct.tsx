@@ -5,9 +5,9 @@ import style from './FeaturedStyle.module.css'
 import { useParams } from 'react-router-dom'
 import OrderNowProductItem from './OrderNowProductItem'
 
-const OrderNowProduct = ({ data, setSizePrice,setRecommendedSizePrice,recommendedSizePrice,setRecommendedCount,setRecommendedPrice}) => {
+const OrderNowProduct = ({ data, setSizePrice,setRecommendedSizePrice,recommendedSizePrice,setRecommendedCount,setRecommendedPrice,mainProduct}) => {
   const {product_id} = useParams();
-  const recommended = data.data.filter((item) => item.recommended == 'Y' && item.product_id != product_id )
+  const recommended = data.data.filter((item) => item.recommended == 'Y' && item.product_id != product_id && item.category != mainProduct.category)
   return <>
    {
       recommended.map((item) => (

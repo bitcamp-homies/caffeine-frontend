@@ -21,7 +21,7 @@ const payment = () => {
       <div className="mt-5 mb-5 text-center">
         <p className="text-2xl font-bold">주문 내역</p>
       </div>
-      <div className="mx-auto mb-24 h-full w-full border lg:w-[700px]">
+      <div className="mx-auto mb-24 h-full w-full border lg:w-[700px] shadow-xl border-red-800 bg-red-800 text-white">
         <PaymentProduct cafe_id={cafe_id} product_id={product_id}/>
 
         <div className="flex flex-col border-t p-5">
@@ -33,6 +33,7 @@ const payment = () => {
               onChange={paymentOptionHandler}
               value="1"
             />
+            <img src="src/components/order/featured/paymentList/img/kakaoSmall.jpg"/>
             <span className="ml-2 lg:text-xl">카카오페이 결제</span>
           </label>
           <label>
@@ -52,10 +53,10 @@ const payment = () => {
       </div>
       <div className="fixed bottom-0 h-[70px] w-full bg-red-800">
         <div className="my-5 ml-5 inline-block">
-          <p className="text-xl text-white">Total Pay : {totalPrice}</p>
+          <p className="text-lg text-white">총 결제금액 : {totalPrice}</p>
         </div>
-        <div className="float-right mt-2 mr-3 inline-block rounded-3xl border p-3 text-white lg:mr-10">
-          <button className="text-xl text-white">payment</button>
+        <div className="float-right mt-2 mr-3 inline-block rounded-3xl border p-2 text-white lg:mr-10">
+          <button className="text-lg text-white">결제하기</button>
         </div>
       </div>
     </>
