@@ -1,14 +1,16 @@
 //@ts-nocheck
 
-
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals.ts';
-import { BrowserRouter } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './index.css'
+import App from './App'
+import reportWebVitals from './reportWebVitals.ts'
+import { BrowserRouter } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import sotre from './store/index'
+
+// @material-tailwind/react
+import { ThemeProvider } from '@material-tailwind/react'
 
 //index에서 QueryClient생성
 const queryClient = new QueryClient()

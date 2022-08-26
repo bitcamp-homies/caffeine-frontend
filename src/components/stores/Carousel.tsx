@@ -10,30 +10,33 @@ const Carousel = ({ data }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   }
-
-  let img = data[0].img_file.split(',')
-  img = img.filter((element, index) => index < img.length - 1)
+  let img
+  if (data != '') {
+    img = data[0].img_file.split(',')
+    img = img.filter((element, index) => index < img.length - 1)
+  }
   let test
 
   return (
     <div className="carousel">
       <Slider {...settings}>
-        {img.map((item, index) => {
-          test =
-            'https://storage.cloud.google.com/bitcamp-caffeine.appspot.com' +
-            data[0].file_path +
-            item
-          {
-            return (
-              <div key={index}>
-                <img
-                  src={test}
-                  style={{ width: '100%', height: '24rem' }}
-                ></img>
-              </div>
-            )
-          }
-        })}
+        {data != '' &&
+          img.map((item, index) => {
+            test =
+              'https://storage.cloud.google.com/bitcamp-caffeine.appspot.com' +
+              data[0].file_path +
+              item
+            {
+              return (
+                <div key={index}>
+                  <img
+                    src={test}
+                    style={{ width: '100%', height: '24rem' }}
+                  ></img>
+                </div>
+              )
+            }
+          })}
       </Slider>
     </div>
   )
