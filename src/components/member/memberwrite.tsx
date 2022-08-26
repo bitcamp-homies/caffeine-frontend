@@ -67,7 +67,7 @@ const MemberSubmit = () =>{
   console.log(data2)
   console.log(data2.email)
     saveMember.mutate(qs.stringify(data2))
-    makeList.mutate(qs.stringify(data2.email))
+    makeList.mutate(qs.stringify(data2))
 
     //nevigate('/')
   }else{
