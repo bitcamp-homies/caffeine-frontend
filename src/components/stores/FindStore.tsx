@@ -44,9 +44,9 @@ const FindStore = () => {
           userLong: userLocation.lon,
           userLat: userLocation.lat,
           boundary: boundary,
-          openFilter: filterOptions.openFilter, 
-          petFilter: filterOptions.petFilter, 
-          parkingFilter: filterOptions.parkingFilter, 
+          openFilter: filterOptions.openFilter,
+          petFilter: filterOptions.petFilter,
+          parkingFilter: filterOptions.parkingFilter,
         },
       })
       .then((res) => {
