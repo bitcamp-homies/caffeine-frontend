@@ -116,7 +116,7 @@ const CafeCoordManage = () => {
       <div>
         사용자위치 경도 : {userLong} 위도 : {userLat}
       </div>
-      <div>
+      <div className="my-4">
         <button
           onClick={() => setGeoCoordAllCafe(data)}
           className="text-semibold border-none bg-green-300 text-center text-white"
@@ -124,6 +124,16 @@ const CafeCoordManage = () => {
           전체 카페 좌표 최신화
         </button>
       </div>
+
+      <div className="my-4">
+        <button
+          onClick={() => setGeoCoordAllCafe(data)}
+          className="text-semibold border-none bg-green-300 text-center text-white"
+        >
+          전체 카페 info random
+        </button>
+      </div>
+
       <div>
         {selected} {keyword}
       </div>
@@ -143,7 +153,7 @@ const CafeCoordManage = () => {
         />
       </div>
       <div className="h-[36rem] w-[72rem] overflow-scroll ">
-        <table className="w-[100rem]">
+        <table className="w-[120rem]">
           <thead className="sticky top-0 bg-gray-300">
             <tr className="h-16">
               <th>CAFE_ID</th>
@@ -156,6 +166,10 @@ const CafeCoordManage = () => {
               <th>경도 </th>
               <th>위도 </th>
               <th>사용자와 거리:m</th>
+              <th>opentime</th>
+              <th>closetime</th>
+              <th>pet</th>
+              <th>parking</th>
               <th>좌표최신화</th>
             </tr>
           </thead>
@@ -176,6 +190,10 @@ const CafeCoordManage = () => {
                   <td>{item.longitude}</td>
                   <td>{item.latitude}</td>
                   <td>{Math.round(item.distance * 10) / 10}</td>
+                  <td>{item.opentime}</td>
+                  <td>{item.closetime}</td>
+                  <td>{item.pet}</td>
+                  <td>{item.parking}</td>
                   <button
                     onClick={() =>
                       setGeoCoord(item.address2, item.address3, item.cafe_id)
