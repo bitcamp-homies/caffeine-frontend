@@ -95,6 +95,54 @@ const CafeCoordManage = () => {
     }
   }
 
+  const getRandomOpentime = () => {
+    //풍혁0826 : opentime은 hour는 9, 10, 11 중 하나 min 은 0 , 15, 30, 45 중 하나 
+    const opentimeHour = Math.floor(Math.random()*3+9);
+    const opentimeMin = 15 * Math.floor(Math.random()*4);
+    const opentime = opentimeHour * 100 + opentimeMin;
+  
+    return opentime;
+  }
+  
+  const getRandomClosetime = () => {
+    //풍혁0826 : close은 hour는 18, 19, 20 중 하나 min 은 0 , 15, 30, 45 중 하나 
+    const closetimeHour = Math.floor(Math.random()*3+18);
+    const closetimeMin = 15 * Math.floor(Math.random()*4);
+    const closetime = closetimeHour * 100 + closetimeMin;
+  
+    return closetime;
+  }
+
+  //풍혁0826 : pet과 parking은 1/3의 확률로 Y가 들어갑니다. 현실은 이보다 훨씬 적겠지만 filter 효과를 보여주기 위해 좀 많이 Y가 되도록
+  const getRandomY = () => {
+    const rand = Math.floor(Math.random()*3+1);
+    if(rand % 3 === 0){
+      return 'Y';
+    }else{
+      return 'N';
+    }
+  }
+
+  const setRandomInfoAllCafe = (cafeList) => {
+    console.log(cafeList.length + ' 개의 카페에 랜덤으로 info 를 넣겠습니다.')
+    for(var i = 0; i < cafeList.length; i++){
+      const cafeinfo = {
+        opentime: getRandomOpentime(),
+        closetime: getRandomClosetime(),
+        pet: getRandomY(),
+        parking: getRandomY(),
+        cafe_id: i,
+      };
+
+      axios
+        .get('http://localhost:8080/cafe/updateCafeinfo', {
+          params: cafeinfo,
+        })
+        .catch((err) => console.log(err));
+    }
+    alert('setRandomInfoAllCafe 완료');
+  }
+
   useEffect(() => {
     getUserLocationAndGetCafeList()
   }, [])
@@ -127,7 +175,7 @@ const CafeCoordManage = () => {
 
       <div className="my-4">
         <button
-          onClick={() => setGeoCoordAllCafe(data)}
+          onClick={() => setRandomInfoAllCafe(data)}
           className="text-semibold border-none bg-green-300 text-center text-white"
         >
           전체 카페 info random
