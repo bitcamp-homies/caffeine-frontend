@@ -33,10 +33,10 @@ const MapContainer = ({
   }
 
   const getDistance = (distance) => {
-    if(distance < 1000){
-      return Math.round(distance)+'m';
-    }else{
-      return Math.round(distance/100)/10+'km';
+    if (distance < 1000) {
+      return Math.round(distance) + 'm'
+    } else {
+      return Math.round(distance / 100) / 10 + 'km'
     }
   }
 

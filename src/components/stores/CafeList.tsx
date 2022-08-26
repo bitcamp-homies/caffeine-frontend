@@ -6,8 +6,11 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import CafeLikeIcon from './CafeLikeIcon'
 import { useNavigate } from 'react-router-dom'
+import { ReactComponent as OpenIcon } from './svg/open-svgrepo-com.svg'
+import { ReactComponent as DogIcon } from './svg/dog-svgrepo-com.svg'
+import { ReactComponent as ParkingIcon } from './svg/parking-car-svgrepo-com.svg'
 
-const CafeList = ({ filterData, setHoverCafe }) => {
+const CafeList = ({ filterData, setHoverCafe, filterOptions }) => {
   let DetailLink
   const session = sessionStorage.getItem('Id')
   const navigate = useNavigate()
@@ -75,6 +78,26 @@ const CafeList = ({ filterData, setHoverCafe }) => {
                 </div>
                 <div className="text-xs text-gray-500">
                   {getDistance(item.distance)} away
+                </div>
+                <div>
+                  {filterOptions.openFilter && (
+                    <OpenIcon
+                      className="mr-4 inline h-[20px] w-[20px] "
+                      fill="#000000"
+                    />
+                  )}
+                  {filterOptions.petFilter && (
+                    <DogIcon
+                      className="mr-4 inline h-[20px] w-[20px] "
+                      fill="#000000"
+                    />
+                  )}
+                  {filterOptions.parkingFilter && (
+                    <ParkingIcon
+                      className="mr-4 inline h-[20px] w-[20px] "
+                      fill="#000000"
+                    />
+                  )}
                 </div>
               </div>
               <div>
