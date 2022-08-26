@@ -19,10 +19,10 @@ const AllProducts = () => {
     <div>
       <div className="flex flex-row gap-4">
         <div className="basis-1/4 hidden lg:block">
-        {data !== undefined && <FilterContainer  data={data} cafe_name={cafe_name} img={useLocation().state.img}/>}
+        {data !== undefined && useLocation().state.img !== null && <FilterContainer  data={data} cafe_name={cafe_name} img={useLocation().state.img}/>}
         </div>
         <div className="basis-full font-semibold pb-4">
-          {data !== undefined && <ProductContainer data={data} cafe_name={cafe_name} img={useLocation().state.img}/> }
+          {data !== undefined && useLocation().state.img !== null && <ProductContainer data={data} cafe_name={cafe_name} img={useLocation().state.img}/> }
         </div>
       </div>
     </div>
