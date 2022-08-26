@@ -9,6 +9,7 @@ const CafeLikeIcon = ({ index, item , likeList}) => {
   const likeBtn = (checkthis) => {
     if (checkthis.id === 'cafe_1' && sessionStorage.getItem("Id") !== null) {
       setLike(!like)
+      
     }
   }
 
