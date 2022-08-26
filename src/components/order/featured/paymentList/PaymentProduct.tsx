@@ -18,10 +18,8 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
   const count = []
   const size = []
   const sizePrice = []
-  isSuccess && console.log(productdata)
   //추천메뉴 세션값 삽입
   productdata?.data.map((item, index) => {
-    console.log(item)
     name[index] = sessionStorage.getItem(
       `recomendedProductName${item.product_name_kor}`,
     )

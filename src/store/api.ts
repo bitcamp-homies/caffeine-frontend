@@ -61,12 +61,31 @@ export const getCafeitemList = (cafe_id) => {
     return temp
 }
 
-export const getCafeitem = (cafe_id,product_id) => {
-    const temp = api.get('/cafe/getCafeitem',{
-        params : {
-            cafe_id : cafe_id,
-            product_id : product_id
-        }
-    })
-    return temp
+//카카오API
+export const kakaoAPI = (productName, productCount, totalPrice) =>{
+  const temp = axios.post({
+    url: "https://kapi.kakao.com/v1/payment/ready",
+    headers: {
+      //카카오 dev에 등록한 admin Key 등록
+      Authorization : "7d170046a599f182cb614154a7298d41",
+      "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    },
+    params: {
+      cid: "TC0ONETIME",
+      partner_order_id: "partner_order_id",
+      partner_user_id: "partner_user_id",
+      item_name: productName,
+      quantity: productCount,
+      total_amount: totalPrice,
+      vat_amount: 0,
+      tax_free_amount: 0,
+      //성공
+      approval_url: "http://localhost:3000/",
+      //실패
+      fail_url: "http://localhost:3000/",
+      //취소
+      cancel_url: "http://localhost:3000/",
+    },
+  })
+  return temp
 }

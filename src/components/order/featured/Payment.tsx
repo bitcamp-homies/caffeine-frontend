@@ -1,20 +1,26 @@
 // @ts-nocheck
+import axios from 'axios'
 import React, { useState } from 'react'
-
-import { useLocation } from 'react-router-dom'
-
+import { Link, useLocation } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-
+import { kakaoAPI } from 'store/api'
 import Cafeinfo from './featuredList/Cafeinfo'
 import PaymentProduct from './paymentList/PaymentProduct'
 
+const productCount = 1
+const productName = "몰라"
+
 const payment = () => {
-  console.log(useLocation())
   const [paymentOption, setPaymentOption] = useState('1')
   const { totalPrice, cafe_id, product_id} = useParams();
   const paymentOptionHandler = (e) => {
     setPaymentOption(e.target.value)
   }
+
+  function kakaocall(){
+    alert('확인')
+  }
+
   return (
     <>
       <Cafeinfo />
@@ -56,7 +62,9 @@ const payment = () => {
           <p className="text-lg text-white">총 결제금액 : {totalPrice}</p>
         </div>
         <div className="float-right mt-2 mr-3 inline-block rounded-3xl border p-2 text-white lg:mr-10">
-          <button className="text-lg text-white">결제하기</button>
+          
+          <button className="text-lg text-white" onClick={kakaocall()}>결제하기</button>
+          
         </div>
       </div>
     </>
