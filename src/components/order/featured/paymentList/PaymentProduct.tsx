@@ -46,7 +46,7 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
   const mainProductList = productdata?.data.find(
     (item) => item.product_id == product_id,
   )
-
+  console.log(productdata)
   return (
     <>
       <div className="border-b border-black">

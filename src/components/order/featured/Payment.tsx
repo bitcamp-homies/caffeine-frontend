@@ -1,12 +1,21 @@
 // @ts-nocheck
 import React, { useState } from 'react'
-
-import { useLocation } from 'react-router-dom'
-
+import { Link, useLocation } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-
+import { kakaoAPI } from 'store/api'
 import Cafeinfo from './featuredList/Cafeinfo'
 import PaymentProduct from './paymentList/PaymentProduct'
+
+const productCount = 1
+const productName = "몰라"
+function callKakao({totalPrice, productCount, prodcutName}) {
+  const {
+    data: kakaoData,
+    isSuccess,
+    isError,
+    isLoading,
+  } = useQuery(['kakaoAPI', totalPrice,productCount,prodcutName], () => kakaoAPI(cafe_id))
+}
 
 const payment = () => {
   console.log(useLocation())
@@ -56,7 +65,9 @@ const payment = () => {
           <p className="text-lg text-white">총 결제금액 : {totalPrice}</p>
         </div>
         <div className="float-right mt-2 mr-3 inline-block rounded-3xl border p-2 text-white lg:mr-10">
+          <Link>
           <button className="text-lg text-white">결제하기</button>
+          </Link>
         </div>
       </div>
     </>
