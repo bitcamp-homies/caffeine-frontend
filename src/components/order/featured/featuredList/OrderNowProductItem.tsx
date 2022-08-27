@@ -12,7 +12,6 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
   setRecommendedPrice,
 }) => {
   const [count, setCount] = useState(0)
-  console.log(data)
   //Plus 핸들러
   const handleClickPlus = () => {
     setCount((prevCount) => prevCount + 1)
@@ -23,16 +22,16 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
   useEffect(() => {
     count > 0
       ? sessionStorage.setItem(
-          `recomendedProductName${data.Product_name_kor}`,
-          data.Product_name_kor,
+          `recomendedProductName${data.product_name_kor}`,
+          data.product_name_kor,
         )
       : sessionStorage.removeItem('recomendedProductName')
     count > 0
-      ? sessionStorage.setItem(`recomendedCount${data.Product_name_kor}`, count)
+      ? sessionStorage.setItem(`recomendedCount${data.product_name_kor}`, count)
       : sessionStorage.removeItem('recomendedCount')
     count > 0
       ? sessionStorage.setItem(
-          `recomendedProductPrice${data.Product_name_kor}`,
+          `recomendedProductPrice${data.product_name_kor}`,
           data.price,
         )
       : sessionStorage.removeItem('recomendedProductPrice')

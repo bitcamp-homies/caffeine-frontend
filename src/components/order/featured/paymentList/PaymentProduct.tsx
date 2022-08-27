@@ -18,7 +18,7 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
   const count = []
   const size = []
   const sizePrice = []
-  
+
   //추천메뉴 세션값 삽입
   productdata?.data.map((item, index) => {
     name[index] = sessionStorage.getItem(
@@ -46,11 +46,11 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
   const mainProductList = productdata?.data.find(
     (item) => item.product_id == product_id,
   )
-  console.log(productdata)
+  
   return (
     <>
       <div className="border-b border-black">
-        <div className="text-center mt-5">
+        <div className="mt-5 text-center">
           <span className="text-2xl font-bold">메인 상품</span>
         </div>
         <div className="ml-3 flex gap-10">
@@ -67,13 +67,18 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
               제품명 : {isSuccess && mainProductList.product_name_kor}
             </span>
             <span className="text-xs font-bold lg:text-base">
-              사이즈 : {mainProductList.category == 'Food' ? 'OneSize' : mainProductSize == '' ? 'Short' : mainProductSize}
+              사이즈 :{' '}
+              {isSuccess && mainProductList.category == 'Food'
+                ? 'OneSize'
+                : mainProductSize == ''
+                ? 'Short'
+                : mainProductSize}
             </span>
             <span className="text-xs font-bold lg:text-base">
               선택 수량 : {mainProductCount}
             </span>
             <span className="text-xs font-bold lg:text-base">
-              금액 :{' '}
+              금액 :
               {isSuccess &&
                 Number(mainProductList.price) + Number(mainProductSizePrice)}
             </span>
@@ -81,7 +86,7 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
         </div>
       </div>
       <div className="border-1 mt-4">
-      <div className="text-center mt-5">
+        <div className="mt-5 text-center">
           <span className="text-2xl font-bold">추가 주문 상품</span>
         </div>
         {productdata?.data.map((item, index) => (

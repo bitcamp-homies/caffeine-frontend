@@ -30,6 +30,8 @@ import OrderList from 'components/admin/OrderList'
 import PointUsed from 'components/admin/PointUsed'
 import Profile from 'components/admin/Profile'
 import Etc from 'components/admin/etc'
+import KakaoResult from 'components/order/featured/paymentList/kakaoAPI/KakaoResult'
+import PaymentComplete from 'components/order/featured/PaymentComplete'
 
 const MainRoutes = () => {
   return (
@@ -57,17 +59,15 @@ const MainRoutes = () => {
         />
         <Route path="featured">
           <Route index element={<Featured />} />
-          <Route path="order-now/cafe/:cafe_id">
-            <Route path="product/:product_id" element={<OrderNow />}/>
-            <Route path="product_id/:product_id/payment/:totalPrice" element={<Payment />} />          
+          <Route path="order-now/cafe/:cafe_id">        
             <Route path="product/:product_id" element={<OrderNow />} />
-            <Route
-              path="product/:product_id/payment/:totalPrice"
-              element={<Payment />}
-            />
+            <Route path="product/:product_id/payment/:totalPrice" element={<Payment />}/>
+            <Route path="product/:product_id/payment/:totalPrice/paymentcomplete" element={<PaymentComplete/>} />
           </Route>
         </Route>
 
+
+      
 
 
         <Route path="cards" element={<Cardheader />}>
