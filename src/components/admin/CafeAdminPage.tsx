@@ -2,10 +2,14 @@
 
 //사진, 카페명, 인스타 아이디, 주소, 소개글 ,메 뉴 추가, 5. 오더 받기/ 안 받기
 
-import React from 'react'
+import React, { useState } from 'react'
 import AddingMenu from './AddingMenu'
 
-const CafeAdminPage = () => {
+const CafeAdminPage = (e) => {
+  const [imgdata,SetImgdata] = useState('')
+  const saveFileImage = (e) => {
+    SetImgdata(URL.createObjectURL(e.target.files[0]))
+  }
   return (
     <>
       <div className="pt-4">
@@ -26,7 +30,7 @@ const CafeAdminPage = () => {
               <div className="pt-8">
                 <img
                   className="h-32 w-32 rounded-full bg-white md:h-52 md:w-52"
-                  src={`https://bluebottlecoffee.com/assets/fb-og-image-default-1c81ddb4bcb02ad6edba3bea1f198ae69821c8825a76f8fb98bddf66a2efc912.jpg`}
+                  src={`https://bluebottlecoffee.c   om/assets/fb-og-image-default-1c81ddb4bcb02ad6edba3bea1f198ae69821c8825a76f8fb98bddf66a2efc912.jpg`}
                   alt="image loading.."
                   loading="lazy"
                 />
@@ -53,7 +57,7 @@ const CafeAdminPage = () => {
                           type="text"
                           name="company-website"
                           id="company-website"
-                          className="text-center block w-full flex-1 rounded-none rounded-r-md border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          className="block w-full flex-1 rounded-none rounded-r-md border border-gray-300 text-center focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           placeholder="Instagram ID"
                         />
                       </div>
@@ -87,20 +91,28 @@ const CafeAdminPage = () => {
                     </label>
                     <div className="mt-1 flex items-center">
                       <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
-                        <svg
-                          className="h-full w-full text-gray-300"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
+                        {
+                         imgdata === '' ? <svg
+                            className="h-full w-full text-gray-300"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                          </svg> : <img id='profileimg' src={imgdata}/>
+                        }
                       </span>
-                      <button
-                        type="button"
-                        className="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      <input
+                        type="file"
+                        id="input_file"
+                        style={{ display: 'none' }}
+                        onChange={saveFileImage}
+                      ></input>
+                      <label
+                        for="input_file"
+                        className="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
                         Change
-                      </button>
+                      </label>
                     </div>
                   </div>
 
