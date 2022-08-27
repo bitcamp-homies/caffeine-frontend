@@ -60,3 +60,8 @@ export const getCafeitemList = (cafe_id) => {
     })
     return temp
 }
+
+export const getMember = (Id) => {
+  const temp = api.post('/cafe/getMember',Id)
+  return temp
+}
