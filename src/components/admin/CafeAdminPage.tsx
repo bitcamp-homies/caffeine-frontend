@@ -1,17 +1,72 @@
 // @ts-nocheck
 
 //사진, 카페명, 인스타 아이디, 주소, 소개글 ,메 뉴 추가, 5. 오더 받기/ 안 받기
-
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddingMenu from './AddingMenu'
-
+import {ref,getStorage, uploadBytesResumable, uploadBytes,getMetadata} from 'firebase/storage'
+import firebase from 'api/firebase'
+import { getMember } from 'store/api'
+import { InsertProfileimg,selectProfileimg,updateProfileimg } from 'store/api'
+import { profile } from 'console'
 const CafeAdminPage = (e) => {
+  firebase.app
   const [imgdata,SetImgdata] = useState('')
+  const [firebaseimgname,SetFireBaseImgName] = useState('')
+  const [file,setFile] = useState('')
+  const [user,Setuser] = useState([])
+  const [profileimg,SetProfileImg] = useState([])
+  const storage = getStorage()
+  const Id = sessionStorage.getItem('Id')
+
+  const getMemberdata = {
+    'user_id' : Id
+  }
+  const qs = require('qs');
+  useEffect(()=>{
+    getMember(qs.stringify(getMemberdata))
+    .then(res =>{
+      Setuser(res.data)
+      const userdata ={
+        user_id : res.data.user_id
+      }
+      selectProfileimg(qs.stringify(userdata))
+      .then(res => SetProfileImg(res.data))
+      } 
+    ) 
+  },[])
+
+
+
   const saveFileImage = (e) => {
+    setFile(e.target.files[0])
+    SetFireBaseImgName(e.target.files[0].name)
     SetImgdata(URL.createObjectURL(e.target.files[0]))
+  }
+  /*     const mountainsRef = ref(storage, `/test/${firebaseimgname}`)
+  uploadBytesResumable(mountainsRef) */
+
+  const metaData = {
+    contentType : file.type
+  }
+  const InsertProfileimgdata ={
+    path : `/profile/${user.user_id}/`,
+    img : `${firebaseimgname}`,
+    user_id : user.user_id
+  }
+  const save = () => {
+    const mountainsRef = ref(storage, `/profile/${user.user_id}/${firebaseimgname}`)//파일명 및 경로 지정
+      uploadBytesResumable(mountainsRef,file,metaData)//실제 업로드 ,경로 , 파일
+      if(profileimg == ''){
+        InsertProfileimg(qs.stringify(InsertProfileimgdata))
+        alert('저장 완료')
+      }else{
+        updateProfileimg(qs.stringify(InsertProfileimgdata))
+        alert('저장완료')
+      }
   }
   return (
     <>
+
       <div className="pt-4">
         <div className="hidden sm:block" aria-hidden="true">
           <div className="py-5">
@@ -92,14 +147,19 @@ const CafeAdminPage = (e) => {
                     <div className="mt-1 flex items-center">
                       <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
                         {
-                         imgdata === '' ? <svg
+                         imgdata === '' && profileimg === '' ? <svg
+                            id="profileimg1"
                             className="h-full w-full text-gray-300"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                           >
                             <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                          </svg> : <img id='profileimg' src={imgdata}/>
+                          </svg> :
+                          <img id='profileimg3'  
+                          className="h-full w-full text-gray-300" 
+                          src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${profileimg.path}${profileimg.profile_img}`}/>
                         }
+
                       </span>
                       <input
                         type="file"
@@ -163,8 +223,9 @@ const CafeAdminPage = (e) => {
 
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                   <button
-                    type="submit"
+                    type="button"
                     className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    onClick={save}
                   >
                     Save
                   </button>

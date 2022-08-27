@@ -65,3 +65,16 @@ export const getMember = (Id) => {
   const temp = api.post('/cafe/getMember',Id)
   return temp
 }
+export const InsertProfileimg = (profile) => {
+  const temp = api.post('/cafe/InsertProfileimg',profile)
+  return temp
+}
+
+export const selectProfileimg = (user_id) => {
+  const temp = api.post('/cafe/selectProfileimg',user_id)
+  return temp
+}
+
+export const updateProfileimg = (user_id) => {
+  const temp = api.post('/cafe/updateProfileimg',user_id)
+}
