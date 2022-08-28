@@ -1,9 +1,9 @@
 // @ts-nocheck
 import axios from 'axios'
 import { useMutation } from 'react-query'
-
+//https://api.staysane.me
 const api = axios.create({
-  baseURL: 'https://api.staysane.me/',
+  baseURL: 'http://localhost:8080',
 })
 
 export const listAllMybatis = () => {

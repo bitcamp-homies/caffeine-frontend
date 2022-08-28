@@ -11,7 +11,7 @@ const CafeListTemp = () => {
   const [data, setData] = React.useState([])
 
   axios
-    .get('http://localhost:8080/cafe/listAllMybatis')
+    .get('https://api.staysane.me/cafe/listAllMybatis')
     .then((res) => {console.log(res.data)})
 
   return <div>

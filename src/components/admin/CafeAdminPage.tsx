@@ -15,6 +15,7 @@ const CafeAdminPage = (e) => {
   const [user,Setuser] = useState([])
   const [profileimg,SetProfileImg] = useState([])
   const [imgfileList,SetImgFileList] = useState([])
+  const [imgfileListName,SetImgFileListName] = useState([])
   const storage = getStorage()
   const Id = sessionStorage.getItem('Id')
 
@@ -35,33 +36,29 @@ const CafeAdminPage = (e) => {
       } 
     ) 
   },[imgdata])
-  const si = user.business_address.split(' ')
-  const si1 = si[0]+'시'
-
   const saveFileImage = (e) => {
 
     setFile(e.target.files[0])
     SetFireBaseImgName(e.target.files[0].name)
     SetImgdata(URL.createObjectURL(e.target.files[0]))
   }
-
   const imgList = (e) => {
-    const imagesList = e.target.files
-    let imgURLList = [...imgfileList]
+    SetImgFileList([... e.target.files])
 
-
-    SetImgFileList(imagesList)
   }
 
   /*     const mountainsRef = ref(storage, `/test/${firebaseimgname}`)
   uploadBytesResumable(mountainsRef) */
   let imgname = firebaseimgname.split('.')
-  let imgname1 = imgname[0]+'profile'
+  let imgname1 = imgname[0]+'-profile'
   let imgname2 = imgname1+'.'+imgname[1] //프로필 이미지 뒤에 글자 붙이기
+  
 
   const metaData = {
     contentType : file.type
   }
+
+
   const InsertProfileimgdata ={
     path : `/profile/${user.user_id}/`,
     img :  imgname2,
@@ -69,14 +66,38 @@ const CafeAdminPage = (e) => {
   }
 
   const save = () => {
+
+
     //실제 firebase에 새로 올라가는 파일
     const mountainsRef = ref(storage, `/profile/${user.user_id}/${imgname2}`)//파일명 및 경로 지정
     //기존에 firebase에 올라가있는 파일 삭제 
     if(profileimg == ''){
       uploadBytesResumable(mountainsRef,file,metaData)//실제 업로드 ,경로 , 파일
       InsertProfileimg(qs.stringify(InsertProfileimgdata))
+      let imgmetaData
+      let imgListRef
+      let ImgFileListName = new Array();
+      for(let i = 0; i < imgfileList.length; i++){
+        imgmetaData = {
+          contentType : imgfileList[i].type
+        }
+        ImgFileListName[i] = [imgfileList[i].name]
+        imgListRef = ref(storage, `/profile/${user.user_id}/${ImgFileListName[i]}`)//파일명 및 경로 지정
+        uploadBytesResumable(imgListRef,imgfileList[i],imgmetaData)
+      }
       alert('저장 완료')
     }else{
+      let imgmetaData
+      let imgListRef
+      let ImgFileListName = new Array();
+      for(let i = 0; i < imgfileList.length; i++){
+        imgmetaData = {
+          contentType : imgfileList[i].type
+        }
+        ImgFileListName[i] = [imgfileList[i].name]
+        imgListRef = ref(storage, `/profile/${user.user_id}/${ImgFileListName[i]}`)//파일명 및 경로 지정
+        uploadBytesResumable(imgListRef,imgfileList[i],imgmetaData)
+      }
         const mountRef = ref(storage, `/profile/${user.user_id}/${profileimg.profile_img}`)
         deleteObject(mountRef)
         uploadBytesResumable(mountainsRef,file,metaData)//실제 업로드 ,경로 , 파일
@@ -246,7 +267,7 @@ const CafeAdminPage = (e) => {
                               name="file-upload"
                               type="file"
                               className="sr-only"
-                              onClick={imgList}
+                              onChange={imgList}
                               multiple
                             />
                           </label>
