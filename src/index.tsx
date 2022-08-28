@@ -11,6 +11,9 @@ import sotre from './store/index'
 
 // @material-tailwind/react
 import { ThemeProvider } from '@material-tailwind/react'
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+
+serviceWorkerRegistration.register();
 
 //index에서 QueryClient생성
 const queryClient = new QueryClient()
