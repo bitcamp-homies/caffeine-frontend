@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useMutation } from 'react-query'
 
 const api = axios.create({
-  baseURL: 'https://api.staysane.me',
+  baseURL: `${process.env.REACT_APP_THUMBS_API_ADDRESS}`,
 })
 
 export const listAllMybatis = () => {

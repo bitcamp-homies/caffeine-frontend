@@ -20,7 +20,7 @@ const CafeSwipe = () => {
   //3000미터 근방 카페
   const getCafeListAll = (userLocation) => {
     axios
-      .get('https://api.staysane.me/cafe/listBoundary3000Mybatis', {
+      .get(`${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/listBoundary3000Mybatis`, {
         params: {
           userLong: userLocation.long,
           userLat: userLocation.lat,
