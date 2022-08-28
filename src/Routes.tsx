@@ -62,7 +62,7 @@ const MainRoutes = () => {
           <Route path="order-now/cafe/:cafe_id">        
             <Route path="product/:product_id" element={<OrderNow />} />
             <Route path="product/:product_id/payment/:totalPrice" element={<Payment />}/>
-            <Route path="product/:product_id/payment/:totalPrice/paymentcomplete" element={<PaymentComplete/>} />
+            <Route path="product/:product_id/payment/:totalPrice/paymentcomplete/:completeNumber" element={<PaymentComplete/>} />
           </Route>
         </Route>
 

@@ -19,7 +19,7 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
   const size = []
   const sizePrice = []
 
-  //추천메뉴 세션값 삽입
+  //추천메뉴 세션값 가져오기
   productdata?.data.map((item, index) => {
     name[index] = sessionStorage.getItem(
       `recomendedProductName${item.product_name_kor}`,
@@ -46,12 +46,11 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
   const mainProductList = productdata?.data.find(
     (item) => item.product_id == product_id,
   )
-  
   return (
     <>
       <div className="border-b border-black">
         <div className="mt-5 text-center">
-          <span className="text-2xl font-bold">메인 상품</span>
+          <span className="text-2xl font-bold">주문 상품</span>
         </div>
         <div className="ml-3 flex gap-10">
           <div>
@@ -70,7 +69,7 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
               사이즈 :{' '}
               {isSuccess && mainProductList.category == 'Food'
                 ? 'OneSize'
-                : mainProductSize == ''
+                : isSuccess && mainProductList.category == 'Drinks'
                 ? 'Short'
                 : mainProductSize}
             </span>
@@ -84,11 +83,7 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
             </span>
           </div>
         </div>
-      </div>
-      <div className="border-1 mt-4">
-        <div className="mt-5 text-center">
-          <span className="text-2xl font-bold">추가 주문 상품</span>
-        </div>
+      
         {productdata?.data.map((item, index) => (
           <div key={item.product_id}>
             {name[index] == null ? null : (

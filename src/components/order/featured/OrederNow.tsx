@@ -7,6 +7,7 @@ import OrderNowProduct from './featuredList/OrderNowProduct'
 import { getCafeitemList } from 'store/api'
 import style from './featuredList/FeaturedStyle.module.css'
 import Size from './featuredList/Size'
+import { main } from '@popperjs/core'
 const OrderNow = () => {
   const { cafe_id, product_id } = useParams()
   const [mainProductCount, setMainProductCount] = useState(1) //메인제품 카운트
@@ -41,8 +42,8 @@ const OrderNow = () => {
       Number(recommendedPrices)
   }
   isSuccess && sessionStorage.setItem('mainProductprice', mainProduct.price)
-  isSuccess &&
-    sessionStorage.setItem('mainProductName', mainProduct.product_name_kor)
+  isSuccess && sessionStorage.setItem('mainProductName', mainProduct.product_name_kor)
+
   //메인제품 카운트 핸들러
   const countPlus = (useCallback) => {
     setMainProductCount((PrevCount) => PrevCount + 1)
@@ -53,7 +54,6 @@ const OrderNow = () => {
     setMainProductCount((PrevCount) => (PrevCount > 1 ? PrevCount - 1 : 1))
     sessionStorage.setItem('mainProductCount', mainProductCount)
   }
-
   //세션스토리지에 값이 남아있을수 있기떄문에 초기화 진행해주기
   useEffect(() => {
     sessionStorage.clear()
