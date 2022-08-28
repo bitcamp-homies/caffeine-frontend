@@ -2,7 +2,7 @@ import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getList = createAsyncThunk("GET_TODO", async () => { //action
-  const response = await axios.get("http://localhost:8080/cafe/JoinAll");
+  const response = await axios.get("https://api.staysane.me/cafe/JoinAll");
   return response.data;
 });
 
