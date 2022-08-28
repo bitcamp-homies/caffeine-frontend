@@ -54,7 +54,7 @@ const OrderNow = () => {
     setMainProductCount((PrevCount) => (PrevCount > 1 ? PrevCount - 1 : 1))
     sessionStorage.setItem('mainProductCount', mainProductCount)
   }
-  //세션스토리지에 값이 남아있을수 있기떄문에 초기화 진행해주기
+  //세션스토리지에 값이 남아있을수 있기떄문에 제품 정보들 삭제하기
   useEffect(() => {
     sessionStorage.clear()
     sessionStorage.setItem('mainProductSizePrice', sizePrice)
@@ -138,8 +138,7 @@ const OrderNow = () => {
         </div>
         <div className="float-right mt-2 mr-3 inline-block rounded-3xl border p-3 text-white lg:mr-10">
           <Link
-            to={`/order/featured/order-now/cafe/${cafe_id}/product/${product_id}/payment/${mainProductPrice}`}
-          >
+            to={`/order/featured/order-now/cafe/${cafe_id}/product/${product_id}/payment/`} state={{ mainProductPrice : mainProductPrice, }}>
             <button className="text-xl text-white">Next</button>
           </Link>
         </div>

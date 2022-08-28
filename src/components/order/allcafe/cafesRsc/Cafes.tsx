@@ -32,7 +32,7 @@ const Cafes = ({data1}) => {
       )) : data1.map((post,idx) => (
         <div key={idx}>
 
-          <Link to={`../cafes/menu/${post.cafe_id}`} state={{cafe_name : post.cafe_name}}>
+<Link to={`../cafes/menu/${post.cafe_id}`} state={{cafe_name : post.cafe_name, img : post.file_path+post.img_file.split(',').at(-1)}}>
 
             <div className="flex h-20 flex-row items-center gap-3 bg-white md:h-28">
               <img
