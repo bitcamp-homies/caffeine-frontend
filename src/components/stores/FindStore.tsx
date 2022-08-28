@@ -39,7 +39,7 @@ const FindStore = () => {
 
   const getCafeList = (userLocation) => {
     axios
-      .get('http://localhost:8080/cafe/listBoundaryMybatis', {
+      .get(`${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/listBoundaryMybatis`, {
         params: {
           userLong: userLocation.lon,
           userLat: userLocation.lat,
