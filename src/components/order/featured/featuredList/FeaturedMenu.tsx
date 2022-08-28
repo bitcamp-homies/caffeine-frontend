@@ -4,7 +4,7 @@ import data from '../featuredData'
 
 const FeaturedMenu = () => {
   const dataList1 = data.filter((item) => item.seq < 2)
-  console.log(dataList1)
+  
 
   const dataShow1 = dataList1.map((item) => (
     <div key={item.seq} className="basis-[60%]">

@@ -2,39 +2,69 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
-const Size = ({data,setSizeCoast,item,setRecommendedSizePrice}) => {
+const Size = ({data,setSizePrice,item,setRecommendedSizePrice}) => {
   const [size, setSize] = useState()
   const [selectsize, setSelectsize] = useState('8px')
+  const [recommendedSizeCoast, setRecommendedSizeCoast] = useState(0); // 추천메뉴 사이즈 가격
+  const [mainProductSizeCoast, setMainProductSizeCoast] = useState(0); // 메인메뉴 사이즈 가격
+  const [recommendedSize, setRecommendedSize] = useState(''); //추천메뉴 사이즈
+  const [mainProductSize, setMainProductSize] = useState(''); //메인 메뉴 사이즈
+
+  useEffect(()=>{
+    if(item == '100'){
+      sessionStorage.setItem(`recommendedSizePrice${data.product_name_kor}`, recommendedSizeCoast);
+      sessionStorage.setItem(`recommendedSize${data.product_name_kor}`, recommendedSize);
+    } else{
+      sessionStorage.setItem("mainProductSizePrice", mainProductSizeCoast);
+      sessionStorage.setItem("mainProductSize", mainProductSize);
+    }
+  },[selectsize])
+  
   const clickbtn = (e) => {
     setSize(e.target.value)
-    if (e.target.value === data.size1) {
+    if (e.target.value === 'Short') {
       setSelectsize('8px')
       if(item == '100'){
-        setRecommendedSizePrice(0)
+        setRecommendedSizePrice(0);
+        setRecommendedSizeCoast(0);
+        setRecommendedSize('Short');
       }else{
-        setSizeCoast(0)
+        setSizePrice(0);
+        setMainProductSizeCoast(0);
+        setMainProductSize('Short');
       }
-    } else if (e.target.value === data.size2) {
+    } else if (e.target.value === 'Tall') {
       setSelectsize('80px')
       if(item == '100'){
-        setRecommendedSizePrice(500)
+        setRecommendedSizePrice(500);
+        setRecommendedSizeCoast(500);
+        setRecommendedSize('Tall');
       }else{
-        setSizeCoast(500)
-
+        setSizePrice(500);
+        setMainProductSizeCoast(500);
+        setMainProductSize('Tall');
       }
-    } else if (e.target.value === data.size3) {
+    } else if (e.target.value === 'Grande') {
       setSelectsize('152px')
       if(item == '100'){
-        setRecommendedSizePrice(1000)
+        setRecommendedSizePrice(1000);
+        setRecommendedSizeCoast(1000);
+        setRecommendedSize('Grande');
       }else{
-        setSizeCoast(1000)
+        setSizePrice(1000);
+        setMainProductSizeCoast(1000);
+        setMainProductSize('Grande');
       }
-    } else if (e.target.value === data.size4) {
+    } else if (e.target.value === 'Venti') {
       setSelectsize('224px')
       if(item == '100'){
-        setRecommendedSizePrice(1500)
+        setRecommendedSizePrice(1500);
+        setRecommendedSizeCoast(1500);
+        setRecommendedSize('Venti');
       }else{
-        setSizeCoast(1500)
+        setSizePrice(1500);
+        setMainProductSizeCoast(1500);
+        setMainProductSize('Venti');
       }
     }
   }
@@ -61,12 +91,12 @@ const Size = ({data,setSizeCoast,item,setRecommendedSizePrice}) => {
               id="Regular"
               name="size"
               type="radio"
-              value={data.size1}
-              checked={size === data.size1}
+              value='Short'
+              checked={size === 'Short'}
               onChange={clickbtn}
             />
             <div className="mx-6 my-2 h-[40px] w-[24px] cursor-pointer bg-[url(https://www.starbucks.com/app-assets/76b8892b0db8f5d411988fe1bbbe4141.svg)] "></div>
-            <p className="text-center text-base font-semibold">{data.size1}</p>
+            <p className="text-center text-base font-semibold">Short</p>
             <p className="text-center text-sm"> 12 fl oz</p>
           </label>
         </div>
@@ -81,13 +111,13 @@ const Size = ({data,setSizeCoast,item,setRecommendedSizePrice}) => {
               id="Tall"
               name="size"
               type="radio"
-              value={data.size2}
-              checked={size === data.size2}
+              value='Tall'
+              checked={size === 'Tall'}
               onChange={clickbtn}
             />
             <div className="mx-6 my-2 h-[40px] w-[24px] cursor-pointer bg-[url(https://www.starbucks.com/app-assets/2920fb2a8c34d3ddb95ad262872526e9.svg)] "></div>
             <p className="text-center text-base font-semibold">
-             {data.size2}
+             Tall
             </p>
             <p className="text-center text-sm"> 16 fl oz</p>
           </label>
@@ -103,12 +133,12 @@ const Size = ({data,setSizeCoast,item,setRecommendedSizePrice}) => {
               id="Grande"
               name="size"
               type="radio"
-              value={data.size3}
-              checked={size === data.size3}
+              value='Grande'
+              checked={size === 'Grande'}
               onChange={clickbtn}
             />
             <div className="mx-6 my-2 h-[40px] w-[24px] cursor-pointer bg-[url(https://www.starbucks.com/app-assets/55e7819f7cf8e1959ec35e680d46d9a9.svg)]"></div>
-            <p className="text-center text-base font-semibold">{data.size3}</p>
+            <p className="text-center text-base font-semibold">Grande</p>
             <p className="text-center text-sm"> 24 fl oz</p>
           </label>
         </div>
@@ -122,13 +152,13 @@ const Size = ({data,setSizeCoast,item,setRecommendedSizePrice}) => {
               id="Venti"
               name="size"
               type="radio"
-              value={data.size4}
-              checked={size === data.size4}
+              value='Venti'
+              checked={size === 'Venti'}
               onChange={clickbtn}
             />
-            <div className="mx-6 my-2 h-[40px] w-[24px] cursor-pointer bg-[url(https://www.starbucks.com/app-assets/3abf3fc78365ef0b59bbfd0ecd1c8490.svg)]"></div>
+         <div className="mx-6 my-2 h-[40px] w-[24px] cursor-pointer bg-[url(https://www.starbucks.com/app-assets/3abf3fc78365ef0b59bbfd0ecd1c8490.svg)]"></div>
             <p className="text-center text-base font-semibold">
-              {data.size4}
+              Venti
             </p>
             <p className="text-center text-sm"> 30 fl oz</p>
           </label>
