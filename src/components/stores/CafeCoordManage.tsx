@@ -29,7 +29,7 @@ const CafeCoordManage = () => {
 
   const getCafeListAll = (userLocation) => {
     axios
-      .get('https://api.staysane.me/cafe/listAlllWithCoordMybatis', {
+      .get(`${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/listAlllWithCoordMybatis`, {
         params: {
           userLong: userLocation.long,
           userLat: userLocation.lat,
@@ -69,7 +69,7 @@ const CafeCoordManage = () => {
         setLatitude(result[0].y)
         console.log('좌표 검색 결과 : ', result[0].y, result[0].x)
         axios
-          .get('https://api.staysane.me/cafe/updateCoordMybatis', {
+          .get(`${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/updateCoordMybatis`, {
             params: {
               longitude: result[0].x,
               latitude: result[0].y,
@@ -133,7 +133,7 @@ const CafeCoordManage = () => {
     }
 
     axios
-      .get('https://api.staysane.me/cafe/updateCafeinfo', {
+      .get(`${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/updateCafeinfo`, {
         params: cafeinfo,
       })
       .catch((err) => console.log(err))
