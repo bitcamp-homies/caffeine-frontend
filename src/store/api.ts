@@ -77,4 +77,40 @@ export const selectProfileimg = (user_id) => {
 
 export const updateProfileimg = (user_id) => {
   const temp = api.post('/cafe/updateProfileimg',user_id)
+} 
+
+//카카오API
+export const kakaoAPI = (productName, productCount, totalPrice ) =>{
+  axios.post({
+    url: "https://kapi.kakao.com/v1/payment/ready",
+    headers: {
+      //카카오 dev에 등록한 admin Key 등록
+      Authorization : "KaKaoAK 7d170046a599f182cb614154a7298d41",
+      "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    },
+    params: {
+      cid: "TC0ONETIME",
+      partner_order_id: "partner_order_id",
+      partner_user_id: "partner_user_id",
+      item_name: productName,
+      quantity: productCount,
+      total_amount: totalPrice,
+      vat_amount: 0,
+      tax_free_amount: 0,
+      //성공
+      approval_url: "http://localhost:3000/",
+      //실패
+      fail_url: "http://localhost:3000/",
+      //취소
+      cancel_url: "http://localhost:3000/",
+    },
+  }).then((response) => {
+    const {
+      data: {next_redirect_pc_url, tid}
+    } = response;
+    console.log(next_redirect_pc_url);
+    console.log(tid);
+    window.localStorage.setItem("tid",tid);
+    window.localStorage.setItem("next_redirect_pc_url",next_redirect_pc_url);
+  });
 }
