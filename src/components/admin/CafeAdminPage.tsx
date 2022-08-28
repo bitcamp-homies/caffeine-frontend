@@ -3,11 +3,10 @@
 //사진, 카페명, 인스타 아이디, 주소, 소개글 ,메 뉴 추가, 5. 오더 받기/ 안 받기
 import React, { useEffect, useState } from 'react'
 import AddingMenu from './AddingMenu'
-import {ref,getStorage, uploadBytesResumable, uploadBytes,getMetadata} from 'firebase/storage'
+import {ref,getStorage, uploadBytesResumable, uploadBytes,getMetadata,deleteObject} from 'firebase/storage'
 import firebase from 'api/firebase'
 import { getMember } from 'store/api'
-import { InsertProfileimg,selectProfileimg,updateProfileimg } from 'store/api'
-import { profile } from 'console'
+import { InsertProfileimg,selectProfileimg,updateProfileimg} from 'store/api'
 const CafeAdminPage = (e) => {
   firebase.app
   const [imgdata,SetImgdata] = useState('')
@@ -15,8 +14,10 @@ const CafeAdminPage = (e) => {
   const [file,setFile] = useState('')
   const [user,Setuser] = useState([])
   const [profileimg,SetProfileImg] = useState([])
+  const [imgfileList,SetImgFileList] = useState([])
   const storage = getStorage()
   const Id = sessionStorage.getItem('Id')
+
 
   const getMemberdata = {
     'user_id' : Id
@@ -33,33 +34,52 @@ const CafeAdminPage = (e) => {
       .then(res => SetProfileImg(res.data))
       } 
     ) 
-  },[])
-
-
+  },[imgdata])
+  const si = user.business_address.split(' ')
+  const si1 = si[0]+'시'
 
   const saveFileImage = (e) => {
+
     setFile(e.target.files[0])
     SetFireBaseImgName(e.target.files[0].name)
     SetImgdata(URL.createObjectURL(e.target.files[0]))
   }
+
+  const imgList = (e) => {
+    const imagesList = e.target.files
+    let imgURLList = [...imgfileList]
+
+
+    SetImgFileList(imagesList)
+  }
+
   /*     const mountainsRef = ref(storage, `/test/${firebaseimgname}`)
   uploadBytesResumable(mountainsRef) */
+  let imgname = firebaseimgname.split('.')
+  let imgname1 = imgname[0]+'profile'
+  let imgname2 = imgname1+'.'+imgname[1] //프로필 이미지 뒤에 글자 붙이기
 
   const metaData = {
     contentType : file.type
   }
   const InsertProfileimgdata ={
     path : `/profile/${user.user_id}/`,
-    img : `${firebaseimgname}`,
+    img :  imgname2,
     user_id : user.user_id
   }
+
   const save = () => {
-    const mountainsRef = ref(storage, `/profile/${user.user_id}/${firebaseimgname}`)//파일명 및 경로 지정
+    //실제 firebase에 새로 올라가는 파일
+    const mountainsRef = ref(storage, `/profile/${user.user_id}/${imgname2}`)//파일명 및 경로 지정
+    //기존에 firebase에 올라가있는 파일 삭제 
+    if(profileimg == ''){
       uploadBytesResumable(mountainsRef,file,metaData)//실제 업로드 ,경로 , 파일
-      if(profileimg == ''){
-        InsertProfileimg(qs.stringify(InsertProfileimgdata))
-        alert('저장 완료')
-      }else{
+      InsertProfileimg(qs.stringify(InsertProfileimgdata))
+      alert('저장 완료')
+    }else{
+        const mountRef = ref(storage, `/profile/${user.user_id}/${profileimg.profile_img}`)
+        deleteObject(mountRef)
+        uploadBytesResumable(mountainsRef,file,metaData)//실제 업로드 ,경로 , 파일
         updateProfileimg(qs.stringify(InsertProfileimgdata))
         alert('저장완료')
       }
@@ -83,12 +103,25 @@ const CafeAdminPage = (e) => {
                 카페 프로필을 자유롭게 수정해주세요
               </p>
               <div className="pt-8">
-                <img
-                  className="h-32 w-32 rounded-full bg-white md:h-52 md:w-52"
-                  src={`https://bluebottlecoffee.c   om/assets/fb-og-image-default-1c81ddb4bcb02ad6edba3bea1f198ae69821c8825a76f8fb98bddf66a2efc912.jpg`}
-                  alt="image loading.."
-                  loading="lazy"
-                />
+                   {
+                    imgdata === '' ? profileimg === '' ? 
+                    <svg
+                       id="profileimg1"
+                       className="h-32 w-32 rounded-full bg-white md:h-52 md:w-52"
+                       fill="currentColor"
+                       viewBox="0 0 24 24"
+                     >
+                       <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                     </svg>
+                     :
+                     <img id='profileimg3'  
+                     className="h-32 w-32 rounded-full bg-white md:h-52 md:w-52" 
+                     src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${profileimg.path}${profileimg.profile_img}`}/>
+                     :
+                     <img id='profileimg3'  
+                     className="h-32 w-32 rounded-full bg-white md:h-52 md:w-52" 
+                     src={imgdata}/>
+                   }
               </div>
             </div>
           </div>
@@ -114,6 +147,7 @@ const CafeAdminPage = (e) => {
                           id="company-website"
                           className="block w-full flex-1 rounded-none rounded-r-md border border-gray-300 text-center focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           placeholder="Instagram ID"
+                          value={user.insta_account}
                         />
                       </div>
                     </div>
@@ -147,7 +181,8 @@ const CafeAdminPage = (e) => {
                     <div className="mt-1 flex items-center">
                       <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
                         {
-                         imgdata === '' && profileimg === '' ? <svg
+                         imgdata === '' ? profileimg === '' ? 
+                         <svg
                             id="profileimg1"
                             className="h-full w-full text-gray-300"
                             fill="currentColor"
@@ -158,6 +193,10 @@ const CafeAdminPage = (e) => {
                           <img id='profileimg3'  
                           className="h-full w-full text-gray-300" 
                           src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${profileimg.path}${profileimg.profile_img}`}/>
+                          :
+                          <img id='profileimg3'  
+                          className="h-full w-full text-gray-300" 
+                          src={imgdata}/>
                         }
 
                       </span>
@@ -207,6 +246,8 @@ const CafeAdminPage = (e) => {
                               name="file-upload"
                               type="file"
                               className="sr-only"
+                              onClick={imgList}
+                              multiple
                             />
                           </label>
                           <p className="pl-1">or drag and drop</p>

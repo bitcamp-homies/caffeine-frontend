@@ -19,7 +19,6 @@ const AdminContainer = () => {
     getMember(qs.stringify(data))
     .then(res => SetMemberData(res.data))
   },[])
-
   let navigate = useNavigate()
   return (
     /* header */
