@@ -70,18 +70,10 @@ export const getProductInfo = (product_id) => {
   return temp
 }
 
-export const savePaymentList = (cafe_id, product_count, product_id, totalPrice,user_id, purchase_way) => {
-  const temp = api.post('/order/paymentList',{
-    params : {
-      user_id : user_id,
-      cafe_id : cafe_id,
-      product_count : product_count,
-      product_id : product_id,
-      totalPrice : totalPrice,
-      purchase_way : purchase_way,
-    }
-  })
+export const savePaymentList = (paymentList) => {
+  const temp = api.post('/order/paymentList', paymentList)
   return temp
+}
 
 export const getMember = (Id) => {
   const temp = api.post('/cafe/getMember',Id)
@@ -101,4 +93,3 @@ export const updateProfileimg = (user_id) => {
   const temp = api.post('/cafe/updateProfileimg',user_id)
 } 
 
-}

@@ -3,27 +3,33 @@ import axios from 'axios'
 import { check } from 'prettier'
 import React, { useEffect, useState } from 'react'
 import { ReactComponentElement } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { kakaoAPI } from 'store/api'
+import { useQuery } from 'react-query'
+import { Link, useLocation, useParams } from 'react-router-dom'
+import { kakaoAPI, listAllMybatis } from 'store/api'
 import Cafeinfo from './featuredList/Cafeinfo'
 import PaymentProduct from './paymentList/PaymentProduct'
 
 const payment = () => {
   //카카오 API키
   const MY_ADMIN_KEY = 'cd251696592fb923e36df2bf69696745'
-  const [paymentOption, setPaymentOption] = useState('2')
-  const { totalPrice, cafe_id, product_id } = useParams()
-  const [paymentBtn, setPaymentBtn] = useState("true");
+  const [paymentOption, setPaymentOption] = useState('1')
+  const { cafe_id, product_id } = useParams()
   const [checkProduct, setCheckProduct] = useState("0")
   const [checkRefund, setCheckRefund] = useState("0");
   const [checkAll, setCheckAll] = useState("0");
+  const location = useLocation();
+  const totalPrice = location.state?.productTotalPrice;
+  const mainProductName = location.state?.mainProduct;
   const paymentOptionHandler = (e) => {
     setPaymentOption(e.target.value)
   }
   
+  const { data, isSuccess } = useQuery('listAllMybatis', listAllMybatis)
+  const cafedata = data?.data.filter((item) => item.cafe_id == cafe_id)
+  const cafe_name = isSuccess && cafedata[0].cafe_name;
+  
   //첫번째 동의 여부
   const checkProductHandler = (e) => {
-    console.log(checkProduct);
     if(checkProduct == 1){
       setCheckProduct(0)
     } else {
@@ -69,22 +75,22 @@ const payment = () => {
       url: '/v1/payment/ready',
       method: 'POST',
       headers: {
-        Authorization: 'KakaoAK de0e3076b485b703b1f1a4a2419440e6',
+        Authorization: `KakaoAK ${MY_ADMIN_KEY}`,
         'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
       },
       params: {
         cid: 'TC0ONETIME',
         partner_order_id: 'partner_order_id',
         partner_user_id: 'partner_user_id',
-        item_name: '초코파이',
+        item_name: cafe_name,
         quantity: 1,
         total_amount: totalPrice,
         vat_amount: 200,
         tax_free_amount: 0,
         // router에 지정한 PayResult의 경로로 수정
-        approval_url: `http://localhost:3000/order/featured/order-now/cafe/${cafe_id}/product/${product_id}/payment/${totalPrice}/paymentcomplete/1`,
-        fail_url: 'http://localhost:3000/payresult',
-        cancel_url: 'http://localhost:3000/payresult',
+        approval_url: `http://localhost:3000/order/featured/order-now/cafe/${cafe_id}/product/${product_id}/payment/kakaoresult`,
+        fail_url: 'http://localhost:3000/',
+        cancel_url: 'http://localhost:3000/',
       },
     }).then((response) => {
       const {
@@ -95,6 +101,12 @@ const payment = () => {
       setKakaoState({ next_redirect_pc_url })
     })
   }, [])
+  console.log(kakaoUrl)
+  function callKakao() {
+    sessionStorage.setItem("totalPrice", totalPrice);
+    window.open(`${kakaoUrl}`, '카카오페이', 'width=800, height=700')
+    
+  }
   return (
     <>
       <Cafeinfo />
@@ -102,7 +114,7 @@ const payment = () => {
         <p className="text-2xl font-bold">주문 내역</p>
       </div>
       <div className="mx-auto mb-24 h-full w-full border shadow-xl lg:w-[700px]">
-        <PaymentProduct cafe_id={cafe_id} product_id={product_id} />
+        <PaymentProduct cafe_id={cafe_id} product_id={product_id}/>
 
         <div className="flex flex-col border-t p-5">
           <p className="text-xl font-bold">결제 수단</p>
@@ -167,6 +179,9 @@ const payment = () => {
                     <p className="text-sm font-bold mr-2">
                       위 이용정책을 모두 확인하였으며 구매를 확정합니다.
                     </p>
+                    <p className="mt-1 text-xs text-gray-300 lg:text-sm mr-2">
+                    주문 음료의 정보들과 환불 및 취소 불가능 내용을 마지막으로 한번더 확인했습니다.
+                    </p>
                   </div>
                   <input className="w-5" type="checkbox" id="checkAll" value="1" onClick={checkAllHandler} />
                 </div>
@@ -182,19 +197,12 @@ const payment = () => {
         <div className="float-right mt-2 mr-3 inline-block rounded-3xl border p-2 text-white lg:mr-10">
           {paymentOption === '1' ? (
             <button
-              className="text-lg text-white"
-              onClick={() =>
-                window.open(
-                  `${kakaoUrl}`,
-                  '카카오페이',
-                  'width=800, height=700',
-                )
-              }
-            >
+              className="text-lg text-white" 
+              onClick={callKakao} >
               결제하기
             </button>
           ) : (
-            <Link to="./paymentcomplete/2">
+            <Link to="./paymenting/1" state={{ totalPrice : totalPrice}}>
               <button className="text-lg text-white" id="payment" onClick={disabledCheck}>결제하기</button>
             </Link>
           )}

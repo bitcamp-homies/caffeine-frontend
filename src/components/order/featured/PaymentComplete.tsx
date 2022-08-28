@@ -1,78 +1,9 @@
 //@ts-nocheck
-import axios from 'axios'
-import ThumbsLogo from 'components/resources/ThumbsLogo'
-import React, { useState } from 'react'
-import { useQuery } from 'react-query'
-import { useParams } from 'react-router-dom'
-import { getCafeitemList, getProductInfo } from 'store/api'
+import React from 'react'
+
 
 const PaymentComplete = () => {
-  const { totalPrice, cafe_id, product_id,completeNumber} = useParams()
-
-  //제품 정보 모두가져오기
-  const {
-    data: productdata,
-    
-  } = useQuery(['getCafeitemList', cafe_id], () => getCafeitemList(cafe_id))
-
-  //메인 제품 정보 모두 가져오기
-  const {
-    data:mainProductInfo,
-    isSuccess,
-    isError,
-    isLoading,
-  } = useQuery(['getProductInfo', product_id], () => getProductInfo(product_id))
   
-  //추가 메뉴
-  const name = []
-  const price = []
-  const count = []
-  const size = []
-  const sizePrice = []
-
-  //추천메뉴 세션값 가져오기
-  productdata?.data.map((item, index) => {
-    name[index] = sessionStorage.getItem(
-      `recomendedProductName${item.product_name_kor}` == null,
-    )
-    price[index] = sessionStorage.getItem(
-      `recomendedProductPrice${item.product_name_kor}`,
-    )
-    count[index] = sessionStorage.getItem(
-      `recomendedCount${item.product_name_kor}`,
-    )
-    size[index] = sessionStorage.getItem(
-      `recommendedSize${item.product_name_kor}`,
-    )
-    sizePrice[index] = sessionStorage.getItem(
-      `recommendedSizePrice${item.product_name_kor}`,
-    )
-  })
-
-  const productName = name.filter((item) => item !== null)
-  const productprice = price.filter((item) => item !== null)
-  const productCount = count.filter((item) => item !== null)
-  const productSize = size.filter((item) => item !== null)
-  
-  //메인상품 세션값
-  const mainProductSize = (sessionStorage.getItem('mainProductSize') == null ? isSuccess && mainProductInfo?.data[0].category == 'Drinks' ? 'Short' : 'OneSize' : sessionStorage.getItem('mainProductSize'))
-  const mainProductSizePrice = sessionStorage.getItem('mainProductSizePrice')
-  const mainProductCount = sessionStorage.getItem('mainProductCount')
-  //메인상품 리스트
-  const mainProductList = productdata?.data.find(
-    (item) => item.product_id == product_id,
-  )
-
-  //insert재료
-  const user_id = "Hong"
-  let [product_count, setProduct_count] = useState(0);
-  const purchase_way = completeNumber;
-  
-  //총합 구하기
-  productCount.map(item =>
-      product_count += Number(item[0])
-  )
-    
   return (
     <>
       <div className="mx-auto my-36 sm:my-80 lg:w-[500px] ">

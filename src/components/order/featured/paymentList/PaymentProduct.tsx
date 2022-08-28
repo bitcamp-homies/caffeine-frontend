@@ -37,7 +37,7 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
       `recommendedSizePrice${item.product_name_kor}`,
     )
   })
-
+  
   //메인상품 세션값
   const mainProductSize = sessionStorage.getItem('mainProductSize')
   const mainProductSizePrice = sessionStorage.getItem('mainProductSizePrice')
