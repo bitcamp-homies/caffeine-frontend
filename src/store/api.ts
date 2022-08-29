@@ -64,7 +64,7 @@ export const getCafesMenusAll = (cafe_id) => {
   })
   return temp
 }
-s
+
 export const getCafeitemList = (cafe_id) => {
     const temp = api.get('/cafe/getCafeitemList',{
         params : {
