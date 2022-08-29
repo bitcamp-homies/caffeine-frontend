@@ -129,7 +129,7 @@ const CafeSwipe = () => {
         id="CafeSwipe"
         className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-3 md:max-w-[24rem]"
         style={{ opacity: cafeSwipeOpacity }}
-        drag
+        drag="x"
         dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
         dragElastic={0.7}
         dragPropagation
