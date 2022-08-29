@@ -14,8 +14,10 @@ const OrderList = () => {
     isLoading,
   } = useQuery(['getOrderList', user_id], () => getOrderList(user_id))
 
-  const orderList = isSuccess && orderData.data
-  console.log(orderList)
+  const orderList = isSuccess && orderData.data.filter(
+    (item) => user_id == item.user_id
+  )
+
   return (
     <div>
       <main className="flex-1 overflow-y-auto bg-gray-200 transition duration-500	ease-in-out dark:bg-white">

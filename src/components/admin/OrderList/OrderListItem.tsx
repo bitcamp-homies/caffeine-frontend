@@ -1,16 +1,22 @@
 //@ts-nocheck
 import React from 'react'
 import { useQuery } from 'react-query'
-import { listAllMybatis } from 'store/api'
+import { deleteOrderList, listAllMybatis } from 'store/api'
 
 const OrderListItem = ({ orderData }) => {
   const { data, isSuccess } = useQuery('listAllMybatis', listAllMybatis)
+  const qs = require("qs");
   const cafe_data = data?.data.filter(
     (item) => item.cafe_id == orderData.cafe_id,
   )
-  console.log(orderData)
-  //className="h-12 w-12 rounded-full object-cover"
-  const deleteBtn = () => {}
+  const getDate = orderData.create_At.split('T');
+  const deleteList = {
+    payment_num : orderData.payment_num
+  }
+  const deleteBtn = () => {
+      alert("삭제 되었습니다.");
+      deleteOrderList(qs.stringify(deleteList));
+  }
   return (
     <div className="">
       <div className="mt-2 flex flex-col">
@@ -79,7 +85,7 @@ const OrderListItem = ({ orderData }) => {
                       className="ml-2 text-sm capitalize
 											text-gray-600 dark:text-gray-600"
                     >
-                      {orderData.creat_At}
+                      {getDate[0]}
                     </span>
                   </div>
                 </div>
