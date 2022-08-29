@@ -17,7 +17,7 @@ const CafeDetail = ({ setHoverCafe }) => {
 
   const getCafeListAll = (userLocation) => {
     axios
-      .get('http://localhost:8080/cafe/listBoundary3000Mybatis', {
+      .get(`${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/listBoundary3000Mybatis`, {
         params: {
           userLong: userLocation.long,
           userLat: userLocation.lat,

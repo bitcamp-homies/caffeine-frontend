@@ -12,7 +12,7 @@ const offsetDivider = 250
 
 const CafeSwipe = () => {
   const [cafeData, setcafeData] = useState([])
-  let cafeInfo = cafeData.filter((item, index) => index === 4)
+  let cafeInfo = cafeData.filter((item, index) => index === 3)
   const [likeOpacity, setLikeOpacity] = useState(0)
   const [nopeOpacity, setNopeOpacity] = useState(0)
   const [cafeSwipeOpacity, setCafeSwipeOpacity] = useState(1)
@@ -20,7 +20,7 @@ const CafeSwipe = () => {
   //3000미터 근방 카페
   const getCafeListAll = (userLocation) => {
     axios
-      .get('http://localhost:8080/cafe/listBoundary3000Mybatis', {
+      .get(`${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/listBoundary3000Mybatis`, {
         params: {
           userLong: userLocation.long,
           userLat: userLocation.lat,
