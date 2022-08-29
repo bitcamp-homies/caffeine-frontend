@@ -84,7 +84,7 @@ const MainNavBar = (props :BurgerProps) => {
             {
               userType==='admin' ?
               <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
-                <Link to="/admin">Admin Page</Link>
+                <Link to="/admin/CafeManageMaster">Admin Page</Link>
               </button>
               :
               <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">

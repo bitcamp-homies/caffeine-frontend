@@ -2,15 +2,17 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const NaviContainerMster = () => {
+  const urlPath = window.location.href;
+  
   return (
-    <div className="hidden h-screen w-2/5 bg-white md:grid md:w-1/4 lg:grid drop-shadow-xl mr-6">
-      <div className="mx-auto py-10">
+    <div className="hidden h-screen w-2/5 bg-white md:grid md:w-1/4 lg:grid drop-shadow-xl mr-6 ">
+      <div className='mx-auto py-10'>
         {/* left Navi */}
         <h1 className="duration-15 mb-10 cursor-pointer text-2xl font-bold text-[#9F2042]">
           Thumbs!
         </h1>
         <ul>
-          <li className="mt-5 flex cursor-pointer space-x-2 duration-150 hover:text-[#9F2042]">
+          <li className='mt-5 flex cursor-pointer space-x-2 duration-150 hover:text-[#9F2042  ]'>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"

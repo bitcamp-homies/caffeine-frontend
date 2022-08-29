@@ -70,8 +70,8 @@ const UserManageMaster = () => {
         className={`mb-4 h-8 w-72 rounded-lg border-b-2 border-[black] text-center`}
         onChange={(event) => setKeyword(event.target.value)}
       />
-
-      <div className="h-[36rem] w-[72rem] overflow-scroll rounded-lg">
+      <hr/>
+      <div className="my-4 h-[36rem] w-[72rem] overflow-scroll rounded-lg">
         <UserListTable userData={filteredData} />
       </div>
       <UserUpdataModal />
