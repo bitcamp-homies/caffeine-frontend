@@ -48,7 +48,7 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
       <div className="mt-10 flex sm:gap-5 gap-3 lg:flex-row justify-start">
         <img
           className="top-0 h-[130px] w-[130px] sm:mx-0 lg:rounded-full"
-          src={`https://storage.cloud.google.com/bitcamp-caffeine.appspot.com${data.file_path}${data.img_file}`}
+          src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${data.file_path}${data.img_file}`}
         />
         <div className="sm:mx-0 lg:my-3">
           <div className="mx-auto text-xl font-bold lg:ml-5 lg:text-2xl">

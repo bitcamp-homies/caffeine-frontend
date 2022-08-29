@@ -20,7 +20,7 @@ const DetailContainer = ({data,menu,cafe_name,img}) => {
           <div className="my-5 flex h-full flex-col justify-center lg:mr-[100px] lg:flex-row">
                   <img
                     className="my-5 mx-auto rounded-full h-[200px] w-[50px] min-w-[200px] lg:my-auto lg:mx-[99px]"
-                    src={`https://storage.cloud.google.com/bitcamp-caffeine.appspot.com${img}`}
+                    src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${img}`}
                     alt="user avatar"
                     loading="lazy"
                   />

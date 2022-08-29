@@ -9,7 +9,7 @@ const DrinksDetail = ({ data }) => {
           <div className="flex h-20 flex-row items-center gap-3 bg-white md:h-28">
             <img
               className="h-20 w-20 rounded-full object-fill md:h-28 md:w-28"
-              src={`https://storage.cloud.google.com/bitcamp-caffeine.appspot.com${item.file_path}${item.img_file}`}
+              src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${item.file_path}${item.img_file}`}
             ></img>
             <div className="items-left flex flex-col gap-1">
               <p>{item.product_name_kor}</p>

@@ -57,7 +57,7 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
             {isSuccess && (
               <img
                 className="my-5 ml-5 h-[150px] w-[150px]"
-                src={`https://storage.cloud.google.com/bitcamp-caffeine.appspot.com${mainProductList.file_path}${mainProductList.img_file}`}
+                src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${mainProductList.file_path}${mainProductList.img_file}`}
               />
             )}
           </div>
@@ -93,7 +93,7 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
                     {isSuccess && (
                       <img
                         className="my-5 ml-5 h-[150px] w-[150px]"
-                        src={`https://storage.cloud.google.com/bitcamp-caffeine.appspot.com${item.file_path}${item.img_file}`}
+                        src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${item.file_path}${item.img_file}`}
                       />
                     )}
                   </div>

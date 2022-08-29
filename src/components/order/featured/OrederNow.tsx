@@ -82,7 +82,7 @@ const OrderNow = () => {
           {isSuccess && (
             <img
               className="w-[400px] lg:min-h-[500px] lg:min-w-[500px]"
-              src={`https://storage.cloud.google.com/bitcamp-caffeine.appspot.com${mainProduct.file_path}${mainProduct.img_file}`}
+              src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${mainProduct.file_path}${mainProduct.img_file}`}
             />
           )}
           {/* 고객이 선택한 제품 표시 */}
