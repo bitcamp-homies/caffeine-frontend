@@ -10,7 +10,7 @@ import axios from 'axios'
 let currentX = 0
 const offsetDivider = 250
 
-const CafeSwipe = ({cafeInfo}) => {
+const CafeSwipe = ({ cafeInfo }) => {
   const [likeOpacity, setLikeOpacity] = useState(0)
   const [nopeOpacity, setNopeOpacity] = useState(0)
   const [cafeSwipeOpacity, setCafeSwipeOpacity] = useState(1)
@@ -53,12 +53,12 @@ const CafeSwipe = ({cafeInfo}) => {
     } else return
   }
   //스와이프 action
-  const LikeOrNope = (offsetX: number) => {
+  const LikeOrNope = (offsetX: number, deltaX) => {
     if (offsetX > 200) {
       alert('LIKE: 즐겨찾는 카페에 등록되었습니다.')
       setCafeSwipeOpacity(1)
       setLikeOpacity(0)
-    } else if (offsetX < -200) {
+    } else if (offsetX < -200 && Math.abs(offsetX) - Math.abs(deltaX) > 150) {
       alert('NOPE: 다른 카페를 보여줍니다.')
       setCafeSwipeOpacity(1)
       setNopeOpacity(0)
@@ -90,15 +90,15 @@ const CafeSwipe = ({cafeInfo}) => {
       </div>
       <motion.div
         id="CafeSwipe"
-        className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-3 md:max-w-[24rem]"
+        className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-3 md:max-w-[28rem]"
         style={{ opacity: cafeSwipeOpacity }}
-        drag="x"
-        dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-        dragElastic={0.7}
-        dragPropagation
+        drag
+        dragSnapToOrigin
+        dragConstraints={{ top: 0, bottom: 0 }}
+        dragElastic={0.3}
         onDrag={(event, info) => handleOpacityUpdate(info.offset.x)}
-        onDragEnd={(event, info) => LikeOrNope(info.offset.x)}
-      >
+        onDragEnd={(event, info) => LikeOrNope(info.offset.x, info.delta.x)}
+      > 
         <CafeInfo cafeInfo={cafeInfo} />
       </motion.div>
     </div>
