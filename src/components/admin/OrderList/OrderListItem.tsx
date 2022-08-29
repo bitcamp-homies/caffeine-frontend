@@ -1,18 +1,33 @@
 //@ts-nocheck
 import React from 'react'
 import { useQuery } from 'react-query'
-import { deleteOrderList, listAllMybatis } from 'store/api'
+import { deleteOrderList, getProductInfo, listAllMybatis } from 'store/api'
 
 const OrderListItem = ({ orderData }) => {
-  const { data, isSuccess } = useQuery('listAllMybatis', listAllMybatis)
+  //모든 카페 정보 호출하기
+  const { data, isSuccess} = useQuery('listAllMybatis', listAllMybatis)
   const qs = require("qs");
+  //모든 카페 정보중 해당 카페 정보 받기
   const cafe_data = data?.data.filter(
     (item) => item.cafe_id == orderData.cafe_id,
   )
+
+  //메인제품 정보 호출
+  const {
+    data:mainProductInfo,    
+    isError,
+    isLoading,
+  } = useQuery(['getProductInfo', orderData.product_id], () => getProductInfo(orderData.product_id))
+  const totalPrice = (orderData.total_price).toLocaleString()
+  //날짜 자르기
   const getDate = orderData.create_At.split('T');
+  
+  //삭제 axios로 넘겨줄 값
   const deleteList = {
     payment_num : orderData.payment_num
   }
+
+  //데이터 삭제
   const deleteBtn = () => {
       alert("삭제 되었습니다.");
       deleteOrderList(qs.stringify(deleteList));
@@ -44,7 +59,10 @@ const OrderListItem = ({ orderData }) => {
                 })}
 
               <div className="ml-6 flex flex-col">
-                <span className="text-lg font-bold">아아</span>
+                <div>
+                  <span className="text-lg font-bold">{isSuccess && mainProductInfo.data[0].product_name_kor}</span>
+                  <span className='text-sm ml-1'>외 {orderData.product_count -1} 개</span>
+                </div>
                 <div className="mt-4 flex">
                   <div className="flex">
                     <svg
@@ -144,7 +162,7 @@ const OrderListItem = ({ orderData }) => {
                 className="font-semibold text-gray-600
 								dark:text-gray-600"
               >
-                {orderData.total_price}
+                {totalPrice}원
               </span>
             </div>
           </div>
