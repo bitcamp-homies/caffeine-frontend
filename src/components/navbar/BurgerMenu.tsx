@@ -24,6 +24,7 @@ const BurgerMenu = (props: BurgerProps) => {
             <li className="mb-8 px-6 text-2xl">Order</li>
             <li className="mb-8 px-6 text-2xl">Cards</li>
             <li className="mb-8 px-6 text-2xl">Gift</li>
+            <li className="mb-8 px-6 text-2xl">FindStore</li>
           </ul>
           <hr className="mx-6 border border-gray-300 bg-gray-300" />
           <div className="flex flex-row px-5 pt-8">

@@ -81,14 +81,17 @@ const MainNavBar = (props :BurgerProps) => {
           <button className="rounded-full border border-black px-4 py-1.5 font-semibold" onClick={logoutBtn}>
             Sign out
           </button>
-          <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
-            <Link to="/member">My Page</Link>
-          </button>
-          <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
-            <Link to="/admin">Admin Page</Link>
-          </button>
+            {
+              userType==='admin' ?
+              <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
+                <Link to="/admin">Admin Page</Link>
+              </button>
+              :
+              <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
+                <Link to="/member">My Page</Link>
+              </button>
+            }
           </>
-            
           }
         </div>
       </div>

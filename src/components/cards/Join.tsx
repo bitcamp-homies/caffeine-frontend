@@ -77,13 +77,13 @@ const Join = (props) => {
                   <div className="mt-5 flex justify-evenly">
                     <a
                       href="#"
-                      className="w-full text-center font-medium text-gray-500"
+                      className="w-full text-center font-medium text-gray-500 hover:text-[#9F2042]"
                     >
                       Recover password!
                     </a>
                     <a
                       href="#"
-                      className="w-full text-center font-medium text-gray-500"
+                      className="w-full text-center font-medium text-gray-500 hover:text-[#9F2042]"
                     >
                       Singup!
                     </a>
