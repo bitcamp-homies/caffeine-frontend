@@ -41,7 +41,7 @@ const CafeInfo = ({ cafeInfo }) => {
                   <p className="pt-1 text-sm text-gray-500">
                     @{item.insta_account}
                   </p>
-                  <div className="h-[8rem] text-sm overflow-y-scroll">
+                  <div className="h-[8rem] text-sm overflow-y-scroll customScrollBar">
                     <p className="mt-2 max-w-[17rem] whitespace-pre-wrap">
                       { text}
                     </p>

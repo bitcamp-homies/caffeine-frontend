@@ -93,8 +93,9 @@ const CafeSwipe = ({cafeInfo}) => {
         className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-3 md:max-w-[24rem]"
         style={{ opacity: cafeSwipeOpacity }}
         drag
+        dragSnapToOrigin
         dragConstraints={{ top: 0, bottom: 0 }}
-        dragElastic={0}
+        dragElastic={0.3}
         dragPropagation
         onDrag={(event, info) => handleOpacityUpdate(info.offset.x)}
         onDragEnd={(event, info) => LikeOrNope(info.offset.x)}
