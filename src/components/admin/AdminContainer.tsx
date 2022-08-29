@@ -7,6 +7,7 @@ import NaviContainer from './NaviContainer'
 import { useNavigate } from 'react-router-dom'
 import DropDown from './DropDown'
 import { getMember } from 'store/api'
+import NaviContainerMster from './NaviContainerMster'
 const AdminContainer = () => {
   const usertype = sessionStorage.getItem('UserType')
   const Id = sessionStorage.getItem('Id')
@@ -33,7 +34,7 @@ const AdminContainer = () => {
           <div className="hidden sm:flex flex-row items-center gap-4 rounded-full bg-gray-200">Thumbs Point : {20000000}</div>
           <div className="hidden md:flex flex-row items-center gap-4 rounded-full bg-gray-200">사용자 : {'private'} / {memberdata.user_type}</div>
           <div className="flex flex-row items-center gap-4 rounded-full bg-gray-200">
-            <p>{memberdata.name} 님 안녕하세요!</p>
+            <p>{memberdata.name}님 안녕하세요!</p>
             <img
               className="w-8 rounded-full"
               src="https://imagez.tmz.com/image/f7/1by1/2021/12/14/f7703994b69d48ca802df55729a2325c_xl.jpg"
@@ -49,7 +50,12 @@ const AdminContainer = () => {
       {/* end of Header */}
 
       <div className="flex">
-        <NaviContainer />
+        {
+          usertype === 'admin' ?
+          <NaviContainerMster />
+          :
+          <NaviContainer />
+        }
         <main className=" min-h-screen w-full">
           <nav className="flex justify-between bg-white px-10 py-5" />
           <ContentContainer />
