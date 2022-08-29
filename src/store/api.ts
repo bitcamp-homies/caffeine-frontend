@@ -1,9 +1,8 @@
 // @ts-nocheck
 import axios from 'axios'
 import { useMutation } from 'react-query'
-//${process.env.REACT_APP_THUMBS_API_ADDRESS}
 const api = axios.create({
-  baseURL: `http://localhost:8080`,
+  baseURL: process.env.REACT_APP_THUMBS_API_ADDRESS,
 })
 
 export const listAllMybatis = () => {
