@@ -24,13 +24,13 @@ const CafeLikeIcon = ({ index, item , likeList}) => {
 
     if (cafe !== 0 && checkthis.id === 'cafe_check' && sessionStorage.getItem("Id") !== null) {
       setLike(!like)
+      setCafe(cafe)
       if(cafe_check?.getAttribute('check') == 1){
-        console.log("cafe update:" + cafe)
-        setCafe(cafe)
-        updateLikeList(JSON.stringify(data))
-      }else if(cafe_check?.getAttribute('check') == 0){
         console.log("cafe delete:" + cafe)
         deleteLikeList(JSON.stringify(data))
+      }else if(cafe_check?.getAttribute('check') == 0){
+        console.log("cafe update:" + cafe)
+        updateLikeList(JSON.stringify(data))
       }
     }
   }
