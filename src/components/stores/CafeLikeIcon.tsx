@@ -33,6 +33,7 @@ const CafeLikeIcon = ({ index, item , likeList}) => {
         updateLikeList(JSON.stringify(data))
       }
     }
+    updateList()
   }
 
   const data = {
@@ -69,12 +70,16 @@ const CafeLikeIcon = ({ index, item , likeList}) => {
       })
   }
 
-  useEffect(()=>{
+  const updateList= ()=> {
     likeList.map((list)=> {
       setCafeId(list.cafe_id)
       setLike(!like)
       }
     )
+  }
+
+  useEffect(()=>{
+    updateList()
   },[])
 
   return (
