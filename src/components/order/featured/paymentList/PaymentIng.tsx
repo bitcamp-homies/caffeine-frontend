@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import { useLocation, useParams } from 'react-router-dom'
 import { getCafeitemList, getProductInfo, savePaymentList } from 'store/api'
-import { setTimeout } from 'timers/promises';
 
 const PaymentIng = () => {
   const { cafe_id, product_id,completeNumber} = useParams()

@@ -1,5 +1,6 @@
 //@ts-nocheck
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 const PaymentComplete = () => {
@@ -48,12 +49,16 @@ const PaymentComplete = () => {
         </div>
 
         <div className="mb-6 text-center">
+        <Link to={`/admin/`}>    
           <button className="mx-1 rounded-xl border border-gray-400 p-2">
             주문 정보 확인하기
           </button>
-          <button className="mx-1 rounded-xl border border-gray-400 p-2">
+        </Link>
+        <Link to={`/`}>
+          <button className="mx-1 rounded-xl border border-gray-400 p-2" >
             메인 화면으로 이동
           </button>
+        </Link>
         </div>
       </div>
     </>
