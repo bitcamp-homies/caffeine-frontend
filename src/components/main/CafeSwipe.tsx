@@ -53,12 +53,12 @@ const CafeSwipe = ({ cafeInfo }) => {
     } else return
   }
   //스와이프 action
-  const LikeOrNope = (offsetX: number) => {
+  const LikeOrNope = (offsetX: number, deltaX) => {
     if (offsetX > 200) {
       alert('LIKE: 즐겨찾는 카페에 등록되었습니다.')
       setCafeSwipeOpacity(1)
       setLikeOpacity(0)
-    } else if (offsetX < -200) {
+    } else if (offsetX < -200 && Math.abs(offsetX) - Math.abs(deltaX) > 150) {
       alert('NOPE: 다른 카페를 보여줍니다.')
       setCafeSwipeOpacity(1)
       setNopeOpacity(0)
@@ -97,8 +97,8 @@ const CafeSwipe = ({ cafeInfo }) => {
         dragConstraints={{ top: 0, bottom: 0 }}
         dragElastic={0.3}
         onDrag={(event, info) => handleOpacityUpdate(info.offset.x)}
-        onDragEnd={(event, info) => LikeOrNope(info.offset.x)}
-      >
+        onDragEnd={(event, info) => LikeOrNope(info.offset.x, info.delta.x)}
+      > 
         <CafeInfo cafeInfo={cafeInfo} />
       </motion.div>
     </div>

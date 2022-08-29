@@ -1,12 +1,10 @@
 // @ts-nocheck
 import Carousel from 'components/stores/Carousel'
 import TempIndexIcon from 'components/resources/TempIndexIcon'
-import { getDownloadURL, getStorage, ref } from 'firebase/storage'
-import { async } from '@firebase/util'
 
 const CafeInfo = ({ cafeInfo }) => {
   return (
-    <>
+    <div>
       <div className="h-96 w-full bg-zinc-900 bg-contain bg-center bg-no-repeat">
         {cafeInfo !== '' && <Carousel data={cafeInfo} />}
       </div>
@@ -69,7 +67,7 @@ const CafeInfo = ({ cafeInfo }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 export default CafeInfo
