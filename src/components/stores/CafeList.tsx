@@ -43,8 +43,9 @@ const CafeList = ({ filterData, setHoverCafe, filterOptions }) => {
           navigate('/login')
         }
       })
-    } else if (session !== null || session !== '' || session !== undefined)
-      setLike(!like)
+    } 
+    // else if (session !== null || session !== '' || session !== undefined)
+    //   setLike(!like)
   }
 
   const data = {
@@ -55,7 +56,7 @@ const CafeList = ({ filterData, setHoverCafe, filterOptions }) => {
   const getLikeList = () => {
     axios({
       method : 'post',
-      url : 'http://localhost:8080/cafe/getLikeList',
+      url : `${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/getLikeList`,
       data : qs.stringify(data),
     })
       .then((res) => {
@@ -127,8 +128,8 @@ const CafeList = ({ filterData, setHoverCafe, filterOptions }) => {
                 </div>
               </div>
               <div>
-                <button className="relative ml-6 h-4 w-4" onClick={toggleLike}>
-                 {likeList !== '' && <CafeLikeIcon index={index} item={item} likeList={likeList}/>}
+                <button className="relative ml-6 h-4 w-4" id={item.cafe_id} onClick={toggleLike}>
+                 {likeList !== '' && <CafeLikeIcon index={index} item={item} likeList={likeList} />}
                 </button>
                 <Link to={DetailLink}>
                   <button className="relative ml-6 h-4 w-4">
