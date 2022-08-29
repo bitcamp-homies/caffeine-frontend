@@ -16,7 +16,6 @@ const Main = () => {
       </div>
       <div id="rightDiv" className="basis-3/5">
         <CafeSwipeContainer />
-        <FooterContainer />
       </div>
     </div>
   )
