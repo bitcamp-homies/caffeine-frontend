@@ -37,7 +37,7 @@ const CafeLikeIcon = ({ index, item , likeList}) => {
         return(
           <div>
           {
-            list.cafe_id === item.cafe_id && like ? setLike(true) : setLike(false)
+            list.cafe_id === item.cafe_id ? setLike(true) : setLike(false)
           }
           </div>
         )
