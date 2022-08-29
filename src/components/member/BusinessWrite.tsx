@@ -51,7 +51,7 @@ const BusinessWrite = () => {
     const email = validateEmail(Email)  //true false 반환 이메일 정규식
 
     const addresscheck = address => {
-        const regExp = /([$시])?([$구])?([$동|$로])/
+        const regExp = /[\S]+(도|시)\s[\S]+(구|군)\s[\S]+(로|동).*/i;
         return regExp.test(address)
     }
     const address = addresscheck(BusinessAddress)
@@ -72,9 +72,8 @@ const BusinessWrite = () => {
     const saveMember = useMutation(data => createMember(data))
     const BusinessSubmit = () =>{
     if(emailcheck?.data?.data == 'ok' && getnickname.data?.data == 'ok' && writepassword && BusinessNum && BusinessName && BusinessAddress&& Insta_Account && Name != '' && address){
-    console.log(data2)
         saveMember.mutate(qs.stringify(data2))
-        nevigate('/')
+         nevigate('/')
     }else{
         alert('내용을 입력해주세요 ')
     }

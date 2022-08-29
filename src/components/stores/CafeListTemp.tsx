@@ -11,7 +11,7 @@ const CafeListTemp = () => {
   const [data, setData] = React.useState([])
 
   axios
-    .get('https://api.staysane.me/cafe/listAllMybatis')
+    .get(`${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/listAllMybatis`)
     .then((res) => {console.log(res.data)})
 
   return <div>

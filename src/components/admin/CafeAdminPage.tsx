@@ -6,24 +6,38 @@ import AddingMenu from './AddingMenu'
 import {ref,getStorage, uploadBytesResumable, uploadBytes,getMetadata,deleteObject} from 'firebase/storage'
 import firebase from 'api/firebase'
 import { getMember } from 'store/api'
-import { InsertProfileimg,selectProfileimg,updateProfileimg} from 'store/api'
+import { insertproducts,getcafes,getcafefics,getcafeficsprofile,insertCafepics,updateCafepics,insertcafes_product_list,insertcafes_product_list_items,insertproducts_img} from 'store/api'
 const CafeAdminPage = (e) => {
   firebase.app
   const [imgdata,SetImgdata] = useState('')
   const [firebaseimgname,SetFireBaseImgName] = useState('')
   const [file,setFile] = useState('')
   const [user,Setuser] = useState([])
-  const [profileimg,SetProfileImg] = useState([])
   const [imgfileList,SetImgFileList] = useState([])
-  const [imgfileListName,SetImgFileListName] = useState([])
+  const [cafes,SetCafes] = useState([])
+  const [cafes_fics,SetCafes_Fics] = useState([])
+  const [cafes_ficsprofile,SetCafes_FicsProfile] = useState([])
+  const [cafe_menu,Setcafe_menu] = useState('')
+  const [menu_Image,SetMenu_Image] = useState('')
+  const [select1,SetSelect1] = useState('drinks')
+  const [select2,SetSelect2] = useState('HotCoffee')
+  const [menu_kor,SetMenu_kor] = useState('')
+  const [menu_eng,SetMenu_eng] = useState('')
+  const [cafe_menuName,SetCafe_MenuName] = useState('')
+  const [price,SetPrice] = useState(0)
+  const [cafes_product_list,SetCafes_Product_List] = useState([])
+  const [products,SetProduct] = useState([])
   const storage = getStorage()
   const Id = sessionStorage.getItem('Id')
-
+  
 
   const getMemberdata = {
     'user_id' : Id
   }
   const qs = require('qs');
+
+
+
   useEffect(()=>{
     getMember(qs.stringify(getMemberdata))
     .then(res =>{
@@ -31,11 +45,76 @@ const CafeAdminPage = (e) => {
       const userdata ={
         user_id : res.data.user_id
       }
-      selectProfileimg(qs.stringify(userdata))
-      .then(res => SetProfileImg(res.data))
+      getcafes(qs.stringify(userdata))
+      .then(res =>{
+        SetCafes(res.data)
+        const cafeficsdata ={
+          cafe_id : res.data.cafe_id
+        }
+        getcafefics(qs.stringify(cafeficsdata))
+        .then(res => SetCafes_Fics(res.data))
+        getcafeficsprofile(qs.stringify(cafeficsdata))
+        .then(res => SetCafes_FicsProfile(res.data))  
+      })
       } 
     ) 
-  },[imgdata])
+  },[imgfileList,imgdata])
+  let address
+  if(cafes != ''){
+    if(cafes.address2 == '강남구'){
+      address = 'gangnam'
+    }
+    if(cafes.address2 == '도봉구'){
+      address = 'dobong'
+    }
+    if(cafes.address2 == '은평구'){
+      address = 'eunpyeong'
+    }
+    if(cafes.address2 == '강서구'){
+      address = 'gangseo'
+    }
+    if(cafes.address2 == '구로구'){
+      address = 'guro'
+    }
+    if(cafes.address2 == '관악구'){
+      address = 'gwanak'
+    }
+    if(cafes.address2 == '종로구'){
+      address = 'jongro'
+    }
+    if(cafes.address2 == '중구'){
+      address = 'jungu'
+    }
+    if(cafes.address2 == '마포구'){
+      address = 'mapo'
+    } 
+    if(cafes.address2 == '노원구'){
+      address = 'nowon'
+    } 
+    if(cafes.address2 == '서초구'){
+      address = 'seocho'
+    } 
+    if(cafes.address2 == '서대문구'){
+      address = 'seodaemun'
+    } 
+    if(cafes.address2 == '성동구'){
+      address = 'seongdong'
+    } 
+    if(cafes.address2 == '송파구'){
+      address = 'songpa'
+    } 
+    if(cafes.address2 == '양천구'){
+      address = 'yangcheon'
+    } 
+    if(cafes.address2 == '영등포구'){
+      address = 'yeongdeungpo'
+    } 
+    if(cafes.address2 == '용산구'){
+      address = 'yongsan'
+    } 
+  }
+
+
   const saveFileImage = (e) => {
 
     setFile(e.target.files[0])
@@ -46,65 +125,215 @@ const CafeAdminPage = (e) => {
     SetImgFileList([... e.target.files])
 
   }
+  const saveMenuImage = (e) => {
+    Setcafe_menu(e.target.files[0])
+    SetMenu_Image(URL.createObjectURL(e.target.files[0]))
+    SetCafe_MenuName(e.target.files[0].name)
+  }
 
   /*     const mountainsRef = ref(storage, `/test/${firebaseimgname}`)
   uploadBytesResumable(mountainsRef) */
   let imgname = firebaseimgname.split('.')
-  let imgname1 = imgname[0]+'-profile'
-  let imgname2 = imgname1+'.'+imgname[1] //프로필 이미지 뒤에 글자 붙이기
-  
-
+  let imgname1 = user.insta_account+'-profile'
+  let imgname2 
+if(imgname[1] != undefined){
+  imgname2 = imgname1+'.'+imgname[1] //프로필 이미지 뒤에 글자 붙이기
+}
+  //프로필 contentType
   const metaData = {
     contentType : file.type
   }
-
-
-  const InsertProfileimgdata ={
-    path : `/profile/${user.user_id}/`,
-    img :  imgname2,
-    user_id : user.user_id
+//menucontentType 
+  const cafemenumetaData ={
+    contentType : cafe_menu.type
   }
+
+  const delimgfileList = (item) => {
+    SetImgFileList(imgfileList.filter((data) => data.name !== item.name))
+
+  }  
+  const delmenu = (e) =>{
+    SetMenu_Image('')
+    Setcafe_menu('')
+  }
+
 
   const save = () => {
 
-
+    const insertCafepicsdata ={
+      file_path :`/cafe/seoul/${address}/${user.insta_account}/`,
+      img_file :  imgname2,
+      cafe_id : cafes.cafe_id
+    }
     //실제 firebase에 새로 올라가는 파일
-    const mountainsRef = ref(storage, `/profile/${user.user_id}/${imgname2}`)//파일명 및 경로 지정
     //기존에 firebase에 올라가있는 파일 삭제 
-    if(profileimg == ''){
-      uploadBytesResumable(mountainsRef,file,metaData)//실제 업로드 ,경로 , 파일
-      InsertProfileimg(qs.stringify(InsertProfileimgdata))
+    if(cafes_ficsprofile == ''){
+      if(imgdata != ''){
+        const mountainsRef = ref(storage,  `/cafe/seoul/${address}/${user.insta_account}/${imgname2}`)//파일명 및 경로 지정
+        uploadBytesResumable(mountainsRef,file,metaData)//실제 업로드 ,경로 , 파일
+        insertCafepics(qs.stringify(insertCafepicsdata))
+        //카페 메뉴 네임지정
+        if(cafe_menuName != ''){
+          const menumountRef = ref(storage,  `/product/${select1}/${select2}/${cafe_menuName}`)
+
+    
+          const insertcafes_product_listdata = {
+            cafe_id : cafes.cafe_id
+          }
+          const insertproductsdata = {
+            product_name_kor : menu_kor,
+            product_name_eng : menu_eng,
+            category : select1,
+            subcategory : select2,
+            price : price
+          }
+          uploadBytesResumable(menumountRef,cafe_menu,cafemenumetaData)
+          insertcafes_product_list(qs.stringify(insertcafes_product_listdata))
+          .then(res => SetCafes_Product_List(res.data))
+          insertproducts(qs.stringify(insertproductsdata))
+          .then(res => SetProduct(res.data))
+          if(cafes_product_list != ''){
+            if(products != ''){
+              let recommended
+              if(select1 == 'drinks'){
+                recommended = 'Y'
+              }else{
+                recommended = 'N'
+              }
+              const insertcafes_product_list_itemsdata ={
+                product_list_id : cafes_product_list.product_list_id,
+                product_id : products.product_id,
+                recommended : recommended
+              }
+              insertcafes_product_list_items(qs.stringify(insertcafes_product_list_itemsdata))
+
+              const insertproducts_imgdata ={
+                product_id : products.product_id,
+                img_file : cafe_menuName,
+                file_path : `/product/${select1}/${select2}/`
+              }
+              insertproducts_img(qs.stringify(insertproducts_imgdata))
+            }
+          }
+        }
+      }
       let imgmetaData
       let imgListRef
       let ImgFileListName = new Array();
+      let Imgfilename = new Array();
+      let imgname = new Array();
       for(let i = 0; i < imgfileList.length; i++){
         imgmetaData = {
           contentType : imgfileList[i].type
         }
-        ImgFileListName[i] = [imgfileList[i].name]
-        imgListRef = ref(storage, `/profile/${user.user_id}/${ImgFileListName[i]}`)//파일명 및 경로 지정
-        uploadBytesResumable(imgListRef,imgfileList[i],imgmetaData)
+        ImgFileListName[i] = imgfileList[i].name
+        Imgfilename[i] = ImgFileListName[i].split('.')
+        imgname[i] = Imgfilename[i][1]
+
+        const insertCafepicsdata1 ={
+          file_path :`/cafe/seoul/${address}/${user.insta_account}/`,
+          img_file :  `${user.insta_account}-${i}.${imgname[i]}`,
+          cafe_id : cafes.cafe_id
+        }
+
+         imgListRef = ref(storage, `/cafe/seoul/${address}/${user.insta_account}/${user.insta_account}-${i}.${imgname[i]}`)//파일명 및 경로 지정
+         uploadBytesResumable(imgListRef,imgfileList[i],imgmetaData)
+         insertCafepics(qs.stringify(insertCafepicsdata1))
       }
       alert('저장 완료')
     }else{
       let imgmetaData
       let imgListRef
       let ImgFileListName = new Array();
+      let Imgfilename = new Array();
+      let imgname = new Array();
       for(let i = 0; i < imgfileList.length; i++){
+
+
         imgmetaData = {
           contentType : imgfileList[i].type
         }
-        ImgFileListName[i] = [imgfileList[i].name]
-        imgListRef = ref(storage, `/profile/${user.user_id}/${ImgFileListName[i]}`)//파일명 및 경로 지정
-        uploadBytesResumable(imgListRef,imgfileList[i],imgmetaData)
+        ImgFileListName[i] = imgfileList[i].name
+        Imgfilename[i] = ImgFileListName[i].split('.')
+        imgname[i] = Imgfilename[i][1]
+
+        const insertCafepicsdata1 ={
+          file_path :`/cafe/seoul/${address}/${user.insta_account}/`,
+          img_file :  `${user.insta_account}-${i}.${imgname[i]}`,
+          cafe_id : cafes.cafe_id
+        }
+         imgListRef = ref(storage, `/cafe/seoul/${address}/${user.insta_account}/${user.insta_account}-${i}.${imgname[i]}`)//파일명 및 경로 지정
+         uploadBytesResumable(imgListRef,imgfileList[i],imgmetaData)
+         insertCafepics(qs.stringify(insertCafepicsdata1))
       }
-        const mountRef = ref(storage, `/profile/${user.user_id}/${profileimg.profile_img}`)
+
+      if(cafe_menuName != ''){
+        const menumountRef = ref(storage,  `/product/${select1}/${select2}/${cafe_menuName}`)
+        cafemenumetaData ={
+          contentType : cafe_menu.type
+        }
+
+        const insertcafes_product_listdata = {
+          cafe_id : user.cafe_id
+        }
+        const insertproductsdata = {
+          product_name_kor : menu_kor,
+          product_name_eng : menu_eng,
+          category : select1,
+          subcategory : select2,
+          price : price
+        }
+        uploadBytesResumable(menumountRef,cafe_menu,cafemenumetaData)
+        insertcafes_product_list(qs.stringify(insertcafes_product_listdata))
+        .then(res => SetCafes_Product_List(res.data))
+        insertproducts(qs.stringify(insertproductsdata))
+        .then(res => SetProduct(res.data))
+        if(cafes_product_list != ''){
+          if(products != ''){
+            let recommended
+            if(select1 == 'drinks'){
+              recommended = 'Y'
+            }else{
+              recommended = 'N'
+            }
+            const insertcafes_product_list_itemsdata ={
+              product_list_id : cafes_product_list.product_list_id,
+              product_id : products.product_id,
+              recommended : recommended
+            }
+            insertcafes_product_list_items(qs.stringify(insertcafes_product_list_itemsdata))
+
+            const insertproducts_imgdata ={
+              product_id : products.product_id,
+              img_file : cafe_menuName,
+              file_path : `/product/${select1}/${select2}/`
+            }
+            insertproducts_img(qs.stringify(insertproducts_imgdata))
+          }
+        }
+      }
+
+      //삭제 경로
+        const mountainsRef = ref(storage,  `/cafe/seoul/${address}/${user.insta_account}/${imgname2}`)//파일명 및 경로 지정
+        const mountRef = ref(storage, `${cafes_ficsprofile.file_path}/${cafes_ficsprofile.img_file}`)
         deleteObject(mountRef)
         uploadBytesResumable(mountainsRef,file,metaData)//실제 업로드 ,경로 , 파일
-        updateProfileimg(qs.stringify(InsertProfileimgdata))
+        updateCafepics(qs.stringify(insertCafepicsdata))
         alert('저장완료')
       }
   }
+
+  const changeselect1 =(e) =>{
+    SetSelect1(e.target.value)
+  }
+  const changeselect2 = (e) =>{
+    SetSelect2(e.target.value)
+  }
+  
+  const inputmenuprice = (e) =>{
+    SetPrice(e.target.value)
+  } 
+
   return (
     <>
 
@@ -125,7 +354,7 @@ const CafeAdminPage = (e) => {
               </p>
               <div className="pt-8">
                    {
-                    imgdata === '' ? profileimg === '' ? 
+                    imgdata === '' ? cafes_ficsprofile === '' ? 
                     <svg
                        id="profileimg1"
                        className="h-32 w-32 rounded-full bg-white md:h-52 md:w-52"
@@ -137,13 +366,63 @@ const CafeAdminPage = (e) => {
                      :
                      <img id='profileimg3'  
                      className="h-32 w-32 rounded-full bg-white md:h-52 md:w-52" 
-                     src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${profileimg.path}${profileimg.profile_img}`}/>
+                     src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${cafes_ficsprofile.file_path}${cafes_ficsprofile.img_file}`}/>
                      :
                      <img id='profileimg3'  
                      className="h-32 w-32 rounded-full bg-white md:h-52 md:w-52" 
                      src={imgdata}/>
                    }
               </div>
+              <div className="pt-8 border mt-7">
+                   {
+                   menu_Image == ''?
+                    <svg
+                       id="cafemenu"
+                       className="h-32 w-32  bg-white md:h-52 md:w-52"
+                       fill="currentColor"
+                       viewBox="0 0 24 24"
+                     >
+                       <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                     </svg>
+                      :
+                     <img id='cafemenu'  
+                     className="h-32 w-32  bg-white md:h-52 md:w-52" 
+                     src={menu_Image}/>
+                   }
+              </div>
+              <div className='w-32 h-28 inline-table'>
+              <p>분류</p>
+              <select id="select1" onChange={changeselect1} className='float-left'>
+                <option value='drinks' selected>음료</option>
+                <option value='food'>음식</option>
+              </select>
+              {
+               select1 !== null && select1 === 'food' ?
+                <select onChange={changeselect2}>
+                <option value='Bakery'>베이커리</option>
+                <option value='Cake'>케이크</option>
+                <option value='IceCream'>아이스크림</option>
+                <option value='Macaron'>마카롱</option>
+                <option value='Sandwich'>샌드위치</option>
+                </select>
+                :
+                <select onChange={changeselect2}>
+                  <option value='HotCoffee' selected>뜨거운 커피</option>
+                  <option value='HotTeas'>뜨거운 차</option>
+                  <option value='IcedCoffee'>차가운 커피</option>
+                  <option value='IcedTeas'>차가운 차</option>
+                </select>
+              }
+
+                <p className='table-row'>메뉴 이름(한글)</p>
+                <input type = "text" className='border w-80' onChange={(e) => SetMenu_kor(e.target.value)}/>
+                <p>메뉴 이름(영어)</p>
+                <input type = "text" className='border w-80' onChange={(e) => SetMenu_eng(e.target.value)}/>
+                <p>가격</p>
+                <input type = "number" id="inputprice" className='border w-80' onChange={inputmenuprice}/>
+
+              </div>
+
             </div>
           </div>
           <div className="mt-5 md:col-span-2 md:mt-0">
@@ -202,7 +481,7 @@ const CafeAdminPage = (e) => {
                     <div className="mt-1 flex items-center">
                       <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
                         {
-                         imgdata === '' ? profileimg === '' ? 
+                         imgdata === '' ? cafes_ficsprofile === '' ? 
                          <svg
                             id="profileimg1"
                             className="h-full w-full text-gray-300"
@@ -213,7 +492,7 @@ const CafeAdminPage = (e) => {
                           </svg> :
                           <img id='profileimg3'  
                           className="h-full w-full text-gray-300" 
-                          src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${profileimg.path}${profileimg.profile_img}`}/>
+                          src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${cafes_ficsprofile.file_path}${cafes_ficsprofile.img_file}`}/>
                           :
                           <img id='profileimg3'  
                           className="h-full w-full text-gray-300" 
@@ -235,7 +514,7 @@ const CafeAdminPage = (e) => {
                       </label>
                     </div>
                   </div>
-
+                      
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
                       카페 사진
@@ -256,6 +535,15 @@ const CafeAdminPage = (e) => {
                             stroke-linejoin="round"
                           />
                         </svg>
+                          {
+                            imgfileList !== '' &&
+                            imgfileList.map((item,index) => (
+                              <div key={index}>
+                              <p  className='inline'>{item.name}</p>
+                              <button type='button' className='float-right' onClick={() => delimgfileList(item)}>삭제</button>
+                              </div>
+                            ))
+                          }
                         <div className="flex text-sm text-gray-600">
                           <label
                             for="file-upload"
@@ -281,7 +569,7 @@ const CafeAdminPage = (e) => {
                   </div>
                 </div>
 
-                <AddingMenu />
+                <AddingMenu saveMenuImage={saveMenuImage} cafe_menu={cafe_menu} delmenu={delmenu}/>
 
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                   <button
