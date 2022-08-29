@@ -23,7 +23,7 @@ const Carousel = ({ data }) => {
         {data != '' &&
           img.map((item, index) => {
             test =
-              'https://storage.cloud.google.com/bitcamp-caffeine.appspot.com' +
+              'https://storage.googleapis.com/bitcamp-caffeine.appspot.com' +
               data[0].file_path +
               item
             {
