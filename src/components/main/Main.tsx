@@ -1,5 +1,6 @@
 // @ts-nocheck
 import CafeSwipe from './CafeSwipe'
+import CafeSwipeContainer from './CafeSwipeContainer'
 
 const Main = () => {
 
@@ -11,7 +12,7 @@ const Main = () => {
         </div>
       </div>
       <div id="rightDiv" className="basis-3/5">
-        <CafeSwipe/>
+        <CafeSwipeContainer />
       </div>
     </div>
   )

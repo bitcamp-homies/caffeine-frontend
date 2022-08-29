@@ -1,6 +1,8 @@
 // @ts-nocheck
 import Carousel from 'components/stores/Carousel'
 import TempIndexIcon from 'components/resources/TempIndexIcon'
+import { getDownloadURL, getStorage, ref } from 'firebase/storage'
+import { async } from '@firebase/util'
 
 const CafeInfo = ({ cafeInfo }) => {
   return (
@@ -14,11 +16,7 @@ const CafeInfo = ({ cafeInfo }) => {
       >
         <div id="head" className="flex flex-row border-b pt-10 pb-4">
           {cafeInfo.map((item) => {
-            console.log(item.about)
-            const profile =
-              'https://storage.cloud.google.com/bitcamp-caffeine.appspot.com' +
-              item.file_path +
-              item.img_file.split(',').splice(-1, 1)
+            const profile = `https://storage.googleapis.com/bitcamp-caffeine.appspot.com${item.file_path}${item.img_file.split(',').at(-1)}`
             const text = item.about
             return (
               <>
