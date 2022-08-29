@@ -6,7 +6,7 @@ import CafeSwipe from './CafeSwipe'
 
 const CafeSwipeContainer = () => {
   const [cafeData, setcafeData] = useState([])
-  let cafeInfo = cafeData.filter((item, index) => index === 3)
+  let cafeInfo = cafeData.filter((item, index) => index === 1)
 
   //3000미터 근방 카페
   const getCafeListAll = (userLocation) => {
@@ -44,7 +44,7 @@ const CafeSwipeContainer = () => {
   }, [])
   
   return (
-    <div id='cafe_container'>
+    <div id='cafe_container' className='relative'>
       <CafeSwipe cafeInfo={cafeInfo}/>
     </div>
   );

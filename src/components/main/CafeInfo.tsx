@@ -41,9 +41,9 @@ const CafeInfo = ({ cafeInfo }) => {
                   <p className="pt-1 text-sm text-gray-500">
                     @{item.insta_account}
                   </p>
-                  <div className="h-[11.5rem] shrink">
-                    <p className="mt-4 max-w-[17rem] whitespace-pre-wrap line-clamp-[9]">
-                      {text?.length > 110 ? text.substr(0, 110 - 1) + "..." : text}
+                  <div className="h-[8rem] text-sm overflow-y-scroll">
+                    <p className="mt-2 max-w-[17rem] whitespace-pre-wrap">
+                      { text}
                     </p>
                   </div>
                 </div>
@@ -51,7 +51,7 @@ const CafeInfo = ({ cafeInfo }) => {
             )
           })}
         </div>
-        <div className="flex flex-row pt-3 pb-5">
+        <div className="flex flex-row pt-3 mb-5">
           <div className="temp_index  px-6">
             <p className="font-medium tracking-widest">온도지수</p>
             <div className="flex flex-row">
