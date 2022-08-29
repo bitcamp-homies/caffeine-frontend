@@ -44,7 +44,7 @@ const CafeSwipeContainer = () => {
   }, [])
   
   return (
-    <div id='cafe_container' className='relative'>
+    <div id='cafe_container' className=''>
       <CafeSwipe cafeInfo={cafeInfo}/>
     </div>
   );

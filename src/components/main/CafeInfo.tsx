@@ -14,9 +14,11 @@ const CafeInfo = ({ cafeInfo }) => {
         id="cafe_profile"
         className="flex flex-col items-center px-5 md:pb-6"
       >
-        <div id="head" className="flex flex-row border-b pt-10 pb-4">
+        <div id="head" className="flex flex-row border-b pt-6 pb-4">
           {cafeInfo.map((item) => {
-            const profile = `https://storage.googleapis.com/bitcamp-caffeine.appspot.com${item.file_path}${item.img_file.split(',').at(-1)}`
+            const profile = `https://storage.googleapis.com/bitcamp-caffeine.appspot.com${
+              item.file_path
+            }${item.img_file.split(',').at(-1)}`
             const text = item.about
             return (
               <>
@@ -27,7 +29,7 @@ const CafeInfo = ({ cafeInfo }) => {
                       alt="user avatar"
                       className="h-20 w-20 rounded-full bg-contain bg-center outline outline-1 outline-gray-300"
                     ></img>
-                    <button className="absolute left-14 top-0.5 rounded-full bg-orange-600 px-1 pt-2 pb-1 font-gMarketLight text-[11px] text-white">
+                    <button className="font-gMarketLight absolute left-14 top-0.5 rounded-full bg-orange-600 px-1 pt-2 pb-1 text-[11px] text-white">
                       385
                     </button>
                   </div>
@@ -41,9 +43,9 @@ const CafeInfo = ({ cafeInfo }) => {
                   <p className="pt-1 text-sm text-gray-500">
                     @{item.insta_account}
                   </p>
-                  <div className="h-[8rem] text-sm overflow-y-scroll customScrollBar">
+                  <div className="customScrollBar h-[8rem] overflow-y-scroll text-sm">
                     <p className="mt-2 max-w-[17rem] whitespace-pre-wrap">
-                      { text}
+                      {text}
                     </p>
                   </div>
                 </div>
@@ -51,7 +53,7 @@ const CafeInfo = ({ cafeInfo }) => {
             )
           })}
         </div>
-        <div className="flex flex-row pt-3 mb-5">
+        <div className="mb-5 flex flex-row pt-3">
           <div className="temp_index  px-6">
             <p className="font-medium tracking-widest">온도지수</p>
             <div className="flex flex-row">

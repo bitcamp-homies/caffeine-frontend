@@ -10,7 +10,7 @@ import axios from 'axios'
 let currentX = 0
 const offsetDivider = 250
 
-const CafeSwipe = ({cafeInfo}) => {
+const CafeSwipe = ({ cafeInfo }) => {
   const [likeOpacity, setLikeOpacity] = useState(0)
   const [nopeOpacity, setNopeOpacity] = useState(0)
   const [cafeSwipeOpacity, setCafeSwipeOpacity] = useState(1)
@@ -90,13 +90,12 @@ const CafeSwipe = ({cafeInfo}) => {
       </div>
       <motion.div
         id="CafeSwipe"
-        className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-3 md:max-w-[24rem]"
+        className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-3 md:max-w-[28rem]"
         style={{ opacity: cafeSwipeOpacity }}
         drag
         dragSnapToOrigin
         dragConstraints={{ top: 0, bottom: 0 }}
         dragElastic={0.3}
-        dragPropagation
         onDrag={(event, info) => handleOpacityUpdate(info.offset.x)}
         onDragEnd={(event, info) => LikeOrNope(info.offset.x)}
       >
