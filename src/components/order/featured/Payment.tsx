@@ -48,7 +48,6 @@ const payment = () => {
   }
   //세번째 동의 여부
   const checkAllHandler = (e) => {
-    console.log(checkAll);
     if(checkAll == 1){
       setCheckAll(0)
     } else {
@@ -58,15 +57,12 @@ const payment = () => {
 
   //결제하기 버튼 동작
   const disabledCheck = (e) => {
-    if(checkProduct == 1 && checkRefund == 1 && checkAll == 1){
-      
-    } else{
+    if(checkProduct != 1 && checkRefund != 1 && checkAll != 1){
       alert("동의 버튼을 눌러주세요");
-      console.log(e.target)
       e.preventDefault()
     }
   }
-
+  
   //카카오 API
   const [kakaoState, setKakaoState] = useState('')
   const kakaoUrl = kakaoState.next_redirect_pc_url
