@@ -171,7 +171,7 @@ const CafeCoordManage = () => {
   }
 
   return (
-    <div className="mx-10 my-8">
+    <div className="my-8">
       <div className="text-xl font-semibold">CaefList Filter</div>
       <CafeFilterListBox setListFilter={setListFilter} />
       {listFilter.filter === '경위도좌표' && (
@@ -208,7 +208,8 @@ const CafeCoordManage = () => {
           />
         </div>
       )}
-      <div className="h-[36rem] w-[72rem] overflow-scroll rounded-lg">
+      <hr/>
+      <div className="h-[36rem] w-[72rem] overflow-scroll rounded-lg my-4">
         <CafeListTable
           listFilter={listFilter}
           filteredData={filteredData}

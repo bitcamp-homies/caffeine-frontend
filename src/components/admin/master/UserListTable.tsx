@@ -25,7 +25,7 @@ const UserListTable = ({ userData }) => {
   //modal
 
   return (
-    <table className="w-[80rem]">
+    <table className="w-[110rem]">
       <thead className="sticky top-0 z-10 bg-[#F8E5EE]">
         <tr className="h-16">
           <th>USER_ID</th>

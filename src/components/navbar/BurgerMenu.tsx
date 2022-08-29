@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { motion, useCycle } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 interface BurgerProps {
   burgered: boolean
@@ -21,9 +22,18 @@ const BurgerMenu = (props: BurgerProps) => {
           onTap={() => burgerCycle}
         >
           <ul>
-            <li className="mb-8 px-6 text-2xl">Order</li>
-            <li className="mb-8 px-6 text-2xl">Cards</li>
-            <li className="mb-8 px-6 text-2xl">Gift</li>
+            <Link to="/order/cafes">
+              <li className="mb-8 px-6 text-2xl">Order</li>
+            </Link>
+            <Link to="/cards">
+              <li className="mb-8 px-6 text-2xl">Cards</li>
+            </Link>
+            <Link to="/">
+              <li className="mb-8 px-6 text-2xl">Gift</li>
+            </Link>
+            <Link to="/store">
+              <li className="mb-8 px-6 text-2xl">FindStore</li>
+            </Link>
           </ul>
           <hr className="mx-6 border border-gray-300 bg-gray-300" />
           <div className="flex flex-row px-5 pt-8">
