@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useMutation } from 'react-query'
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: `${process.env.REACT_APP_THUMBS_API_ADDRESS}`,
 })
 
 export const listAllMybatis = () => {
@@ -64,3 +64,45 @@ export const getCafesMenusAll = (cafe_id) => {
   })
   return temp
 }
+s
+export const getCafeitemList = (cafe_id) => {
+    const temp = api.get('/cafe/getCafeitemList',{
+        params : {
+            cafe_id : cafe_id
+        }
+    })
+    return temp
+}
+
+export const getProductInfo = (product_id) => {
+  const temp = api.get('/order/getProductInfo',{
+    params : {
+      product_id : product_id
+    }
+  })
+  return temp
+}
+
+export const savePaymentList = (paymentList) => {
+  const temp = api.post('/order/paymentList', paymentList)
+  return temp
+}
+
+export const getMember = (Id) => {
+  const temp = api.post('/cafe/getMember',Id)
+  return temp
+}
+export const InsertProfileimg = (profile) => {
+  const temp = api.post('/cafe/InsertProfileimg',profile)
+  return temp
+}
+
+export const selectProfileimg = (user_id) => {
+  const temp = api.post('/cafe/selectProfileimg',user_id)
+  return temp
+}
+
+export const updateProfileimg = (user_id) => {
+  const temp = api.post('/cafe/updateProfileimg',user_id)
+} 
+

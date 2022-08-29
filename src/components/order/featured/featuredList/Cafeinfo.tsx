@@ -55,7 +55,7 @@ const Cafeinfo = () => {
                         return (
                           <p
                             key={item.cafe_id}
-                            className="text-gray-400"
+                            className="text-gray-400 hover:cursor-pointer underline"
                             onClick={() => window.open(`${map}${address}`)}
                           >
                             {`${address}${address4}`}
