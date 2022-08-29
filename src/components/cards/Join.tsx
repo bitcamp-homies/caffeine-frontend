@@ -41,7 +41,7 @@ const Join = (props) => {
     }
   }
   return (
-    <body className="bg-gradient-to-br from-green-100 to-white antialiased">
+    <body className="bg-gradient-to-br from-[#F8E5EE] to-white antialiased">
       <div className="container mx-auto px-6">
         <div className="flex h-screen flex-col justify-evenly text-center md:flex-row md:items-center md:text-left">
           <div className="mx-auto w-full md:mx-0 md:w-full lg:w-9/12">
@@ -56,7 +56,7 @@ const Join = (props) => {
                     type="text"
                     id="username"
                     placeholder="Please insert your username"
-                    className="appearance-none rounded-lg border-2 border-gray-100 px-4 py-3 placeholder-gray-300 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                    className="appearance-none rounded-lg border-2 border-gray-100 px-4 py-3 placeholder-gray-300 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#9F2042]"
                     onChange={(e)=>setId(e.target.value)}
                   />
                 </div>
@@ -66,7 +66,7 @@ const Join = (props) => {
                     type="password"
                     id="password"
                     placeholder="Please insert your password"
-                    className="appearance-none rounded-lg border-2 border-gray-100 px-4 py-3 placeholder-gray-300 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                    className="appearance-none rounded-lg border-2 border-gray-100 px-4 py-3 placeholder-gray-300 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#9F2042]"
                     onChange={(e)=>setPassword(e.target.value)}
                   />
                 </div>
