@@ -82,7 +82,7 @@ const PaymentIng = () => {
   },[])
   return (
     <div>
-      하이하이
+      <p className=''>결제중입니다.</p>
     </div>
   );
 };

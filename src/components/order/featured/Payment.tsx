@@ -39,7 +39,6 @@ const payment = () => {
   
   //두번째 동의 여부
   const checkRefundHandler = (e) => {
-    console.log(checkRefund);
     if(checkRefund == 1){
       setCheckRefund(0)
     } else {
@@ -57,12 +56,15 @@ const payment = () => {
 
   //결제하기 버튼 동작
   const disabledCheck = (e) => {
-    if(checkProduct != 1 && checkRefund != 1 && checkAll != 1){
+    sessionStorage.setItem("totalPrice", totalPrice);
+    if(checkProduct == 1 && checkRefund == 1 && checkAll == 1){
+      
+    } else{
       alert("동의 버튼을 눌러주세요");
       e.preventDefault()
     }
   }
-  
+  console.log(cafe_name);
   //카카오 API
   const [kakaoState, setKakaoState] = useState('')
   const kakaoUrl = kakaoState.next_redirect_pc_url
@@ -84,9 +86,9 @@ const payment = () => {
         vat_amount: 200,
         tax_free_amount: 0,
         // router에 지정한 PayResult의 경로로 수정
-        approval_url: `http://localhost:3000/order/featured/order-now/cafe/${cafe_id}/product/${product_id}/payment/kakaoresult`,
-        fail_url: 'http://localhost:3000/',
-        cancel_url: 'http://localhost:3000/',
+        approval_url: `${process.env.REACT_APP_THUMBS_REACT_ADDRESS}/order/featured/order-now/cafe/${cafe_id}/product/${product_id}/payment/kakaoresult`,
+        fail_url: `${process.env.REACT_APP_THUMBS_REACT_ADDRESS}`,
+        cancel_url: `${process.env.REACT_APP_THUMBS_REACT_ADDRESS}`,
       },
     }).then((response) => {
       const {
@@ -97,7 +99,7 @@ const payment = () => {
       setKakaoState({ next_redirect_pc_url })
     })
   }, [])
-  console.log(kakaoUrl)
+  
   function callKakao() {
     sessionStorage.setItem("totalPrice", totalPrice);
     window.open(`${kakaoUrl}`, '카카오페이', 'width=800, height=700')
