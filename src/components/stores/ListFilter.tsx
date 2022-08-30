@@ -47,9 +47,9 @@ const ListFilter = ({
       label: '7km',
     },
   ]
-
+  const outerHeight = window.outerHeight
   return (
-    <div className="h-128 basis-full lg:flex lg:basis-2/5 lg:flex-col">
+    <div className={`basis-full lg:flex lg:h-[900px] lg:basis-2/5 lg:flex-col`}>
       <div className="w-full lg:w-[28rem] xl:w-[35rem]">
         <div className="my-4 px-4">
           <span className="text-xl font-bold tracking-widest">Filters</span>
