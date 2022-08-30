@@ -38,7 +38,7 @@ const OrderListItem = ({ orderData }) => {
     <div>
       <div className="mt-4 rounded-2xl bg-gray-300">
         <div className="flex">
-          <div className="my-auto ml-3 flex md:ml-5">
+          <div className="mt-3 ml-3 flex md:ml-5">
             {isSuccess &&
               cafe_data.map((item) => {
                 const profile =
@@ -93,12 +93,12 @@ const OrderListItem = ({ orderData }) => {
                 </span>
               </div>
             </div>
-            <div className="mt-1 -ml-5 text-center">
+            <div className="mt-1 float-left text-center w-50">
               <span
                 className="font-semibold text-gray-600
                   dark:text-gray-600"
               >
-                {orderData.purchase_way == 1 ? '포인트 결제' : '카카오 결제'} :
+                {orderData.purchase_way == 1 ? '포인트 결제' : '카카오페이 결제'} :
               </span>
               <span
                 className="ml-1 font-semibold text-gray-600
@@ -111,7 +111,7 @@ const OrderListItem = ({ orderData }) => {
               <button
                 className="dark-hover:text-gray-200 ml-1 flex
                     select-none items-center rounded-full
-                    border border-blue-500 py-2 px-6
+                    border border-blue-500 mt-9 py-2 px-6
                     leading-none hover:bg-blue-400
                     hover:text-white focus:outline-none
                     dark:border-blue-600"

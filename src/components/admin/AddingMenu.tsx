@@ -1,7 +1,8 @@
 // @ts-nocheck
 import React from 'react'
 
-const AddingMenu = () => {
+const AddingMenu = ({saveMenuImage,cafe_menu,delmenu}) => {
+  
   return (
     <div className="bg-white px-4 py-5 sm:p-6">
       <label className="block text-sm font-medium text-gray-700">
@@ -23,17 +24,25 @@ const AddingMenu = () => {
               stroke-linejoin="round"
             />
           </svg>
+             {
+              cafe_menu !== '' &&
+              <div>
+              <p  className='inline'>{cafe_menu.name}</p>
+              <button type='button' className='float-right' onClick={delmenu}>삭제</button>
+              </div>
+              }
           <div className="flex text-sm text-gray-600">
             <label
-              for="file-upload"
+              for="file-upload1"
               className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
             >
               <span>사진 업로드</span>
               <input
-                id="file-upload"
-                name="file-upload"
+                id="file-upload1"
+                name="file-upload1"
                 type="file"
                 className="sr-only"
+                onChange={saveMenuImage}
               />
             </label>
             <p className="pl-1">or drag and drop</p>
