@@ -10,7 +10,6 @@ const Carousel = ({ data }) => {
     swipe: false,
     infinite: true,
     speed: 500,
-    adaptiveHeight: true,
     arrows: false
   }
   let img

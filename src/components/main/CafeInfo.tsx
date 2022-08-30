@@ -3,7 +3,6 @@ import Carousel from 'components/stores/Carousel'
 import TempIndexIcon from 'components/resources/TempIndexIcon'
 
 const CafeInfo = ({ cafeInfo }) => {
-  console.log(cafeInfo[0])
   return (
     <div>
       <div className="h-96 w-full bg-zinc-900 bg-contain bg-center bg-no-repeat">
@@ -19,31 +18,54 @@ const CafeInfo = ({ cafeInfo }) => {
               item.file_path
             }${item.img_file.split(',').at(-1)}`
             const text = item.about
+            
+            let distance = item.distance
+            if (distance > 1000) {
+              distance = `${Math.round((distance + Number.EPSILON) / 10) / 100}km`
+            } else {
+              distance = `${Math.round(distance)}m`
+            }
+
+            let address = ''
+            if (item.address4 = '') {
+              address = `${item.address1} ${item.address2} ${item.address3}`
+            } else {
+              address = `${item.address1} ${item.address2} ${item.address3}
+                         ${item.address4}`
+            }
+
             return (
               <>
-                <div>
+                <div className="flex flex-col">
                   <div id="profile_img" className="relative pr-6">
                     <img
                       src={profile}
                       alt="user avatar"
                       className="h-20 w-20 rounded-full bg-contain bg-center outline outline-1 outline-gray-300"
                     ></img>
-                    <button className="absolute left-14 top-0.5 rounded-full bg-orange-600 px-1 pt-2 pb-1 text-[11px] text-white">
+                    <button className="absolute left-14 top-0.5 rounded-full bg-orange-600 px-1 py-1 text-[11px] text-white">
                       385
                     </button>
+                  </div>
+                  <div className="mt-2">
+                    <p className="text-[0.85rem] ">
+                      당신과의 거리
+                    </p>
+                    <p className="w-[4.8rem] bg-gradient-to-r from-pink-600 to-[#F0A202] text-lg text-center text-white">
+                      {distance}
+                    </p>
                   </div>
                 </div>
                 <div className="flex flex-col" id="profile_info">
                   <p className="text-lg font-semibold">{item.cafe_name}</p>
-                  <p className="pt-1 text-sm text-gray-500">
-                    {item.address1} {item.address2} {item.address3}{' '}
-                    {item.address4}
+                  <p className="pt-1 text-[0.85rem] text-gray-500">
+                    {address}
                   </p>
-                  <p className="pt-1 text-sm text-gray-500">
+                  <p className=" text-[0.85rem] text-gray-500">
                     @{item.insta_account}
                   </p>
-                  <div className="customScrollBar h-[8rem] overflow-y-scroll text-sm">
-                    <p className="mt-2 max-w-[17rem] whitespace-pre-wrap">
+                  <div className="h-[6.25rem] overflow-y-scroll text-sm">
+                    <p className="mt-2 w-[14rem] whitespace-pre-wrap">
                       {text}
                     </p>
                   </div>
@@ -53,7 +75,7 @@ const CafeInfo = ({ cafeInfo }) => {
           })}
         </div>
         <div className="flex flex-row pt-3 pb-6 lg:pb-0">
-          <div className="temp_index px-6">
+          <div className="temp_index -ml-5 px-7">
             <p className="font-medium tracking-widest">온도지수</p>
             <div className="flex flex-row">
               <TempIndexIcon />
