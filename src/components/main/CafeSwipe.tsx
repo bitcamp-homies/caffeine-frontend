@@ -17,10 +17,10 @@ const CafeSwipe = ({
   setLikeOpacity,
   nopeOpacity,
   setNopeOpacity,
+  handleRemove,
 }) => {
   const [cafeSwipeOpacity, setCafeSwipeOpacity] = useState(1)
   const cafe_id = cafeInfo.cafe_id
-  console.log(cafeInfo.cafe_id)
 
   //스와이프 opacity 변화
   const handleOpacityUpdate = (offsetX: number) => {
@@ -65,10 +65,12 @@ const CafeSwipe = ({
       alert('LIKE: 즐겨찾는 카페에 등록되었습니다.')
       setCafeSwipeOpacity(1)
       setLikeOpacity(0)
+      handleRemove(cafe_id)
     } else if (offsetX < -200 && Math.abs(offsetX) - Math.abs(deltaX) > 150) {
       alert('NOPE: 다른 카페를 보여줍니다.')
       setCafeSwipeOpacity(1)
       setNopeOpacity(0)
+      handleRemove(cafe_id)
     } else {
       setCafeSwipeOpacity(1)
       setLikeOpacity(0)

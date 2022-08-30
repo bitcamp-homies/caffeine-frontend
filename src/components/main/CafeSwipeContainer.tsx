@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
 import CafeSwipe from './CafeSwipe'
@@ -49,6 +49,11 @@ const CafeSwipeContainer = () => {
   const [likeOpacity, setLikeOpacity] = useState(0)
   const [nopeOpacity, setNopeOpacity] = useState(0)
 
+  function handleRemove(cafe_id) {
+    const newCafeData = cafeData.filter((item) => item.cafe_id !== cafe_id)
+    setcafeData(newCafeData)
+  }
+
   return (
     <div id="cafe_container" className="relative lg:mt-12">
       <div id="control_boxes">
@@ -68,7 +73,7 @@ const CafeSwipeContainer = () => {
           <ThumbsDownLetter />
           <p className="mb-1 text-4xl">👎🏻</p>
         </div>
-        <div id="cafe_list">
+        <div id="cafe_list" ref={this.blurRef}>
           {cafeData.map((cafeInfo) => (
             <div key={cafeInfo.cafe_id}>
                 <CafeSwipe
@@ -77,6 +82,7 @@ const CafeSwipeContainer = () => {
                   setLikeOpacity={setLikeOpacity}
                   nopeOpacity={nopeOpacity}
                   setNopeOpacity={setNopeOpacity}
+                  handleRemove={handleRemove}
                 />
             </div>
           ))}
