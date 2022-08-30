@@ -4,19 +4,18 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
 const DateListFitler = [
-  { value:'day', filter: '일별현황(day)' },
-  { value:'month', filter: '월별현황(month)' },
+  { value: 'day', filter: '일별현황(day)' },
+  { value: 'month', filter: '월별현황(month)' },
 ]
 
-const UserAnalyticDateFilter = ({setDateFilter}) => {
-
+const UserAnalyticDateFilter = ({ setDateFilter }) => {
   const [selected, setSelected] = useState(DateListFitler[0])
   useEffect(() => {
-    setDateFilter(selected.value);
-  },[selected])
+    setDateFilter(selected.value)
+  }, [selected])
 
   return (
-    <div className="sticky top-0 z-30 w-72 float-right mr-6 mt-4">
+    <div className="sticky top-0 z-30 float-right mr-6 mt-4 w-72">
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
@@ -68,8 +67,7 @@ const UserAnalyticDateFilter = ({setDateFilter}) => {
         </div>
       </Listbox>
     </div>
-  );
-};
+  )
+}
 
-export default UserAnalyticDateFilter;
-
+export default UserAnalyticDateFilter

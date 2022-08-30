@@ -4,18 +4,18 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
 const TypeFitler = [
-  { value:'business', filter: '사업자' },
-  { value:'user', filter: '일반사용자' },
+  { value: 'business', filter: '사업자' },
+  { value: 'user', filter: '일반사용자' },
 ]
 
-const UserAnalyticTypeFilter = ({setUserFilter}) => {
-  const [selected, setSelected] = useState(TypeFitler[0]);
+const UserAnalyticTypeFilter = ({ setUserFilter }) => {
+  const [selected, setSelected] = useState(TypeFitler[0])
   useEffect(() => {
-    setUserFilter(selected.value);
-  },[selected])
+    setUserFilter(selected.value)
+  }, [selected])
 
   return (
-    <div className="sticky top-0 z-30 w-72 float-right mr-6 mt-4">
+    <div className="sticky top-0 z-30 float-right mr-6 mt-4 w-72">
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
@@ -67,7 +67,7 @@ const UserAnalyticTypeFilter = ({setUserFilter}) => {
         </div>
       </Listbox>
     </div>
-  );
-};
+  )
+}
 
-export default UserAnalyticTypeFilter;
+export default UserAnalyticTypeFilter

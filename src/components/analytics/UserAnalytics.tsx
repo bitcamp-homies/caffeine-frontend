@@ -17,20 +17,19 @@ const UserAnalytics = () => {
     },
   }
 
-  const [userFilter, setUserFilter] = useState('business');
-  const [dateFilter, setDateFilter] = useState('day');
+  const [userFilter, setUserFilter] = useState('business')
+  const [dateFilter, setDateFilter] = useState('day')
 
-  const [analyticData, setAnalyticData] = useState([]);
+  const [analyticData, setAnalyticData] = useState([])
   useEffect(() => {
     axios
       .get(
         `${process.env.REACT_APP_THUMBS_API_ADDRESS}/user/getUserAnalyticMybatis`,
         {
-          params :
-          {
-            user_type : userFilter,
-            date_type : dateFilter,
-          }
+          params: {
+            user_type: userFilter,
+            date_type: dateFilter,
+          },
         },
       )
       .then((res) => {
@@ -38,16 +37,16 @@ const UserAnalytics = () => {
       })
       .catch((err) => {
         console.log(err)
-      })  
-  },[userFilter, dateFilter])
+      })
+  }, [userFilter, dateFilter])
 
   return (
     // chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정
-    <div className='w-full h-[500px] m-auto'>
+    <div className="m-auto h-[500px] w-full">
       <div>
         {userFilter} {dateFilter}
-        <UserAnalyticTypeFilter setUserFilter={setUserFilter}/>  
-        <UserAnalyticDateFilter setDateFilter={setDateFilter}/>
+        <UserAnalyticTypeFilter setUserFilter={setUserFilter} />
+        <UserAnalyticDateFilter setDateFilter={setDateFilter} />
       </div>
       <ResponsiveBar
         /**
@@ -66,12 +65,7 @@ const UserAnalytics = () => {
         /**
          * keys들을 그룹화하는 index key (분류하는 값)
          */
-        indexBy={
-          dateFilter === 'day'?
-          'create_date'
-          :
-          'month'
-        }
+        indexBy={dateFilter === 'day' ? 'create_date' : 'month'}
         /**
          * chart margin
          */
@@ -198,4 +192,4 @@ const UserAnalytics = () => {
   )
 }
 
-export default UserAnalytics;
+export default UserAnalytics
