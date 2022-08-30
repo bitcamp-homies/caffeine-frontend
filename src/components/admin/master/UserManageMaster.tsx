@@ -37,29 +37,23 @@ const UserManageMaster = () => {
     }
   }, [selectedFilter])
 
-  // useEffect(() => {
-  //   if(!keyword){
-  //     setFilteredData(userData);
-  //   }
-  //   if(keyword){
-  //     const searchResult = userData.filter((item, index) => {
-  //       if(item.name && item.nickname && item.email ){
-  //         return (
-  //           item.name.indexOf(keyword) > 0
-  //           ||item.nickname.indexOf(keyword) > 0
-  //           || item.email.indexOf(keyword) > 0
-  //         )
-  //       }
-  //     })
-  //     // console.log(keyword);
-  //     // filteredData.map((item, index) => {
-  //     //   if(item.name){
-  //     //     console.log('item.name', item.name.indexOf(keyword));
-  //     //   }
-  //     // })
-  //     setFilteredData(searchResult);
-  //   }
-  // },[keyword])
+  useEffect(() => {
+    if(!keyword){
+      setFilteredData(userData);
+    }
+    if(keyword){
+      const searchResult = userData.filter((item, index) => {
+        if(item.name && item.nickname && item.email ){
+          return (
+            item.name.indexOf(keyword) >= 0
+            ||item.nickname.indexOf(keyword) >= 0
+            || item.email.indexOf(keyword) >= 0
+          )
+        }
+      })
+      setFilteredData(searchResult);
+    }
+  },[keyword])
 
   return (
     <div>
