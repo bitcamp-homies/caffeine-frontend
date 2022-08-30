@@ -11,6 +11,7 @@ const Carousel = ({ data }) => {
     infinite: true,
     speed: 500,
     adaptiveHeight: true,
+    arrows: false
   }
   let img
   if (data != '') {

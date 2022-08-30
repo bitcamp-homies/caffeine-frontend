@@ -51,8 +51,8 @@ const CafeInfo = ({ cafeInfo }) => {
             )
           })}
         </div>
-        <div className="mb-5 flex flex-row pt-3">
-          <div className="temp_index  px-6">
+        <div className="flex flex-row pt-3 pb-6 lg:pb-0">
+          <div className="temp_index px-6">
             <p className="font-medium tracking-widest">온도지수</p>
             <div className="flex flex-row">
               <TempIndexIcon />

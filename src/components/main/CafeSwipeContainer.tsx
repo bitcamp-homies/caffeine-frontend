@@ -52,29 +52,47 @@ const CafeSwipeContainer = () => {
   const [nopeOpacity, setNopeOpacity] = useState(0)
 
   return (
-    <div id="cafe_container" className="relative">
-      <CafeSwipe
-        cafeInfo={cafeInfo}
-        likeOpacity={likeOpacity}
-        setLikeOpacity={setLikeOpacity}
-        nopeOpacity={nopeOpacity}
-        setNopeOpacity={setNopeOpacity}
-      />
-      <div
-        id="like_box"
-        className="absolute inset-0 -z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-blue-500 shadow-lg"
-        style={{ opacity: likeOpacity }}
-      >
-        <ThumbsUpLetter />
-        <p className="mb-1 text-4xl">👍🏻</p>
-      </div>
-      <div
-        id="nope_box"
-        className="absolute inset-0 -z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-red-500 shadow-lg"
-        style={{ opacity: nopeOpacity }}
-      >
-        <ThumbsDownLetter />
-        <p className="mb-1 text-4xl">👎🏻</p>
+    <div id="cafe_container" className="relative lg:mt-12">
+      <div id="control_boxes">
+        <div
+          id="like_box"
+          className="absolute inset-x-0 top-[17rem] z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-blue-500 shadow-lg"
+          style={{ opacity: likeOpacity }}
+        >
+          <ThumbsUpLetter />
+          <p className="mb-1 text-4xl">👍🏻</p>
+        </div>
+        <div
+          id="nope_box"
+          className="absolute inset-x-0 top-[17rem] z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-red-500 shadow-lg"
+          style={{ opacity: nopeOpacity }}
+        >
+          <ThumbsDownLetter />
+          <p className="mb-1 text-4xl">👎🏻</p>
+        </div>
+        <div>
+          <CafeSwipe
+            cafeInfo={cafeInfo}
+            likeOpacity={likeOpacity}
+            setLikeOpacity={setLikeOpacity}
+            nopeOpacity={nopeOpacity}
+            setNopeOpacity={setNopeOpacity}
+          />
+          <CafeSwipe
+            cafeInfo={cafeInfo}
+            likeOpacity={likeOpacity}
+            setLikeOpacity={setLikeOpacity}
+            nopeOpacity={nopeOpacity}
+            setNopeOpacity={setNopeOpacity}
+          />
+          <CafeSwipe
+            cafeInfo={cafeInfo}
+            likeOpacity={likeOpacity}
+            setLikeOpacity={setLikeOpacity}
+            nopeOpacity={nopeOpacity}
+            setNopeOpacity={setNopeOpacity}
+          />
+        </div>
       </div>
     </div>
   )
