@@ -9,9 +9,18 @@ import axios from 'axios'
 
 let currentX = 0
 const offsetDivider = 250
+const likeNopeDivider = 50
 
-const CafeSwipe = ({ cafeInfo, likeOpacity, setLikeOpacity, nopeOpacity, setNopeOpacity }) => {
+const CafeSwipe = ({
+  cafeInfo,
+  likeOpacity,
+  setLikeOpacity,
+  nopeOpacity,
+  setNopeOpacity,
+}) => {
   const [cafeSwipeOpacity, setCafeSwipeOpacity] = useState(1)
+  const cafe_id = cafeInfo.cafe_id
+  console.log(cafeInfo.cafe_id)
 
   //스와이프 opacity 변화
   const handleOpacityUpdate = (offsetX: number) => {
@@ -22,13 +31,13 @@ const CafeSwipe = ({ cafeInfo, likeOpacity, setLikeOpacity, nopeOpacity, setNope
       currentX = offsetX
     } else if (offsetX > 0) {
       if (offsetX > currentX) {
-        setLikeOpacity(likeOpacity + (offsetX - currentX) / offsetDivider)
+        setLikeOpacity(likeOpacity + (offsetX - currentX) / likeNopeDivider)
         setCafeSwipeOpacity(
           cafeSwipeOpacity - (offsetX - currentX) / offsetDivider,
         )
         currentX = offsetX
       } else {
-        setLikeOpacity(likeOpacity - (currentX - offsetX) / offsetDivider)
+        setLikeOpacity(likeOpacity - (currentX - offsetX) / likeNopeDivider)
         setCafeSwipeOpacity(
           cafeSwipeOpacity + (currentX - offsetX) / offsetDivider,
         )
@@ -36,13 +45,13 @@ const CafeSwipe = ({ cafeInfo, likeOpacity, setLikeOpacity, nopeOpacity, setNope
       }
     } else if (offsetX < 0) {
       if (offsetX < currentX) {
-        setNopeOpacity(nopeOpacity + (currentX - offsetX) / offsetDivider)
+        setNopeOpacity(nopeOpacity + (currentX - offsetX) / likeNopeDivider)
         setCafeSwipeOpacity(
           cafeSwipeOpacity - (currentX - offsetX) / offsetDivider,
         )
         currentX = offsetX
       } else {
-        setNopeOpacity(nopeOpacity - (offsetX - currentX) / offsetDivider)
+        setNopeOpacity(nopeOpacity - (offsetX - currentX) / likeNopeDivider)
         setCafeSwipeOpacity(
           cafeSwipeOpacity + (offsetX - currentX) / offsetDivider,
         )
@@ -69,11 +78,11 @@ const CafeSwipe = ({ cafeInfo, likeOpacity, setLikeOpacity, nopeOpacity, setNope
   }
 
   return (
-    <div className='absolute inset-0 z-0'>
+    <div className="absolute inset-0 z-0">
       <div className="relative">
         <motion.div
           id="CafeSwipe"
-          className="my-2 rounded-3xl pt-10 shadow-lg shadow-slate-300  md:mx-auto md:mt-3 md:max-w-[28rem] bg-white"
+          className="my-2 rounded-3xl bg-white pt-10 shadow-lg  shadow-slate-300 md:mx-auto md:mt-3 md:max-w-[28rem]"
           style={{ opacity: cafeSwipeOpacity }}
           drag
           dragSnapToOrigin
@@ -81,7 +90,7 @@ const CafeSwipe = ({ cafeInfo, likeOpacity, setLikeOpacity, nopeOpacity, setNope
           dragElastic={0.3}
           onDrag={(event, info) => handleOpacityUpdate(info.offset.x)}
           onDragEnd={(event, info) => LikeOrNope(info.offset.x, info.delta.x)}
-        > 
+        >
           <CafeInfo cafeInfo={cafeInfo} />
         </motion.div>
       </div>
@@ -89,4 +98,4 @@ const CafeSwipe = ({ cafeInfo, likeOpacity, setLikeOpacity, nopeOpacity, setNope
   )
 }
 
-export default CafeSwipe
+export default React.memo(CafeSwipe)

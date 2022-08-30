@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import CafeSwipe from './CafeSwipe'
@@ -8,8 +8,6 @@ import ThumbsDownLetter from 'components/resources/ThumbsDownLetter'
 
 const CafeSwipeContainer = () => {
   const [cafeData, setcafeData] = useState([])
-  // let cafeInfo = cafeData.filter((item, index) => index === 1)
-
   //3000미터 근방 카페
   const getCafeListAll = (userLocation) => {
     axios
@@ -70,23 +68,16 @@ const CafeSwipeContainer = () => {
           <ThumbsDownLetter />
           <p className="mb-1 text-4xl">👎🏻</p>
         </div>
-        <div id='cafe_list'>
-          {/* <CafeSwipe
-            cafeInfo={cafeInfo}
-            likeOpacity={likeOpacity}
-            setLikeOpacity={setLikeOpacity}
-            nopeOpacity={nopeOpacity}
-            setNopeOpacity={setNopeOpacity}
-          /> */}
+        <div id="cafe_list">
           {cafeData.map((cafeInfo) => (
             <div key={cafeInfo.cafe_id}>
-              <CafeSwipe
-              cafeInfo={cafeInfo}
-              likeOpacity={likeOpacity}
-              setLikeOpacity={setLikeOpacity}
-              nopeOpacity={nopeOpacity}
-              setNopeOpacity={setNopeOpacity}
-              />
+                <CafeSwipe
+                  cafeInfo={cafeInfo}
+                  likeOpacity={likeOpacity}
+                  setLikeOpacity={setLikeOpacity}
+                  nopeOpacity={nopeOpacity}
+                  setNopeOpacity={setNopeOpacity}
+                />
             </div>
           ))}
         </div>
