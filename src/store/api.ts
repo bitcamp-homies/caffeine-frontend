@@ -186,3 +186,20 @@ export const insertproducts_img = (item) => {
   const temp = api.post('/cafe/insertproducts_img',item)
 }
 
+export const selectcafes_product_list = (item) => {
+  const temp = api.post('/cafe/selectcafes_product_list',item)
+  return temp
+}
+
+export const selectproducts = (item) =>{
+  const temp = api.post('/cafe/selectproducts',item)
+  return temp
+}
+
+export const cafesUpdate = (item) => {
+  const temp = api.post('/cafe/cafesUpdate',item)
+}
+
+export const usersinstaupdate = (item) => {
+  const temp = api.post('/cafe/usersinstaupdate',item)
+}
