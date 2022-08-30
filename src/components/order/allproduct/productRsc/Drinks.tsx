@@ -17,7 +17,7 @@ const Drinks = ({ data, result }) => {
   
   const loginCheck = (e) => {
     if (test == null) {
-      alert('로그인 해라')
+      alert('로그인시 제공되는 기능입니다.')
       e.preventDefault()
     }
   }
