@@ -43,8 +43,23 @@ export const EmailCheck = (Email) => {
   return temp
 }
 
+export const UserCheck = (Email) => {
+  const temp = api.get('/cafe/UserCheck', {
+    params: {
+      
+      Email: Email,
+
+    },
+  })
+  return temp
+}
+
 export const createMember = (Member) => {
   const temp = api.post('/cafe/createMember', Member)
+}
+
+export const updateMember = (Member) => {
+  const temp = api.post('/cafe/updateMember', Member)
 }
 
 export const Login = (login) => {
@@ -60,6 +75,24 @@ export const getCafeitemList = (cafe_id) => {
     })
     return temp
 }
+
+export const getMember = (Id) => {
+  const temp = api.post('/cafe/getMember',Id)
+  return temp
+}
+export const InsertProfileimg = (profile) => {
+  const temp = api.post('/cafe/InsertProfileimg',profile)
+  return temp
+}
+
+export const selectProfileimg = (user_id) => {
+  const temp = api.post('/cafe/selectProfileimg',user_id)
+  return temp
+}
+
+export const updateProfileimg = (user_id) => {
+  const temp = api.post('/cafe/updateProfileimg',user_id)
+} 
 
 //카카오API
 export const kakaoAPI = (productName, productCount, totalPrice ) =>{

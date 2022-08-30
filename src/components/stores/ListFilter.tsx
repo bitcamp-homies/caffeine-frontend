@@ -7,7 +7,6 @@ import Slider from '@mui/material/Slider'
 import { useState } from 'react'
 
 const ListFilter = ({
-  showFilter,
   setShowFilter,
   boundary,
   setBoundary,
@@ -147,7 +146,7 @@ const ListFilter = ({
         <div className="my-4 w-auto px-10 text-center">
           <Slider
             aria-label="Distance"
-            defaultValue={3}
+            defaultValue={boundary}
             getAriaValueText={valuetext}
             valueLabelDisplay="off"
             step={1}

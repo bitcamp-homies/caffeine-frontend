@@ -16,7 +16,6 @@ const MainNavBar = (props :BurgerProps) => {
   const [login,setLogin] = useState(userType)
 
   const navegate = useNavigate()
-    console.log(userType)
 
   const logoutBtn = () => {
     sessionStorage.clear()
@@ -84,6 +83,9 @@ const MainNavBar = (props :BurgerProps) => {
           </button>
           <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
             <Link to="/member">My Page</Link>
+          </button>
+          <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
+            <Link to="/admin">Admin Page</Link>
           </button>
           </>
             

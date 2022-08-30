@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ReactComponent as MyLocationIcon } from './svg/navigate-circle-sharp-svgrepo-com.svg'
 
 let map
 let customOverlay = new kakao.maps.CustomOverlay({
@@ -159,9 +160,14 @@ const MapContainer = ({
     const options = {
       center: new window.kakao.maps.LatLng(37.4923615, 127.0292881),
       level: 7,
+      draggable: true,
+      scrollwheel: true,
+      disableDoubleClick: false,
+      disableDoubleClickZoom: false,
     }
     map = new window.kakao.maps.Map(container, options)
-
+    const zoomControl = new kakao.maps.ZoomControl()
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT)
     // 맵 렌더링
   }, [])
 
@@ -208,7 +214,22 @@ const MapContainer = ({
     }
   }, [hoverCafe])
 
-  return <div className="h-[17rem] w-full lg:h-[32rem]" id="myMap"></div>
+  return (
+    <div id="map_wrap" className="h-[17rem] w-full lg:h-[32rem]">
+      <div className="static h-full w-full" id="myMap">
+        <button
+          className="absolute bottom-[2.5rem] right-0 z-10 h-9 w-9 rounded-lg border-2 bg-white drop-shadow-lg lg:bottom-[17.5rem]"
+          onClick={() => {
+            map.setCenter(
+              new window.kakao.maps.LatLng(userLocation.lat, userLocation.lon),
+            )
+          }}
+        >
+          <MyLocationIcon className="h-8 w-8" />
+        </button>
+      </div>
+    </div>
+  )
 }
 
 export default MapContainer

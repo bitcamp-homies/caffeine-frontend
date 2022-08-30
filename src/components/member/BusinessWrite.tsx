@@ -5,7 +5,22 @@ import { isQueryKey } from 'react-query/types/core/utils';
 import { useNavigate } from 'react-router-dom';
 import { NickNameCheck,EmailCheck } from 'store/api';
 import { createMember } from 'store/api';
+import PopupDom from '../admin/PopupDom';
+import PopupPostCode from '../admin/PopupPostCode';
+
 const BusinessWrite = () => {
+    // 팝업창 상태 관리
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+ 
+  // 팝업창 열기
+  const openPostCode = () => {
+      setIsPopupOpen(true)
+  }
+
+  // 팝업창 닫기
+  const closePostCode = () => {
+      setIsPopupOpen(false)
+  }
 
     const [NickName, setNickName] = useState('')
     const [Email, setEmail] = useState('')
@@ -16,6 +31,7 @@ const BusinessWrite = () => {
     const [BusinessNum, setBusinessNum] = useState('')
     const [BusinessName, setBusinessName] = useState('')
     const [BusinessAddress, setBusinessAddress] = useState('')
+    const [BusinessAddress1, setBusinessAddress1] = useState('')
     const [Insta_Account, setInsta_Account] = useState('')
 
 
@@ -57,6 +73,7 @@ const BusinessWrite = () => {
     'business_reg_num' : BusinessNum,
     'business_name' : BusinessName,
     'business_address' : BusinessAddress,
+    'business_address1' : BusinessAddress1,
     'insta_account' : Insta_Account
 
     }
@@ -191,10 +208,24 @@ const BusinessWrite = () => {
                         
                     </div>
                     <div className="py-3 relative">
-                        <label class=" mx-3 font-medium text-sm"><span class="text-red-800">* </span>가게주소</label>
-                        <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,40%)] px-[12px] py-[16px]">
-                        <input type="text" className="w-full" id="BusinessAddress" name="BusinessAddress" onChange={(e)=>setBusinessAddress(e.target.value)}/>
+                        <div>
+                            <button className="mb-3 mt-5 rounded-[500px] border text-sm font-semibold px-[10px] py-[8px] text-center" type='button' onClick={openPostCode}>우편번호 검색</button>
+                            <div id='popupDom'>
+                                {isPopupOpen && (
+                                    <PopupDom>
+                                        <PopupPostCode onClose={closePostCode} setBusinessAddress={setBusinessAddress}/>
+                                    </PopupDom>
+                                )}
+                            </div>
                         </div>
+                        <label class=" mx-3 font-medium text-sm"><span class="text-red-800">* </span>가게주소</label>
+                        <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,60%)] px-[12px] py-[16px]">
+                            <input type="text" className="w-full" id="BusinessAddress" name="BusinessAddress" readOnly value={BusinessAddress}/>
+                        </div>
+                        <label class=" mx-3 font-medium text-sm"><span class="text-red-800">* </span>상세주소</label>
+                          <div className="rounded-lg shadow-[0_0_0_1px_rgb(0,0,0,60%)] px-[12px] py-[16px]">
+                            <input type="text" className="w-full" value={BusinessAddress1} onChange={(e)=>setBusinessAddress1(e.target.value)} />
+                          </div>
                         <div className="pt-2 text-sm">
                             <p>사업자등록증에 등록된 주소를 정확히 입력해주세요.</p>
                         </div>
