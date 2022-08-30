@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useCallback, useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import Cafeinfo from './featuredList/Cafeinfo'
 import OrderNowProduct from './featuredList/OrderNowProduct'
 import { getCafeitemList } from 'store/api'
@@ -12,17 +12,16 @@ import { main } from '@popperjs/core'
 const OrderNow = () => {
   const { cafe_id, product_id } = useParams()
   const [mainProductCount, setMainProductCount] = useState(1) //메인제품 카운트
-  const [mainProductSize, setMainProductSize] = useState("") //메인제품 사이즈
+  const [mainProductSize, setMainProductSize] = useState('') //메인제품 사이즈
   const [sizePrice, setSizePrice] = useState(0) //메인제품 사이즈 가격
   const [recommendedPrice, setRecommendedPrice] = useState(0) //추천메뉴의 가격
   const [recommendedSizePrice, setRecommendedSizePrice] = useState(0) //추천메뉴 사이즈 가격
   const [recommendedCount, setRecommendedCount] = useState(0) //추천메뉴 카운트
-  const location = useLocation(); //State값 받기
-  const id = location.state?.id;
-  const userType = location.state?.userType;
-  const nickName = location.state?.nickName;
-  const user_id = location.state?.user_id;
-  
+  const location = useLocation() //State값 받기
+  const id = location.state?.id
+  const userType = location.state?.userType
+  const nickName = location.state?.nickName
+  const user_id = location.state?.user_id
   //api 호출 후 해당카페의 제품들 전부 불러오기
   const {
     data: productdata,
@@ -35,7 +34,7 @@ const OrderNow = () => {
   const mainProduct = productdata?.data.find(
     (item) => item.product_id == product_id,
   )
-  
+
   //추천메뉴들의 총 가격
   let recommendedPrices =
     Number(recommendedPrice) +
@@ -49,32 +48,13 @@ const OrderNow = () => {
       Number(recommendedPrices)
   }
 
-  //Link에 넘겨줘야할 값( 잠시 보류 )
-  /*
-  
-  메인제품
-  1. 메인제품 사이즈 mainProductSize
-  3. 메인제품 수량 mainProductCount
-
-  추천메뉴
-  1. 추천메뉴 가격
-  2. 추천메뉴 사이즈
-  4. 추천메뉴 수량
-  5. 추천메뉴 제품명
-
-  total
-  1. 총합 가격
-  
-
-  */
-  
   //메인제품 카운트 핸들러
-  const countPlus = useCallback => {
+  const countPlus = (useCallback) => {
     setMainProductCount((PrevCount) => PrevCount + 1)
-    sessionStorage.setItem('mainProductCount', mainProductCount+1)
+    sessionStorage.setItem('mainProductCount', mainProductCount + 1)
   }
 
-  const countMinus = useCallback => {
+  const countMinus = (useCallback) => {
     setMainProductCount((PrevCount) => (PrevCount > 1 ? PrevCount - 1 : 1))
     sessionStorage.setItem('mainProductCount', mainProductCount)
   }
@@ -84,11 +64,15 @@ const OrderNow = () => {
     sessionStorage.clear()
     sessionStorage.setItem('mainProductSizePrice', sizePrice)
     sessionStorage.setItem('mainProductCount', mainProductCount)
-    {isSuccess && mainProduct.category == 'Drinks' ? sessionStorage.setItem('mainProductSize', 'Short') : sessionStorage.setItem('mainProductSize', 'OneSize')}
-    sessionStorage.setItem('Id', id);
-    sessionStorage.setItem('NickName',nickName);
-    sessionStorage.setItem('UserType',userType);
-    sessionStorage.setItem('User_id', user_id);
+    {
+      isSuccess && mainProduct.category == 'Drinks'
+        ? sessionStorage.setItem('mainProductSize', 'Short')
+        : sessionStorage.setItem('mainProductSize', 'OneSize')
+    }
+    (id == null ? null : sessionStorage.setItem('Id', id))
+    sessionStorage.setItem('NickName', nickName)
+    sessionStorage.setItem('UserType', userType)
+    sessionStorage.setItem('User_id', user_id)
   }, [])
   return (
     <>
@@ -98,7 +82,7 @@ const OrderNow = () => {
           {isSuccess && (
             <img
               className="w-[400px] lg:min-h-[500px] lg:min-w-[500px]"
-              src={`https://storage.cloud.google.com/bitcamp-caffeine.appspot.com${mainProduct.file_path}${mainProduct.img_file}`}
+              src={`https://storage.googleapis.com/bitcamp-caffeine.appspot.com${mainProduct.file_path}${mainProduct.img_file}`}
             />
           )}
           {/* 고객이 선택한 제품 표시 */}
@@ -132,7 +116,11 @@ const OrderNow = () => {
           </div>
 
           {isSuccess && mainProduct.category !== 'Food' && (
-            <Size data={mainProduct} mainProductSize={mainProductSize} setSizePrice={setSizePrice} />
+            <Size
+              data={mainProduct}
+              mainProductSize={mainProductSize}
+              setSizePrice={setSizePrice}
+            />
           )}
         </div>
 
@@ -142,7 +130,7 @@ const OrderNow = () => {
               추천 메뉴
             </span>
           </h2>
-          <div className='mb-28'>
+          <div className="mb-28">
             {isSuccess && (
               <OrderNowProduct
                 data={productdata}
@@ -165,7 +153,12 @@ const OrderNow = () => {
         </div>
         <div className="float-right mt-2 mr-3 inline-block rounded-3xl border p-3 text-white lg:mr-10">
           <Link
-            to={`/order/featured/order-now/cafe/${cafe_id}/product/${product_id}/payment/`} state={{ productTotalPrice : productTotalPrice, mainProductName : isSuccess && mainProduct.product_name_kor}}>
+            to={`/order/featured/order-now/cafe/${cafe_id}/product/${product_id}/payment/`}
+            state={{
+              productTotalPrice: productTotalPrice,
+              mainProductName: isSuccess && mainProduct.product_name_kor,
+            }}
+          >
             <button className="text-xl text-white">Next</button>
           </Link>
         </div>

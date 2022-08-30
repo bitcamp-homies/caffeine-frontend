@@ -13,7 +13,6 @@ module.exports = {
       '2xl': '1536px',
     },
     fontFamily: {
-      // 'sans': ['GmarketSansMedium', 'system-ui'],
       'sans': ['Noto Sans KR', 'system-ui'],
     },
     extend: {
@@ -21,7 +20,6 @@ module.exports = {
         'black-rgba': 'rgba(0, 0, 0, 0.50)',
       },
       fontFamily: {
-        'gMarketLight' : 'GmarketSansLight',
         'notoSansKR' : 'Noto Sans KR',
       },
       lineClamp: {

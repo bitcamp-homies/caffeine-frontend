@@ -15,7 +15,7 @@ import Payment from 'components/order/featured/Payment'
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import MemberWrite from 'components/member/memberwrite'
-import CafeCoordManage from 'components/stores/CafeCoordManage'
+import CafeCoordManage from 'components/admin/master/CafeCoordManage'
 import Gift from 'components/cards/Gift'
 import Point from 'components/cards/Point'
 import Join from 'components/cards/Join'
@@ -33,6 +33,7 @@ import Etc from 'components/admin/etc'
 import KakaoResult from 'components/order/featured/paymentList/kakaoAPI/KakaoResult'
 import PaymentComplete from 'components/order/featured/PaymentComplete'
 import PaymentIng from 'components/order/featured/paymentList/PaymentIng'
+import UserManageMaster from 'components/admin/master/UserManageMaster'
 
 const MainRoutes = () => {
   return (
@@ -47,6 +48,8 @@ const MainRoutes = () => {
         <Route path="OrderList" element={<OrderList />} />
         <Route path="PointUsed" element={<PointUsed />} />
         <Route path="Profile" element={<Profile />} />
+        <Route path="CafeManageMaster" element={<CafeCoordManage />} />
+        <Route path="UserManageMaster" element={<UserManageMaster />} />
       </Route>
 
       <Route path="order" element={<Order />}>
@@ -81,7 +84,6 @@ const MainRoutes = () => {
       <Route path="member/memberwrite" element={<MemberWrite />} />
       <Route path="member/businesswrite" element={<BusinessWrite />} />
       <Route path="/store/:cafename" element={<FindStore />}></Route>
-      <Route path="coord" element={<CafeCoordManage />}></Route>
       <Route path="login" element={<Join />}></Route>
     </Routes>
   )

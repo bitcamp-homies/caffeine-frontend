@@ -5,7 +5,7 @@ const SigninBtn = ({LoginBtn}:any) => {
   return (
     <button
       type="button"
-      className="w-full rounded-lg bg-green-600 py-4 text-green-100"
+      className="w-full rounded-lg bg-[#9F2042] py-4 text-[#F8E5EE]"
       onClick={LoginBtn}
     >
       <div className="flex flex-row items-center justify-center">
