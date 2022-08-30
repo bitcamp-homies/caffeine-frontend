@@ -3,6 +3,7 @@ import Carousel from 'components/stores/Carousel'
 import TempIndexIcon from 'components/resources/TempIndexIcon'
 
 const CafeInfo = ({ cafeInfo }) => {
+  console.log(cafeInfo[0])
   return (
     <div>
       <div className="h-96 w-full bg-zinc-900 bg-contain bg-center bg-no-repeat">
@@ -27,7 +28,7 @@ const CafeInfo = ({ cafeInfo }) => {
                       alt="user avatar"
                       className="h-20 w-20 rounded-full bg-contain bg-center outline outline-1 outline-gray-300"
                     ></img>
-                    <button className="font-gMarketLight absolute left-14 top-0.5 rounded-full bg-orange-600 px-1 pt-2 pb-1 text-[11px] text-white">
+                    <button className="absolute left-14 top-0.5 rounded-full bg-orange-600 px-1 pt-2 pb-1 text-[11px] text-white">
                       385
                     </button>
                   </div>

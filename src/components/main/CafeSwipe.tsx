@@ -73,7 +73,7 @@ const CafeSwipe = ({ cafeInfo, likeOpacity, setLikeOpacity, nopeOpacity, setNope
       <div className="relative">
         <motion.div
           id="CafeSwipe"
-          className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-3 md:max-w-[28rem] bg-white"
+          className="my-2 rounded-3xl pt-10 shadow-lg shadow-slate-300  md:mx-auto md:mt-3 md:max-w-[28rem] bg-white"
           style={{ opacity: cafeSwipeOpacity }}
           drag
           dragSnapToOrigin
