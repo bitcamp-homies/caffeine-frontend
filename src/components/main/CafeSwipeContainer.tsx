@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import CafeSwipe from './CafeSwipe'
+import ThumbsUpLetter from 'components/resources/ThumbsUpLetter'
+import ThumbsDownLetter from 'components/resources/ThumbsDownLetter'
 
 const CafeSwipeContainer = () => {
   const [cafeData, setcafeData] = useState([])
@@ -11,12 +13,15 @@ const CafeSwipeContainer = () => {
   //3000미터 근방 카페
   const getCafeListAll = (userLocation) => {
     axios
-      .get(`${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/listBoundary3000Mybatis`, {
-        params: {
-          userLong: userLocation.long,
-          userLat: userLocation.lat,
+      .get(
+        `${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/listBoundary3000Mybatis`,
+        {
+          params: {
+            userLong: userLocation.long,
+            userLat: userLocation.lat,
+          },
         },
-      })
+      )
       .then((res) => {
         setcafeData(res.data)
       })
@@ -42,12 +47,37 @@ const CafeSwipeContainer = () => {
   React.useEffect(() => {
     getUserLocationAndGetCafeList()
   }, [])
-  
-  return (
-    <div id='cafe_container' className=''>
-      <CafeSwipe cafeInfo={cafeInfo}/>
-    </div>
-  );
-};
 
-export default CafeSwipeContainer;
+  const [likeOpacity, setLikeOpacity] = useState(0)
+  const [nopeOpacity, setNopeOpacity] = useState(0)
+
+  return (
+    <div id="cafe_container" className="relative">
+      <CafeSwipe
+        cafeInfo={cafeInfo}
+        likeOpacity={likeOpacity}
+        setLikeOpacity={setLikeOpacity}
+        nopeOpacity={nopeOpacity}
+        setNopeOpacity={setNopeOpacity}
+      />
+      <div
+        id="like_box"
+        className="absolute inset-0 -z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-blue-500 shadow-lg"
+        style={{ opacity: likeOpacity }}
+      >
+        <ThumbsUpLetter />
+        <p className="mb-1 text-4xl">👍🏻</p>
+      </div>
+      <div
+        id="nope_box"
+        className="absolute inset-0 -z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-red-500 shadow-lg"
+        style={{ opacity: nopeOpacity }}
+      >
+        <ThumbsDownLetter />
+        <p className="mb-1 text-4xl">👎🏻</p>
+      </div>
+    </div>
+  )
+}
+
+export default CafeSwipeContainer

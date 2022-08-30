@@ -10,9 +10,7 @@ import axios from 'axios'
 let currentX = 0
 const offsetDivider = 250
 
-const CafeSwipe = ({ cafeInfo }) => {
-  const [likeOpacity, setLikeOpacity] = useState(0)
-  const [nopeOpacity, setNopeOpacity] = useState(0)
+const CafeSwipe = ({ cafeInfo, likeOpacity, setLikeOpacity, nopeOpacity, setNopeOpacity }) => {
   const [cafeSwipeOpacity, setCafeSwipeOpacity] = useState(1)
 
   //스와이프 opacity 변화
@@ -71,36 +69,23 @@ const CafeSwipe = ({ cafeInfo }) => {
   }
 
   return (
-    <div className="relative">
-      <div
-        id="like_box"
-        className="absolute inset-0 -z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-blue-500 shadow-lg"
-        style={{ opacity: likeOpacity }}
-      >
-        <ThumbsUpLetter />
-        <p className="mb-1 text-4xl">👍🏻</p>
+    <div className='absolute inset-0'>
+      <div className="relative">
+        
+        <motion.div
+          id="CafeSwipe"
+          className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-3 md:max-w-[28rem] bg-white"
+          style={{ opacity: cafeSwipeOpacity }}
+          drag
+          dragSnapToOrigin
+          dragConstraints={{ top: 0, bottom: 0 }}
+          dragElastic={0.3}
+          onDrag={(event, info) => handleOpacityUpdate(info.offset.x)}
+          onDragEnd={(event, info) => LikeOrNope(info.offset.x, info.delta.x)}
+        > 
+          <CafeInfo cafeInfo={cafeInfo} />
+        </motion.div>
       </div>
-      <div
-        id="nope_box"
-        className="absolute inset-0 -z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-red-500 shadow-lg"
-        style={{ opacity: nopeOpacity }}
-      >
-        <ThumbsDownLetter />
-        <p className="mb-1 text-4xl">👎🏻</p>
-      </div>
-      <motion.div
-        id="CafeSwipe"
-        className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-3 md:max-w-[28rem]"
-        style={{ opacity: cafeSwipeOpacity }}
-        drag
-        dragSnapToOrigin
-        dragConstraints={{ top: 0, bottom: 0 }}
-        dragElastic={0.3}
-        onDrag={(event, info) => handleOpacityUpdate(info.offset.x)}
-        onDragEnd={(event, info) => LikeOrNope(info.offset.x, info.delta.x)}
-      > 
-        <CafeInfo cafeInfo={cafeInfo} />
-      </motion.div>
     </div>
   )
 }
