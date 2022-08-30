@@ -75,6 +75,7 @@ export const getCafeitemList = (cafe_id) => {
     return temp
 }
 
+//웅비 제품 정보 가져오기
 export const getProductInfo = (product_id) => {
   const temp = api.get('/order/getProductInfo',{
     params : {
@@ -82,6 +83,21 @@ export const getProductInfo = (product_id) => {
     }
   })
   return temp
+}
+
+//웅비 주문 정보 호출
+export const getOrderList = (user_id) => {
+  const temp = api.get('/admin/getOrderList',{
+    params : {
+      user_id : user_id
+    }
+  })
+  return temp
+}
+
+//웅비 주문정보 삭제
+export const deleteOrderList = (deleteList) => {
+  const temp = api.post('/admin/deleteOrderList', deleteList)
 }
 
 export const savePaymentList = (paymentList) => {
@@ -185,3 +201,20 @@ export const insertproducts_img = (item) => {
   const temp = api.post('/cafe/insertproducts_img',item)
 }
 
+export const selectcafes_product_list = (item) => {
+  const temp = api.post('/cafe/selectcafes_product_list',item)
+  return temp
+}
+
+export const selectproducts = (item) =>{
+  const temp = api.post('/cafe/selectproducts',item)
+  return temp
+}
+
+export const cafesUpdate = (item) => {
+  const temp = api.post('/cafe/cafesUpdate',item)
+}
+
+export const usersinstaupdate = (item) => {
+  const temp = api.post('/cafe/usersinstaupdate',item)
+}
