@@ -5,7 +5,8 @@ import { ReactComponent as FilLikeIcon } from './svg/fill-heart-svgrepo-com.svg'
 
 const CafeLikeIcon = ({ index, item }) => {
   const [like, setLike] = useState(false)
-
+  const [cafeId, setCafeId] = useState('')
+  const session = sessionStorage.getItem("Id")
   const likeBtn = (checkthis) => {
     if (checkthis.id == 'cafe_1' && sessionStorage.getItem("Id") !== null) {
       setLike(!like)

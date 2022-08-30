@@ -138,7 +138,7 @@ const MapContainer = ({
     )
 
     var content = `
-      <div class='w-[150px] h-[40px] rounded-full text-center py-2 px-1 bg-none drop-shadow-lg mb-9 text-black font-semibold text-[${fontSize}px]'>
+      <div class='w-[170px] h-[25px] rounded-2xl text-center bg-white drop-shadow-lg mb-9 text-black font-semibold text-[${fontSize}px]'>
         ${cafeData.cafe_name}
         <span class='text-[#9F2042]'> 
           ${getDistance(cafeData.distance)}
@@ -215,7 +215,7 @@ const MapContainer = ({
   }, [hoverCafe])
 
   return (
-    <div id="map_wrap" className="h-[17rem] w-full lg:h-[32rem]">
+    <div id="map_wrap" className="h-[17rem] w-full lg:h-[50rem]">
       <div className="static h-full w-full" id="myMap">
         <button
           className="absolute bottom-[2.5rem] right-0 z-10 h-9 w-9 rounded-lg border-2 bg-white drop-shadow-lg lg:bottom-[17.5rem]"
