@@ -52,7 +52,7 @@ const ListFilter = ({
     <div className="h-128 basis-full lg:flex lg:basis-2/5 lg:flex-col">
       <div className="w-full lg:w-[28rem] xl:w-[35rem]">
         <div className="my-4 px-4">
-          <span className="text-2xl font-bold tracking-widest">Filters</span>
+          <span className="text-xl font-bold tracking-widest">Filters</span>
           <button
             className="float-right w-10 rounded-full text-center text-xl font-bold hover:bg-gray-200"
             onClick={() => setShowFilter(false)}

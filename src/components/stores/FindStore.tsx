@@ -39,16 +39,19 @@ const FindStore = () => {
 
   const getCafeList = (userLocation) => {
     axios
-      .get(`${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/listBoundaryMybatis`, {
-        params: {
-          userLong: userLocation.lon,
-          userLat: userLocation.lat,
-          boundary: boundary,
-          openFilter: filterOptions.openFilter,
-          petFilter: filterOptions.petFilter,
-          parkingFilter: filterOptions.parkingFilter,
+      .get(
+        `${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/listBoundaryMybatis`,
+        {
+          params: {
+            userLong: userLocation.lon,
+            userLat: userLocation.lat,
+            boundary: boundary,
+            openFilter: filterOptions.openFilter,
+            petFilter: filterOptions.petFilter,
+            parkingFilter: filterOptions.parkingFilter,
+          },
         },
-      })
+      )
       .then((res) => {
         setCafeList(res.data)
       })
@@ -85,7 +88,9 @@ const FindStore = () => {
 
   return (
     <>
-      <div className={`ml-4 flex flex-col-reverse  lg:flex-row lg:h-[${window.outerHeight}px]`}>
+      <div
+        className={`ml-4 flex flex-col-reverse  lg:flex-row lg:h-[${window.outerHeight}px]`}
+      >
         {cafename !== undefined && <CafeDetail setHoverCafe={setHoverCafe} />}
         {cafename === undefined && !showFilter && (
           <SearchPlace
