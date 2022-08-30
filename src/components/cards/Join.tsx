@@ -47,25 +47,25 @@ const Join = (props) => {
           <div className="mx-auto w-full md:mx-0 md:w-full lg:w-9/12">
             <div className="flex w-full flex-col rounded-xl bg-white p-10 shadow-xl">
               <h2 className="mb-5 text-left text-2xl font-bold text-gray-800">
-                Sigin
+                로그인
               </h2>
               <form action="" className="w-full">
                 <div id="input" className="my-5 flex w-full flex-col">
-                  <label className="mb-2 text-gray-500">Username</label>
+                  <label className="mb-2 text-gray-500">이메일</label>
                   <input
                     type="text"
                     id="username"
-                    placeholder="Please insert your username"
+                    placeholder="이메일을 입력해주세요."
                     className="appearance-none rounded-lg border-2 border-gray-100 px-4 py-3 placeholder-gray-300 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#9F2042]"
                     onChange={(e)=>setId(e.target.value)}
                   />
                 </div>
                 <div id="input" className="my-5 flex w-full flex-col">
-                  <label className="mb-2 text-gray-500">Password</label>
+                  <label className="mb-2 text-gray-500">비밀번호</label>
                   <input
                     type="password"
                     id="password"
-                    placeholder="Please insert your password"
+                    placeholder="비밀번호를 입력해주세요."
                     className="appearance-none rounded-lg border-2 border-gray-100 px-4 py-3 placeholder-gray-300 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#9F2042]"
                     onChange={(e)=>setPassword(e.target.value)}
                   />
@@ -79,13 +79,13 @@ const Join = (props) => {
                       href="#"
                       className="w-full text-center font-medium text-gray-500 hover:text-[#9F2042]"
                     >
-                      Recover password!
+                      비밀번호찾기
                     </a>
                     <a
-                      href="#"
+                      href="http://localhost:3000/member"
                       className="w-full text-center font-medium text-gray-500 hover:text-[#9F2042]"
                     >
-                      Singup!
+                      회원가입
                     </a>
                   </div>
                 </div>
