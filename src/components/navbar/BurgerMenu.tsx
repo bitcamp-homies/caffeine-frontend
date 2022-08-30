@@ -37,12 +37,17 @@ const BurgerMenu = (props: BurgerProps) => {
           </ul>
           <hr className="mx-6 border border-gray-300 bg-gray-300" />
           <div className="flex flex-row px-5 pt-8">
-            <button className="mr-4 rounded-full border border-black bg-white px-3 py-1 text-lg">
-              로그인
-            </button>
-            <button className="rounded-full border bg-black px-3 py-1 text-lg text-white">
-              회원가입
-            </button>
+            <Link to="/login">
+              <button className="mr-4 rounded-full border border-black bg-white px-3 py-1 text-lg">
+                로그인
+              </button>
+            </Link>
+            
+            <Link to="/member">
+              <button className="rounded-full border bg-black px-3 py-1 text-lg text-white">
+                회원가입
+              </button>
+            </Link>
           </div>
         </motion.div>
       </div>
