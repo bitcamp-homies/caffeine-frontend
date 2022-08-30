@@ -3,6 +3,46 @@ import Carousel from 'components/stores/Carousel'
 import TempIndexIcon from 'components/resources/TempIndexIcon'
 
 const CafeInfo = ({ cafeInfo }) => {
+  const {
+    about,
+    address1,
+    address2,
+    address3,
+    address4,
+    cafe_id,
+    cafe_name,
+    closetime,
+    distance,
+    file_path,
+    img_file,
+    insta_account,
+    latitude,
+    longitude,
+    opentime,
+    parking,
+    pet,
+    user_id,
+  } = cafeInfo
+  const profile = `https://storage.googleapis.com/bitcamp-caffeine.appspot.com${file_path}${img_file
+    .split(',')
+    .at(-1)}`
+  let distanceReformed = distance
+  if (distanceReformed > 1000) {
+    distanceReformed = `${
+      Math.round((distanceReformed + Number.EPSILON) / 10) / 100
+    }km`
+  } else {
+    distanceReformed = `${Math.round(distanceReformed)}m`
+  }
+
+  let address = ''
+  if ((address4 == '')) {
+    address = `${address1} ${address2} ${address3}`
+  } else {
+    address = `${address1} ${address2} ${address3}
+               ${address4}`
+  }
+
   return (
     <div>
       <div className="h-96 w-full bg-zinc-900 bg-contain bg-center bg-no-repeat">
@@ -13,66 +53,32 @@ const CafeInfo = ({ cafeInfo }) => {
         className="flex flex-col items-center px-5 md:pb-6"
       >
         <div id="head" className="flex flex-row border-b pt-6 pb-4">
-          {cafeInfo.map((item) => {
-            const profile = `https://storage.googleapis.com/bitcamp-caffeine.appspot.com${
-              item.file_path
-            }${item.img_file.split(',').at(-1)}`
-            const text = item.about
-            
-            let distance = item.distance
-            if (distance > 1000) {
-              distance = `${Math.round((distance + Number.EPSILON) / 10) / 100}km`
-            } else {
-              distance = `${Math.round(distance)}m`
-            }
-
-            let address = ''
-            if (item.address4 = '') {
-              address = `${item.address1} ${item.address2} ${item.address3}`
-            } else {
-              address = `${item.address1} ${item.address2} ${item.address3}
-                         ${item.address4}`
-            }
-
-            return (
-              <>
-                <div className="flex flex-col">
-                  <div id="profile_img" className="relative pr-6">
-                    <img
-                      src={profile}
-                      alt="user avatar"
-                      className="h-20 w-20 rounded-full bg-contain bg-center outline outline-1 outline-gray-300"
-                    ></img>
-                    <button className="absolute left-14 top-0.5 rounded-full bg-orange-600 px-1 py-1 text-[11px] text-white">
-                      385
-                    </button>
-                  </div>
-                  <div className="mt-2">
-                    <p className="text-[0.85rem] ">
-                      당신과의 거리
-                    </p>
-                    <p className="w-[4.8rem] bg-gradient-to-r from-pink-600 to-[#F0A202] text-lg text-center text-white">
-                      {distance}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex flex-col" id="profile_info">
-                  <p className="text-lg font-semibold">{item.cafe_name}</p>
-                  <p className="pt-1 text-[0.85rem] text-gray-500">
-                    {address}
-                  </p>
-                  <p className=" text-[0.85rem] text-gray-500">
-                    @{item.insta_account}
-                  </p>
-                  <div className="h-[6.25rem] overflow-y-scroll text-sm">
-                    <p className="mt-2 w-[14rem] whitespace-pre-wrap">
-                      {text}
-                    </p>
-                  </div>
-                </div>
-              </>
-            )
-          })}
+          <div className="flex flex-col">
+            <div id="profile_img" className="relative pr-6">
+              <img
+                src={profile}
+                alt="user avatar"
+                className="h-20 w-20 rounded-full bg-contain bg-center outline outline-1 outline-gray-300"
+              ></img>
+              <button className="absolute left-14 top-0.5 rounded-full bg-orange-600 px-1 py-1 text-[11px] text-white">
+                385
+              </button>
+            </div>
+            <div className="mt-2">
+              <p className="text-[0.85rem] ">당신과의 거리</p>
+              <p className="w-[4.8rem] bg-gradient-to-r from-pink-600 to-[#F0A202] text-center text-lg text-white">
+                {distanceReformed}
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col" id="profile_info">
+            <p className="text-lg font-semibold">{cafe_name}</p>
+            <p className="pt-1 text-[0.85rem] text-gray-500">{address}</p>
+            <p className=" text-[0.85rem] text-gray-500">@{insta_account}</p>
+            <div className="h-[6.25rem] overflow-y-scroll text-sm">
+              <p className="mt-2 w-[14rem] whitespace-pre-wrap">{about}</p>
+            </div>
+          </div>
         </div>
         <div className="flex flex-row pt-3 pb-6 lg:pb-0">
           <div className="temp_index -ml-5 px-7">

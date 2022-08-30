@@ -8,7 +8,7 @@ import ThumbsDownLetter from 'components/resources/ThumbsDownLetter'
 
 const CafeSwipeContainer = () => {
   const [cafeData, setcafeData] = useState([])
-  let cafeInfo = cafeData.filter((item, index) => index === 1)
+  // let cafeInfo = cafeData.filter((item, index) => index === 1)
 
   //3000미터 근방 카페
   const getCafeListAll = (userLocation) => {
@@ -70,28 +70,25 @@ const CafeSwipeContainer = () => {
           <ThumbsDownLetter />
           <p className="mb-1 text-4xl">👎🏻</p>
         </div>
-        <div>
-          <CafeSwipe
+        <div id='cafe_list'>
+          {/* <CafeSwipe
             cafeInfo={cafeInfo}
             likeOpacity={likeOpacity}
             setLikeOpacity={setLikeOpacity}
             nopeOpacity={nopeOpacity}
             setNopeOpacity={setNopeOpacity}
-          />
-          <CafeSwipe
-            cafeInfo={cafeInfo}
-            likeOpacity={likeOpacity}
-            setLikeOpacity={setLikeOpacity}
-            nopeOpacity={nopeOpacity}
-            setNopeOpacity={setNopeOpacity}
-          />
-          <CafeSwipe
-            cafeInfo={cafeInfo}
-            likeOpacity={likeOpacity}
-            setLikeOpacity={setLikeOpacity}
-            nopeOpacity={nopeOpacity}
-            setNopeOpacity={setNopeOpacity}
-          />
+          /> */}
+          {cafeData.map((cafeInfo) => (
+            <div key={cafeInfo.cafe_id}>
+              <CafeSwipe
+              cafeInfo={cafeInfo}
+              likeOpacity={likeOpacity}
+              setLikeOpacity={setLikeOpacity}
+              nopeOpacity={nopeOpacity}
+              setNopeOpacity={setNopeOpacity}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>

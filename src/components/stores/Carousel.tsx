@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import { useRef } from 'react'
 
 const Carousel = ({ data }) => {
+  // console.log(data)
   const settings = {
     lazyLoad: true,
     swipe: false,
@@ -14,7 +15,7 @@ const Carousel = ({ data }) => {
   }
   let img
   if (data != '') {
-    img = data[0].img_file.split(',')
+    img = data.img_file.split(',')
     img = img.filter((element, index) => index < img.length - 1)
   }
   let test
@@ -36,7 +37,7 @@ const Carousel = ({ data }) => {
           img.map((item, index) => {
             test =
               'https://storage.googleapis.com/bitcamp-caffeine.appspot.com' +
-              data[0].file_path +
+              data.file_path +
               item
             {
               return (
