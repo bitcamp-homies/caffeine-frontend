@@ -15,10 +15,10 @@ const CafeLikeIcon = ({ index, item, likeList }) => {
     cafe_check?.setAttribute('value', item.cafe_id)
     const cafe = cafe_check?.getAttribute('value')
 
-    if (like == true) {
+    if (like == false) {
       cafe_check?.setAttribute('check', '0') //check 안됫을경우
-    } else {
-      cafe_check?.setAttribute('check', '1') //check됫을경우
+    } else if(like == true){
+      cafe_check?.setAttribute('check', '1') //check 됫을경우
     }
     console.log('확인 :' + cafe_check?.getAttribute('check'))
 
@@ -27,17 +27,18 @@ const CafeLikeIcon = ({ index, item, likeList }) => {
       checkthis.id === 'cafe_check' &&
       sessionStorage.getItem('Id') !== null
     ) {
-      setLike(!like)
-      setCafe(cafe)
-      if (cafe_check?.getAttribute('check') == 1) {
+      if (cafe_check?.getAttribute('check') == 0) {
         console.log('cafe delete:' + cafe)
+        setCafe(cafe)
         deleteLikeList(JSON.stringify(data))
-      } else if (cafe_check?.getAttribute('check') == 0) {
+      } else if (cafe_check?.getAttribute('check') == 1) {
         console.log('cafe update:' + cafe)
+        setCafe(cafe)
         updateLikeList(JSON.stringify(data))
-      }
+      } 
+      setLike(!like)
+      updateList()
     }
-    updateList()
   }
 
   const data = {
