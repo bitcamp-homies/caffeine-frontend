@@ -88,6 +88,7 @@ const NaviContainerMster = () => {
               가입현황
             </Link>
           </li>
+          {/* 풍혁0830 : 일단 죽여놓을게요  
           <li className="mt-10 flex cursor-pointer space-x-2 duration-150 hover:text-[#9F2042]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +109,7 @@ const NaviContainerMster = () => {
             <Link to="UserManageMaster" className="font-semibold">
               공지사항등록
             </Link>
-          </li>
+          </li> */}
         </ul>
         {/* left navi bottom */}
       </div>

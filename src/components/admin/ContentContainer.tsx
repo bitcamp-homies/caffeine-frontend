@@ -7,7 +7,10 @@ const ContentContainer = () => {
       return '전체카페관리';
     }else if(urlPath.indexOf('UserManageMaster') >= 0){
       return '전체유저관리';
-    }else{
+    }else if(urlPath.indexOf('UserAnalytics') >= 0){
+      return '가입현황';
+    }
+    else{
       return '관리';
     }
     

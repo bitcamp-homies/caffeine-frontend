@@ -169,7 +169,7 @@ const MapContainer = ({
     const zoomControl = new kakao.maps.ZoomControl()
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT)
     // 맵 렌더링
-  }, [])
+  }, [  ])
 
   React.useEffect(() => {
     //풍혁0819 : 마커를 이동하게 된다면, 사용자의 위치가 업데이트 되고
@@ -215,8 +215,8 @@ const MapContainer = ({
   }, [hoverCafe])
 
   return (
-    <div id="map_wrap" className="h-[17rem] w-full lg:h-[32rem]">
-      <div className="static h-full w-full" id="myMap">
+    <div id="map_wrap" className={` w-full lg:h-[${window.outerHeight}px]`}>
+      <div className={`static h-full w-full`} id="myMap">
         <button
           className="absolute bottom-[2.5rem] right-0 z-10 h-9 w-9 rounded-lg border-2 bg-white drop-shadow-lg lg:bottom-[17.5rem]"
           onClick={() => {
