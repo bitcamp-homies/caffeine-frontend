@@ -85,7 +85,7 @@ const FindStore = () => {
 
   return (
     <>
-      <div className="ml-4 flex flex-col-reverse lg:flex-row">
+      <div className={`ml-4 flex flex-col-reverse  lg:flex-row lg:h-[${window.outerHeight}px]`}>
         {cafename !== undefined && <CafeDetail setHoverCafe={setHoverCafe} />}
         {cafename === undefined && !showFilter && (
           <SearchPlace
