@@ -66,11 +66,6 @@ const BusinessWrite = () => {
     }
     const email = validateEmail(Email)  //true false 반환 이메일 정규식
 
-    const addresscheck = address => {
-        const regExp = /[\S]+(도|시)\s[\S]+(구|군)\s[\S]+(로|동).*/i;
-        return regExp.test(address)
-    }
-    const address = addresscheck(BusinessAddress)
     const data2 = {
     'name' : Name,
     'email' : Email,
@@ -88,7 +83,7 @@ const BusinessWrite = () => {
     const qs = require('qs');
     const saveMember = useMutation(data => createMember(data))
     const BusinessSubmit = () =>{
-    if(emailcheck?.data?.data == 'ok' && getnickname.data?.data == 'ok' && writepassword && BusinessNum && BusinessName && BusinessAddress&& Insta_Account && Name != '' && address){
+    if(emailcheck?.data?.data == 'ok' && getnickname.data?.data == 'ok' && writepassword && BusinessNum && BusinessName && BusinessAddress&& Insta_Account && Name != ''){
         saveMember.mutate(qs.stringify(data2))
          nevigate('/')
     }else{
@@ -233,10 +228,7 @@ const BusinessWrite = () => {
                             <input type="text" className="w-full" value={BusinessAddress1} onChange={(e)=>setBusinessAddress1(e.target.value)} />
                           </div>
                         <div className="pt-2 text-sm">
-                            {
-                                address ? '' :
                             <p>사업자등록증에 등록된 주소를 정확히 입력해주세요.</p>
-                            }
                         </div>
                     </div>
                     <div className="py-3 relative">
