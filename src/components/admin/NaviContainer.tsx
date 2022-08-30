@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-
+import { getMember } from 'store/api'
 const NaviContainer = () => {
+  const usertype = sessionStorage.getItem('UserType')
   return (
     <div className="hidden h-screen w-2/5 bg-white md:grid md:w-1/4 lg:grid">
       <div className="mx-auto py-10">
@@ -48,6 +49,8 @@ const NaviContainer = () => {
               포인트 사용 내역
             </Link>
           </li>
+          {
+            usertype === 'business' ?
           <li className="mt-10 flex cursor-pointer space-x-2 duration-150 hover:text-[#9F2042]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +71,8 @@ const NaviContainer = () => {
             <Link to="CafeAdminPage" className="font-semibold">
               내 카페 관리
             </Link>
-          </li>
+          </li> : ''
+          }
           <li className="mt-10 flex cursor-pointer space-x-2 duration-150 hover:text-[#9F2042]">
             <svg
               xmlns="http://www.w3.org/2000/svg"

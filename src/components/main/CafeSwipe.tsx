@@ -10,47 +10,10 @@ import axios from 'axios'
 let currentX = 0
 const offsetDivider = 250
 
-const CafeSwipe = () => {
-  const [cafeData, setcafeData] = useState([])
-  let cafeInfo = cafeData.filter((item, index) => index === 4)
+const CafeSwipe = ({ cafeInfo }) => {
   const [likeOpacity, setLikeOpacity] = useState(0)
   const [nopeOpacity, setNopeOpacity] = useState(0)
   const [cafeSwipeOpacity, setCafeSwipeOpacity] = useState(1)
-
-  //3000미터 근방 카페
-  const getCafeListAll = (userLocation) => {
-    axios
-      .get('http://localhost:8080/cafe/listBoundary3000Mybatis', {
-        params: {
-          userLong: userLocation.long,
-          userLat: userLocation.lat,
-        },
-      })
-      .then((res) => {
-        setcafeData(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
-  const getUserLocationAndGetCafeList = () => {
-    if (navigator.geolocation) {
-      // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-      navigator.geolocation.getCurrentPosition(function (position) {
-        var lat = position.coords.latitude, // 위도
-          lon = position.coords.longitude // 경도
-        getCafeListAll({ long: lon, lat: lat })
-      })
-    } else {
-      // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-      console.log('위치불러오기실패...!')
-    }
-  }
-
-  React.useEffect(() => {
-    getUserLocationAndGetCafeList()
-  }, [])
 
   //스와이프 opacity 변화
   const handleOpacityUpdate = (offsetX: number) => {
@@ -90,12 +53,12 @@ const CafeSwipe = () => {
     } else return
   }
   //스와이프 action
-  const LikeOrNope = (offsetX: number) => {
+  const LikeOrNope = (offsetX: number, deltaX) => {
     if (offsetX > 200) {
       alert('LIKE: 즐겨찾는 카페에 등록되었습니다.')
       setCafeSwipeOpacity(1)
       setLikeOpacity(0)
-    } else if (offsetX < -200) {
+    } else if (offsetX < -200 && Math.abs(offsetX) - Math.abs(deltaX) > 150) {
       alert('NOPE: 다른 카페를 보여줍니다.')
       setCafeSwipeOpacity(1)
       setNopeOpacity(0)
@@ -127,15 +90,15 @@ const CafeSwipe = () => {
       </div>
       <motion.div
         id="CafeSwipe"
-        className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-3 md:max-w-[24rem]"
+        className="my-2 rounded-lg shadow-xl md:mx-auto md:mt-3 md:max-w-[28rem]"
         style={{ opacity: cafeSwipeOpacity }}
         drag
-        dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-        dragElastic={0.7}
-        dragPropagation
+        dragSnapToOrigin
+        dragConstraints={{ top: 0, bottom: 0 }}
+        dragElastic={0.3}
         onDrag={(event, info) => handleOpacityUpdate(info.offset.x)}
-        onDragEnd={(event, info) => LikeOrNope(info.offset.x)}
-      >
+        onDragEnd={(event, info) => LikeOrNope(info.offset.x, info.delta.x)}
+      > 
         <CafeInfo cafeInfo={cafeInfo} />
       </motion.div>
     </div>

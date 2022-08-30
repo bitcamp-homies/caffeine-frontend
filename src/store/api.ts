@@ -1,9 +1,8 @@
 // @ts-nocheck
 import axios from 'axios'
 import { useMutation } from 'react-query'
-
 const api = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: process.env.REACT_APP_THUMBS_API_ADDRESS,
 })
 
 export const listAllMybatis = () => {
@@ -76,6 +75,20 @@ export const getCafeitemList = (cafe_id) => {
     return temp
 }
 
+export const getProductInfo = (product_id) => {
+  const temp = api.get('/order/getProductInfo',{
+    params : {
+      product_id : product_id
+    }
+  })
+  return temp
+}
+
+export const savePaymentList = (paymentList) => {
+  const temp = api.post('/order/paymentList', paymentList)
+  return temp
+}
+
 export const getMember = (Id) => {
   const temp = api.post('/cafe/getMember',Id)
   return temp
@@ -129,3 +142,46 @@ export const kakaoAPI = (productName, productCount, totalPrice ) =>{
     window.localStorage.setItem("next_redirect_pc_url",next_redirect_pc_url);
   });
 }
+
+export const getcafes = (user_id) => {
+  const temp = api.post('/cafe/getcafes',user_id)
+  return temp
+} 
+
+export const getcafefics = (cafe_id) => {
+  const temp = api.post('/cafe/getcafefics',cafe_id)
+  return temp
+}
+
+
+export const getcafeficsprofile = (cafe_id) => {
+  const temp = api.post('/cafe/getcafeficsprofile',cafe_id)
+  return temp
+}
+
+export const insertCafepics = (cafe_id) => {
+  const temp = api.post('/cafe/insertCafepics',cafe_id)
+}
+
+export const updateCafepics = (cafe_id) => {
+  const temp = api.post('/cafe/updateCafepics',cafe_id)
+}
+
+export const insertcafes_product_list = (productdata) => {
+  const temp = api.post('/cafe/insertcafes_product_list',productdata)
+  return temp
+}
+
+export const insertproducts = (productdata) => {
+  const temp = api.post('/cafe/insertproducts',productdata)
+  return temp
+}
+
+export const insertcafes_product_list_items = (item) => {
+  const temp = api.post('/cafe/insertcafes_product_list_items',item)
+}
+
+export const insertproducts_img = (item) => {
+  const temp = api.post('/cafe/insertproducts_img',item)
+}
+

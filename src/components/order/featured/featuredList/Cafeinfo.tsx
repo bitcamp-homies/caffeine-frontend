@@ -21,7 +21,7 @@ const Cafeinfo = () => {
             {isSuccess &&
               cafedata.map((item) => {
                 const profile =
-                  'https://storage.cloud.google.com/bitcamp-caffeine.appspot.com' +
+                  'https://storage.googleapis.com/bitcamp-caffeine.appspot.com' +
                   item.file_path +
                   item.img_file.split(',').splice(-1, 1)
                 return (
@@ -55,7 +55,7 @@ const Cafeinfo = () => {
                         return (
                           <p
                             key={item.cafe_id}
-                            className="text-gray-400"
+                            className="text-gray-400 hover:cursor-pointer underline"
                             onClick={() => window.open(`${map}${address}`)}
                           >
                             {`${address}${address4}`}

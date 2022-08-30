@@ -9,11 +9,11 @@ interface BurgerProps {
   burger: Function
 }
 
-const MainNavBar = (props :BurgerProps) => {
+const MainNavBar = (props: BurgerProps) => {
   const isBurger = props.burgered
   const burgerCycle = props.burger
-  const userType = sessionStorage.getItem("UserType")
-  const [login,setLogin] = useState(userType)
+  const userType = sessionStorage.getItem('UserType')
+  const [login, setLogin] = useState(userType)
 
   const navegate = useNavigate()
 
@@ -21,9 +21,6 @@ const MainNavBar = (props :BurgerProps) => {
     sessionStorage.clear()
     navegate('/')
   }
-
-  
-
 
   return (
     <nav
@@ -49,10 +46,10 @@ const MainNavBar = (props :BurgerProps) => {
       <div id="desktopNav" className="hidden w-full flex-row md:flex">
         <ul className="mx-10 list-none self-center font-bold">
           <li className="mr-7 inline-block">
-            <Link to="/order/cafes">ORDER</Link>
+            <Link to="/order/cafes">사이렌오더</Link>
           </li>
           <li className="mr-7 inline-block">
-            <Link to="/cards">CARDS</Link>
+            <Link to="/cards">포인트</Link>
           </li>
           <li className="inline-block">
             <button>GIFT</button>
@@ -61,35 +58,36 @@ const MainNavBar = (props :BurgerProps) => {
         <div className="ml-auto flex flex-shrink-0 flex-row self-center">
           <Link to="/store" className="flex flex-row self-center">
             <MapMarker />
-            <span className="ml-4 mr-10 font-semibold">Find a store</span>
+            <span className="ml-4 mr-10 font-semibold">지도로 찾기</span>
           </Link>
-          {
-            userType === null ? 
-
+          {userType === null ? (
             <>
-          
-            <button className="rounded-full border border-black px-4 py-1.5 font-semibold">
-            <Link to="login">Sign in</Link>
-          </button>
-          <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
-            <Link to="/member">Join now</Link>
-          </button>
-          </>
-          : 
-          <>
-
-          <button className="rounded-full border border-black px-4 py-1.5 font-semibold" onClick={logoutBtn}>
-            Sign out
-          </button>
-          <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
-            <Link to="/member">My Page</Link>
-          </button>
-          <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
-            <Link to="/admin">Admin Page</Link>
-          </button>
-          </>
-            
-          }
+              <button className="rounded-full border border-black px-4 py-1 font-semibold">
+                <Link to="login">로그인</Link>
+              </button>
+              <button className="ml-4 rounded-full border border-black bg-black px-4 py-1 font-semibold text-white">
+                <Link to="/member">회원가입</Link>
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className="rounded-full border border-black px-4 py-1.5 font-semibold"
+                onClick={logoutBtn}
+              >
+                로그아웃
+              </button>
+              {userType === 'admin' ? (
+                <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
+                  <Link to="/admin/CafeManageMaster">Admin Page</Link>
+                </button>
+              ) : (
+                <button className="ml-4 rounded-full border border-black bg-black px-4 py-1.5 font-semibold text-white">
+                  <Link to="/admin/LikeList">My Page</Link>
+                </button>
+              )}
+            </>
+          )}
         </div>
       </div>
     </nav>
