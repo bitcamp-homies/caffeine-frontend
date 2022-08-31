@@ -209,7 +209,7 @@ const CafeCoordManage = () => {
         </div>
       )}
       <hr/>
-      <div className="h-[36rem] w-[72rem] overflow-scroll rounded-lg my-4">
+      <div className="h-[36rem] w-5/6 overflow-scroll rounded-lg my-4">
         <CafeListTable
           listFilter={listFilter}
           filteredData={filteredData}

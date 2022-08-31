@@ -5,8 +5,8 @@ const NaviContainerMster = () => {
   const urlPath = window.location.href
 
   return (
-    <div className="mr-6 hidden h-screen w-2/5 bg-white drop-shadow-xl md:grid md:w-1/4 lg:grid ">
-      <div className="mx-auto py-10">
+    <div className="mr-6 hidden h-screen w-full bg-white drop-shadow-xl md:grid md:w-1/4 lg:grid ">
+      <div className="mx-auto py-10 w-[180px] px-6 ">
         {/* left Navi */}
         <h1 className="duration-15 mb-10 cursor-pointer text-2xl font-bold text-[#9F2042]">
           Thumbs!
