@@ -22,6 +22,7 @@ const CafeInfo = ({ cafeInfo }) => {
     parking,
     pet,
     user_id,
+    like_count
   } = cafeInfo
   const profile = `https://storage.googleapis.com/bitcamp-caffeine.appspot.com${file_path}${img_file
     .split(',')
@@ -36,7 +37,7 @@ const CafeInfo = ({ cafeInfo }) => {
   }
 
   let address = ''
-  if ((address4 == '')) {
+  if (address4 == '') {
     address = `${address1} ${address2} ${address3}`
   } else {
     address = `${address1} ${address2} ${address3}
@@ -61,7 +62,7 @@ const CafeInfo = ({ cafeInfo }) => {
                 className="h-20 w-20 rounded-full bg-contain bg-center outline outline-1 outline-gray-300"
               ></img>
               <button className="absolute left-14 top-0.5 rounded-full bg-orange-600 px-1 py-1 text-[11px] text-white">
-                385
+                {like_count}
               </button>
             </div>
             <div className="mt-2">
@@ -76,7 +77,7 @@ const CafeInfo = ({ cafeInfo }) => {
             <p className="pt-1 text-[0.85rem] text-gray-500">{address}</p>
             <p className=" text-[0.85rem] text-gray-500">@{insta_account}</p>
             <div className="h-[6.25rem] overflow-y-scroll text-sm">
-              <p className="mt-2 w-[14rem] whitespace-pre-wrap">{about}</p>
+              <p className="mt-2 w-[14rem] whitespace-pre-wrap text-ellipsis overflow-hidden">{about}</p>
             </div>
           </div>
         </div>

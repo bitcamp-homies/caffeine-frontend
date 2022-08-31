@@ -18,6 +18,10 @@ const CafeSwipe = ({
   nopeOpacity,
   setNopeOpacity,
   handleRemove,
+  blur,
+  idx,
+  setBlurArr,
+  blurArr,
 }) => {
   const [cafeSwipeOpacity, setCafeSwipeOpacity] = useState(1)
   const cafe_id = cafeInfo.cafe_id
@@ -66,11 +70,17 @@ const CafeSwipe = ({
       setCafeSwipeOpacity(1)
       setLikeOpacity(0)
       handleRemove(cafe_id)
+      const blurArrTmp = blurArr
+      blurArrTmp[idx - 1] = ''
+      setBlurArr(blurArrTmp)
     } else if (offsetX < -200 && Math.abs(offsetX) - Math.abs(deltaX) > 150) {
       alert('NOPE: 다른 카페를 보여줍니다.')
       setCafeSwipeOpacity(1)
       setNopeOpacity(0)
       handleRemove(cafe_id)
+      const blurArrTmp = blurArr
+      blurArrTmp[idx - 1] = ''
+      setBlurArr(blurArrTmp)
     } else {
       setCafeSwipeOpacity(1)
       setLikeOpacity(0)
@@ -84,7 +94,7 @@ const CafeSwipe = ({
       <div className="relative">
         <motion.div
           id="CafeSwipe"
-          className="my-2 rounded-3xl bg-white pt-10 shadow-lg  shadow-slate-300 md:mx-auto md:mt-3 md:max-w-[28rem]"
+          className={`my-2 rounded-3xl bg-white pt-10 shadow-lg  shadow-slate-300 md:mx-auto md:mt-3 md:max-w-[28rem] ${blur}`}
           style={{ opacity: cafeSwipeOpacity }}
           drag
           dragSnapToOrigin

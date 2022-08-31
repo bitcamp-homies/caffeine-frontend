@@ -54,6 +54,19 @@ const CafeSwipeContainer = () => {
     setcafeData(newCafeData)
   }
 
+  const [blurArr, setBlurArr] = useState([
+    'blur-sm',
+    'blur-sm',
+    'blur-sm',
+    'blur-sm',
+    'blur-sm',
+    'blur-sm',
+    'blur-sm',
+    'blur-sm',
+    'blur-sm',
+    '',
+  ])
+
   return (
     <div id="cafe_container" className="relative lg:mt-12">
       <div id="control_boxes">
@@ -73,19 +86,26 @@ const CafeSwipeContainer = () => {
           <ThumbsDownLetter />
           <p className="mb-1 text-4xl">👎🏻</p>
         </div>
-        <div id="cafe_list" ref={this.blurRef}>
-          {cafeData.map((cafeInfo) => (
+        <div id="cafe_list">
+          {cafeData.map((cafeInfo, idx) => {
+            console.log(idx, blurArr[idx])
+            
+            return (
             <div key={cafeInfo.cafe_id}>
-                <CafeSwipe
-                  cafeInfo={cafeInfo}
-                  likeOpacity={likeOpacity}
-                  setLikeOpacity={setLikeOpacity}
-                  nopeOpacity={nopeOpacity}
-                  setNopeOpacity={setNopeOpacity}
-                  handleRemove={handleRemove}
-                />
+              <CafeSwipe
+                cafeInfo={cafeInfo}
+                likeOpacity={likeOpacity}
+                setLikeOpacity={setLikeOpacity}
+                nopeOpacity={nopeOpacity}
+                setNopeOpacity={setNopeOpacity}
+                handleRemove={handleRemove}
+                blur={blurArr[idx]}
+                blurArr={blurArr}
+                setBlurArr={setBlurArr}
+                idx={idx}
+              />
             </div>
-          ))}
+          )})}
         </div>
       </div>
     </div>
