@@ -64,7 +64,7 @@ const payment = () => {
       e.preventDefault()
     }
   }
-  console.log(cafe_name);
+  
   //카카오 API
   const [kakaoState, setKakaoState] = useState('')
   const kakaoUrl = kakaoState.next_redirect_pc_url

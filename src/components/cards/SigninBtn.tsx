@@ -25,7 +25,7 @@ const SigninBtn = ({LoginBtn}:any) => {
             ></path>
           </svg>
         </div>
-        <div className="font-bold">Sigin</div>
+        <div className="font-bold">로그인</div>
       </div>
     </button>
   )

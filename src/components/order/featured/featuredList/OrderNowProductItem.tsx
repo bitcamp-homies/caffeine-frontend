@@ -53,7 +53,7 @@ const OrderNowProductItem: FC<OrderNowProductItemProps> = ({
         <div className="sm:mx-0 lg:my-3">
           <div className="mx-auto text-xl font-bold lg:ml-5 lg:text-2xl">
             <p id="ProductName">
-              {data.product_name_eng}
+              {data.product_name_kor}
             </p>
           </div>
           <div id="totalPay" className="my-2 text-base text-gray-600 lg:ml-5">

@@ -40,7 +40,9 @@ const SearchPlace = ({
   }
 
   return (
-    <div className="h-128 basis-full lg:flex lg:basis-2/5 lg:flex-col">
+    <div
+      className={`h-[${window.outerHeight}] basis-full lg:flex lg:basis-2/5 lg:flex-col`}
+    >
       <form className="inputForm pr-5 pl-14 " onSubmit={handleSubmit}>
         <div className="text-center lg:text-left">
           <div className="my-6 inline-block w-3/4 border-b-2 border-gray-400 lg:w-64 xl:w-96">
@@ -60,7 +62,7 @@ const SearchPlace = ({
           </div>
           <button
             onClick={() => setShowFilter(true)}
-            className="ml-4 h-8 w-20 rounded-full border-2 border-[#9F2042] text-center text-[#9F2042] hover:bg-[#F8E5EE]"
+            className="ml-2 h-8 w-14 rounded-full border-2 border-[#9F2042] text-center text-xs text-[#9F2042] hover:bg-[#F8E5EE] lg:h-8 lg:w-20 lg:text-lg"
             type="submit"
           >
             Filter {getFilterNum() > 0 && '(' + getFilterNum() + ')'}

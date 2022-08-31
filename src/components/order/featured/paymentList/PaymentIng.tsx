@@ -78,7 +78,7 @@ const PaymentIng = () => {
   useEffect(()=>{
     savePaymentList(qs.stringify(paymentList));
     //페이지 바로이동
-    window.location.href=`http://localhost:3000/order/featured/order-now/cafe/${cafe_id}/product/${product_id}/payment/paymenting/${completeNumber}/paymentcomplete`
+    window.location.href=`${process.env.REACT_APP_THUMBS_REACT_ADDRESS}/order/featured/order-now/cafe/${cafe_id}/product/${product_id}/payment/paymenting/${completeNumber}/paymentcomplete`
   },[])
   return (
     <div>
