@@ -5,16 +5,17 @@ import 'slick-carousel/slick/slick-theme.css'
 import { useRef } from 'react'
 
 const Carousel = ({ data }) => {
+  // console.log(data)
   const settings = {
-    fade: true,
     lazyLoad: true,
+    swipe: false,
     infinite: true,
     speed: 500,
-    adaptiveHeight: true,
+    arrows: false
   }
   let img
   if (data != '') {
-    img = data[0].img_file.split(',')
+    img = data.img_file.split(',')
     img = img.filter((element, index) => index < img.length - 1)
   }
   let test
@@ -36,14 +37,14 @@ const Carousel = ({ data }) => {
           img.map((item, index) => {
             test =
               'https://storage.googleapis.com/bitcamp-caffeine.appspot.com' +
-              data[0].file_path +
+              data.file_path +
               item
             {
               return (
                 <div key={index}>
                   <img
                     src={test}
-                    className='object-contain'
+                    className='object-contain bg-white'
                     style={{ width: '100%', height: '24rem' }}
                   ></img>
                 </div>
@@ -51,10 +52,10 @@ const Carousel = ({ data }) => {
             }
           })}
       </Slider>
-      <button id='leftBtn' className='absolute w-11 top-[10.5rem] left-2 rotate-180' onClick={handlePrevSlide}>
+      <button id='leftBtn' className='absolute w-11 top-[10.5rem] left-8 rotate-180' onClick={handlePrevSlide}>
         <img src={`${process.env.PUBLIC_URL}/img/ArrowBtn-128px.png`} alt='Next Button' className='invert'/>
       </button>
-      <button id='rightBtn' className='absolute w-11 top-[10.5rem] right-2' onClick={handleNextSlide}>
+      <button id='rightBtn' className='absolute w-11 top-[10.5rem] right-8' onClick={handleNextSlide}>
         <img src={`${process.env.PUBLIC_URL}/img/ArrowBtn-128px.png`} alt='Previous Button' className='invert'/>
       </button>
     </div>
