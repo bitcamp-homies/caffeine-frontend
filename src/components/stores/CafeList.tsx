@@ -45,9 +45,11 @@ const CafeList = ({ filterData, setHoverCafe, filterOptions }) => {
     } else if (session !== null || session !== '' || session !== undefined)
       setLike(!like)
   }
-
+  const outerHeight = window.outerHeight
   return (
-    <ul className="h-[440px] w-full overflow-scroll overflow-x-hidden lg:w-[28rem] xl:w-[35rem]">
+    <ul
+      className={`max-h-96 h-[${outerHeight}px] w-full overflow-scroll overflow-x-hidden lg:w-[28rem] lg:h-[${outerHeight}px] lg:max-h-[1080px] xl:w-[35rem]`}
+    >
       {filterData.map((item, index) => {
         DetailLink = `/store/${item.cafe_name}`
         return (
