@@ -42,8 +42,23 @@ export const EmailCheck = (Email) => {
   return temp
 }
 
+export const UserCheck = (Email) => {
+  const temp = api.get('/cafe/UserCheck', {
+    params: {
+      
+      Email: Email,
+
+    },
+  })
+  return temp
+}
+
 export const createMember = (Member) => {
   const temp = api.post('/cafe/createMember', Member)
+}
+
+export const updateMember = (Member) => {
+  const temp = api.post('/cafe/updateMember', Member)
 }
 
 export const Login = (login) => {
