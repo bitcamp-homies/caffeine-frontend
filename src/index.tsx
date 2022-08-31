@@ -22,8 +22,7 @@ const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
-  // 풍혁0831: 렌덩링이 두번되는 것을 막기위해서(두번되면 조회수가 2씩 증가해서..) 일단 주석 처리해놓겠습니다. 
-  // <React.StrictMode>
+  <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <CookiesProvider>
         <BrowserRouter>
@@ -31,7 +30,7 @@ root.render(
         </BrowserRouter>
       </CookiesProvider>
     </QueryClientProvider>
-  // </React.StrictMode>,
+  </React.StrictMode>,
 )
 
 // If you want to start measuring performance in your app, pass a function

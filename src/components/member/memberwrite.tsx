@@ -5,6 +5,7 @@ import { isQueryKey } from 'react-query/types/core/utils';
 import { useNavigate } from 'react-router-dom';
 import { NickNameCheck,EmailCheck } from 'store/api';
 import { createMember } from 'store/api';
+
 const MemberWrite = () => {
   
   const [NickName, setNickName] = useState('')
@@ -16,6 +17,7 @@ const MemberWrite = () => {
   const [BusinessNum, setBusinessNum] = useState(0)
   const [BusinessName, setBusinessName] = useState(null)
   const [BusinessAddress, setBusinessAddress] = useState(null)
+  const [BusinessAddress1, setBusinessAddress1] = useState(null)
   const [Insta_Account, setInsta_Account] = useState(null)
   const nevigate = useNavigate();
   const getnickname = useQuery(
@@ -55,6 +57,7 @@ const data2 = {
   'business_reg_num' : BusinessNum,
   'business_name' : BusinessName,
   'business_address' : BusinessAddress,
+  'business_address1' : BusinessAddress1,
   'insta_account' : Insta_Account
 }
 

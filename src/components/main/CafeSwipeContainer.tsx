@@ -1,22 +1,25 @@
 // @ts-nocheck
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
 import CafeSwipe from './CafeSwipe'
+import ThumbsUpLetter from 'components/resources/ThumbsUpLetter'
+import ThumbsDownLetter from 'components/resources/ThumbsDownLetter'
 
 const CafeSwipeContainer = () => {
   const [cafeData, setcafeData] = useState([])
-  let cafeInfo = cafeData.filter((item, index) => index === 1)
-
   //3000미터 근방 카페
   const getCafeListAll = (userLocation) => {
     axios
-      .get(`${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/listBoundary3000Mybatis`, {
-        params: {
-          userLong: userLocation.long,
-          userLat: userLocation.lat,
+      .get(
+        `${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/listBoundary3000Mybatis`,
+        {
+          params: {
+            userLong: userLocation.long,
+            userLat: userLocation.lat,
+          },
         },
-      })
+      )
       .then((res) => {
         setcafeData(res.data)
       })
@@ -42,12 +45,71 @@ const CafeSwipeContainer = () => {
   React.useEffect(() => {
     getUserLocationAndGetCafeList()
   }, [])
-  
-  return (
-    <div id='cafe_container' className=''>
-      <CafeSwipe cafeInfo={cafeInfo}/>
-    </div>
-  );
-};
 
-export default CafeSwipeContainer;
+  const [likeOpacity, setLikeOpacity] = useState(0)
+  const [nopeOpacity, setNopeOpacity] = useState(0)
+
+  function handleRemove(cafe_id) {
+    const newCafeData = cafeData.filter((item) => item.cafe_id !== cafe_id)
+    setcafeData(newCafeData)
+  }
+
+  const [blurArr, setBlurArr] = useState([
+    'blur-sm',
+    'blur-sm',
+    'blur-sm',
+    'blur-sm',
+    'blur-sm',
+    'blur-sm',
+    'blur-sm',
+    'blur-sm',
+    'blur-sm',
+    '',
+  ])
+
+  return (
+    <div id="cafe_container" className="relative lg:mt-12">
+      <div id="control_boxes">
+        <div
+          id="like_box"
+          className="absolute inset-x-0 top-[17rem] z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-blue-500 shadow-lg"
+          style={{ opacity: likeOpacity }}
+        >
+          <ThumbsUpLetter />
+          <p className="mb-1 text-4xl">👍🏻</p>
+        </div>
+        <div
+          id="nope_box"
+          className="absolute inset-x-0 top-[17rem] z-10 m-auto flex h-32 w-56 flex-row items-center justify-center rounded-3xl bg-red-500 shadow-lg"
+          style={{ opacity: nopeOpacity }}
+        >
+          <ThumbsDownLetter />
+          <p className="mb-1 text-4xl">👎🏻</p>
+        </div>
+        <div id="cafe_list">
+          {cafeData.map((cafeInfo, idx) => {
+            console.log(idx, blurArr[idx])
+            
+            return (
+            <div key={cafeInfo.cafe_id}>
+              <CafeSwipe
+                cafeInfo={cafeInfo}
+                likeOpacity={likeOpacity}
+                setLikeOpacity={setLikeOpacity}
+                nopeOpacity={nopeOpacity}
+                setNopeOpacity={setNopeOpacity}
+                handleRemove={handleRemove}
+                blur={blurArr[idx]}
+                blurArr={blurArr}
+                setBlurArr={setBlurArr}
+                idx={idx}
+              />
+            </div>
+          )})}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default CafeSwipeContainer
