@@ -35,6 +35,7 @@ import PaymentComplete from 'components/order/featured/PaymentComplete'
 import PaymentIng from 'components/order/featured/paymentList/PaymentIng'
 import UserManageMaster from 'components/admin/master/UserManageMaster'
 import UserAnalytics from 'components/analytics/UserAnalytics'
+import VisitAnalytics from 'components/analytics/VisitAnalytics'
 
 const MainRoutes = () => {
   return (
@@ -52,6 +53,7 @@ const MainRoutes = () => {
         <Route path="CafeManageMaster" element={<CafeCoordManage />} />
         <Route path="UserManageMaster" element={<UserManageMaster />} />
         <Route path="UserAnalytics" element={<UserAnalytics />} />
+        <Route path="VisitAnalytics" element={<VisitAnalytics />} />
       </Route>
 
       <Route path="order" element={<Order />}>
@@ -65,12 +67,21 @@ const MainRoutes = () => {
         />
         <Route path="featured">
           <Route index element={<Featured />} />
-          <Route path="order-now/cafe/:cafe_id">        
+          <Route path="order-now/cafe/:cafe_id">
             <Route path="product/:product_id" element={<OrderNow />} />
-            <Route path="product/:product_id/payment/" element={<Payment />}/>
-            <Route path="product/:product_id/payment/paymenting/:completeNumber" element={<PaymentIng/>} />
-            <Route path="product/:product_id/payment/kakaoresult/" element={<KakaoResult/>} />
-            <Route path="product/:product_id/payment/paymenting/:completeNumber/paymentcomplete/" element={<PaymentComplete/>} />
+            <Route path="product/:product_id/payment/" element={<Payment />} />
+            <Route
+              path="product/:product_id/payment/paymenting/:completeNumber"
+              element={<PaymentIng />}
+            />
+            <Route
+              path="product/:product_id/payment/kakaoresult/"
+              element={<KakaoResult />}
+            />
+            <Route
+              path="product/:product_id/payment/paymenting/:completeNumber/paymentcomplete/"
+              element={<PaymentComplete />}
+            />
           </Route>
         </Route>
 

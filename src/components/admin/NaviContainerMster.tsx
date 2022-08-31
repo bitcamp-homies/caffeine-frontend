@@ -2,17 +2,17 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const NaviContainerMster = () => {
-  const urlPath = window.location.href;
-  
+  const urlPath = window.location.href
+
   return (
-    <div className="hidden h-screen w-2/5 bg-white md:grid md:w-1/4 lg:grid drop-shadow-xl mr-6 ">
-      <div className='mx-auto py-10'>
+    <div className="mr-6 hidden h-screen w-2/5 bg-white drop-shadow-xl md:grid md:w-1/4 lg:grid ">
+      <div className="mx-auto py-10">
         {/* left Navi */}
         <h1 className="duration-15 mb-10 cursor-pointer text-2xl font-bold text-[#9F2042]">
           Thumbs!
         </h1>
         <ul>
-          <li className='mt-5 flex cursor-pointer space-x-2 duration-150 hover:text-[#9F2042  ]'>
+          <li className="hover:text-[#9F2042 ] mt-5 flex cursor-pointer space-x-2  duration-150">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -65,8 +65,8 @@ const NaviContainerMster = () => {
                 d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
               />
             </svg>
-            <Link to="UserManageMaster" className="font-semibold">
-              방문자현황  
+            <Link to="VisitAnalytics" className="font-semibold">
+              방문자현황
             </Link>
           </li>
           <li className="mt-10 flex cursor-pointer space-x-2 duration-150 hover:text-[#9F2042]">
