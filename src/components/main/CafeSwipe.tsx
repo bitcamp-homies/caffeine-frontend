@@ -18,8 +18,9 @@ const CafeSwipe = ({
   nopeOpacity,
   setNopeOpacity,
   handleRemove,
+  zIndexArr,
+  idx,
   // blur,
-  // idx,
   // setBlurArr,
   // blurArr,
 }) => {
@@ -94,7 +95,7 @@ const CafeSwipe = ({
       <div className="relative">
         <motion.div
           id="CafeSwipe"
-          className={`my-2 rounded-3xl bg-white pt-10 shadow-lg  shadow-slate-300 md:mx-auto md:mt-3 md:max-w-[28rem]`}
+          className={`my-2 rounded-3xl bg-white pt-10 shadow-lg  shadow-slate-300 md:mx-auto md:mt-3 md:max-w-[28rem] ${zIndexArr[idx]}`}
           style={{ opacity: cafeSwipeOpacity }}
           drag
           dragSnapToOrigin
