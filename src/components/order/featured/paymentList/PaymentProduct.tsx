@@ -99,7 +99,7 @@ const PaymentProduct = ({ cafe_id, product_id }) => {
                   </div>
                   <div className="my-auto flex flex-col">
                     <span className="mr-2 text-xs font-bold lg:mr-0 lg:text-base">
-                      {item.product_name_kor}
+                    제품명 : {item.product_name_kor}
                     </span>
                     <span className="text-xs font-bold lg:text-base">
                       사이즈 : {size[index] == null ? 'OneSize' : size[index]}
