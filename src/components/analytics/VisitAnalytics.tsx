@@ -1,33 +1,20 @@
 //@ts-nocheck
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { ResponsiveBar } from '@nivo/bar'
-import axios from 'axios'
-import UserAnalyticDateFilter from './filter/UserAnalyticDateFilter'
-import UserAnalyticTypeFilter from './filter/UserAnalyticTypeFilter'
+import VisitAnalyticDateFilter from './filter/VisitAnalyticDateFilter'
 
-const UserAnalytics = () => {
-  const handle = {
-    barClick: (data: any) => {
-      console.log(data)
-    },
-
-    legendClick: (data: any) => {
-      console.log(data)
-    },
-  }
-
-  const [userFilter, setUserFilter] = useState('business')
+const VisitAnalytics = () => {
+  const [analyticData, setAnalyticData] = useState([])
   const [dateFilter, setDateFilter] = useState('day')
 
-  const [analyticData, setAnalyticData] = useState([])
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_THUMBS_API_ADDRESS}/user/getUserAnalyticMybatis`,
+        `${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/getVisitAnalyticMybatis`,
         {
           params: {
-            user_type: userFilter,
-            date_type: dateFilter,
+            dateFilter: dateFilter,
           },
         },
       )
@@ -37,15 +24,20 @@ const UserAnalytics = () => {
       .catch((err) => {
         console.log(err)
       })
-  }, [userFilter, dateFilter])
+  }, [dateFilter])
 
+  const handle = {
+    barClick: (data: any) => {
+      console.log(data)
+    },
+
+    legendClick: (data: any) => {
+      console.log(data)
+    },
+  }
   return (
-    // chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정
     <div className="m-auto h-[500px] w-full">
-      <div>
-        <UserAnalyticTypeFilter setUserFilter={setUserFilter} />
-        <UserAnalyticDateFilter setDateFilter={setDateFilter} />
-      </div>
+      <div>{<VisitAnalyticDateFilter setDateFilter={setDateFilter} />}</div>
 
       <ResponsiveBar
         /**
@@ -60,11 +52,11 @@ const UserAnalytics = () => {
         /**
          * chart에 보여질 데이터 key (측정되는 값)
          */
-        keys={['num']}
+        keys={['cnt']}
         /**
          * keys들을 그룹화하는 index key (분류하는 값)
          */
-        indexBy={dateFilter === 'day' ? 'create_date' : 'month'}
+        indexBy={dateFilter === 'day' ? 'date_row' : 'month'}
         /**
          * chart margin
          */
@@ -126,18 +118,14 @@ const UserAnalytics = () => {
         /**
          * axis bottom 설정
          */
-        axisBottom={
-          dateFilter === 'day'
-            ? null
-            : {
-                tickSize: 5, // 값 설명하기 위해 튀어나오는 점 크기
-                tickPadding: 5, // tick padding
-                tickRotation: 0, // tick 기울기
-                legend: '날짜', // bottom 글씨
-                legendPosition: 'middle', // 글씨 위치
-                legendOffset: 40, // 글씨와 chart간 간격m
-              }
-        }
+        axisBottom={{
+          tickSize: 5, // 값 설명하기 위해 튀어나오는 점 크기
+          tickPadding: 5, // tick padding
+          tickRotation: 0, // tick 기울기
+          legend: '날짜', // bottom 글씨
+          legendPosition: 'middle', // 글씨 위치
+          legendOffset: 40, // 글씨와 chart간 간격m
+        }}
         /**
          * axis left 설정
          */
@@ -145,7 +133,7 @@ const UserAnalytics = () => {
           tickSize: 5, // 값 설명하기 위해 튀어나오는 점 크기
           tickPadding: 5, // tick padding
           tickRotation: 0, // tick 기울기
-          legend: '등록수', // left 글씨
+          legend: '방문자수', // left 글씨
           legendPosition: 'middle', // 글씨 위치
           legendOffset: -60, // 글씨와 chart간 간격
         }}
@@ -195,4 +183,4 @@ const UserAnalytics = () => {
   )
 }
 
-export default UserAnalytics
+export default VisitAnalytics

@@ -62,7 +62,6 @@ export default function UserUpdataModal({
         },
       )
       .then((res) => {
-        console.log('res.data', res.data)
         setSelected({
           ...selected,
           email: insta + '@gmail.com',
