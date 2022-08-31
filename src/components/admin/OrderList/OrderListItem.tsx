@@ -36,7 +36,7 @@ const OrderListItem = ({ orderData }) => {
   }
   return (
     <div>
-      <div className="mt-4 rounded-2xl bg-gray-300">
+      <div className="mt-4 rounded-2xl bg-[#9F2042]">
         <div className="flex">
           <div className="mt-3 ml-3 flex md:ml-5">
             {isSuccess &&
@@ -59,7 +59,7 @@ const OrderListItem = ({ orderData }) => {
 
           <div className="mt-3 ml-3 md:mt-2">
             <div className="flex-row ">
-              <span className="text-sm md:text-lg">
+              <span className="text-sm text-white md:text-lg">
                 {isSuccess && mainProductInfo.data[0].product_name_kor}
               </span>
               {orderData.product_count - 1 == 0 ? null : (
@@ -72,53 +72,49 @@ const OrderListItem = ({ orderData }) => {
             <div className="mt-1 flex">
               <div className="flex flex-row">
                 <svg
-                  className="h-5 w-5 fill-current dark:text-gray-600"
+                  className="h-5 w-5 fill-current text-white"
                   viewBox="0 0 24 24"
                 >
                   <path d="M12 4a4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4 4 4 0 014-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4z"></path>
                 </svg>
-                <span className="text-sm capitalize text-gray-600 dark:text-gray-600">
+                <span className="text-sm capitalize text-white">
                   {isSuccess && cafe_data[0].cafe_name}
                 </span>
               </div>
               <div className="ml-3 flex">
                 <svg
-                  className="h-5 w-5 fill-current dark:text-gray-600"
+                  className="h-5 w-5 fill-current text-white"
                   viewBox="0 0 24 24"
                 >
                   <path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2h-1V1m-1 11h-5v5h5v-5z" />
                 </svg>
-                <span className="ml-1 text-sm capitalize text-gray-600 dark:text-gray-600">
+                <span className="ml-1 text-sm capitalize text-white">
                   {getDate[0]}
                 </span>
               </div>
             </div>
-            <div className="mt-1 float-left text-center w-50">
-              <span
-                className="font-semibold text-gray-600
-                  dark:text-gray-600"
-              >
-                {orderData.purchase_way == 1 ? '포인트 결제' : '카카오페이 결제'} :
+            <div className="w-50 float-left mt-1 text-center">
+              <span className="font-semibold text-white">
+                {orderData.purchase_way == 1
+                  ? '포인트 결제'
+                  : '카카오페이 결제'}{' '}
+                :
               </span>
-              <span
-                className="ml-1 font-semibold text-gray-600
-                  dark:text-gray-600"
-              >
+              <span className="ml-1 font-semibold text-white">
                 {totalPrice}원
               </span>
             </div>
             <div className="mt-3 mb-3">
               <button
-                className="dark-hover:text-gray-200 ml-1 flex
-                    select-none items-center rounded-full
-                    border border-blue-500 mt-9 py-2 px-6
+                className="dark-hover:text-gray-200 ml-1 mt-9
+                    flex select-none items-center
+                    rounded-full border border-white py-2 px-6
                     leading-none hover:bg-blue-400
-                    hover:text-white focus:outline-none
-                    dark:border-blue-600"
+                    hover:text-white focus:outline-none"
               >
                 <svg
                   className="mr-2 h-5 w-5 fill-current
-                      text-blue-600"
+                  text-white"
                   viewBox="0 0 576 512"
                 >
                   <path
@@ -142,7 +138,9 @@ const OrderListItem = ({ orderData }) => {
                         30.9-30.9c4-4.2 4-10.8-.1-14.9z"
                   ></path>
                 </svg>
-                <span onClick={deleteBtn}>삭제</span>
+                <span className="text-white" onClick={deleteBtn}>
+                  삭제
+                </span>
               </button>
             </div>
           </div>
