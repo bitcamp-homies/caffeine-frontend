@@ -31,7 +31,7 @@ useEffect(()=>{
   });
 },[])
   const nextBtn = () => {
-    opener.parent.location=`http://localhost:3000/order/featured/order-now/cafe/${cafe_id}/product/${product_id}/payment/paymenting/2`;
+    opener.parent.location=`${process.env.REACT_APP_THUMBS_REACT_ADDRESS}/order/featured/order-now/cafe/${cafe_id}/product/${product_id}/payment/paymenting/2`;
     window.close()
   }
   return (

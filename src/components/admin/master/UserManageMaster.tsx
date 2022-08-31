@@ -37,29 +37,23 @@ const UserManageMaster = () => {
     }
   }, [selectedFilter])
 
-  // useEffect(() => {
-  //   if(!keyword){
-  //     setFilteredData(userData);
-  //   }
-  //   if(keyword){
-  //     const searchResult = userData.filter((item, index) => {
-  //       if(item.name && item.nickname && item.email ){
-  //         return (
-  //           item.name.indexOf(keyword) > 0
-  //           ||item.nickname.indexOf(keyword) > 0
-  //           || item.email.indexOf(keyword) > 0
-  //         )
-  //       }
-  //     })
-  //     // console.log(keyword);
-  //     // filteredData.map((item, index) => {
-  //     //   if(item.name){
-  //     //     console.log('item.name', item.name.indexOf(keyword));
-  //     //   }
-  //     // })
-  //     setFilteredData(searchResult);
-  //   }
-  // },[keyword])
+  useEffect(() => {
+    if (!keyword) {
+      setFilteredData(userData)
+    }
+    if (keyword) {
+      const searchResult = userData.filter((item, index) => {
+        if (item.name && item.nickname && item.email) {
+          return (
+            item.name.indexOf(keyword) >= 0 ||
+            item.nickname.indexOf(keyword) >= 0 ||
+            item.email.indexOf(keyword) >= 0
+          )
+        }
+      })
+      setFilteredData(searchResult)
+    }
+  }, [keyword])
 
   return (
     <div>
@@ -70,7 +64,7 @@ const UserManageMaster = () => {
         className={`mb-4 h-8 w-72 rounded-lg border-b-2 border-[black] text-center`}
         onChange={(event) => setKeyword(event.target.value)}
       />
-      <hr/>
+      <hr />
       <div className="my-4 h-[36rem] w-[72rem] overflow-scroll rounded-lg">
         <UserListTable userData={filteredData} />
       </div>
