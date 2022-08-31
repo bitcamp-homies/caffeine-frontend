@@ -22,7 +22,7 @@ const CafeInfo = ({ cafeInfo }) => {
     parking,
     pet,
     user_id,
-    like_count
+    like_count,
   } = cafeInfo
   const profile = `https://storage.googleapis.com/bitcamp-caffeine.appspot.com${file_path}${img_file
     .split(',')
