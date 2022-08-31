@@ -3,51 +3,51 @@ import { useEffect } from 'react'
 import CafeSwipe from './CafeSwipe'
 import CafeSwipeContainer from './CafeSwipeContainer'
 import FooterContainer from './FooterContainer'
-import { useCookies } from "react-cookie";
-import axios from 'axios';
-
+import { useCookies } from 'react-cookie'
+import axios from 'axios'
 
 const Main = () => {
-  const COOKIE_KEY = 'visitMain';
-  const [cookies, setCookie, removeCookie] = useCookies([COOKIE_KEY]);
+  const COOKIE_KEY = 'visitMain'
+  const [cookies, setCookie, removeCookie] = useCookies([COOKIE_KEY])
 
   const setOnedayCookie = () => {
-    const expireDate = new Date();
-    expireDate.setDate(expireDate.getDate() + 1);
+    const expireDate = new Date()
+    expireDate.setDate(expireDate.getDate() + 1)
     // console.log('cookie 만료 : ', expireDate);
-    setCookie(
-      COOKIE_KEY, 'true', {path : '/', expires : expireDate}
-    )
+    setCookie(COOKIE_KEY, 'true', { path: '/', expires: expireDate })
     // console.log('쿠키삽입완료');
   }
 
   const increaseVisit = () => {
-    if(!cookies[COOKIE_KEY]){
-      setOnedayCookie();
+    if (!cookies[COOKIE_KEY]) {
+      setOnedayCookie()
       axios
-        .get(`${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/increaeVisitMybatis`)
+        .get(
+          `${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/increaeVisitMybatis`,
+        )
         .then((res) => {})
-        .catch((err) => {console.log(err)});
-
-    }else{
+        .catch((err) => {
+          console.log(err)
+        })
+    } else {
       // console.log('이미 방문했던 사람 조회수 증가 안함.');
     }
   }
 
   useEffect(() => {
-    increaseVisit();
-  },[])
-  
+    increaseVisit()
+  }, [])
+
   const getTimeWord = () => {
-    const nowHour = new Date().getHours();
-    if(nowHour >= 4 && nowHour < 12){
-      return 'morning';
-    }else if(nowHour >= 12 && nowHour < 18){
-      return 'afternoon';
-    }else if(nowHour >=18 && nowHour < 21){
-      return 'evening';
-    }else {
-      return 'night';
+    const nowHour = new Date().getHours()
+    if (nowHour >= 4 && nowHour < 12) {
+      return 'morning'
+    } else if (nowHour >= 12 && nowHour < 18) {
+      return 'afternoon'
+    } else if (nowHour >= 18 && nowHour < 21) {
+      return 'evening'
+    } else {
+      return 'night'
     }
   }
 
