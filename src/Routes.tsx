@@ -34,6 +34,7 @@ import KakaoResult from 'components/order/featured/paymentList/kakaoAPI/KakaoRes
 import PaymentComplete from 'components/order/featured/PaymentComplete'
 import PaymentIng from 'components/order/featured/paymentList/PaymentIng'
 import UserManageMaster from 'components/admin/master/UserManageMaster'
+import UserAnalytics from 'components/analytics/UserAnalytics'
 
 const MainRoutes = () => {
   return (
@@ -50,6 +51,7 @@ const MainRoutes = () => {
         <Route path="Profile" element={<Profile />} />
         <Route path="CafeManageMaster" element={<CafeCoordManage />} />
         <Route path="UserManageMaster" element={<UserManageMaster />} />
+        <Route path="UserAnalytics" element={<UserAnalytics />} />
       </Route>
 
       <Route path="order" element={<Order />}>
