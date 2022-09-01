@@ -31,7 +31,7 @@ const Carousel = ({ data }) => {
   }
 
   return (
-    <div className="carousel relative">
+    <div className="carousel relative h-[22rem] w-full">
       <Slider {...settings} ref={sliderRef}>
         {data != '' &&
           img.map((item, index) => {
@@ -45,7 +45,7 @@ const Carousel = ({ data }) => {
                   <img
                     src={test}
                     className='object-contain bg-white'
-                    style={{ width: '100%', height: '24rem' }}
+                    style={{ width: '100%', height: '22rem' }}
                   ></img>
                 </div>
               )

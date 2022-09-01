@@ -5,6 +5,7 @@ import CafeSwipeContainer from './CafeSwipeContainer'
 import FooterContainer from './FooterContainer'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
+import { Outlet } from 'react-router-dom'
 
 const Main = () => {
   const COOKIE_KEY = 'visitMain'
@@ -62,6 +63,32 @@ const Main = () => {
         </div>
       </div>
       <div id="rightDiv" className="basis-3/5">
+      <div className="px-4 pt-3 text-center">
+        <button
+          id="1km"
+          className="mr-4 rounded-full px-4 py-1"
+        >
+          1km
+        </button>
+        <button
+          id="3km"
+          className="mr-4 rounded-full px-4 py-1"
+        >
+          3km
+        </button>
+        <button
+          id="7km"
+          className="mr-4 rounded-full px-4 py-1"
+        >
+          7km
+        </button>
+        <button
+          id="all"
+          className="rounded-full px-4 py-1"
+        >
+          All
+        </button>
+      </div>
         <CafeSwipeContainer />
       </div>
     </div>
