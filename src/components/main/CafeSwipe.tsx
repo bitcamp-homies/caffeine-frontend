@@ -95,7 +95,6 @@ const CafeSwipe = ({
       <div className="relative">
         <motion.div
           id="CafeSwipe"
-<<<<<<< 182-CafeSwipe-distance-indicator
           className={`my-2 rounded-3xl bg-white border-2 shadow-lg  shadow-slate-300 md:mx-auto md:mt-3 md:max-w-[28rem] ${blur}`}
           style={{ opacity: cafeSwipeOpacity }}
           drag
