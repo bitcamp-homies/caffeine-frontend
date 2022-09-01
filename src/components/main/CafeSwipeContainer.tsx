@@ -67,6 +67,19 @@ const CafeSwipeContainer = () => {
     '',
   ])
 
+  const [zIndexArr, setZIndexArr] = useState([
+    'z-[5]',
+    'z-[10]',
+    'z-[15]',
+    'z-[20]',
+    'z-[25]',
+    'z-[30]',
+    'z-[35]',
+    'z-[40]',
+    'z-[45]',
+    'z-[50]',
+  ])
+
   return (
     <div id="cafe_container" className="relative lg:mt-12">
       <div id="control_boxes">
@@ -88,8 +101,6 @@ const CafeSwipeContainer = () => {
         </div>
         <div id="cafe_list">
           {cafeData.map((cafeInfo, idx) => {
-            console.log(idx, blurArr[idx])
-            
             return (
             <div key={cafeInfo.cafe_id}>
               <CafeSwipe
@@ -103,6 +114,7 @@ const CafeSwipeContainer = () => {
                 blurArr={blurArr}
                 setBlurArr={setBlurArr}
                 idx={idx}
+                zIndexArr={zIndexArr}
               />
             </div>
           )})}
