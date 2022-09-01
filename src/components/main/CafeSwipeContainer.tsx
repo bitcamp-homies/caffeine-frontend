@@ -96,6 +96,19 @@ const CafeSwipeContainer = () => {
     '',
   ])
 
+  const [zIndexArr, setZIndexArr] = useState([
+    'z-[5]',
+    'z-[10]',
+    'z-[15]',
+    'z-[20]',
+    'z-[25]',
+    'z-[30]',
+    'z-[35]',
+    'z-[40]',
+    'z-[45]',
+    'z-[50]',
+  ])
+
   return (
     <div id="cafe_container" className="relative">
       <div id="control_boxes">
