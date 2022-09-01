@@ -13,7 +13,7 @@ import FindStore from 'components/stores/FindStore'
 import Payment from 'components/order/featured/Payment'
 
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import MemberWrite from 'components/member/memberwrite'
 import CafeCoordManage from 'components/admin/master/CafeCoordManage'
 import Gift from 'components/cards/Gift'
@@ -36,12 +36,13 @@ import PaymentIng from 'components/order/featured/paymentList/PaymentIng'
 import UserManageMaster from 'components/admin/master/UserManageMaster'
 import UserAnalytics from 'components/analytics/UserAnalytics'
 import VisitAnalytics from 'components/analytics/VisitAnalytics'
+import CafeSwipeContainer from 'components/main/CafeSwipeContainer'
 
 const MainRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<App />} />
-      <Route index element={<Main />} />
+      <Route path="/" element={<Navigate to ="/getlucky" />} />
+      <Route path="getlucky" element={<Main />} />
 
       <Route path="admin" element={<AdminContainer />}>
         <Route path="CafeAdminPage" element={<CafeAdminPage />} />

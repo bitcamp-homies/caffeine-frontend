@@ -12,7 +12,7 @@ const CafeSwipeContainer = () => {
   const getCafeListAll = (userLocation) => {
     axios
       .get(
-        `${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/listBoundary3000Mybatis`,
+        `${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/getDistanceCount`,
         {
           params: {
             userLong: userLocation.long,
@@ -21,7 +21,36 @@ const CafeSwipeContainer = () => {
         },
       )
       .then((res) => {
-        setcafeData(res.data)
+        const distanceCount = res.data[0]
+        const distanceKey =
+          distanceCount.oneKm !== 0
+            ? 1000
+            : distanceCount.threeKm !== 0
+            ? 3000
+            : distanceCount.sevenKm !== 0
+            ? 7000
+            : 1000000
+        if (distanceKey === 1000) {
+          document.getElementById('1km')?.classList.add('bg-gradient-to-r', 'from-pink-600', 'to-[#F0A202]', 'text-white')
+        } else if (distanceKey === 3000) {
+          document.getElementById('3km')?.classList.add('bg-gradient-to-r', 'from-pink-600', 'to-[#F0A202]', 'text-white')
+        } else if (distanceKey === 7000) {
+          document.getElementById('7km')?.classList.add('bg-gradient-to-r', 'from-pink-600', 'to-[#F0A202]', 'text-white')
+        } else {
+          document.getElementById('all')?.classList.add('bg-gradient-to-r', 'from-pink-600', 'to-[#F0A202]', 'text-white')
+        }
+        axios.get(
+          `${process.env.REACT_APP_THUMBS_API_ADDRESS}/cafe/getCafeListByDistance`,
+          {
+            params: {
+              userLong: userLocation.long,
+              userLat: userLocation.lat,
+              distanceKey: distanceKey,
+            },
+          },
+        ).then((res) => {
+          setcafeData(res.data)
+        })
       })
       .catch((err) => {
         console.log(err)
@@ -81,7 +110,7 @@ const CafeSwipeContainer = () => {
   ])
 
   return (
-    <div id="cafe_container" className="relative lg:mt-12">
+    <div id="cafe_container" className="relative">
       <div id="control_boxes">
         <div
           id="like_box"
@@ -102,22 +131,22 @@ const CafeSwipeContainer = () => {
         <div id="cafe_list">
           {cafeData.map((cafeInfo, idx) => {
             return (
-            <div key={cafeInfo.cafe_id}>
-              <CafeSwipe
-                cafeInfo={cafeInfo}
-                likeOpacity={likeOpacity}
-                setLikeOpacity={setLikeOpacity}
-                nopeOpacity={nopeOpacity}
-                setNopeOpacity={setNopeOpacity}
-                handleRemove={handleRemove}
-                blur={blurArr[idx]}
-                blurArr={blurArr}
-                setBlurArr={setBlurArr}
-                idx={idx}
-                zIndexArr={zIndexArr}
-              />
-            </div>
-          )})}
+              <div key={cafeInfo.cafe_id}>
+                <CafeSwipe
+                  cafeInfo={cafeInfo}
+                  likeOpacity={likeOpacity}
+                  setLikeOpacity={setLikeOpacity}
+                  nopeOpacity={nopeOpacity}
+                  setNopeOpacity={setNopeOpacity}
+                  handleRemove={handleRemove}
+                  blur={blurArr[idx]}
+                  blurArr={blurArr}
+                  setBlurArr={setBlurArr}
+                  idx={idx}
+                />
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>

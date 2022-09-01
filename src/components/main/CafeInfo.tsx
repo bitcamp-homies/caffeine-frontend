@@ -45,10 +45,8 @@ const CafeInfo = ({ cafeInfo }) => {
   }
 
   return (
-    <div>
-      <div className="h-96 w-full bg-zinc-900 bg-contain bg-center bg-no-repeat">
-        {cafeInfo !== '' && <Carousel data={cafeInfo} />}
-      </div>
+    <div className='pt-10'>
+      <Carousel data={cafeInfo} />
       <div
         id="cafe_profile"
         className="flex flex-col items-center px-5 md:pb-6"
@@ -66,8 +64,8 @@ const CafeInfo = ({ cafeInfo }) => {
               </button>
             </div>
             <div className="mt-2">
-              <p className="text-[0.85rem] ">당신과의 거리</p>
-              <p className="w-[4.8rem] bg-gradient-to-r from-pink-600 to-[#F0A202] text-center text-lg text-white">
+              <p className="text-[0.85rem]">당신과의 거리</p>
+              <p className="mt-1 w-[4.8rem] bg-gradient-to-r from-pink-600 to-[#F0A202] text-center text-lg text-white">
                 {distanceReformed}
               </p>
             </div>
@@ -77,7 +75,9 @@ const CafeInfo = ({ cafeInfo }) => {
             <p className="pt-1 text-[0.85rem] text-gray-500">{address}</p>
             <p className=" text-[0.85rem] text-gray-500">@{insta_account}</p>
             <div className="h-[6.25rem] overflow-y-scroll text-sm">
-              <p className="mt-2 w-[14rem] whitespace-pre-wrap text-ellipsis overflow-hidden">{about}</p>
+              <p className="mt-2 w-[14rem] overflow-hidden text-ellipsis whitespace-pre-wrap">
+                {about}
+              </p>
             </div>
           </div>
         </div>

@@ -19,7 +19,7 @@ const ProductContainer = ({ data, cafe_name, img, file_path, img_file }) => {
     addressfilter = address.filter((item) => item.cafe_id === data[0].cafe_id)
   }
   return (
-    <div className="pt-6 justify-center">
+    <div className="pt-6 justify-center px-2">
       <div className="h-16 w-full rounded-2xl bg-red-800 flex flex-row items-center pl-4 gap-4 md:h-28 md:gap-10">
           <img
             className="h-14 w-14 rounded-full bg-white md:h-20 md:w-20"
