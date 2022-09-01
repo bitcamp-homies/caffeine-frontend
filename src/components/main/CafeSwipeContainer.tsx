@@ -77,6 +77,7 @@ const CafeSwipeContainer = () => {
 
   const [likeOpacity, setLikeOpacity] = useState(0)
   const [nopeOpacity, setNopeOpacity] = useState(0)
+  const [swipeCount, setSwipeCount] = useState(0)
 
   function handleRemove(cafe_id) {
     const newCafeData = cafeData.filter((item) => item.cafe_id !== cafe_id)
@@ -87,26 +88,7 @@ const CafeSwipeContainer = () => {
     'blur-sm',
     'blur-sm',
     'blur-sm',
-    'blur-sm',
-    'blur-sm',
-    'blur-sm',
-    'blur-sm',
-    'blur-sm',
-    'blur-sm',
     '',
-  ])
-
-  const [zIndexArr, setZIndexArr] = useState([
-    'z-[5]',
-    'z-[10]',
-    'z-[15]',
-    'z-[20]',
-    'z-[25]',
-    'z-[30]',
-    'z-[35]',
-    'z-[40]',
-    'z-[45]',
-    'z-[50]',
   ])
 
   return (
@@ -143,6 +125,10 @@ const CafeSwipeContainer = () => {
                   blurArr={blurArr}
                   setBlurArr={setBlurArr}
                   idx={idx}
+                  swipeCount={swipeCount}
+                  setSwipeCount={setSwipeCount}
+                  CafeSwipeContainer={CafeSwipeContainer}
+                  getUserLocationAndGetCafeList={getUserLocationAndGetCafeList}
                 />
               </div>
             )

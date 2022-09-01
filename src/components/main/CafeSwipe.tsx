@@ -18,11 +18,14 @@ const CafeSwipe = ({
   nopeOpacity,
   setNopeOpacity,
   handleRemove,
-  zIndexArr,
   idx,
-  // blur,
-  // setBlurArr,
-  // blurArr,
+  swipeCount,
+  setSwipeCount,
+  blur,
+  setBlurArr,
+  blurArr,
+  CafeSwipeContainer,
+  getUserLocationAndGetCafeList,
 }) => {
   const [cafeSwipeOpacity, setCafeSwipeOpacity] = useState(1)
   const cafe_id = cafeInfo.cafe_id
@@ -67,21 +70,45 @@ const CafeSwipe = ({
   //스와이프 action
   const LikeOrNope = (offsetX: number, deltaX) => {
     if (offsetX > 200) {
-      alert('LIKE: 즐겨찾는 카페에 등록되었습니다.')
-      setCafeSwipeOpacity(1)
-      setLikeOpacity(0)
-      handleRemove(cafe_id)
-      // const blurArrTmp = blurArr
-      // blurArrTmp[idx - 1] = ''
-      // setBlurArr(blurArrTmp)
+      if (swipeCount === 3) {
+        alert('새로운 카페를 보여드립니다 😉')
+        setSwipeCount(0)
+        setNopeOpacity(0)
+        setLikeOpacity(0)
+        getUserLocationAndGetCafeList()
+        setBlurArr(['blur-sm',
+        'blur-sm',
+        'blur-sm',
+        '',])
+      } else {
+        setCafeSwipeOpacity(1)
+        setLikeOpacity(0)
+        handleRemove(cafe_id)
+        const blurArrTmp = blurArr
+        blurArrTmp[idx - 1] = ''
+        setBlurArr(blurArrTmp)
+        setSwipeCount((swipeCount += 1))
+      }
     } else if (offsetX < -200 && Math.abs(offsetX) - Math.abs(deltaX) > 150) {
-      alert('NOPE: 다른 카페를 보여줍니다.')
-      setCafeSwipeOpacity(1)
-      setNopeOpacity(0)
-      handleRemove(cafe_id)
-      // const blurArrTmp = blurArr
-      // blurArrTmp[idx - 1] = ''
-      // setBlurArr(blurArrTmp)
+      if (swipeCount === 3) {
+        alert('새로운 카페를 보여드립니다 😉')
+        setSwipeCount(0)
+        setNopeOpacity(0)
+        setLikeOpacity(0)
+        getUserLocationAndGetCafeList()
+        setBlurArr(['blur-sm',
+        'blur-sm',
+        'blur-sm',
+        '',])
+      } else {
+        setCafeSwipeOpacity(1)
+        setNopeOpacity(0)
+        handleRemove(cafe_id)
+        const blurArrTmp = blurArr
+        blurArrTmp[idx - 1] = ''
+        setBlurArr(blurArrTmp)
+        setSwipeCount((swipeCount += 1))
+      }
     } else {
       setCafeSwipeOpacity(1)
       setLikeOpacity(0)
@@ -95,7 +122,7 @@ const CafeSwipe = ({
       <div className="relative">
         <motion.div
           id="CafeSwipe"
-          className={`my-2 rounded-3xl bg-white border-2 shadow-lg  shadow-slate-300 md:mx-auto md:mt-3 md:max-w-[28rem] ${blur}`}
+          className={`my-2 rounded-3xl border-2 bg-white shadow-lg  shadow-slate-300 md:mx-auto md:mt-3 md:max-w-[28rem] ${blur}`}
           style={{ opacity: cafeSwipeOpacity }}
           drag
           dragSnapToOrigin
