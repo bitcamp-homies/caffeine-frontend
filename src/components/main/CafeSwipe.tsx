@@ -77,6 +77,7 @@ const CafeSwipe = ({
         setCafeSwipeOpacity(1)
         setLikeOpacity(0)
         handleRemove(cafe_id)
+        setSwipeCount(swipeCount += 1)
       }
     } else if (offsetX < -200 && Math.abs(offsetX) - Math.abs(deltaX) > 150) {
       if (swipeCount === 3) {
@@ -89,6 +90,7 @@ const CafeSwipe = ({
         setCafeSwipeOpacity(1)
         setNopeOpacity(0)
         handleRemove(cafe_id)
+        setSwipeCount(swipeCount += 1)
       }
     } else {
       setCafeSwipeOpacity(1)
@@ -96,6 +98,7 @@ const CafeSwipe = ({
       setNopeOpacity(0)
     }
     currentX = 0
+    console.log(swipeCount)
   }
 
   return (
