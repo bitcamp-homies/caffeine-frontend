@@ -84,13 +84,6 @@ const CafeSwipeContainer = () => {
     setcafeData(newCafeData)
   }
 
-  const [blurArr, setBlurArr] = useState([
-    'blur-sm',
-    'blur-sm',
-    'blur-sm',
-    '',
-  ])
-
   return (
     <div id="cafe_container" className="relative">
       <div id="control_boxes">
@@ -121,9 +114,6 @@ const CafeSwipeContainer = () => {
                   nopeOpacity={nopeOpacity}
                   setNopeOpacity={setNopeOpacity}
                   handleRemove={handleRemove}
-                  blur={blurArr[idx]}
-                  blurArr={blurArr}
-                  setBlurArr={setBlurArr}
                   idx={idx}
                   swipeCount={swipeCount}
                   setSwipeCount={setSwipeCount}

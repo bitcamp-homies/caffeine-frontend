@@ -21,9 +21,6 @@ const CafeSwipe = ({
   idx,
   swipeCount,
   setSwipeCount,
-  blur,
-  setBlurArr,
-  blurArr,
   CafeSwipeContainer,
   getUserLocationAndGetCafeList,
 }) => {
@@ -76,18 +73,10 @@ const CafeSwipe = ({
         setNopeOpacity(0)
         setLikeOpacity(0)
         getUserLocationAndGetCafeList()
-        setBlurArr(['blur-sm',
-        'blur-sm',
-        'blur-sm',
-        '',])
       } else {
         setCafeSwipeOpacity(1)
         setLikeOpacity(0)
         handleRemove(cafe_id)
-        const blurArrTmp = blurArr
-        blurArrTmp[idx - 1] = ''
-        setBlurArr(blurArrTmp)
-        setSwipeCount((swipeCount += 1))
       }
     } else if (offsetX < -200 && Math.abs(offsetX) - Math.abs(deltaX) > 150) {
       if (swipeCount === 3) {
@@ -96,18 +85,10 @@ const CafeSwipe = ({
         setNopeOpacity(0)
         setLikeOpacity(0)
         getUserLocationAndGetCafeList()
-        setBlurArr(['blur-sm',
-        'blur-sm',
-        'blur-sm',
-        '',])
       } else {
         setCafeSwipeOpacity(1)
         setNopeOpacity(0)
         handleRemove(cafe_id)
-        const blurArrTmp = blurArr
-        blurArrTmp[idx - 1] = ''
-        setBlurArr(blurArrTmp)
-        setSwipeCount((swipeCount += 1))
       }
     } else {
       setCafeSwipeOpacity(1)
@@ -122,7 +103,7 @@ const CafeSwipe = ({
       <div className="relative">
         <motion.div
           id="CafeSwipe"
-          className={`my-2 rounded-3xl border-2 bg-white shadow-lg  shadow-slate-300 md:mx-auto md:mt-3 md:max-w-[28rem] ${blur}`}
+          className={`my-2 rounded-3xl border-2 bg-white shadow-lg  shadow-slate-300 md:mx-auto md:mt-3 md:max-w-[28rem]`}
           style={{ opacity: cafeSwipeOpacity }}
           drag
           dragSnapToOrigin
